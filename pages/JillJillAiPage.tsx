@@ -1,4 +1,3 @@
-
 import React from 'react';
 import HeroSection from '../components/HeroSection';
 import Section from '../components/Section';
@@ -42,7 +41,7 @@ const JillJillAiPage: React.FC = () => {
             <HeroSection
                 headline={<><span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-violet">JillJill</span> – AI Voice Agent for B2B Sales</>}
                 subtext="Automate cold-calling. Qualify leads. Book meetings. 24×7. JillJill handles top-of-funnel outreach so your sales team can focus on closing."
-                primaryCta={{ text: 'Request a Demo', onClick: () => window.open('https://cal.com/vims-003/vims-enterprise', '_blank') }}
+                primaryCta={{ text: 'Request a Demo', onClick: () => window.open('https://www.jilljill.in/', '_blank') }}
                 imageUrl="https://picsum.photos/1920/1080?random=4"
                 altText="Ultra-realistic AI voice assistant avatar speaking through a phone interface with call analytics in the background of a futuristic sales office."
             />
