@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="mt-4 space-y-2">
               {quickLinks.map(page => (
                 <li key={page}>
-                  <a onClick={() => onNavigate(page)} className="cursor-pointer text-base text-slate-400 hover:text-light-text transition-colors">{page}</a>
+                  <a onClick={() => onNavigate(page)} className="block cursor-pointer text-base text-slate-400 hover:text-light-text transform hover:translate-x-1 transition-all duration-300">{page}</a>
                 </li>
               ))}
             </ul>
@@ -50,7 +50,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="mt-4 space-y-2">
               {services.map(service => (
                 <li key={service}>
-                  <a onClick={() => onNavigate(service)} className="cursor-pointer text-base text-slate-400 hover:text-light-text transition-colors">{service}</a>
+                  <a onClick={() => onNavigate(service)} className="block cursor-pointer text-base text-slate-400 hover:text-light-text transform hover:translate-x-1 transition-all duration-300">{service}</a>
                 </li>
               ))}
             </ul>
@@ -60,8 +60,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div>
             <h4 className="text-sm font-semibold text-slate-300 tracking-wider uppercase">Contact Us</h4>
             <ul className="mt-4 space-y-2 text-slate-400 text-base">
-              <li><a href="mailto:contact@vimsenterprise.com" className="hover:text-light-text">contact@vimsenterprise.com</a></li>
-              <li><a href="tel:+919940660868" className="hover:text-light-text">+91 9940660868 / +91 9789692447</a></li>
+              <li><a href="mailto:contact@vimsenterprise.com" className="block hover:text-light-text transform hover:translate-x-1 transition-all duration-300">contact@vimsenterprise.com</a></li>
+              <li><a href="tel:+919940660868" className="block hover:text-light-text transform hover:translate-x-1 transition-all duration-300">+91 9940660868 / +91 9789692447</a></li>
               <li>India</li>
             </ul>
           </div>
