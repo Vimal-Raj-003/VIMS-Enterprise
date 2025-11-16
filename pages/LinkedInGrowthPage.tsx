@@ -4,6 +4,7 @@ import HeroSection from '../components/HeroSection';
 import Section from '../components/Section';
 import { Testimonial } from '../types';
 import { CheckCircle, Zap, TrendingUp, UserCheck, Star, Edit, Bot } from 'lucide-react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const LinkedInGrowthPage: React.FC = () => {
   const philosophyPoints = [
@@ -34,6 +35,11 @@ const LinkedInGrowthPage: React.FC = () => {
     { quote: "VIMS transformed my LinkedIn presence. The content strategy was spot-on for the automotive tech industry, leading to a 400% increase in profile views and several key partnership inquiries.", name: "Aarav Sharma", role: "CTO, AutoTech Innovators" },
     { quote: "The personal branding roadmap was a game-changer. They helped me define my voice and consistently position myself as a thought leader in AI manufacturing.", name: "Priya Singh", role: "Founder, AI Manufacturing Solutions" },
   ];
+  
+  const { ref: philosophyRef, isVisible: philosophyVisible } = useScrollAnimation<HTMLDivElement>();
+  const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation<HTMLDivElement>();
+  const { ref: processRef, isVisible: processVisible } = useScrollAnimation<HTMLDivElement>();
+  const { ref: testimonialsRef, isVisible: testimonialsVisible } = useScrollAnimation<HTMLDivElement>();
 
   return (
     <>
@@ -45,27 +51,30 @@ const LinkedInGrowthPage: React.FC = () => {
         altText="Professional Indian CXO in a modern office looking at a large transparent screen with a LinkedIn profile and performance charts."
       />
       
-      <Section>
+      <section ref={philosophyRef} className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div>
+              <div className={`${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
                   <h2 className="text-2xl md:text-3xl font-bold font-poppins">Our Core Philosophy</h2>
                   <p className="mt-4 text-slate-400">We believe in a strategic, long-term approach to building your most valuable professional asset: your reputation.</p>
               </div>
               <div className="space-y-4">
                   {philosophyPoints.map((point, i) => (
-                      <div key={i} className="flex items-center p-4 bg-slate-900/50 rounded-2xl">
+                      <div key={i} className={`flex items-center p-4 bg-slate-900/50 rounded-2xl ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${150 + i * 100}ms` }}>
                           <CheckCircle className="h-6 w-6 text-green mr-4 flex-shrink-0" />
                           <span className="text-slate-300">{point}</span>
                       </div>
                   ))}
               </div>
           </div>
-      </Section>
+        </div>
+      </section>
 
-      <Section className="bg-navy-light">
+      <section ref={servicesRef} className="bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Service 1 */}
-            <div className="p-8 bg-slate-900 rounded-4xl border border-slate-800">
+            <div className={`p-8 bg-slate-900 rounded-4xl border border-slate-800 ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '100ms' }}>
                 <div className="flex items-center mb-4"><TrendingUp className="h-8 w-8 text-cyan mr-3" /> <h3 className="text-2xl font-bold font-poppins">LinkedIn Content Creation</h3></div>
                 <p className="text-slate-400 mb-6">Daily/weekly niche-specific content (Automotive, ADAS, EV, AI, Manufacturing) using story-driven, educational & viral formats. Includes a 30/60/90-day SEO-optimized content calendar.</p>
                 <div className="space-y-3">
@@ -75,7 +84,7 @@ const LinkedInGrowthPage: React.FC = () => {
                 </div>
             </div>
             {/* Service 2 */}
-            <div className="p-8 bg-slate-900 rounded-4xl border border-slate-800">
+            <div className={`p-8 bg-slate-900 rounded-4xl border border-slate-800 ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
                 <div className="flex items-center mb-4"><UserCheck className="h-8 w-8 text-cyan mr-3" /> <h3 className="text-2xl font-bold font-poppins">LinkedIn Profile Optimization</h3></div>
                 <p className="text-slate-400 mb-6">We rewrite and optimize every section of your profile to tell a compelling story, attract the right audience, and convert visitors into leads.</p>
                 <div className="flex flex-wrap gap-2">
@@ -83,7 +92,7 @@ const LinkedInGrowthPage: React.FC = () => {
                 </div>
             </div>
             {/* Service 3 */}
-            <div className="p-8 bg-slate-900 rounded-4xl border border-slate-800">
+            <div className={`p-8 bg-slate-900 rounded-4xl border border-slate-800 ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '300ms' }}>
                 <div className="flex items-center mb-4"><Edit className="h-8 w-8 text-cyan mr-3" /> <h3 className="text-2xl font-bold font-poppins">Personal Branding Development</h3></div>
                 <p className="text-slate-400 mb-6">Go beyond the profile. We help you define your unique brand identity, position yourself as an authority, and create a roadmap for long-term influence.</p>
                 <div className="flex flex-wrap gap-2">
@@ -91,38 +100,42 @@ const LinkedInGrowthPage: React.FC = () => {
                 </div>
             </div>
             {/* Service 4 */}
-            <div className="p-8 bg-slate-900 rounded-4xl border border-slate-800">
+            <div className={`p-8 bg-slate-900 rounded-4xl border border-slate-800 ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
                 <div className="flex items-center mb-4"><Bot className="h-8 w-8 text-cyan mr-3" /> <h3 className="text-2xl font-bold font-poppins">LinkedIn AI-Agent</h3></div>
                 <p className="text-slate-400 mb-6">Achieve unparalleled consistency. Our AI agent automatically posts your approved content at peak times, ensuring you're always visible. 5x consistency, zero manual posting.</p>
                  <div className="flex items-center text-green"><Zap className="h-5 w-5 mr-2" /><span>Works with long-form, short-form, and carousel posts.</span></div>
             </div>
           </div>
-      </Section>
+        </div>
+      </section>
 
-      <Section>
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-poppins font-bold">Our LinkedIn Growth Process</h2>
-        </div>
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          {processSteps.map((step, i) => (
-            <React.Fragment key={i}>
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-slate-800 border-2 border-cyan flex items-center justify-center text-xl font-bold mb-3">{i + 1}</div>
-                <p className="font-semibold">{step}</p>
-              </div>
-              {i < processSteps.length - 1 && <div className="hidden md:block flex-grow h-0.5 bg-slate-700"></div>}
-            </React.Fragment>
-          ))}
-        </div>
-      </Section>
-      
-      <Section className="bg-navy-light">
+      <section ref={processRef} className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-poppins font-bold">What Our Clients Say</h2>
+            <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${processVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Our LinkedIn Growth Process</h2>
+          </div>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            {processSteps.map((step, i) => (
+              <React.Fragment key={i}>
+                <div className={`flex flex-col items-center text-center ${processVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${i * 100}ms` }}>
+                  <div className="w-16 h-16 rounded-full bg-slate-800 border-2 border-cyan flex items-center justify-center text-xl font-bold mb-3">{i + 1}</div>
+                  <p className="font-semibold">{step}</p>
+                </div>
+                {i < processSteps.length - 1 && <div className={`hidden md:block flex-grow h-0.5 bg-slate-700 ${processVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${50 + i * 100}ms` }}></div>}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      <section ref={testimonialsRef} className="bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+              <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${testimonialsVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>What Our Clients Say</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {testimonials.map((t, i) => (
-                  <div key={i} className="p-8 bg-slate-900/50 rounded-3xl border border-slate-800">
+                  <div key={i} className={`p-8 bg-slate-900/50 rounded-3xl border border-slate-800 ${testimonialsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${150 + i * 100}ms` }}>
                       <p className="text-slate-300 italic mb-6">"{t.quote}"</p>
                       <div>
                           <p className="font-bold text-light-text">{t.name}</p>
@@ -131,7 +144,8 @@ const LinkedInGrowthPage: React.FC = () => {
                   </div>
               ))}
           </div>
-      </Section>
+        </div>
+      </section>
     </>
   );
 };

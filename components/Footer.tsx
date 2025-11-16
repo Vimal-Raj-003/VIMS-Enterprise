@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Linkedin, Youtube, Instagram, MessageSquare } from 'lucide-react';
 import { Page } from '../types';
@@ -61,8 +60,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div>
             <h4 className="text-sm font-semibold text-slate-300 tracking-wider uppercase">Contact Us</h4>
             <ul className="mt-4 space-y-2 text-slate-400 text-base">
-              <li><a href="mailto:contact@vims.enterprises" className="hover:text-light-text">contact@vims.enterprises</a></li>
-              <li><a href="tel:+911234567890" className="hover:text-light-text">+91 123 456 7890</a></li>
+              <li><a href="mailto:contact@vimsenterprise.com" className="hover:text-light-text">contact@vimsenterprise.com</a></li>
+              <li><a href="tel:+919940660868" className="hover:text-light-text">+91 9940660868 / +91 9789692447</a></li>
               <li>India</li>
             </ul>
           </div>

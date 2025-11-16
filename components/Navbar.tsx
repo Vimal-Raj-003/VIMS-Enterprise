@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Page } from '../types';
 import { NAV_LINKS, SERVICE_PAGES } from '../constants';
 import { Menu, X, ChevronDown } from 'lucide-react';
@@ -13,6 +13,9 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  
+  const servicesRef = useRef<HTMLDivElement>(null);
+  const mobileServicesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +24,23 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+        const target = event.target as Node;
+        if (
+            !servicesRef.current?.contains(target) &&
+            !mobileServicesRef.current?.contains(target)
+        ) {
+            setIsServicesOpen(false);
+        }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+    };
+}, []);
 
   const handleLinkClick = (page: Page) => {
     onNavigate(page);
@@ -54,8 +74,8 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
                 </a>
               ))}
               {/* Services Dropdown */}
-              <div className="relative" onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => setIsServicesOpen(false)}>
-                <button className={`flex items-center ${navItemClasses('Services')}`}>
+              <div className="relative" ref={servicesRef}>
+                <button onClick={() => setIsServicesOpen(!isServicesOpen)} className={`flex items-center ${navItemClasses('Services')}`}>
                   Services <ChevronDown size={16} className={`ml-1 transition-transform duration-300 ${isServicesOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {isServicesOpen && (
@@ -96,7 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
               </a>
             ))}
             {/* Mobile Services Section */}
-            <div>
+            <div ref={mobileServicesRef}>
               <button onClick={() => setIsServicesOpen(!isServicesOpen)} className={`w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium ${navItemClasses('Services')}`}>
                   <span>Services</span>
                   <ChevronDown size={20} className={`transition-transform duration-300 ${isServicesOpen ? 'rotate-180' : ''}`} />

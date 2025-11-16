@@ -5,6 +5,7 @@ import HeroSection from '../components/HeroSection';
 import Section from '../components/Section';
 import ServiceCard from '../components/ServiceCard';
 import { Briefcase, Nfc, Bot, Target, Zap, CheckCircle, BarChart, Search, PenTool, BotMessageSquare, Megaphone, LineChart } from 'lucide-react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 interface HomePageProps {
   onNavigate: (page: Page) => void;
@@ -33,6 +34,10 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     { number: '05', title: 'Growth & Optimization', description: 'We monitor performance, providing insights and continuous optimization.' },
   ];
 
+  const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation<HTMLDivElement>();
+  const { ref: whyVimsRef, isVisible: whyVimsVisible } = useScrollAnimation<HTMLDivElement>();
+  const { ref: processRef, isVisible: processVisible } = useScrollAnimation<HTMLDivElement>();
+
   return (
     <>
       <HeroSection
@@ -44,57 +49,63 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         altText="A futuristic digital command center in an Indian B2B tech office with professionals collaborating around holographic dashboards."
       />
 
-      <Section id="services" className="bg-navy-light">
-        <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-poppins font-bold">What We Do</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-400">We provide a suite of services designed to build, automate, and scale your brand.</p>
-        </div>
-        <div className="mt-16 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, index) => (
-            <div key={index} className="cursor-pointer" onClick={() => onNavigate(service.page)}>
-                <ServiceCard icon={service.icon} title={service.title} description={service.description} />
-            </div>
-          ))}
-        </div>
-      </Section>
-      
-      <Section>
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-poppins font-bold">Why Choose VIMS Enterprises?</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-400">Our unique approach combines deep expertise with cutting-edge technology.</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {pillars.map((pillar, i) => (
-                <div key={i} className="flex items-start space-x-4 p-6 bg-slate-900/30 rounded-3xl">
-                    <div className="flex-shrink-0">{pillar.icon}</div>
-                    <div>
-                        <h3 className="text-lg font-bold text-light-text">{pillar.title}</h3>
-                        <p className="mt-1 text-slate-400">{pillar.description}</p>
-                    </div>
-                </div>
+      <section id="services" ref={servicesRef} className="bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center">
+            <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>What We Do</h2>
+            <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-400 ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>We provide a suite of services designed to build, automate, and scale your brand.</p>
+          </div>
+          <div className="mt-16 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {services.map((service, index) => (
+              <div key={index} className={`cursor-pointer ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + index * 100}ms` }} onClick={() => onNavigate(service.page)}>
+                  <ServiceCard icon={service.icon} title={service.title} description={service.description} />
+              </div>
             ))}
+          </div>
         </div>
-      </Section>
+      </section>
+      
+      <section ref={whyVimsRef} className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${whyVimsVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Why Choose VIMS Enterprises?</h2>
+            <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-400 ${whyVimsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>Our unique approach combines deep expertise with cutting-edge technology.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {pillars.map((pillar, i) => (
+                  <div key={i} className={`flex items-start space-x-4 p-6 bg-slate-900/30 rounded-3xl ${whyVimsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
+                      <div className="flex-shrink-0">{pillar.icon}</div>
+                      <div>
+                          <h3 className="text-lg font-bold text-light-text">{pillar.title}</h3>
+                          <p className="mt-1 text-slate-400">{pillar.description}</p>
+                      </div>
+                  </div>
+              ))}
+          </div>
+        </div>
+      </section>
 
-      <Section id="process" className="bg-navy-light">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-poppins font-bold">Our Process</h2>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-400">A proven 5-step methodology to ensure your success.</p>
+      <section id="process" ref={processRef} className="bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${processVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Our Process</h2>
+            <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-400 ${processVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>A proven 5-step methodology to ensure your success.</p>
+          </div>
+          <div className="relative">
+              <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-800 -translate-y-1/2"></div>
+              <div className={`hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-cyan to-violet ${processVisible ? 'animate-pulse' : ''}`}></div>
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+                  {processSteps.map((step, i) => (
+                      <div key={i} className={`relative p-6 bg-slate-900 rounded-3xl border border-slate-800 ${processVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
+                          <div className="text-3xl font-bold text-cyan mb-4">{step.number}</div>
+                          <h3 className="text-lg font-bold mb-2">{step.title}</h3>
+                          <p className="text-slate-400 text-sm">{step.description}</p>
+                      </div>
+                  ))}
+              </div>
+          </div>
         </div>
-        <div className="relative">
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-800 -translate-y-1/2"></div>
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-cyan to-violet animate-pulse"></div>
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-                {processSteps.map((step, i) => (
-                    <div key={i} className="relative p-6 bg-slate-900 rounded-3xl border border-slate-800">
-                        <div className="text-3xl font-bold text-cyan mb-4">{step.number}</div>
-                        <h3 className="text-lg font-bold mb-2">{step.title}</h3>
-                        <p className="text-slate-400 text-sm">{step.description}</p>
-                    </div>
-                ))}
-            </div>
-        </div>
-      </Section>
+      </section>
 
       <Section>
         <div className="bg-slate-900/50 rounded-4xl p-8 md:p-12 border border-slate-800">
