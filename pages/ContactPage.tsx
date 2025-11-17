@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import HeroSection from '../components/HeroSection';
 import Section from '../components/Section';
@@ -40,8 +39,8 @@ const ContactPage: React.FC = () => {
     ];
     
     const contactInfo = [
-        { icon: <Mail className="h-6 w-6 text-cyan mr-4 mt-1" />, title: "Email", lines: [<a href="mailto:contact@vimsenterprise.com" className="text-slate-400 hover:text-cyan transition">contact@vimsenterprise.com</a>] },
-        { icon: <Phone className="h-6 w-6 text-cyan mr-4 mt-1" />, title: "Phone", lines: [<a href="tel:+919940660868" className="text-slate-400 hover:text-cyan transition block">+91 9940660868</a>, <a href="tel:+919789692447" className="text-slate-400 hover:text-cyan transition block">+91 9789692447</a>] }
+        { icon: <Mail className="h-6 w-6 text-cyan mr-4 mt-1" />, title: "Email", lines: [<a href="mailto:contact@vimsenterprise.com" className="text-slate-600 dark:text-slate-400 hover:text-cyan transition">contact@vimsenterprise.com</a>] },
+        { icon: <Phone className="h-6 w-6 text-cyan mr-4 mt-1" />, title: "Phone", lines: [<a href="tel:+919940660868" className="text-slate-600 dark:text-slate-400 hover:text-cyan transition block">+91 9940660868</a>, <a href="tel:+919789692447" className="text-slate-600 dark:text-slate-400 hover:text-cyan transition block">+91 9789692447</a>] }
     ];
 
     const { ref: contactRef, isVisible: contactVisible } = useScrollAnimation<HTMLDivElement>();
@@ -60,33 +59,33 @@ const ContactPage: React.FC = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                         <div className="lg:col-span-2">
-                            <div className={`p-8 bg-slate-900/50 rounded-4xl border border-slate-800 ${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+                            <div className={`p-8 bg-white dark:bg-slate-900/50 rounded-4xl border border-slate-200 dark:border-slate-800 ${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
                                 <h2 className="text-2xl font-bold font-poppins mb-6">Send us a Message</h2>
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className={`${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '100ms' }}>
-                                            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" required className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 focus:ring-cyan focus:border-cyan transition" />
+                                            <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" required className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-cyan focus:border-cyan transition" />
                                         </div>
                                         <div className={`${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
-                                            <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Your Email" required className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 focus:ring-cyan focus:border-cyan transition" />
+                                            <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Your Email" required className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-cyan focus:border-cyan transition" />
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                          <div className={`${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '300ms' }}>
-                                            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Your Phone" required className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 focus:ring-cyan focus:border-cyan transition" />
+                                            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Your Phone" required className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-cyan focus:border-cyan transition" />
                                         </div>
                                          <div className={`${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
-                                            <input type="text" name="company" value={formData.company} onChange={handleChange} placeholder="Company Name" required className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 focus:ring-cyan focus:border-cyan transition" />
+                                            <input type="text" name="company" value={formData.company} onChange={handleChange} placeholder="Company Name" required className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-cyan focus:border-cyan transition" />
                                         </div>
                                     </div>
                                     <div className={`${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '500ms' }}>
-                                        <select name="service" value={formData.service} onChange={handleChange} required className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 focus:ring-cyan focus:border-cyan transition text-slate-400">
+                                        <select name="service" value={formData.service} onChange={handleChange} required className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-cyan focus:border-cyan transition text-slate-500 dark:text-slate-400">
                                             <option value="" disabled>Service Interested In...</option>
                                             {serviceOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                                         </select>
                                     </div>
                                     <div className={`${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '600ms' }}>
-                                        <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Your Message" rows={5} required className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 focus:ring-cyan focus:border-cyan transition"></textarea>
+                                        <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Your Message" rows={5} required className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-3 focus:ring-cyan focus:border-cyan transition"></textarea>
                                     </div>
                                     <div className={`${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '700ms' }}>
                                         <button type="submit" className="w-full px-8 py-3 text-base font-bold text-light-text bg-gradient-to-r from-orange to-violet hover:from-violet hover:to-orange rounded-full shadow-lg transition-transform transform hover:scale-105">

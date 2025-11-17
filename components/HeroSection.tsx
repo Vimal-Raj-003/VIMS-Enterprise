@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 
 interface HeroSectionProps {
@@ -43,7 +42,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ headline, subtext, primaryCta
         aria-label={altText}
         role="img"
       >
-        <div className="absolute inset-0 bg-navy/70 backdrop-brightness-50"></div>
+        <div className="absolute inset-0 bg-white/30 dark:bg-navy/70 dark:backdrop-brightness-50"></div>
       </div>
       
       {/* Animated Particles */}
@@ -75,10 +74,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ headline, subtext, primaryCta
 
       {/* Content */}
       <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 md:py-48 text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-poppins font-extrabold tracking-tight text-light-text">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-poppins font-extrabold tracking-tight text-slate-900 dark:text-light-text">
           {headline}
         </h1>
-        <p className="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-300">
+        <p className="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-slate-800 dark:text-slate-300">
           {subtext}
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -91,7 +90,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ headline, subtext, primaryCta
           {secondaryCta && (
             <button 
               onClick={secondaryCta.onClick}
-              className="w-full sm:w-auto px-8 py-3 text-base font-bold text-light-text bg-slate-800/50 border-2 border-slate-700 hover:bg-slate-700/50 hover:border-cyan rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+              className="w-full sm:w-auto px-8 py-3 text-base font-bold text-slate-900 dark:text-light-text bg-white/50 dark:bg-slate-800/50 border-2 border-slate-300 dark:border-slate-700 hover:bg-white/80 dark:hover:bg-slate-700/50 hover:border-cyan rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
             >
               {secondaryCta.text}
             </button>

@@ -1,10 +1,8 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VIMS Enterprises – Digital Identity, AI Automation & Personal Branding</title>
     <meta name="description" content="VIMS Enterprises helps founders, CXOs and growth-focused businesses build authority, automate workflows, and scale revenue through LinkedIn branding, AI automation, digital identity and intelligent voice agents." />
@@ -20,9 +18,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <script>
+      // Avoids FOUC by applying theme from localStorage before page load
+      if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             fontFamily: {
@@ -87,7 +94,7 @@
 }
 </script>
 </head>
-  <body class="bg-navy font-sans text-light-text antialiased">
+  <body class="bg-slate-50 dark:bg-navy font-sans text-slate-800 dark:text-light-text antialiased transition-colors duration-300">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

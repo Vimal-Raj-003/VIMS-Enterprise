@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback, useEffect } from 'react';
 import { Page } from './types';
 import Navbar from './components/Navbar';
@@ -14,8 +13,10 @@ import ContactPage from './pages/ContactPage';
 import { PAGE_META } from './constants';
 import FloatingBookNowButton from './components/FloatingBookNowButton';
 import CtaSection from './components/CtaSection';
+import { ThemeProvider } from './contexts/ThemeContext';
 
-const App: React.FC = () => {
+// FIX: Removed React.FC type from component definition to resolve issue with 'children' prop being implicitly required.
+const App = () => {
   const [activePage, setActivePage] = useState<Page>(Page.Home);
 
   const handleNavigate = useCallback((page: Page) => {
@@ -56,15 +57,17 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-navy text-light-text overflow-x-hidden">
-      <Navbar activePage={activePage} onNavigate={handleNavigate} />
-      <main className="flex-grow pt-20">
-        {renderPage()}
-      </main>
-      <CtaSection />
-      <FloatingBookNowButton />
-      <Footer onNavigate={handleNavigate} />
-    </div>
+    <ThemeProvider>
+      <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-navy text-slate-900 dark:text-light-text overflow-x-hidden transition-colors duration-300">
+        <Navbar activePage={activePage} onNavigate={handleNavigate} />
+        <main className="flex-grow pt-20">
+          {renderPage()}
+        </main>
+        <CtaSection />
+        <FloatingBookNowButton />
+        <Footer onNavigate={handleNavigate} />
+      </div>
+    </ThemeProvider>
   );
 };
 

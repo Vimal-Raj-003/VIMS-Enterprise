@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import HeroSection from '../components/HeroSection';
 import Section from '../components/Section';
@@ -116,7 +115,7 @@ const AiAutomationPage: React.FC = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <div>
                             <h2 className={`text-3xl font-bold font-poppins mb-4 ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Our Automation Philosophy</h2>
-                            <p className={`text-slate-400 mb-6 ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>We believe automation should be custom, pain-point-driven, and seamlessly integrated into your existing processes. Our goal is to save you time, increase revenue, and eliminate manual work so you can focus on what you do best.</p>
+                            <p className={`text-slate-600 dark:text-slate-400 mb-6 ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>We believe automation should be custom, pain-point-driven, and seamlessly integrated into your existing processes. Our goal is to save you time, increase revenue, and eliminate manual work so you can focus on what you do best.</p>
                             <div className="space-y-3">
                                 <div className={`flex items-center ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '300ms' }}><Zap className="h-5 w-5 text-green mr-2" /><span>Custom workflows designed for your specific needs.</span></div>
                                 <div className={`flex items-center ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}><Zap className="h-5 w-5 text-green mr-2" /><span>Integration with your favorite tools (Zoho, HubSpot, etc.).</span></div>
@@ -130,41 +129,41 @@ const AiAutomationPage: React.FC = () => {
                 </div>
             </section>
 
-            <section ref={solutionsRef} className="bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+            <section ref={solutionsRef} className="bg-slate-100 dark:bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${solutionsVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Automation Solutions Infographic</h2>
-                        <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-400 ${solutionsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>Click on a workflow to see more details.</p>
+                        <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400 ${solutionsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>Click on a workflow to see more details.</p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         {workflows.map((flow, i) => (
                             <div 
                                 key={i} 
                                 onClick={() => setSelectedWorkflow(selectedWorkflow === i ? null : i)}
-                                className={`p-6 h-full bg-slate-900 rounded-3xl border transition-all duration-300 cursor-pointer ${solutionsVisible ? 'animate-fade-in-up' : 'opacity-0'} ${
+                                className={`p-6 h-full bg-white dark:bg-slate-900 rounded-3xl border transition-all duration-300 cursor-pointer ${solutionsVisible ? 'animate-fade-in-up' : 'opacity-0'} ${
                                     selectedWorkflow === i 
                                     ? 'border-cyan shadow-lg shadow-cyan/20 transform -translate-y-2' 
-                                    : 'border-slate-800 hover:border-slate-600'
+                                    : 'border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600'
                                 }`}
                                 style={{ animationDelay: `${300 + i * 100}ms` }}
                             >
-                               <div className="w-12 h-12 flex items-center justify-center bg-slate-800 rounded-xl text-cyan mb-4">{flow.icon}</div>
+                               <div className="w-12 h-12 flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-xl text-cyan mb-4">{flow.icon}</div>
                                <h3 className="text-lg font-bold mb-2">{flow.title}</h3>
-                               <p className="text-slate-400 text-sm">{flow.description}</p>
+                               <p className="text-slate-600 dark:text-slate-400 text-sm">{flow.description}</p>
                             </div>
                         ))}
                     </div>
 
                     <div className="mt-12 min-h-[250px]">
                         {selectedWorkflow !== null && (
-                            <div className="bg-slate-900/50 rounded-4xl p-8 border border-cyan/50 transition-opacity duration-500 animate-fade-in-up">
+                            <div className="bg-white dark:bg-slate-900/50 rounded-4xl p-8 border border-cyan/50 transition-opacity duration-500 animate-fade-in-up">
                                 <h3 className="text-2xl font-bold font-poppins text-cyan mb-4">{workflows[selectedWorkflow].title}</h3>
-                                <p className="text-slate-300 mb-6">This workflow is designed to streamline the process of "{workflows[selectedWorkflow].title.toLowerCase()}" by integrating key tools and actions.</p>
+                                <p className="text-slate-700 dark:text-slate-300 mb-6">This workflow is designed to streamline the process of "{workflows[selectedWorkflow].title.toLowerCase()}" by integrating key tools and actions.</p>
                                 <ul className="space-y-3">
                                     {workflows[selectedWorkflow].details.map((detail, index) => (
                                         <li key={index} className="flex items-start">
                                             <CheckCircle className="h-5 w-5 text-green mt-1 mr-3 flex-shrink-0" />
-                                            <span className="text-slate-400">{detail}</span>
+                                            <span className="text-slate-600 dark:text-slate-400">{detail}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -176,15 +175,15 @@ const AiAutomationPage: React.FC = () => {
             
             <section ref={deliverRef} className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
-                    <div className="bg-slate-900/50 rounded-4xl p-8 md:p-12 border border-slate-800">
-                        <h2 className={`text-2xl md:text-3xl font-poppins font-bold text-center mb-8 ${deliverVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>What We Deliver</h2>
+                    <div className="bg-white dark:bg-slate-900/50 rounded-4xl p-8 md:p-12 border border-slate-200 dark:border-slate-800">
+                        <h2 className={`text-2xl md:text-3xl font-poppins font-bold text-center mb-8 ${deliverRef ? 'animate-fade-in-up' : 'opacity-0'}`}>What We Deliver</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {deliverables.map((item, i) => (
-                                <div key={i} className={`flex items-start space-x-4 ${deliverVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${150 + i * 150}ms` }}>
+                                <div key={i} className={`flex items-start space-x-4 ${deliverRef ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${150 + i * 150}ms` }}>
                                     {React.cloneElement(item.icon, { className: "h-8 w-8 text-cyan mt-1 flex-shrink-0" })}
                                     <div>
                                         <h3 className="text-lg font-bold">{item.title}</h3>
-                                        <p className="text-slate-400">{item.description}</p>
+                                        <p className="text-slate-600 dark:text-slate-400">{item.description}</p>
                                     </div>
                                 </div>
                             ))}

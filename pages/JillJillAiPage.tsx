@@ -50,43 +50,43 @@ const JillJillAiPage: React.FC = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${featuresVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Key Features</h2>
-                        <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-400 ${featuresVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>An entire top-of-funnel sales team, in one AI agent.</p>
+                        <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400 ${featuresVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>An entire top-of-funnel sales team, in one AI agent.</p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {features.map((feature, i) => (
-                            <div key={i} className={`p-6 bg-slate-900/50 rounded-3xl border border-slate-800 ${featuresVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
+                            <div key={i} className={`p-6 bg-white dark:bg-slate-900/50 rounded-3xl border border-slate-200 dark:border-slate-800 ${featuresVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
                                <div className="flex items-center mb-4">
-                                   <div className="w-12 h-12 flex items-center justify-center bg-slate-800 rounded-xl text-cyan mr-4">{feature.icon}</div>
+                                   <div className="w-12 h-12 flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-xl text-cyan mr-4">{feature.icon}</div>
                                    <h3 className="text-lg font-bold">{feature.title}</h3>
                                </div>
-                                <p className="text-slate-400">{feature.description}</p>
+                                <p className="text-slate-600 dark:text-slate-400">{feature.description}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section ref={roiRef} className="bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+            <section ref={roiRef} className="bg-slate-100 dark:bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                      <div className="text-center mb-16">
                         <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>The ROI of AI Sales Automation</h2>
-                         <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-400 ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>JillJill doesn't just save time—it drives significant, measurable financial results.</p>
+                         <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400 ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>JillJill doesn't just save time—it drives significant, measurable financial results.</p>
                     </div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr className="border-b border-slate-700">
-                                    <th className={`p-4 text-sm font-semibold uppercase text-slate-400 ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '300ms' }}>Metric</th>
+                                <tr className="border-b border-slate-300 dark:border-slate-700">
+                                    <th className={`p-4 text-sm font-semibold uppercase text-slate-500 dark:text-slate-400 ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '300ms' }}>Metric</th>
                                     <th className={`p-4 text-sm font-semibold uppercase text-cyan text-center ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>JillJill AI Agent</th>
                                     <th className={`p-4 text-sm font-semibold uppercase text-slate-500 text-center ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '500ms' }}>Human SDR</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {roiMetrics.map((row, i) => (
-                                    <tr key={i} className={`border-b border-slate-800 ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${400 + i * 100}ms` }}>
+                                    <tr key={i} className={`border-b border-slate-200 dark:border-slate-800 ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${400 + i * 100}ms` }}>
                                         <td className="p-4 font-medium">{row.metric}</td>
-                                        <td className="p-4 text-center font-bold text-lg text-light-text">{row.ai}</td>
-                                        <td className="p-4 text-center text-slate-400">{row.human}</td>
+                                        <td className="p-4 text-center font-bold text-lg text-slate-900 dark:text-light-text">{row.ai}</td>
+                                        <td className="p-4 text-center text-slate-600 dark:text-slate-400">{row.human}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -99,12 +99,12 @@ const JillJillAiPage: React.FC = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${workflowVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Implementation Workflow</h2>
-                        <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-400 ${workflowVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>Our structured 6-step process ensures a smooth and successful deployment.</p>
+                        <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400 ${workflowVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>Our structured 6-step process ensures a smooth and successful deployment.</p>
                     </div>
                      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
                         {processSteps.map((step, i) => (
-                             <div key={i} className={`flex items-center p-3 pr-5 bg-slate-900 rounded-full border border-slate-800 transition-all duration-300 hover:border-cyan/70 hover:shadow-lg hover:shadow-cyan/10 transform hover:-translate-y-1 ${workflowVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
-                                 <div className="w-10 h-10 flex-shrink-0 rounded-full bg-cyan text-navy flex items-center justify-center font-bold text-lg mr-4">{i + 1}</div>
+                             <div key={i} className={`flex items-center p-3 pr-5 bg-white dark:bg-slate-900 rounded-full border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:border-cyan/70 hover:shadow-lg hover:shadow-cyan/10 transform hover:-translate-y-1 ${workflowVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
+                                 <div className="w-10 h-10 flex-shrink-0 rounded-full bg-cyan text-navy dark:text-light-text flex items-center justify-center font-bold text-lg mr-4">{i + 1}</div>
                                  <span className="font-medium text-base">{step}</span>
                              </div>
                         ))}
