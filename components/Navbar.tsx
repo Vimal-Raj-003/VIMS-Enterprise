@@ -4,6 +4,8 @@ import { NAV_LINKS, SERVICE_PAGES } from '../constants';
 import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
+import { motion } from 'motion/react';
+
 interface NavbarProps {
   activePage: Page;
   onNavigate: (page: Page) => void;
@@ -63,22 +65,38 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
-             <a onClick={() => handleLinkClick(Page.Home)} className="cursor-pointer text-2xl font-poppins font-bold text-slate-900 dark:text-light-text">
-              VIMS<span className="text-cyan">.</span>
+             <a onClick={() => handleLinkClick(Page.Home)} className="flex items-center gap-2 cursor-pointer text-2xl font-poppins font-bold text-slate-900 dark:text-light-text group">
+              <motion.img 
+                whileHover={{ rotate: 5, scale: 1.1 }}
+                src="https://lh3.googleusercontent.com/d/1nFXxO-oUx6f3P6a_1nfI-VGpZWDHWxvu" 
+                alt="VIMS Logo" 
+                className="w-10 h-10 object-contain rounded-lg" 
+                referrerPolicy="no-referrer" 
+              />
+              <span className="group-hover:text-cyan transition-colors">VIMS</span>
             </a>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-6">
               {NAV_LINKS.map((link) => (
-                <a key={link.name} onClick={() => handleLinkClick(link.name)} className={navItemClasses(link.name)}>
+                <motion.a 
+                  key={link.name} 
+                  whileHover={{ y: -2 }}
+                  onClick={() => handleLinkClick(link.name)} 
+                  className={navItemClasses(link.name)}
+                >
                   {link.name}
-                </a>
+                </motion.a>
               ))}
               {/* Services Dropdown */}
               <div className="relative" ref={servicesRef}>
-                <button onClick={() => setIsServicesOpen(!isServicesOpen)} className={`flex items-center ${navItemClasses('Services')}`}>
+                <motion.button 
+                  whileHover={{ y: -2 }}
+                  onClick={() => setIsServicesOpen(!isServicesOpen)} 
+                  className={`flex items-center ${navItemClasses('Services')}`}
+                >
                   Services <ChevronDown size={16} className={`ml-1 transition-transform duration-300 ${isServicesOpen ? 'rotate-180' : ''}`} />
-                </button>
+                </motion.button>
                 {isServicesOpen && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg rounded-xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-fade-in-up" style={{ animationDuration: '300ms' }}>
                     <div className="p-2">
@@ -92,30 +110,35 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
                 )}
               </div>
               
-              <button 
+              <motion.button 
+                whileHover={{ rotate: 15, scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={toggleTheme}
                 className="ml-4 p-2.5 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
                 aria-label="Toggle theme"
               >
                 {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-              </button>
+              </motion.button>
 
-              <button 
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => window.open('https://cal.com/vims-003/vims-enterprise', '_blank')}
-                className="px-5 py-2.5 text-sm font-bold text-light-text bg-gradient-to-r from-orange to-violet hover:from-violet hover:to-orange rounded-full shadow-lg transition-transform transform hover:scale-105"
+                className="px-5 py-2.5 text-sm font-bold text-light-text bg-gradient-to-r from-orange to-violet hover:brightness-110 rounded-full shadow-lg transition-all duration-300"
               >
                 Book Strategy Call
-              </button>
+              </motion.button>
             </div>
           </div>
           <div className="md:hidden flex items-center gap-2">
-             <button 
+             <motion.button 
+                whileTap={{ scale: 0.9 }}
                 onClick={toggleTheme}
                 className="p-2.5 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 aria-label="Toggle theme"
               >
                 {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-              </button>
+              </motion.button>
             <button onClick={() => setIsOpen(!isOpen)} className="text-slate-800 dark:text-light-text hover:text-cyan transition-colors" aria-label="Toggle menu">
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -124,7 +147,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
       </nav>
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white/95 dark:bg-slate-900/90 backdrop-blur-lg">
+        <div className="md:hidden bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {NAV_LINKS.map((link) => (
               <a key={link.name} onClick={() => handleLinkClick(link.name)} className={`block px-3 py-2 rounded-md text-base font-medium ${navItemClasses(link.name)}`}>
@@ -148,12 +171,13 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
               )}
             </div>
             <div className="pt-4 px-3">
-              <button 
+              <motion.button 
+                whileTap={{ scale: 0.98 }}
                 onClick={() => window.open('https://cal.com/vims-003/vims-enterprise', '_blank')}
-                className="w-full px-5 py-3 text-sm font-bold text-light-text bg-gradient-to-r from-orange to-violet rounded-full shadow-lg transition-transform transform hover:scale-105"
+                className="w-full px-5 py-3 text-sm font-bold text-light-text bg-gradient-to-r from-orange to-violet rounded-full shadow-lg transition-all duration-300"
               >
                 Book Strategy Call
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>

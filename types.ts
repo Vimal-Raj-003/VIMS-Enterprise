@@ -10,6 +10,7 @@ export enum Page {
   AIAutomation = 'AI Automation',
   About = 'About',
   Contact = 'Contact',
+  TeamProfile = 'Team Profile',
 }
 
 export interface ServiceCardProps {

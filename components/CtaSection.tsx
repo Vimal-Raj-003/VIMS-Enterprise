@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { motion } from 'motion/react';
+
 const CtaSection: React.FC = () => {
   return (
     <section className="py-12 px-4 sm:px-6 lg:px-8">
@@ -14,15 +16,17 @@ const CtaSection: React.FC = () => {
               Ready to Transform Your Business?
             </h2>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-slate-200">
-              Let's discuss how VIMS Enterprises can help you achieve your growth goals. Book a no-obligation strategy call with our experts today.
+              Let's discuss how VIMS can help you achieve your growth goals. Book a no-obligation strategy call with our experts today.
             </p>
             <div className="mt-8">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05, backgroundColor: "#f8fafc" }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => window.open('https://cal.com/vims-003/vims-enterprise', '_blank')}
-                className="px-8 py-3 text-base font-bold text-navy bg-light-text hover:bg-slate-200 rounded-full shadow-lg transition-transform transform hover:scale-105"
+                className="px-8 py-3 text-base font-bold text-navy bg-light-text rounded-full shadow-lg transition-all duration-300"
               >
                 Book Strategy Call
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>

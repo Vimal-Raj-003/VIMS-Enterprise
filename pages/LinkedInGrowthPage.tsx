@@ -44,7 +44,7 @@ const LinkedInGrowthPage: React.FC = () => {
     <>
       <HeroSection
         headline={<>LinkedIn Growth & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-violet">Personal Branding</span></>}
-        subtext="Driving Authority. Visibility. Trust. VIMS Enterprises helps founders, CXOs & professionals in automotive, deep tech, AI, manufacturing and B2B sectors turn LinkedIn into a 24×7 growth engine."
+        subtext="Driving Authority. Visibility. Trust. VIMS helps founders, CXOs & professionals in automotive, deep tech, AI, manufacturing and B2B sectors turn LinkedIn into a 24×7 growth engine."
         primaryCta={{ text: 'Get Your LinkedIn Audit', onClick: () => window.open('https://cal.com/vims-003/vims-enterprise', '_blank') }}
         imageUrl="https://picsum.photos/1920/1080?random=2"
         altText="Professional Indian CXO in a modern office looking at a large transparent screen with a LinkedIn profile and performance charts."
@@ -54,12 +54,12 @@ const LinkedInGrowthPage: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div className={`${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-                  <h2 className="text-2xl md:text-3xl font-bold font-poppins">Our Core Philosophy</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold font-poppins text-slate-900 dark:text-light-text">Our Core Philosophy</h2>
                   <p className="mt-4 text-slate-600 dark:text-slate-400">We believe in a strategic, long-term approach to building your most valuable professional asset: your reputation.</p>
               </div>
               <div className="space-y-4">
                   {philosophyPoints.map((point, i) => (
-                      <div key={i} className={`flex items-center p-4 bg-white dark:bg-slate-900/50 rounded-2xl ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${150 + i * 100}ms` }}>
+                      <div key={i} className={`flex items-center p-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md border border-white/20 dark:border-slate-800/10 rounded-2xl ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${150 + i * 100}ms` }}>
                           <CheckCircle className="h-6 w-6 text-green mr-4 flex-shrink-0" />
                           <span className="text-slate-700 dark:text-slate-300">{point}</span>
                       </div>
@@ -69,11 +69,11 @@ const LinkedInGrowthPage: React.FC = () => {
         </div>
       </section>
 
-      <section ref={servicesRef} className="bg-slate-100 dark:bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      <section ref={servicesRef} className="bg-slate-100/30 dark:bg-navy-light/10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Service 1 */}
-            <div className={`p-8 bg-white dark:bg-slate-900 rounded-4xl border border-slate-200 dark:border-slate-800 ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '100ms' }}>
+            <div className={`p-8 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md rounded-4xl border border-slate-200 dark:border-slate-800 shadow-xl ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '100ms' }}>
                 <div className="flex items-center mb-4"><TrendingUp className="h-8 w-8 text-cyan mr-3" /> <h3 className="text-2xl font-bold font-poppins">LinkedIn Content Creation</h3></div>
                 <p className="text-slate-600 dark:text-slate-400 mb-6">Daily/weekly niche-specific content (Automotive, ADAS, EV, AI, Manufacturing) using story-driven, educational & viral formats. Includes a 30/60/90-day SEO-optimized content calendar.</p>
                 <div className="space-y-3">
@@ -83,7 +83,7 @@ const LinkedInGrowthPage: React.FC = () => {
                 </div>
             </div>
             {/* Service 2 */}
-            <div className={`p-8 bg-white dark:bg-slate-900 rounded-4xl border border-slate-200 dark:border-slate-800 ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
+            <div className={`p-8 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md rounded-4xl border border-slate-200 dark:border-slate-800 shadow-xl ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
                 <div className="flex items-center mb-4"><UserCheck className="h-8 w-8 text-cyan mr-3" /> <h3 className="text-2xl font-bold font-poppins">LinkedIn Profile Optimization</h3></div>
                 <p className="text-slate-600 dark:text-slate-400 mb-6">We rewrite and optimize every section of your profile to tell a compelling story, attract the right audience, and convert visitors into leads.</p>
                 <div className="flex flex-wrap gap-2">
@@ -91,7 +91,7 @@ const LinkedInGrowthPage: React.FC = () => {
                 </div>
             </div>
             {/* Service 3 */}
-            <div className={`p-8 bg-white dark:bg-slate-900 rounded-4xl border border-slate-200 dark:border-slate-800 ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '300ms' }}>
+            <div className={`p-8 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md rounded-4xl border border-slate-200 dark:border-slate-800 shadow-xl ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '300ms' }}>
                 <div className="flex items-center mb-4"><Edit className="h-8 w-8 text-cyan mr-3" /> <h3 className="text-2xl font-bold font-poppins">Personal Branding Development</h3></div>
                 <p className="text-slate-600 dark:text-slate-400 mb-6">Go beyond the profile. We help you define your unique brand identity, position yourself as an authority, and create a roadmap for long-term influence.</p>
                 <div className="flex flex-wrap gap-2">
@@ -99,7 +99,7 @@ const LinkedInGrowthPage: React.FC = () => {
                 </div>
             </div>
             {/* Service 4 */}
-            <div className={`p-8 bg-white dark:bg-slate-900 rounded-4xl border border-slate-200 dark:border-slate-800 ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
+            <div className={`p-8 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md rounded-4xl border border-slate-200 dark:border-slate-800 shadow-xl ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}>
                 <div className="flex items-center mb-4"><Bot className="h-8 w-8 text-cyan mr-3" /> <h3 className="text-2xl font-bold font-poppins">LinkedIn AI-Agent</h3></div>
                 <p className="text-slate-600 dark:text-slate-400 mb-6">Achieve unparalleled consistency. Our AI agent automatically posts your approved content at peak times, ensuring you're always visible. 5x consistency, zero manual posting.</p>
                  <div className="flex items-center text-green"><Zap className="h-5 w-5 mr-2" /><span>Works with long-form, short-form, and carousel posts.</span></div>
@@ -127,14 +127,14 @@ const LinkedInGrowthPage: React.FC = () => {
         </div>
       </section>
       
-      <section ref={testimonialsRef} className="bg-slate-100 dark:bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      <section ref={testimonialsRef} className="bg-slate-100/30 dark:bg-navy-light/10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
               <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${testimonialsVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>What Our Clients Say</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {testimonials.map((t, i) => (
-                  <div key={i} className={`p-8 bg-white dark:bg-slate-900/50 rounded-3xl border border-slate-200 dark:border-slate-800 ${testimonialsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${150 + i * 100}ms` }}>
+                  <div key={i} className={`p-8 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg ${testimonialsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${150 + i * 100}ms` }}>
                       <p className="text-slate-700 dark:text-slate-300 italic mb-6">"{t.quote}"</p>
                       <div>
                           <p className="font-bold text-slate-900 dark:text-light-text">{t.name}</p>

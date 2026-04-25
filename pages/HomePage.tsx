@@ -3,6 +3,8 @@ import { Page } from '../types';
 import HeroSection from '../components/HeroSection';
 import Section from '../components/Section';
 import ServiceCard from '../components/ServiceCard';
+import ClientsSection from '../components/ClientsSection';
+import SoftwareSolutionsSection from '../components/SoftwareSolutionsSection';
 import { Briefcase, Nfc, Bot, Target, Zap, CheckCircle, BarChart, Search, PenTool, BotMessageSquare, Megaphone, LineChart } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
@@ -41,14 +43,16 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     <>
       <HeroSection
         headline={<>Transform Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-violet">Digital Presence</span> into a Growth Engine.</>}
-        subtext="VIMS Enterprises helps founders, CXOs and growth-focused businesses build authority, automate workflows, and scale revenue through LinkedIn branding, AI automation, digital identity and intelligent voice agents."
+        subtext="VIMS helps founders, CXOs and growth-focused businesses build authority, automate workflows, and scale revenue through LinkedIn branding, AI automation, digital identity and intelligent voice agents."
         primaryCta={{ text: 'Book a Strategy Call', onClick: () => window.open('https://cal.com/vims-003/vims-enterprise', '_blank') }}
         secondaryCta={{ text: 'Explore Services', onClick: () => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }) }}
         imageUrl="https://picsum.photos/1920/1080?random=1"
         altText="A futuristic digital command center in an Indian B2B tech office with professionals collaborating around holographic dashboards."
       />
 
-      <section id="services" ref={servicesRef} className="bg-slate-100 dark:bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      <ClientsSection />
+
+      <section id="services" ref={servicesRef} className="bg-slate-100/50 dark:bg-navy-light/10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto">
           <div className="text-center">
             <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>What We Do</h2>
@@ -64,15 +68,17 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
       
+      <SoftwareSolutionsSection />
+
       <section ref={whyVimsRef} className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${whyVimsVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Why Choose VIMS Enterprises?</h2>
+            <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${whyVimsVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Why Choose VIMS?</h2>
             <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400 ${whyVimsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>Our unique approach combines deep expertise with cutting-edge technology.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {pillars.map((pillar, i) => (
-                  <div key={i} className={`flex items-start space-x-4 p-6 bg-white dark:bg-slate-900/30 rounded-3xl ${whyVimsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
+                  <div key={i} className={`flex items-start space-x-4 p-6 bg-white/40 dark:bg-slate-900/40 rounded-3xl backdrop-blur-md border border-white/20 dark:border-slate-800/30 shadow-xl ${whyVimsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
                       <div className="flex-shrink-0">{pillar.icon}</div>
                       <div>
                           <h3 className="text-lg font-bold text-slate-900 dark:text-light-text">{pillar.title}</h3>
@@ -84,7 +90,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <section id="process" ref={processRef} className="bg-slate-100 dark:bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      <section id="process" ref={processRef} className="bg-slate-100/30 dark:bg-navy-light/10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${processVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Our Process</h2>
@@ -95,7 +101,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <div className={`hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-cyan to-violet ${processVisible ? 'animate-pulse' : ''}`}></div>
               <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
                   {processSteps.map((step, i) => (
-                      <div key={i} className={`relative p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 ${processVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
+                      <div key={i} className={`relative p-6 bg-white/60 dark:bg-slate-900/60 rounded-3xl border border-slate-200 dark:border-slate-800 backdrop-blur-md shadow-lg ${processVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
                           <div className="text-3xl font-bold text-cyan mb-4">{step.number}</div>
                           <h3 className="text-lg font-bold mb-2">{step.title}</h3>
                           <p className="text-slate-600 dark:text-slate-400 text-sm">{step.description}</p>
@@ -107,7 +113,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       </section>
 
       <Section>
-        <div className="bg-white dark:bg-slate-900/50 rounded-4xl p-8 md:p-12 border border-slate-200 dark:border-slate-800">
+        <div className="bg-white/40 dark:bg-slate-900/40 rounded-4xl p-8 md:p-12 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-md shadow-2xl">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                 <div className="p-4">
                     <BarChart className="mx-auto h-12 w-12 text-cyan mb-3"/>

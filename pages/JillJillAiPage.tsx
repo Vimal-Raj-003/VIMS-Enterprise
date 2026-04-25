@@ -54,7 +54,7 @@ const JillJillAiPage: React.FC = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {features.map((feature, i) => (
-                            <div key={i} className={`p-6 bg-white dark:bg-slate-900/50 rounded-3xl border border-slate-200 dark:border-slate-800 ${featuresVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
+                            <div key={i} className={`p-6 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-3xl border border-white/20 dark:border-slate-800/20 shadow-xl ${featuresVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
                                <div className="flex items-center mb-4">
                                    <div className="w-12 h-12 flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-xl text-cyan mr-4">{feature.icon}</div>
                                    <h3 className="text-lg font-bold">{feature.title}</h3>
@@ -66,7 +66,7 @@ const JillJillAiPage: React.FC = () => {
                 </div>
             </section>
 
-            <section ref={roiRef} className="bg-slate-100 dark:bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+            <section ref={roiRef} className="bg-slate-100/30 dark:bg-navy-light/10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 backdrop-blur-sm">
                 <div className="max-w-7xl mx-auto">
                      <div className="text-center mb-16">
                         <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>The ROI of AI Sales Automation</h2>
@@ -103,7 +103,7 @@ const JillJillAiPage: React.FC = () => {
                     </div>
                      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
                         {processSteps.map((step, i) => (
-                             <div key={i} className={`flex items-center p-3 pr-5 bg-white dark:bg-slate-900 rounded-full border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:border-cyan/70 hover:shadow-lg hover:shadow-cyan/10 transform hover:-translate-y-1 ${workflowVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
+                             <div key={i} className={`flex items-center p-3 pr-5 bg-white/60 dark:bg-slate-900/40 backdrop-blur-md rounded-full border border-slate-200 dark:border-slate-800 shadow-md transition-all duration-300 hover:border-cyan/70 hover:shadow-lg hover:shadow-cyan/10 transform hover:-translate-y-1 ${workflowVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
                                  <div className="w-10 h-10 flex-shrink-0 rounded-full bg-cyan text-navy dark:text-light-text flex items-center justify-center font-bold text-lg mr-4">{i + 1}</div>
                                  <span className="font-medium text-base">{step}</span>
                              </div>

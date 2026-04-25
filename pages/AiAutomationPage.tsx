@@ -129,7 +129,7 @@ const AiAutomationPage: React.FC = () => {
                 </div>
             </section>
 
-            <section ref={solutionsRef} className="bg-slate-100 dark:bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+            <section ref={solutionsRef} className="bg-slate-100/30 dark:bg-navy-light/10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 backdrop-blur-sm">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${solutionsVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Automation Solutions Infographic</h2>
@@ -140,7 +140,7 @@ const AiAutomationPage: React.FC = () => {
                             <div 
                                 key={i} 
                                 onClick={() => setSelectedWorkflow(selectedWorkflow === i ? null : i)}
-                                className={`p-6 h-full bg-white dark:bg-slate-900 rounded-3xl border transition-all duration-300 cursor-pointer ${solutionsVisible ? 'animate-fade-in-up' : 'opacity-0'} ${
+                                className={`p-6 h-full bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-3xl border transition-all duration-300 cursor-pointer ${solutionsVisible ? 'animate-fade-in-up' : 'opacity-0'} ${
                                     selectedWorkflow === i 
                                     ? 'border-cyan shadow-lg shadow-cyan/20 transform -translate-y-2' 
                                     : 'border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600'
@@ -175,7 +175,7 @@ const AiAutomationPage: React.FC = () => {
             
             <section ref={deliverRef} className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
-                    <div className="bg-white dark:bg-slate-900/50 rounded-4xl p-8 md:p-12 border border-slate-200 dark:border-slate-800">
+                    <div className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-4xl p-8 md:p-12 border border-slate-200 dark:border-slate-800 shadow-xl">
                         <h2 className={`text-2xl md:text-3xl font-poppins font-bold text-center mb-8 ${deliverRef ? 'animate-fade-in-up' : 'opacity-0'}`}>What We Deliver</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {deliverables.map((item, i) => (

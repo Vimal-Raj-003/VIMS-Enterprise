@@ -47,7 +47,7 @@ const DigitalMarketingPage: React.FC = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {services.map((service, i) => (
-                            <div key={i} className={`p-6 h-full bg-white dark:bg-slate-900/50 rounded-3xl border border-slate-200 dark:border-slate-800 ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
+                            <div key={i} className={`p-6 h-full bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-3xl border border-white/10 dark:border-slate-800/20 shadow-lg ${servicesVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
                                <div className="w-12 h-12 flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-xl text-cyan mb-4">{service.icon}</div>
                                <h3 className="text-lg font-bold mb-2">{service.title}</h3>
                                <p className="text-slate-600 dark:text-slate-400 text-sm">{service.description}</p>
@@ -57,7 +57,7 @@ const DigitalMarketingPage: React.FC = () => {
                 </div>
             </section>
 
-            <section ref={strategyRef} className="bg-slate-100 dark:bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+            <section ref={strategyRef} className="bg-slate-100/30 dark:bg-navy-light/10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 backdrop-blur-sm">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <div className={`${strategyVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>

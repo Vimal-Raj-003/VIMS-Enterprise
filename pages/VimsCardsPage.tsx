@@ -58,7 +58,7 @@ const VimsCardsPage: React.FC = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {technologies.map((tech, i) => (
-                            <div key={i} className={`p-8 text-center bg-white dark:bg-slate-900/50 rounded-3xl border border-slate-200 dark:border-slate-800 ${techVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
+                            <div key={i} className={`p-8 text-center bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-3xl border border-white/20 dark:border-slate-800/10 shadow-lg ${techVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
                                 <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-2xl text-cyan">{tech.icon}</div>
                                 <h3 className="text-xl font-bold mb-2">{tech.title}</h3>
                                 <p className="text-slate-600 dark:text-slate-400">{tech.description}</p>
@@ -68,7 +68,7 @@ const VimsCardsPage: React.FC = () => {
                 </div>
             </section>
 
-            <section ref={benefitsRef} className="bg-slate-100 dark:bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+            <section ref={benefitsRef} className="bg-slate-100/30 dark:bg-navy-light/10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 backdrop-blur-sm">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${benefitsVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Key Benefits</h2>
@@ -76,7 +76,7 @@ const VimsCardsPage: React.FC = () => {
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                         {benefits.map((benefit, i) => (
-                            <div key={i} className={`flex items-center p-4 bg-white dark:bg-slate-900 rounded-2xl ${benefitsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
+                            <div key={i} className={`flex items-center p-4 bg-white/50 dark:bg-slate-900/40 backdrop-blur-md rounded-2xl border border-white/20 dark:border-slate-800/10 shadow-sm ${benefitsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
                                 <div className="w-10 h-10 mr-4 flex-shrink-0 flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-full text-cyan">{benefit.icon}</div>
                                 <span className="text-sm md:text-base">{benefit.text}</span>
                             </div>
@@ -107,7 +107,7 @@ const VimsCardsPage: React.FC = () => {
                 </div>
             </section>
 
-             <section ref={ctaRef} className="bg-slate-100 dark:bg-navy-light py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+             <section ref={ctaRef} className="bg-slate-100/30 dark:bg-navy-light/10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 backdrop-blur-sm">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
                         <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${ctaVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Powerful Call-to-Actions</h2>

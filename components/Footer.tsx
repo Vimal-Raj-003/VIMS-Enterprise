@@ -17,12 +17,15 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   );
 
   return (
-    <footer className="bg-slate-100 dark:bg-navy-light border-t border-slate-200 dark:border-slate-800">
+    <footer className="bg-slate-100/30 dark:bg-navy-light/10 border-t border-slate-200 dark:border-slate-800 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-poppins font-bold text-slate-900 dark:text-light-text">VIMS<span className="text-cyan">.</span></h3>
+            <div className="flex items-center gap-2 cursor-pointer" onClick={() => onNavigate(Page.Home)}>
+              <img src="https://lh3.googleusercontent.com/d/1nFXxO-oUx6f3P6a_1nfI-VGpZWDHWxvu" alt="VIMS Logo" className="w-8 h-8 object-contain rounded-md" referrerPolicy="no-referrer" />
+              <h3 className="text-2xl font-poppins font-bold text-slate-900 dark:text-light-text">VIMS</h3>
+            </div>
             <p className="text-slate-600 dark:text-slate-400 text-sm">Transforming your digital presence into a growth engine.</p>
             <div className="flex space-x-4">
               <SocialIcon href="#" icon={<Linkedin size={20} />} />
@@ -61,14 +64,15 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <h4 className="text-sm font-semibold text-slate-700 dark:text-slate-300 tracking-wider uppercase">Contact Us</h4>
             <ul className="mt-4 space-y-2 text-slate-600 dark:text-slate-400 text-base">
               <li><a href="mailto:contact@vimsenterprise.com" className="block hover:text-slate-900 dark:hover:text-light-text transform hover:translate-x-1 transition-all duration-300">contact@vimsenterprise.com</a></li>
-              <li><a href="tel:+919940660868" className="block hover:text-slate-900 dark:hover:text-light-text transform hover:translate-x-1 transition-all duration-300">+91 9940660868 / +91 9789692447</a></li>
+              <li><a href="tel:+919940660868" className="block hover:text-slate-900 dark:hover:text-light-text transform hover:translate-x-1 transition-all duration-300">+91 9940660868</a></li>
+              <li><a href="tel:+919789692447" className="block hover:text-slate-900 dark:hover:text-light-text transform hover:translate-x-1 transition-all duration-300">+91 9789692447</a></li>
               <li>India</li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 border-t border-slate-200 dark:border-slate-800 pt-8 text-center">
-          <p className="text-base text-slate-500">&copy; {new Date().getFullYear()} VIMS Enterprises. All rights reserved.</p>
+          <p className="text-base text-slate-500">&copy; {new Date().getFullYear()} VIMS. All rights reserved.</p>
         </div>
       </div>
     </footer>

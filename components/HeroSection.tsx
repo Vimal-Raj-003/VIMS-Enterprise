@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 
+import { motion } from 'motion/react';
+
 interface HeroSectionProps {
   headline: React.ReactNode;
   subtext: string;
@@ -42,7 +44,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ headline, subtext, primaryCta
         aria-label={altText}
         role="img"
       >
-        <div className="absolute inset-0 bg-white/30 dark:bg-navy/70 dark:backdrop-brightness-50"></div>
+        <div className="absolute inset-0 bg-white/20 dark:bg-navy/60 backdrop-blur-[2px]"></div>
       </div>
       
       {/* Animated Particles */}
@@ -81,19 +83,23 @@ const HeroSection: React.FC<HeroSectionProps> = ({ headline, subtext, primaryCta
           {subtext}
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button 
+          <motion.button 
+            whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(139, 92, 246, 0.4)" }}
+            whileTap={{ scale: 0.95 }}
             onClick={primaryCta.onClick}
-            className="w-full sm:w-auto px-8 py-3 text-base font-bold text-light-text bg-gradient-to-r from-orange to-violet hover:from-violet hover:to-orange rounded-full shadow-lg transition-transform transform hover:scale-105"
+            className="w-full sm:w-auto px-8 py-3 text-base font-bold text-light-text bg-gradient-to-r from-orange to-violet hover:brightness-110 rounded-full shadow-lg transition-all duration-300"
           >
             {primaryCta.text}
-          </button>
+          </motion.button>
           {secondaryCta && (
-            <button 
+            <motion.button 
+              whileHover={{ scale: 1.05, borderColor: "#22d3ee" }}
+              whileTap={{ scale: 0.95 }}
               onClick={secondaryCta.onClick}
-              className="w-full sm:w-auto px-8 py-3 text-base font-bold text-slate-900 dark:text-light-text bg-white/50 dark:bg-slate-800/50 border-2 border-slate-300 dark:border-slate-700 hover:bg-white/80 dark:hover:bg-slate-700/50 hover:border-cyan rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+              className="w-full sm:w-auto px-8 py-3 text-base font-bold text-slate-900 dark:text-light-text bg-white/50 dark:bg-slate-800/50 border-2 border-slate-300 dark:border-slate-700 hover:bg-white/80 dark:hover:bg-slate-700/50 rounded-full shadow-lg transition-all duration-300"
             >
               {secondaryCta.text}
-            </button>
+            </motion.button>
           )}
         </div>
       </div>
