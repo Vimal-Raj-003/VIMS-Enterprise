@@ -121,10 +121,14 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
               </motion.button>
 
               <motion.button 
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 0 15px 5px rgba(139, 92, 246, 0.4)",
+                  filter: "brightness(1.1)"
+                }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.open('https://cal.com/vims-003/vims-enterprise', '_blank')}
-                className="px-5 py-2.5 text-sm font-bold text-light-text bg-gradient-to-r from-orange to-violet hover:brightness-110 rounded-full shadow-lg transition-all duration-300"
+                className="px-5 py-2.5 text-sm font-bold text-light-text bg-gradient-to-r from-orange to-violet rounded-full shadow-lg transition-all duration-300"
               >
                 Book Strategy Call
               </motion.button>

@@ -21,7 +21,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
         id: 'vimal',
         name: 'Vimal Raj Mahadevan',
         role: 'CEO',
-        imageUrl: 'https://picsum.photos/600/600?random=101',
+        imageUrl: 'https://lh3.googleusercontent.com/d/1DdSOJoucm50WiMTGwlp4CDCi7tGv-nJb',
         description: 'Vimal is the visionary leader of VIMS, dedicated to bridging the gap between traditional business and modern AI technology. He brings a unique blend of strategic foresight and technical depth to every project.',
         expertise: ['Product Development', 'Custom SaaS Implementations', 'System Analysis', 'Execution Excellence', 'AI Strategy'],
         experience: 'Expert in leading digital transformation for high-stakes industries, focusing on execution excellence and scalable product development.',
@@ -32,7 +32,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
         id: 'gowtham',
         name: 'Gowthamraj M',
         role: 'CFO',
-        imageUrl: 'https://picsum.photos/600/600?random=102',
+        imageUrl: 'https://lh3.googleusercontent.com/d/1CKMyl3Nl2Q8PjlXdZ2ffj3DemiFrCjDm',
         description: 'With over 15 years of industrial expertise, Gowthamraj ensures the structural and fiscal integrity of our solutions. He specializes in designing architectures that not only work today but scale for tomorrow.',
         expertise: ['Product Architecture', 'Scalable System Design', 'High-quality Solution Delivery', 'Industrial Strategy', 'Financial Operations'],
         experience: '15+ years of Industrial Expertise specializing in product architecture and scalable system design across diverse tech landscapes.',
@@ -43,7 +43,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
         id: 'guru',
         name: 'GuruPrasath S',
         role: 'Product Manager',
-        imageUrl: 'https://picsum.photos/600/600?random=103',
+        imageUrl: 'https://lh3.googleusercontent.com/d/12C1DyqVRs6jHiTz6gFjA910LtVWiay-d',
         description: 'GuruPrasath is the engine room of our AI operations. He drives the execution of end-to-end SaaS platforms with a focus on workflow optimization and seamless AI integration.',
         expertise: ['AI Automation', 'Workflow Optimization', 'End-to-End SaaS Operations', 'Process Engineering', 'Platform Management'],
         experience: 'Specialist in driving AI automation and optimization, ensuring seamless execution of complex SaaS operations and digital transformations.',
@@ -83,6 +83,7 @@ const TeamProfilePage: React.FC<TeamProfilePageProps> = ({ memberId, onBack }) =
                                 src={member.imageUrl} 
                                 alt={member.name} 
                                 className="w-full aspect-square rounded-3xl object-cover mb-6 border-2 border-slate-100 dark:border-slate-700"
+                                referrerPolicy="no-referrer"
                             />
                             <h1 className="text-2xl font-bold font-poppins text-center mb-1">{member.name}</h1>
                             <p className="text-cyan font-medium text-center mb-6">{member.role}</p>
@@ -151,7 +152,11 @@ const TeamProfilePage: React.FC<TeamProfilePageProps> = ({ memberId, onBack }) =
 
                             <section className="pt-8">
                                 <motion.button 
-                                    whileHover={{ scale: 1.05, filter: 'brightness(1.1)' }}
+                                    whileHover={{ 
+                                      scale: 1.05, 
+                                      filter: 'brightness(1.1)',
+                                      boxShadow: "0 0 20px 5px rgba(139, 92, 246, 0.4)"
+                                    }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={() => window.open('https://cal.com/vims-003/vims-enterprise', '_blank')}
                                     className="px-8 py-4 bg-gradient-to-r from-orange to-violet text-light-text font-bold rounded-full shadow-2xl flex items-center"

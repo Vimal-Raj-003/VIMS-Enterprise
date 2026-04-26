@@ -19,9 +19,9 @@ const AboutPage: React.FC<AboutPageProps> = ({ onProfileClick }) => {
     ];
     
     const teamMembers = [
-        { id: 'vimal', name: "Vimal Raj Mahadevan", role: "CEO", imageUrl: "https://picsum.photos/400/400?random=101" },
-        { id: 'gowtham', name: "Gowthamraj M", role: "CFO", imageUrl: "https://picsum.photos/400/400?random=102" },
-        { id: 'guru', name: "GuruPrasath S", role: "Product Manager", imageUrl: "https://picsum.photos/400/400?random=103" },
+        { id: 'vimal', name: "Vimal Raj Mahadevan", role: "CEO", imageUrl: "https://lh3.googleusercontent.com/d/1DdSOJoucm50WiMTGwlp4CDCi7tGv-nJb" },
+        { id: 'gowtham', name: "Gowthamraj M", role: "CFO", imageUrl: "https://lh3.googleusercontent.com/d/1CKMyl3Nl2Q8PjlXdZ2ffj3DemiFrCjDm" },
+        { id: 'guru', name: "GuruPrasath S", role: "Product Manager", imageUrl: "https://lh3.googleusercontent.com/d/12C1DyqVRs6jHiTz6gFjA910LtVWiay-d" },
     ];
     
     const focusAreas = [
@@ -97,9 +97,12 @@ const AboutPage: React.FC<AboutPageProps> = ({ onProfileClick }) => {
                         {teamMembers.map((member, i) => (
                             <motion.div 
                                 key={member.id} 
-                                whileHover={{ y: -10 }}
+                                whileHover={{ 
+                                    y: -10,
+                                    boxShadow: "0 0 25px 5px rgba(34, 211, 238, 0.2)"
+                                }}
                                 onClick={() => onProfileClick && onProfileClick(member.id)}
-                                className={`group relative w-64 text-center cursor-pointer ${teamVisible ? 'animate-fade-in-up' : 'opacity-0'}`} 
+                                className={`group relative w-64 text-center cursor-pointer rounded-4xl p-4 transition-all ${teamVisible ? 'animate-fade-in-up' : 'opacity-0'}`} 
                                 style={{ animationDelay: `${150 + i * 100}ms` }}
                             >
                                 <div className="relative mb-6">
@@ -108,6 +111,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onProfileClick }) => {
                                         src={member.imageUrl} 
                                         alt={`Photo of ${member.name}`} 
                                         className="relative w-48 h-48 mx-auto rounded-full object-cover border-4 border-white/50 dark:border-slate-800/50 shadow-xl group-hover:border-cyan transition-colors duration-300" 
+                                        referrerPolicy="no-referrer"
                                     />
                                     <div className="absolute bottom-2 right-1/2 translate-x-1/2 p-2 bg-white dark:bg-slate-900 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                         <ArrowRight className="text-cyan" size={20} />

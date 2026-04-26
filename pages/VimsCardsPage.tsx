@@ -98,9 +98,18 @@ const VimsCardsPage: React.FC = () => {
                                 <div className="flex flex-wrap gap-2 mb-6">
                                     {item.features.map(f => <span key={f} className="text-xs bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-1 rounded-full">{f}</span>)}
                                 </div>
-                                <button className="mt-auto w-full px-6 py-3 text-base font-bold text-slate-900 dark:text-light-text bg-white/50 dark:bg-slate-800/50 border-2 border-slate-300 dark:border-slate-700 hover:bg-slate-200/50 dark:hover:bg-slate-700/50 hover:border-cyan rounded-full transition-all duration-300">
+                                <motion.button 
+                                    whileHover={{ 
+                                        scale: 1.05, 
+                                        backgroundColor: "rgba(34, 211, 238, 0.1)",
+                                        borderColor: "#22d3ee",
+                                        boxShadow: "0 0 15px 5px rgba(34, 211, 238, 0.3)"
+                                    }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="mt-auto w-full px-6 py-3 text-base font-bold text-slate-900 dark:text-light-text bg-white/50 dark:bg-slate-800/50 border-2 border-slate-300 dark:border-slate-700 rounded-full transition-all duration-300"
+                                >
                                     Purchase Now
-                                </button>
+                                </motion.button>
                             </div>
                         ))}
                     </div>

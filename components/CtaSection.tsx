@@ -20,7 +20,11 @@ const CtaSection: React.FC = () => {
             </p>
             <div className="mt-8">
               <motion.button
-                whileHover={{ scale: 1.05, backgroundColor: "#f8fafc" }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  backgroundColor: "#ffffff",
+                  boxShadow: "0 0 20px 5px rgba(255, 255, 255, 0.4)"
+                }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.open('https://cal.com/vims-003/vims-enterprise', '_blank')}
                 className="px-8 py-3 text-base font-bold text-navy bg-light-text rounded-full shadow-lg transition-all duration-300"

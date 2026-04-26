@@ -5,7 +5,12 @@ import { Calendar } from 'lucide-react';
 const FloatingBookNowButton: React.FC = () => {
   return (
     <motion.button
-      whileHover={{ paddingLeft: "2rem", paddingRight: "2rem", boxShadow: "0 20px 25px -5px rgba(139, 92, 246, 0.5)" }}
+      whileHover={{ 
+        paddingLeft: "2rem", 
+        paddingRight: "2rem", 
+        boxShadow: "0 0 25px 10px rgba(139, 92, 246, 0.6)",
+        filter: "brightness(1.1)"
+      }}
       whileTap={{ scale: 0.95 }}
       onClick={() => window.open('https://cal.com/vims-003/vims-enterprise', '_blank')}
       className="fixed top-1/2 right-0 z-40 transform -translate-y-1/2 -rotate-90 origin-bottom-right 

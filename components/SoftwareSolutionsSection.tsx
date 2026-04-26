@@ -8,23 +8,23 @@ const SoftwareSolutionsSection: React.FC = () => {
   const solutions = [
     {
       icon: <Code size={32} className="text-cyan" />,
-      title: 'Custom Software Solutions',
-      description: 'We build tailored software solutions to meet the unique needs of our clients, ensuring scalability and performance.'
+      title: 'Scalable SaaS Architecture',
+      description: 'We develop multi-tenant SaaS ecosystems with highly resilient backends, ensuring your platform handles concurrent growth without performance degradation.'
     },
     {
       icon: <Workflow size={32} className="text-violet" />,
-      title: 'Agent Flows & Workflows',
-      description: 'Design and implement intelligent agent flows and automated workflows to streamline your business operations.'
+      title: 'Autonomous Agent Workflows',
+      description: 'Beyond simple bots—we engineer self-correcting agent chains that manage complex business logic, lead qualifying, and operational data piping.'
     },
     {
       icon: <Layers size={32} className="text-orange" />,
-      title: 'Complete System Integration',
-      description: 'Seamlessly integrate disparate systems into a unified, efficient digital ecosystem.'
+      title: 'Heterogeneous System Integration',
+      description: 'Unified synchronization between disparate ERPs, CRMs, and proprietary databases using robust API gateway architectures and webhooks.'
     },
     {
       icon: <Cpu size={32} className="text-green" />,
-      title: 'Digital Transformation',
-      description: 'The perfect solution to digitalize your entire workflow, bringing your business into the modern era.'
+      title: 'Industrial Digital Transformation',
+      description: 'Deep-dive system analysis to bridge the gap between physical operations and digital intelligence, utilizing AI to predict and optimize output.'
     }
   ];
 

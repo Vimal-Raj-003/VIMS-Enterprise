@@ -91,7 +91,11 @@ const ContactPage: React.FC = () => {
                                     </div>
                                     <div className={`${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '700ms' }}>
                                         <motion.button 
-                                            whileHover={{ scale: 1.02, filter: "brightness(1.1)" }}
+                                            whileHover={{ 
+                                              scale: 1.02, 
+                                              filter: "brightness(1.1)",
+                                              boxShadow: "0 0 20px 5px rgba(139, 92, 246, 0.4)"
+                                            }}
                                             whileTap={{ scale: 0.98 }}
                                             type="submit" 
                                             className="w-full px-8 py-3 text-base font-bold text-light-text bg-gradient-to-r from-orange to-violet rounded-full shadow-lg transition-all duration-300"

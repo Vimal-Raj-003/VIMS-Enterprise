@@ -1,58 +1,82 @@
 import React from 'react';
-import { Globe, Building2, Cpu, Sparkles, Hexagon, ShieldCheck, Zap, Layers } from 'lucide-react';
+import { motion } from 'motion/react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const clients = [
-  { name: 'Product Cost Solutions', type: 'Global', icon: <Globe className="w-6 h-6 text-cyan" /> },
-  { name: 'chiptip', type: 'Global', icon: <Cpu className="w-6 h-6 text-violet" /> },
-  { name: 'Hexuno Technologies', type: 'Global', icon: <Hexagon className="w-6 h-6 text-orange" /> },
-  { name: 'Radent Engineering', type: 'Indian', icon: <Building2 className="w-6 h-6 text-green" /> },
-  { name: 'Piest Systems', type: 'Indian', icon: <Layers className="w-6 h-6 text-cyan" /> },
-  { name: 'Ameer Jewellery', type: 'Indian', icon: <Sparkles className="w-6 h-6 text-yellow-500" /> },
-  { name: 'n+', type: 'Indian', icon: <Zap className="w-6 h-6 text-red-500" /> },
-  { name: 'mochsha', type: 'Indian', icon: <ShieldCheck className="w-6 h-6 text-violet" /> },
+  { name: 'Hexuno Technologies', logo: 'https://lh3.googleusercontent.com/d/1s0jF0XoV5P-xnhGjpSQjY6BFqQ2ayCOM' },
+  { name: 'mochsha', logo: 'https://lh3.googleusercontent.com/d/1EUNNyPikC8FaNMjsPTjl2hXPk6Ww0FQw' },
+  { name: 'Radent Engineering', logo: 'https://lh3.googleusercontent.com/d/1hE-duq1Lrx9QD8ogEKCenRkzGbgy0dW_' },
+  { name: 'Piest Systems', logo: 'https://lh3.googleusercontent.com/d/1CwpaT43mq-rlodoRXNpOVxtG9LOQ3tBH' },
+  { name: 'Ameer Jewellery', logo: 'https://lh3.googleusercontent.com/d/1gv4HLMQ0neMkmUNe9JQArX3JGtvyNXyX' },
+  { name: 'Nangai pharmacy', logo: 'https://lh3.googleusercontent.com/d/15yIsmmQ7QrATDWp7KUHtADYC10Yc3LpZ' },
 ];
 
 const ClientsSection: React.FC = () => {
-  return (
-    <section className="py-16 bg-slate-50/30 dark:bg-navy-light/10 border-y border-slate-200 dark:border-slate-800 overflow-hidden relative backdrop-blur-sm">
-      {/* Gradient Overlays for smooth fade effect on edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-50/50 dark:from-navy-light/50 to-transparent z-10"></div>
-      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-50/50 dark:from-navy-light/50 to-transparent z-10"></div>
+  const { ref, isVisible } = useScrollAnimation<HTMLDivElement>();
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center">
-        <h2 className="text-sm uppercase tracking-widest font-semibold text-slate-500 dark:text-slate-400 mb-2">
-          Trusted By Industry Leaders
-        </h2>
-        <p className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-light-text">
-          Global & Indian Clients
-        </p>
+  return (
+    <section ref={ref} className="py-20 md:py-28 bg-slate-50/20 dark:bg-navy-light/5 border-y border-slate-200 dark:border-slate-800 overflow-hidden relative backdrop-blur-sm">
+      {/* Gradient Overlays for smooth fade effect on edges */}
+      <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-slate-50/90 dark:from-navy-light/90 to-transparent z-10"></div>
+      <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-slate-50/90 dark:from-navy-light/90 to-transparent z-10"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="text-3xl md:text-5xl font-poppins font-bold text-slate-900 dark:text-light-text tracking-tight"
+        >
+          Trusted by Industry Leaders
+        </motion.h2>
       </div>
       
-      <div className="relative flex overflow-x-hidden group">
-        <div className="animate-marquee flex whitespace-nowrap items-center space-x-8 px-4">
+      <div className="relative flex overflow-x-hidden py-8">
+        <div className="animate-marquee flex whitespace-nowrap items-center space-x-12 px-6">
           {clients.concat(clients).map((client, index) => (
-            <div 
+            <motion.div 
               key={index} 
-              className="flex items-center justify-center space-x-3 px-8 py-5 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 min-w-[240px] hover:shadow-md hover:border-cyan/30 transition-all duration-300 transform hover:-translate-y-1"
+              whileHover={{ y: -5 }}
+              className="flex items-center justify-center space-x-6 px-10 py-6 bg-white/30 dark:bg-slate-900/30 backdrop-blur-lg rounded-[2rem] shadow-xl border border-white/40 dark:border-slate-800/40 min-w-[320px] lg:min-w-[400px] h-32 hover:border-cyan/50 transition-all duration-500 group/card relative overflow-hidden"
             >
-              {client.icon}
-              <span className="text-lg font-bold text-slate-700 dark:text-slate-300">
-                {client.name}
-              </span>
-            </div>
+              {/* Internal blending effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent dark:from-white/5 pointer-events-none"></div>
+              
+              <div className="h-20 w-full flex items-center justify-center p-2">
+                <img 
+                  src={client.logo} 
+                  alt={`${client.name} logo`} 
+                  className="max-h-full max-w-full object-contain filter grayscale opacity-70 group-hover/card:grayscale-0 group-hover/card:opacity-100 transition-all duration-700 ease-in-out scale-110 group-hover/card:scale-125" 
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan/30 to-transparent translate-y-1 group-hover/card:translate-y-0 transition-transform duration-500"></div>
+            </motion.div>
           ))}
         </div>
-        <div className="absolute top-0 animate-marquee2 flex whitespace-nowrap items-center space-x-8 px-4">
+        
+        {/* Clone for continuous marquee - ensuring same styling */}
+        <div className="absolute top-0 animate-marquee2 flex whitespace-nowrap items-center space-x-12 px-6 py-8">
           {clients.concat(clients).map((client, index) => (
-            <div 
+            <motion.div 
               key={`clone-${index}`} 
-              className="flex items-center justify-center space-x-3 px-8 py-5 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 min-w-[240px] hover:shadow-md hover:border-cyan/30 transition-all duration-300 transform hover:-translate-y-1"
+              whileHover={{ y: -5 }}
+              className="flex items-center justify-center space-x-6 px-10 py-6 bg-white/30 dark:bg-slate-900/30 backdrop-blur-lg rounded-[2rem] shadow-xl border border-white/40 dark:border-slate-800/40 min-w-[320px] lg:min-w-[400px] h-32 hover:border-cyan/50 transition-all duration-500 group/card relative overflow-hidden"
             >
-              {client.icon}
-              <span className="text-lg font-bold text-slate-700 dark:text-slate-300">
-                {client.name}
-              </span>
-            </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent dark:from-white/5 pointer-events-none"></div>
+              
+              <div className="h-20 w-full flex items-center justify-center p-2">
+                <img 
+                  src={client.logo} 
+                  alt={`${client.name} logo`} 
+                  className="max-h-full max-w-full object-contain filter grayscale opacity-70 group-hover/card:grayscale-0 group-hover/card:opacity-100 transition-all duration-700 ease-in-out scale-110 group-hover/card:scale-125" 
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan/30 to-transparent translate-y-1 group-hover/card:translate-y-0 transition-transform duration-500"></div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -61,3 +85,4 @@ const ClientsSection: React.FC = () => {
 };
 
 export default ClientsSection;
+
