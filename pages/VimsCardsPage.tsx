@@ -1,7 +1,7 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import HeroSection from '../components/HeroSection';
-import Section from '../components/Section';
-import { Nfc, QrCode, Smartphone, Users, Briefcase, Zap, Globe, DollarSign, Share2, Phone, Mail, Globe2, ShoppingCart, Download, Star, CreditCard, PlayCircle, BarChart } from 'lucide-react';
+import { Nfc, QrCode, Smartphone, Users, Briefcase, Zap, Globe, DollarSign, Share2, Phone, Mail, Globe2, ShoppingCart, Download, Star, CreditCard, PlayCircle, BarChart, ShoppingBag } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const VimsCardsPage: React.FC = () => {
@@ -27,6 +27,12 @@ const VimsCardsPage: React.FC = () => {
         { name: "Google Review Cards", price: "₹899", features: ["Review-focused", "Brand Colors"], color: "bg-orange/10 dark:bg-orange/10" },
     ];
 
+    const testimonials = [
+        { name: "Rajesh Kumar", role: "Marketing Head, Nexus Retail", videoId: "ScMzIvxBSi4", thumbnail: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400&h=225" },
+        { name: "Ananya Dave", role: "Founder, GreenSpace Designs", videoId: "mXjZ_Yl-kFk", thumbnail: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400&h=225" },
+        { name: "Vikram Singh", role: "Real Estate Consultant", videoId: "dQw4w9WgXcQ", thumbnail: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400&h=225" }
+    ];
+
     const ctaGroups = {
         Immediate: [{ icon: <Phone />, text: 'Call' }, { icon: <Mail />, text: 'Email' }, { icon: <Download />, text: 'Save Contact' }],
         Engagement: [{ icon: <Globe2 />, text: 'Website' }, { icon: <Briefcase />, text: 'Portfolio' }, { icon: <Users />, text: 'Socials' }],
@@ -37,11 +43,13 @@ const VimsCardsPage: React.FC = () => {
     const { ref: techRef, isVisible: techVisible } = useScrollAnimation<HTMLDivElement>();
     const { ref: benefitsRef, isVisible: benefitsVisible } = useScrollAnimation<HTMLDivElement>();
     const { ref: catalogRef, isVisible: catalogVisible } = useScrollAnimation<HTMLDivElement>();
+    const { ref: testimonialRef, isVisible: testimonialVisible } = useScrollAnimation<HTMLDivElement>();
     const { ref: ctaRef, isVisible: ctaVisible } = useScrollAnimation<HTMLDivElement>();
 
     return (
         <>
             <HeroSection
+                variant="subpage"
                 headline={<><span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-violet">VIMS Cards</span> - Your Digital Identity</>}
                 subtext="Our mission: help businesses achieve 2X sales growth through a powerful, modern, and sustainable digital identity."
                 primaryCta={{ text: 'View VIMS Card', onClick: () => window.open('https://www.vimscard.com/', '_blank') }}
@@ -92,25 +100,107 @@ const VimsCardsPage: React.FC = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {catalogItems.map((item, i) => (
-                            <div key={i} className={`p-8 rounded-4xl border border-slate-200 dark:border-slate-800 flex flex-col ${item.color} ${catalogVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${150 + i * 100}ms` }}>
-                                <h3 className="text-2xl font-bold font-poppins">{item.name}</h3>
-                                <p className="text-4xl font-bold my-4 text-cyan">{item.price}</p>
-                                <div className="flex flex-wrap gap-2 mb-6">
-                                    {item.features.map(f => <span key={f} className="text-xs bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-1 rounded-full">{f}</span>)}
+                            <motion.div 
+                                key={i} 
+                                whileHover={{ 
+                                    y: -10,
+                                    scale: 1.02,
+                                    transition: { duration: 0.3 }
+                                }}
+                                className={`group p-8 rounded-4xl border-2 border-transparent hover:border-cyan/50 flex flex-col ${item.color} ${catalogVisible ? 'animate-fade-in-up' : 'opacity-0'} relative overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(34,211,238,0.15)]`} 
+                                style={{ animationDelay: `${150 + i * 100}ms` }}
+                            >
+                                {/* Decorative Glow */}
+                                <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan/20 blur-[50px] group-hover:bg-cyan/40 transition-colors duration-500"></div>
+
+                                <h3 className="text-2xl font-bold font-poppins relative z-10 transition-colors duration-300 group-hover:text-cyan">{item.name}</h3>
+                                
+                                <div className="flex items-baseline space-x-2 my-4 relative z-10">
+                                    <motion.p 
+                                        animate={{ scale: [1, 1.05, 1] }}
+                                        transition={{ duration: 4, repeat: Infinity }}
+                                        className="text-4xl font-bold text-cyan"
+                                    >
+                                        {item.price}
+                                    </motion.p>
+                                    <span className="text-sm text-slate-500">/ per card</span>
                                 </div>
+
+                                <div className="flex flex-wrap gap-2 mb-6 relative z-10">
+                                    {item.features.map(f => (
+                                        <motion.span 
+                                            key={f} 
+                                            whileHover={{ scale: 1.1, backgroundColor: "rgba(34, 211, 238, 0.2)" }}
+                                            className="text-xs bg-slate-200/50 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-full border border-transparent hover:border-cyan/30 transition-all cursor-default"
+                                        >
+                                            {f}
+                                        </motion.span>
+                                    ))}
+                                </div>
+
+                                <div className="space-y-3 mb-8 relative z-10">
+                                    {["Premium NFC Chip", "Dynamic QR Code", "Lifetime Access"].map((feat, idx) => (
+                                        <div key={idx} className="flex items-center space-x-2 text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
+                                            <Zap size={14} className="text-cyan group-hover:scale-125 transition-transform" />
+                                            <span>{feat}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
                                 <motion.button 
                                     whileHover={{ 
                                         scale: 1.05, 
-                                        backgroundColor: "rgba(34, 211, 238, 0.1)",
-                                        borderColor: "#22d3ee",
-                                        boxShadow: "0 0 15px 5px rgba(34, 211, 238, 0.3)"
+                                        backgroundColor: "#22d3ee",
+                                        color: "#0f172a",
+                                        boxShadow: "0 0 20px 5px rgba(34, 211, 238, 0.4)"
                                     }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="mt-auto w-full px-6 py-3 text-base font-bold text-slate-900 dark:text-light-text bg-white/50 dark:bg-slate-800/50 border-2 border-slate-300 dark:border-slate-700 rounded-full transition-all duration-300"
+                                    className="mt-auto w-full px-6 py-4 text-base font-bold text-slate-900 dark:text-light-text bg-white/80 dark:bg-slate-800/80 border-2 border-slate-300 dark:border-slate-700 rounded-2xl transition-all duration-300 backdrop-blur-sm"
                                 >
                                     Purchase Now
                                 </motion.button>
-                            </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section ref={testimonialRef} className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${testimonialVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Success Stories</h2>
+                        <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400 ${testimonialVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>See how VIMS Cards are transforming professional networking across industries.</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {testimonials.map((t, i) => (
+                            <motion.div 
+                                key={i}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={testimonialVisible ? { opacity: 1, y: 0 } : {}}
+                                transition={{ delay: 0.3 + i * 0.1 }}
+                                className="group bg-white/10 dark:bg-navy-light/20 backdrop-blur-xl rounded-4xl border border-white/20 dark:border-cyan/10 overflow-hidden shadow-2xl"
+                            >
+                                <div className="relative aspect-video overflow-hidden">
+                                    <iframe 
+                                        className="w-full h-full"
+                                        src={`https://www.youtube.com/embed/${t.videoId}?modestbranding=1&autohide=1&showinfo=0&controls=1`}
+                                        title={t.name}
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    ></iframe>
+                                    {/* Overlay for better aesthetic when not playing */}
+                                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-navy/80 to-transparent group-hover:opacity-0 transition-opacity duration-500"></div>
+                                </div>
+                                <div className="p-6">
+                                    <div className="flex items-center space-x-2 mb-2">
+                                        <div className="w-8 h-[1px] bg-cyan/50"></div>
+                                        <span className="text-[10px] uppercase tracking-widest text-cyan font-bold leading-none">Verified Client</span>
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-light-text">{t.name}</h3>
+                                    <p className="text-sm text-slate-500 dark:text-slate-400">{t.role}</p>
+                                </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
@@ -129,7 +219,9 @@ const VimsCardsPage: React.FC = () => {
                                 <div className="space-y-3">
                                     {ctas.map((cta, i) => (
                                         <div key={i} className="flex items-center text-slate-700 dark:text-slate-300">
-                                            {React.cloneElement(cta.icon, {className: "h-5 w-5 mr-3 text-slate-500"})}
+                                            <div className="h-5 w-5 mr-3 text-slate-500">
+                                                {cta.icon}
+                                            </div>
                                             <span>{cta.text}</span>
                                         </div>
                                     ))}

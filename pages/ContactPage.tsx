@@ -50,6 +50,7 @@ const ContactPage: React.FC = () => {
     return (
         <>
             <HeroSection
+                variant="subpage"
                 headline={<>Let’s Build Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-violet">Growth Engine</span>.</>}
                 subtext="Book a complimentary discovery session to discuss your challenges and goals. We'll explore how our solutions can help you achieve transformative growth."
                 primaryCta={{ text: 'Book a Call', onClick: () => window.open('https://cal.com/vims-003/vims-enterprise', '_blank') }}

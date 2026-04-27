@@ -32,6 +32,7 @@ const DigitalMarketingPage: React.FC = () => {
     return (
         <>
             <HeroSection
+                variant="subpage"
                 headline={<>Digital Marketing & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-violet">Brand Growth</span></>}
                 subtext="An integrated approach to growth. We combine digital marketing, automation, content, and brand strategy to build a powerful presence for businesses, founders, and entrepreneurs."
                 primaryCta={{ text: 'Plan Your Strategy', onClick: () => window.open('https://cal.com/vims-003/vims-enterprise', '_blank') }}

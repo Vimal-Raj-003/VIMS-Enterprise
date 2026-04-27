@@ -39,6 +39,7 @@ const JillJillAiPage: React.FC = () => {
     return (
         <>
             <HeroSection
+                variant="subpage"
                 headline={<><span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-violet">JillJill</span> – AI Voice Agent for B2B Sales</>}
                 subtext="Automate cold-calling. Qualify leads. Book meetings. 24×7. JillJill handles top-of-funnel outreach so your sales team can focus on closing."
                 primaryCta={{ text: 'Request a Demo', onClick: () => window.open('https://www.jilljill.in/', '_blank') }}

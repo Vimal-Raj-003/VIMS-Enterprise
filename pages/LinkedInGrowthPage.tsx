@@ -43,6 +43,7 @@ const LinkedInGrowthPage: React.FC = () => {
   return (
     <>
       <HeroSection
+        variant="subpage"
         headline={<>LinkedIn Growth & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-violet">Personal Branding</span></>}
         subtext="Driving Authority. Visibility. Trust. VIMS helps founders, CXOs & professionals in automotive, deep tech, AI, manufacturing and B2B sectors turn LinkedIn into a 24×7 growth engine."
         primaryCta={{ text: 'Get Your LinkedIn Audit', onClick: () => window.open('https://cal.com/vims-003/vims-enterprise', '_blank') }}

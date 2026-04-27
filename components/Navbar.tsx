@@ -4,7 +4,7 @@ import { NAV_LINKS, SERVICE_PAGES } from '../constants';
 import { Menu, X, ChevronDown, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface NavbarProps {
   activePage: Page;
@@ -150,42 +150,77 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
         </div>
       </nav>
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {NAV_LINKS.map((link) => (
-              <a key={link.name} onClick={() => handleLinkClick(link.name)} className={`block px-3 py-2 rounded-md text-base font-medium ${navItemClasses(link.name)}`}>
-                {link.name}
-              </a>
-            ))}
-            {/* Mobile Services Section */}
-            <div ref={mobileServicesRef}>
-              <button onClick={() => setIsServicesOpen(!isServicesOpen)} className={`w-full flex justify-between items-center px-3 py-2 rounded-md text-base font-medium ${navItemClasses('Services')}`}>
-                  <span>Services</span>
-                  <ChevronDown size={20} className={`transition-transform duration-300 ${isServicesOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {isServicesOpen && (
-                  <div className="pl-4 mt-1 space-y-1">
-                      {SERVICE_PAGES.map((service) => (
-                          <a key={service.name} onClick={() => handleLinkClick(service.name)} className={`block px-3 py-2 rounded-md text-base font-medium ${navItemClasses(service.name)}`}>
-                              {service.name}
-                          </a>
-                      ))}
-                  </div>
-              )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="md:hidden bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl border-b border-slate-200 dark:border-slate-800 overflow-hidden"
+          >
+            <div className="px-4 pt-2 pb-6 space-y-2">
+              {NAV_LINKS.map((link) => (
+                <a 
+                  key={link.name} 
+                  onClick={() => handleLinkClick(link.name)} 
+                  className={`block px-3 py-3 rounded-xl text-lg font-medium transition-all ${
+                    activePage === link.name ? 'text-cyan bg-cyan/5' : 'text-slate-600 dark:text-slate-300'
+                  }`}
+                >
+                  {link.name}
+                </a>
+              ))}
+              
+              {/* Mobile Services Section */}
+              <div ref={mobileServicesRef} className="border-t border-slate-100 dark:border-slate-800/50 pt-2">
+                <button 
+                  onClick={() => setIsServicesOpen(!isServicesOpen)} 
+                  className={`w-full flex justify-between items-center px-3 py-3 rounded-xl text-lg font-medium transition-all ${
+                    isServicesPageActive ? 'text-cyan' : 'text-slate-600 dark:text-slate-300'
+                  }`}
+                >
+                    <span>Services</span>
+                    <ChevronDown size={20} className={`transition-transform duration-300 ${isServicesOpen ? 'rotate-180' : ''}`} />
+                </button>
+                
+                <AnimatePresence>
+                  {isServicesOpen && (
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="pl-4 space-y-1 overflow-hidden"
+                    >
+                        {SERVICE_PAGES.map((service) => (
+                            <a 
+                              key={service.name} 
+                              onClick={() => handleLinkClick(service.name)} 
+                              className={`block px-3 py-2.5 rounded-lg text-base font-medium transition-all ${
+                                activePage === service.name ? 'text-cyan bg-cyan/5' : 'text-slate-500 dark:text-slate-400'
+                              }`}
+                            >
+                                {service.name}
+                            </a>
+                        ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <div className="pt-6">
+                <motion.button 
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => window.open('https://cal.com/vims-003/vims-enterprise', '_blank')}
+                  className="w-full px-5 py-4 text-base font-bold text-light-text bg-gradient-to-r from-orange to-violet rounded-2xl shadow-xl transition-all duration-300"
+                >
+                  Book Strategy Call
+                </motion.button>
+              </div>
             </div>
-            <div className="pt-4 px-3">
-              <motion.button 
-                whileTap={{ scale: 0.98 }}
-                onClick={() => window.open('https://cal.com/vims-003/vims-enterprise', '_blank')}
-                className="w-full px-5 py-3 text-sm font-bold text-light-text bg-gradient-to-r from-orange to-violet rounded-full shadow-lg transition-all duration-300"
-              >
-                Book Strategy Call
-              </motion.button>
-            </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

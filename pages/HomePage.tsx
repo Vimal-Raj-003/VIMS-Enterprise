@@ -63,6 +63,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <>
       <HeroSection
+        variant="landing"
         headline={<>Architecting the Future of <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-violet">Enterprise Tech</span> & AI.</>}
         subtext="Deep-dive analysis meets professional engineering. We build high-scale SaaS platforms, intelligent AI agent workforces, and industrial-grade software solutions for global business owners."
         primaryCta={{ text: 'Book a Strategy Call', onClick: () => window.open('https://cal.com/vims-003/vims-enterprise', '_blank') }}

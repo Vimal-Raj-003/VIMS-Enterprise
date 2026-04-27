@@ -22,14 +22,18 @@ const CtaSection: React.FC = () => {
               <motion.button
                 whileHover={{ 
                   scale: 1.05, 
+                  y: -5,
                   backgroundColor: "#ffffff",
-                  boxShadow: "0 0 20px 5px rgba(255, 255, 255, 0.4)"
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px 5px rgba(34, 211, 238, 0.3)",
+                  letterSpacing: "0.05em"
                 }}
-                whileTap={{ scale: 0.95 }}
+                whileTap={{ scale: 0.98, y: 0 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 onClick={() => window.open('https://cal.com/vims-003/vims-enterprise', '_blank')}
-                className="px-8 py-3 text-base font-bold text-navy bg-light-text rounded-full shadow-lg transition-all duration-300"
+                className="px-10 py-4 text-base font-bold text-navy bg-light-text rounded-full shadow-2xl transition-all duration-300 relative overflow-hidden group/btn"
               >
-                Book Strategy Call
+                <span className="relative z-10">Book Strategy Call</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan/0 via-cyan/20 to-cyan/0 -translate-x-full group-hover/btn:animate-shimmer"></div>
               </motion.button>
             </div>
           </div>

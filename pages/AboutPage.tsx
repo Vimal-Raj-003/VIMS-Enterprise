@@ -40,6 +40,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onProfileClick }) => {
     return (
         <>
             <HeroSection
+                variant="subpage"
                 headline={<>About <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-violet">VIMS</span></>}
                 subtext="We are a modern digital transformation partner dedicated to helping businesses and their leaders build unshakable authority and automated growth systems."
                 primaryCta={{ text: 'Meet the Team', onClick: () => document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' }) }}

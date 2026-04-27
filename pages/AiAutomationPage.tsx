@@ -103,6 +103,7 @@ const AiAutomationPage: React.FC = () => {
     return (
         <>
             <HeroSection
+                variant="subpage"
                 headline={<>AI-Powered Workflows to <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-violet">Scale Your Business</span></>}
                 subtext="Modern workflows that capture, follow up, book, analyze, and automate core business operations across leads, content, feedback and reviews."
                 primaryCta={{ text: 'Automate My Business', onClick: () => window.open('https://cal.com/vims-003/vims-enterprise', '_blank') }}

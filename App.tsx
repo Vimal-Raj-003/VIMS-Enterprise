@@ -16,7 +16,8 @@ import FloatingBookNowButton from './components/FloatingBookNowButton';
 import CtaSection from './components/CtaSection';
 import { ThemeProvider } from './contexts/ThemeContext';
 import DynamicBackground from './components/DynamicBackground';
-import LottieBackground from './components/LottieBackground';
+import SystemTelemetry from './components/SystemTelemetry';
+import CookieConsent from './components/CookieConsent';
 
 // FIX: Removed React.FC type from component definition to resolve issue with 'children' prop being implicitly required.
 const App = () => {
@@ -74,7 +75,8 @@ const App = () => {
     <ThemeProvider>
       <div className="relative min-h-screen">
         <DynamicBackground />
-        <LottieBackground />
+        <SystemTelemetry />
+        <CookieConsent />
         <div className="flex flex-col min-h-screen bg-transparent text-slate-900 dark:text-light-text overflow-x-hidden transition-colors duration-300">
           <Navbar activePage={activePage} onNavigate={handleNavigate} />
           <main className="flex-grow pt-20 relative z-10">
