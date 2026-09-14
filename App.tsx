@@ -8,6 +8,7 @@ import VimsCardsPage from './pages/VimsCardsPage';
 import JillJillAiPage from './pages/JillJillAiPage';
 import DigitalMarketingPage from './pages/DigitalMarketingPage';
 import AiAutomationPage from './pages/AiAutomationPage';
+import CostEstimationPage from './pages/CostEstimationPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import TeamProfilePage from './pages/TeamProfilePage';
@@ -60,6 +61,8 @@ const App = () => {
         return <DigitalMarketingPage />;
       case Page.AIAutomation:
         return <AiAutomationPage />;
+      case Page.CostEstimation:
+        return <CostEstimationPage onNavigate={handleNavigate} />;
       case Page.About:
         return <AboutPage onProfileClick={handleViewProfile} />;
       case Page.Contact:

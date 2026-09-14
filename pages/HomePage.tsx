@@ -6,7 +6,7 @@ import ServiceCard from '../components/ServiceCard';
 import ClientsSection from '../components/ClientsSection';
 import SoftwareSolutionsSection from '../components/SoftwareSolutionsSection';
 import { motion } from 'motion/react';
-import { Layers, Cpu, Code, Briefcase, Nfc, Bot, Target, Zap, CheckCircle, BarChart, Search, PenTool, BotMessageSquare, Megaphone, LineChart } from 'lucide-react';
+import { Layers, Cpu, Code, Briefcase, Nfc, Bot, Target, Zap, CheckCircle, BarChart, Search, PenTool, BotMessageSquare, Megaphone, LineChart, Calculator } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 interface HomePageProps {
@@ -16,27 +16,27 @@ interface HomePageProps {
 const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const services = [
     { 
-      icon: <Layers size={32} />, 
-      title: 'Enterprise SaaS & Web Apps', 
-      description: 'End-to-end development of scalable SaaS platforms, custom enterprise applications, and high-performance web ecosystems.', 
-      page: Page.About // Placeholder for deep service page
+      icon: <Cpu size={32} className="text-cyan" />, 
+      title: 'AI Automation & Agents', 
+      description: 'Autonomous workflows, custom LLM integration, and operational AI agent workforces that eliminate manual bottlenecks.', 
+      page: Page.AIAutomation
     },
     { 
-      icon: <Bot size={32} />, 
-      title: 'Custom AI Agent Workforce', 
-      description: 'We build intelligent AI agents that handle operations, qualified lead generation, and workflow automation autonomously.', 
+      icon: <Calculator size={32} className="text-violet" />, 
+      title: 'Cost Estimation & Should-Costing', 
+      description: 'Scientific bottom-up should-costing, zero-based costing, and fact-based supplier negotiation for sheet metal, molding & casting.', 
+      page: Page.CostEstimation 
+    },
+    { 
+      icon: <Bot size={32} className="text-orange" />, 
+      title: 'Custom AI Voice Agent', 
+      description: 'JillJill AI multilingual conversational voice calling, automated lead qualification, and real-time appointment bookings.', 
       page: Page.JillJillAI 
     },
     { 
-      icon: <Cpu size={32} />, 
-      title: 'Digital Transformation & IR 4.0', 
-      description: 'Modernizing industrial and business workflows with IoT, system analysis, and execution excellence for the digital age.', 
-      page: Page.About 
-    },
-    { 
-      icon: <Nfc size={32} />, 
-      title: 'Digital Identity & Networking', 
-      description: 'NFC-integrated digital identity solutions that transform how professional networking and authority-building happens.', 
+      icon: <Nfc size={32} className="text-emerald-500" />, 
+      title: 'Digital Identity & Authority', 
+      description: 'Smart NFC digital business cards and LinkedIn founder personal branding systems to accelerate high-ticket B2B growth.', 
       page: Page.VIMSCards 
     },
   ];

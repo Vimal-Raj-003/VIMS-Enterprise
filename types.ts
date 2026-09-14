@@ -3,11 +3,12 @@ import React from 'react';
 
 export enum Page {
   Home = 'Home',
+  AIAutomation = 'AI Automation',
+  CostEstimation = 'Cost Estimation & Sheet Costing',
   LinkedInGrowth = 'LinkedIn Growth',
   VIMSCards = 'VIMS Cards',
   JillJillAI = 'JillJill AI Voice Agent',
   DigitalMarketing = 'Digital Marketing',
-  AIAutomation = 'AI Automation',
   About = 'About',
   Contact = 'Contact',
   TeamProfile = 'Team Profile',

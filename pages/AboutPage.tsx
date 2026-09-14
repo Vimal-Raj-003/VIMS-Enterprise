@@ -19,8 +19,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onProfileClick }) => {
     ];
     
     const teamMembers = [
-        { id: 'vimal', name: "Vimal Raj Mahadevan", role: "CEO", imageUrl: "https://lh3.googleusercontent.com/d/1DdSOJoucm50WiMTGwlp4CDCi7tGv-nJb" },
-        { id: 'gowtham', name: "Gowthamraj M", role: "CFO", imageUrl: "https://lh3.googleusercontent.com/d/1CKMyl3Nl2Q8PjlXdZ2ffj3DemiFrCjDm" },
+        { id: 'gowtham', name: "Gowtham Raj M", role: "CEO", imageUrl: "https://lh3.googleusercontent.com/d/1CKMyl3Nl2Q8PjlXdZ2ffj3DemiFrCjDm" },
         { id: 'guru', name: "GuruPrasath S", role: "Product Manager", imageUrl: "https://lh3.googleusercontent.com/d/12C1DyqVRs6jHiTz6gFjA910LtVWiay-d" },
     ];
     

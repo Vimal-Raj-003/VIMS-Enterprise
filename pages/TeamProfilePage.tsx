@@ -18,25 +18,14 @@ export interface TeamMember {
 
 export const TEAM_MEMBERS: TeamMember[] = [
     {
-        id: 'vimal',
-        name: 'Vimal Raj Mahadevan',
-        role: 'CEO',
-        imageUrl: 'https://lh3.googleusercontent.com/d/1DdSOJoucm50WiMTGwlp4CDCi7tGv-nJb',
-        description: 'Vimal is the visionary leader of VIMS, dedicated to bridging the gap between traditional business and modern AI technology. He brings a unique blend of strategic foresight and technical depth to every project.',
-        expertise: ['Product Development', 'Custom SaaS Implementations', 'System Analysis', 'Execution Excellence', 'AI Strategy'],
-        experience: 'Expert in leading digital transformation for high-stakes industries, focusing on execution excellence and scalable product development.',
-        email: 'vimal@vims-enterprise.com',
-        linkedin: 'https://linkedin.com/in/vimal-raj-mahadevan'
-    },
-    {
         id: 'gowtham',
-        name: 'Gowthamraj M',
-        role: 'CFO',
+        name: 'Gowtham Raj M',
+        role: 'CEO',
         imageUrl: 'https://lh3.googleusercontent.com/d/1CKMyl3Nl2Q8PjlXdZ2ffj3DemiFrCjDm',
-        description: 'With over 15 years of industrial expertise, Gowthamraj ensures the structural and fiscal integrity of our solutions. He specializes in designing architectures that not only work today but scale for tomorrow.',
-        expertise: ['Product Architecture', 'Scalable System Design', 'High-quality Solution Delivery', 'Industrial Strategy', 'Financial Operations'],
-        experience: '15+ years of Industrial Expertise specializing in product architecture and scalable system design across diverse tech landscapes.',
-        email: 'gowtham@vims-enterprise.com',
+        description: 'With over 15 years of industrial and enterprise expertise, Gowtham Raj leads VIMS as Chief Executive Officer. He steers the strategic vision, AI automation initiatives, and engineering should-costing ecosystem for our global clientele.',
+        expertise: ['Executive Leadership', 'Product Architecture', 'Scalable System Design', 'High-quality Solution Delivery', 'Industrial Strategy', 'Engineering & Operations'],
+        experience: '15+ years of Industrial Expertise specializing in product architecture, organizational leadership, and scalable systems across manufacturing, tech, and enterprise landscapes.',
+        email: 'gowtham@vimsenterprise.com',
         linkedin: 'https://linkedin.com/in/gowthamraj-m'
     },
     {
@@ -47,7 +36,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
         description: 'GuruPrasath is the engine room of our AI operations. He drives the execution of end-to-end SaaS platforms with a focus on workflow optimization and seamless AI integration.',
         expertise: ['AI Automation', 'Workflow Optimization', 'End-to-End SaaS Operations', 'Process Engineering', 'Platform Management'],
         experience: 'Specialist in driving AI automation and optimization, ensuring seamless execution of complex SaaS operations and digital transformations.',
-        email: 'guru@vims-enterprise.com',
+        email: 'guru@vimsenterprise.com',
         linkedin: 'https://linkedin.com/in/guruprasath-s'
     }
 ];

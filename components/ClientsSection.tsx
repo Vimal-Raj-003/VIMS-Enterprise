@@ -4,7 +4,6 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const clients = [
   { name: 'Hexuno Technologies', logo: 'https://lh3.googleusercontent.com/d/1s0jF0XoV5P-xnhGjpSQjY6BFqQ2ayCOM' },
-  { name: 'mochsha', logo: 'https://lh3.googleusercontent.com/d/1EUNNyPikC8FaNMjsPTjl2hXPk6Ww0FQw' },
   { name: 'Radent Engineering', logo: 'https://lh3.googleusercontent.com/d/1hE-duq1Lrx9QD8ogEKCenRkzGbgy0dW_' },
   { name: 'Piest Systems', logo: 'https://lh3.googleusercontent.com/d/1CwpaT43mq-rlodoRXNpOVxtG9LOQ3tBH' },
   { name: 'Ameer Jewellery', logo: 'https://lh3.googleusercontent.com/d/1gv4HLMQ0neMkmUNe9JQArX3JGtvyNXyX' },

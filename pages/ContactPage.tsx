@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import HeroSection from '../components/HeroSection';
 import Section from '../components/Section';
-import { Mail, Phone, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MessageSquare, CheckCircle2 } from 'lucide-react';
 import { Page } from '../types';
+import { COMPANY_CONTACT } from '../constants';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 import { motion } from 'motion/react';
@@ -17,6 +18,7 @@ const ContactPage: React.FC = () => {
         service: '',
         message: ''
     });
+    const [submitted, setSubmitted] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -25,24 +27,36 @@ const ContactPage: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission logic here
         console.log('Form submitted:', formData);
-        alert('Thank you for your message! We will get back to you shortly.');
+        setSubmitted(true);
         setFormData({ name: '', email: '', phone: '', company: '', website: '', service: '', message: '' });
     };
 
     const serviceOptions = [
+        Page.AIAutomation,
+        Page.CostEstimation,
         Page.LinkedInGrowth,
         Page.VIMSCards,
         Page.JillJillAI,
         Page.DigitalMarketing,
-        Page.AIAutomation,
+        'Enterprise AI & Commodity Should-Costing',
         'Multiple Services'
     ];
     
     const contactInfo = [
-        { icon: <Mail className="h-6 w-6 text-cyan mr-4 mt-1" />, title: "Email", lines: [<a href="mailto:contact@vimsenterprise.com" className="text-slate-600 dark:text-slate-400 hover:text-cyan transition">contact@vimsenterprise.com</a>] },
-        { icon: <Phone className="h-6 w-6 text-cyan mr-4 mt-1" />, title: "Phone", lines: [<a href="tel:+919940660868" className="text-slate-600 dark:text-slate-400 hover:text-cyan transition block">+91 9940660868</a>, <a href="tel:+919789692447" className="text-slate-600 dark:text-slate-400 hover:text-cyan transition block">+91 9789692447</a>] }
+        { 
+            icon: <Mail className="h-6 w-6 text-cyan mr-4 mt-1" />, 
+            title: "Email", 
+            lines: [<a href={`mailto:${COMPANY_CONTACT.email}`} className="text-slate-600 dark:text-slate-400 hover:text-cyan transition">{COMPANY_CONTACT.email}</a>] 
+        },
+        { 
+            icon: <Phone className="h-6 w-6 text-cyan mr-4 mt-1" />, 
+            title: "Phone", 
+            lines: [
+                <a href={`tel:+91${COMPANY_CONTACT.phone}`} className="text-slate-600 dark:text-slate-400 hover:text-cyan transition block">{COMPANY_CONTACT.phoneFormatted}</a>,
+                <span className="text-xs text-slate-400 font-mono">Mon–Sat, 9AM – 8PM IST</span>
+            ] 
+        }
     ];
 
     const { ref: contactRef, isVisible: contactVisible } = useScrollAnimation<HTMLDivElement>();
@@ -64,6 +78,12 @@ const ContactPage: React.FC = () => {
                         <div className="lg:col-span-2">
                             <div className={`p-8 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-4xl border border-white/20 dark:border-slate-800/30 shadow-2xl ${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
                                 <h2 className="text-2xl font-bold font-poppins mb-6">Send us a Message</h2>
+                                {submitted && (
+                                    <div className="mb-6 p-4 bg-green-500/10 border border-green-500/30 rounded-2xl flex items-center text-green-600 dark:text-green-400 gap-3">
+                                        <CheckCircle2 className="h-6 w-6 flex-shrink-0" />
+                                        <p className="text-sm font-medium">Thank you for your message! Our team will get back to you within 24 hours.</p>
+                                    </div>
+                                )}
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className={`${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '100ms' }}>
@@ -124,10 +144,11 @@ const ContactPage: React.FC = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
+                                onClick={() => window.open(COMPANY_CONTACT.whatsappUrl, '_blank')}
                                 className={`w-full flex items-center justify-center px-6 py-3 text-base font-bold text-light-text bg-green-600 hover:bg-green-700 rounded-full shadow-lg transition-all duration-300 ${contactVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '600ms' }}
                             >
                                 <MessageSquare className="h-5 w-5 mr-2" />
-                                Chat on WhatsApp
+                                Chat on WhatsApp ({COMPANY_CONTACT.phoneFormatted})
                             </motion.button>
                         </div>
                     </div>
