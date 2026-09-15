@@ -31,7 +31,8 @@ import {
   TrendingUp,
   Clock,
   Briefcase,
-  Activity
+  Activity,
+  Presentation
 } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
@@ -379,6 +380,23 @@ const CostEstimationPage: React.FC<CostEstimationPageProps> = ({ onNavigate }) =
               <Sliders size={18} className="text-cyan" />
               <span>Test Interactive Cost Simulator</span>
             </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.03, boxShadow: '0 0 25px rgba(16, 185, 129, 0.45)' }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => onNavigate ? onNavigate(Page.KickoffPresentation) : undefined}
+              className="px-7 py-4 rounded-2xl bg-gradient-to-r from-emerald-900/80 via-slate-900/90 to-teal-950/80 backdrop-blur-md border border-emerald-500/50 hover:border-emerald-400 text-white font-bold text-sm shadow-xl transition-all flex items-center gap-2.5 group relative overflow-hidden"
+              title="Open Cost Estimation Suite & Interactive Slides"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600/20 to-teal-600/20 rounded-2xl blur-sm opacity-50 group-hover:opacity-100 transition-opacity" />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-emerald-400 group-hover:text-teal-300 transition-colors relative z-10">
+                <path d="M16 3h5v5M21 3l-7 7M8 21H3v-5M3 21l7-7"/>
+              </svg>
+              <span className="relative z-10">Compare Cost Scenarios</span>
+              <span className="text-[10px] font-mono font-bold text-emerald-300 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30 relative z-10">
+                Slides
+              </span>
+            </motion.button>
           </motion.div>
 
           {/* Key Proof Metrics Bar */}
@@ -518,6 +536,35 @@ const CostEstimationPage: React.FC<CostEstimationPageProps> = ({ onNavigate }) =
       {/* COSTING LIFECYCLE (DATA INTAKE -> SHOULD COST -> SUPPLIER NEGOTIATION) */}
       <div id="costing-lifecycle">
         <CostingLifecycleSection onBookAudit={() => window.open(COMPANY_CONTACT.bookingUrl, '_blank')} />
+      </div>
+
+      {/* CLIENT KICKOFF PRESENTATION DOSSIER CALLOUT */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 mb-12">
+        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-violet-950/70 via-slate-900/90 to-cyan-950/70 border border-violet-500/40 shadow-xl backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
+              <span className="text-xs font-mono font-bold uppercase tracking-wider text-cyan">
+                Executive Kickoff Resource // 5 Slides
+              </span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold font-poppins text-white">
+              Preparing for a Subcontracting Project Kickoff?
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+              Explore our interactive 5-slide client kickoff presentation deck detailing our 11+ years across Sheet Metal, Plastics, Die Casting, Machining & Plating, measure input requirements, sample pilot benchmarks, and transparent report anatomy.
+            </p>
+          </div>
+
+          <button
+            onClick={() => onNavigate ? onNavigate(Page.KickoffPresentation) : undefined}
+            className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan via-blue-600 to-violet hover:from-cyan-400 hover:to-violet-500 text-white font-bold text-xs sm:text-sm tracking-wide shadow-lg hover:shadow-cyan/25 flex items-center gap-2.5 transition-all shrink-0 group"
+          >
+            <Presentation size={18} className="group-hover:rotate-6 transition-transform" />
+            <span>Launch Client Kickoff Deck</span>
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
       </div>
 
       {/* INTERACTIVE CLEAN-SHEET SHOULD-COST SIMULATOR */}

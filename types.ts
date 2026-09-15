@@ -5,6 +5,7 @@ export enum Page {
   Home = 'Home',
   AIAutomation = 'AI Automation',
   CostEstimation = 'Cost Estimation & Sheet Costing',
+  KickoffPresentation = 'Client Kickoff Deck',
   LinkedInGrowth = 'LinkedIn Growth',
   VIMSCards = 'VIMS Cards',
   JillJillAI = 'JillJill AI Voice Agent',

@@ -49,6 +49,10 @@ export const PAGE_META: Record<Page, { title: string; description: string }> = {
         title: 'Mechanical Cost Estimation, Sheet Costing & Supplier Negotiation | VIMS',
         description: 'Scientific bottom-up should-costing, sheet metal costing, plastic injection molding, die casting, and CNC machining estimation with fact-based supplier negotiation intelligence.'
     },
+    [Page.KickoffPresentation]: {
+        title: 'Client Kickoff Presentation – Should-Costing Subcontracting | VIMS',
+        description: 'Executive client kickoff deck for mechanical should-costing subcontracting, 11+ years multi-commodity manufacturing capabilities, data intake, sample pilot, and interactive costing report.'
+    },
     [Page.LinkedInGrowth]: {
         title: 'LinkedIn Growth & Personal Branding | VIMS',
         description: 'Turn LinkedIn into a 24x7 growth engine with our expert content creation, profile optimization, and personal branding solutions for founders and CXOs.'

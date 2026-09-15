@@ -9,6 +9,7 @@ import JillJillAiPage from './pages/JillJillAiPage';
 import DigitalMarketingPage from './pages/DigitalMarketingPage';
 import AiAutomationPage from './pages/AiAutomationPage';
 import CostEstimationPage from './pages/CostEstimationPage';
+import KickoffPresentationPage from './pages/KickoffPresentationPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import TeamProfilePage from './pages/TeamProfilePage';
@@ -19,6 +20,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import DynamicBackground from './components/DynamicBackground';
 import SystemTelemetry from './components/SystemTelemetry';
 import CookieConsent from './components/CookieConsent';
+import ScrollProgressBar from './components/ScrollProgressBar';
 
 // FIX: Removed React.FC type from component definition to resolve issue with 'children' prop being implicitly required.
 const App = () => {
@@ -63,6 +65,8 @@ const App = () => {
         return <AiAutomationPage />;
       case Page.CostEstimation:
         return <CostEstimationPage onNavigate={handleNavigate} />;
+      case Page.KickoffPresentation:
+        return <KickoffPresentationPage onNavigate={handleNavigate} />;
       case Page.About:
         return <AboutPage onProfileClick={handleViewProfile} />;
       case Page.Contact:
@@ -74,6 +78,18 @@ const App = () => {
     }
   };
 
+  if (activePage === Page.KickoffPresentation) {
+    return (
+      <ThemeProvider>
+        <div className="relative min-h-screen">
+          <DynamicBackground />
+          <SystemTelemetry />
+          <KickoffPresentationPage onNavigate={handleNavigate} />
+        </div>
+      </ThemeProvider>
+    );
+  }
+
   return (
     <ThemeProvider>
       <div className="relative min-h-screen">
@@ -82,6 +98,7 @@ const App = () => {
         <CookieConsent />
         <div className="flex flex-col min-h-screen bg-transparent text-slate-900 dark:text-light-text overflow-x-hidden transition-colors duration-300">
           <Navbar activePage={activePage} onNavigate={handleNavigate} />
+          <ScrollProgressBar activePage={activePage} />
           <main className="flex-grow pt-20 relative z-10">
             {renderPage()}
           </main>
