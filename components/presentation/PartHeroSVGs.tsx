@@ -579,36 +579,81 @@ export interface RealPartPhotoInfo {
   finish: string;
 }
 
-export const realPartPhotos: Record<string, RealPartPhotoInfo> = {
+export const processMachinePhotos: Record<string, RealPartPhotoInfo> = {
   sheetmetal: {
-    url: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80',
-    caption: 'Real Workshop Sample: CRCA Cold Rolled Steel Bracket with Stamped Slots, Bend Flanges & Trivalent Zinc Plating',
-    tag: 'CRCA 2.5mm · Stamped & Bent',
-    finish: 'Fe/Zn 8μm Blue Passivated'
+    url: '/images/manufacturing/sheetmetal_press.jpg',
+    caption: 'Practical Scenario: 800-Ton Hydraulic Progressive Stamping Press Line with Coil Feeder and Deep-Draw Ram',
+    tag: '800T Hydraulic Press · 25 SPM',
+    finish: 'Automated Coil Decoiler & Straightener'
   },
   diecasting: {
-    url: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80',
-    caption: 'Real Workshop Sample: High-Pressure Die Cast A380 Aluminum Enclosure Housing with Cooling Fins and Precision CNC Facing',
-    tag: 'A380 Aluminum · HPDC 400T',
-    finish: 'Shot-Blasted & CNC Machined Faces'
+    url: '/images/manufacturing/die_casting_machine.jpg',
+    caption: 'Practical Scenario: 800-Ton Cold-Chamber High-Pressure Die Casting Machine Cell with Robotic Ladle',
+    tag: 'HPDC 800T Cold Chamber',
+    finish: 'Automatic Ladle & Die Thermal Control'
   },
   plastic: {
-    url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80',
-    caption: 'Real Workshop Sample: Precision Injection Molded Engineering ABS Modular Enclosure Cover with Snap-Joints',
-    tag: 'ABS Thermoplastic · 2mm Wall',
-    finish: 'VDI 27 Matte Spark Textured'
+    url: '/images/manufacturing/plastic_molding_machine.jpg',
+    caption: 'Practical Scenario: 350-Ton Servo-Hydraulic Plastic Injection Molding Machine with Digital Melt Manifold',
+    tag: '350T Injection Unit · Hot Runner',
+    finish: 'Multi-Zone PID Heated Barrel'
   },
   machining: {
-    url: 'https://images.unsplash.com/photo-1581092162384-8987c1d64718?auto=format&fit=crop&w=800&q=80',
-    caption: 'Real Workshop Sample: Precision CNC Turned & Milled Stepped Drive Shaft with Keyway and Ground Bearing Journals',
-    tag: 'EN8 Carbon Steel · CNC Lathe',
-    finish: 'Cylindrical Ground Ra 0.8 μm'
+    url: '/images/manufacturing/vmc_machining_center.png',
+    caption: 'Practical Scenario: CNC Vertical Machining Center (VMC) with 12,000 RPM Spindle & 24-Pocket ATC',
+    tag: '3-Axis CNC VMC · BT40 Spindle',
+    finish: '70-Bar Thru-Spindle Coolant'
   },
   forging: {
-    url: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80',
-    caption: 'Real Workshop Sample: Closed-Die Hot Forged High-Tensile Steel Connecting Rod with I-Beam Web and Machined Eye Bores',
-    tag: 'EN19 Forged Alloy Steel',
-    finish: 'Shot-Peened & Normalized'
+    url: '/images/manufacturing/forging_press.jpg',
+    caption: 'Practical Scenario: 2,500-Ton Closed-Die Hot Forging Hydraulic Press with 1,200°C Billet Induction Line',
+    tag: '2,500T Hot Forging Press',
+    finish: '1200°C Induction Pre-Heating'
+  },
+  secondary: {
+    url: '/images/manufacturing/plating_booth.jpg',
+    caption: 'Practical Scenario: Automated Industrial Electroplating Line, Multi-Stage Immersion Tanks & Exhaust Finishing Booth',
+    tag: 'Automated Plating Booth & Line',
+    finish: 'RoHS Trivalent Blue/Yellow Passivation'
+  }
+};
+
+export const realPartPhotos: Record<string, RealPartPhotoInfo> = {
+  sheetmetal: {
+    url: '/images/manufacturing/sheetmetal_parts.jpg',
+    caption: 'Manufactured Part Sample: CRCA Cold Rolled Steel Bracket (140 × 80 mm) with Pierced Slots, Bend Flanges & Trivalent Zinc Plating',
+    tag: 'CRCA 2.5mm · Stamped & Formed Bracket',
+    finish: 'Fe/Zn 8μm Blue Passivated (ASTM B633)'
+  },
+  diecasting: {
+    url: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80',
+    caption: 'Manufactured Part Sample: High-Pressure Die Cast A380 Aluminum Enclosure Housing (160 × 110 mm) with Cooling Fins and CNC Tapped Holes',
+    tag: 'A380 Aluminum · HPDC 400T Housing',
+    finish: 'Shot-Blasted & CNC M6 Tapped (Ra 1.6μm)'
+  },
+  plastic: {
+    url: '/images/manufacturing/plastic_parts.jpg',
+    caption: 'Manufactured Part Sample: Precision Injection Molded Engineering ABS Enclosure Cover (180 × 130 mm) with Snap-Fits & Internal Ribs',
+    tag: 'ABS Thermoplastic · 2.0mm Wall Cover',
+    finish: 'VDI 27 Spark Textured Matte'
+  },
+  machining: {
+    url: '/images/manufacturing/machined_parts.jpg',
+    caption: 'Manufactured Part Sample: Precision CNC Turned & Milled Stepped Drive Shaft (Ø30 × 80 mm) with DIN 6885 Keyway',
+    tag: 'EN8 Bright Steel · CNC Turned & Milled',
+    finish: 'Cylindrical Ground Ra 0.8 μm Bearing Journal'
+  },
+  forging: {
+    url: '/images/manufacturing/forged_parts.jpg',
+    caption: 'Manufactured Part Sample: Closed-Die Hot Forged High-Tensile Steel Connecting Rod / Crank Arm (210 mm) with I-Beam Shank',
+    tag: 'EN19 Forged Alloy Steel · Crank Arm',
+    finish: 'Quenched & Tempered (28–32 HRC)'
+  },
+  secondary: {
+    url: '/images/manufacturing/plated_parts.jpg',
+    caption: 'Manufactured Part Sample: Precision Trivalent Zinc and Electroless Nickel Plated Automotive Fasteners & Brackets',
+    tag: 'Fe/Zn 8-12μm · Trivalent Blue',
+    finish: 'ASTM B117 120hr Salt Spray Certified'
   }
 };
 
@@ -619,17 +664,17 @@ export const PartHeroVisual: React.FC<{
   if (viewMode === 'photo') {
     const photo = realPartPhotos[commodityKey] || realPartPhotos.sheetmetal;
     return (
-      <div className="w-full h-full min-h-[200px] flex flex-col items-center justify-center relative overflow-hidden rounded-xl bg-slate-950 p-2">
+      <div className="w-full h-full min-h-[220px] flex flex-col items-center justify-center relative overflow-hidden rounded-xl bg-slate-950 p-2">
         <img 
           src={photo.url} 
           alt={photo.caption}
           referrerPolicy="no-referrer"
-          className="w-full h-[190px] object-cover rounded-lg shadow-2xl border border-white/10 transition-transform duration-500 hover:scale-105"
+          className="w-full h-[200px] object-cover rounded-lg shadow-2xl border border-white/10 transition-transform duration-500 hover:scale-105"
         />
-        <div className="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-emerald-500/40 text-[10px] font-mono font-bold text-emerald-400">
-          ● {photo.tag}
+        <div className="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-emerald-500/40 text-[10px] font-mono font-bold text-emerald-400 shadow-md">
+          ⚙️ {photo.tag}
         </div>
-        <div className="absolute bottom-4 right-4 bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-cyan/40 text-[10px] font-mono font-semibold text-cyan">
+        <div className="absolute bottom-4 right-4 bg-slate-900/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-cyan-400/40 text-[10px] font-mono font-semibold text-cyan-300 shadow-md">
           {photo.finish}
         </div>
       </div>

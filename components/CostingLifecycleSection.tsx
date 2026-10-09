@@ -589,7 +589,7 @@ export const CostingLifecycleSection: React.FC<CostingLifecycleSectionProps> = (
                       Thermodynamics Over Vendor Intuition
                     </h3>
                     <p className="mt-3 text-slate-400 text-sm leading-relaxed">
-                      Vendors pad quotes with conservative cycle times and inflated machine hourly rates. VIMS applies physical formulas—like Fourier's heat conduction and Kienzle cutting force models—to calculate exact cycle durations.
+                      Vendors pad quotes with conservative cycle times and inflated machine hourly rates. VIMS applies physical formulas (such as Fourier heat conduction and Kienzle cutting force models) to calculate exact cycle durations.
                     </p>
                   </div>
 

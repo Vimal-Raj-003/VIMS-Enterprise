@@ -71,7 +71,7 @@ const JillJillAiPage: React.FC = () => {
                 <div className="max-w-7xl mx-auto">
                      <div className="text-center mb-16">
                         <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>The ROI of AI Sales Automation</h2>
-                         <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400 ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>JillJill doesn't just save time—it drives significant, measurable financial results.</p>
+                         <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400 ${roiVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>JillJill doesn't just save time, it drives significant, measurable financial results.</p>
                     </div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">

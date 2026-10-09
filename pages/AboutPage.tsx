@@ -1,7 +1,7 @@
 import React from 'react';
 import HeroSection from '../components/HeroSection';
 import Section from '../components/Section';
-import { Target, ShieldCheck, Handshake, Briefcase, Nfc, Bot, Zap, Megaphone, ArrowRight } from 'lucide-react';
+import { Target, ShieldCheck, Handshake, Briefcase, Nfc, Bot, Zap, Megaphone, ArrowRight, Building2, Calculator } from 'lucide-react';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { motion } from 'motion/react';
 
@@ -12,10 +12,10 @@ interface AboutPageProps {
 const AboutPage: React.FC<AboutPageProps> = ({ onProfileClick }) => {
 
     const values = [
-        { icon: <Target />, title: "Depth, Not Fluff", description: "We focus on strategies that deliver real, measurable business outcomes, not just vanity metrics." },
-        { icon: <ShieldCheck />, title: "Ethical Branding", description: "Our methods are built on authenticity and transparency to build genuine trust with your audience." },
-        { icon: <Briefcase />, title: "Industry Specialization", description: "Deep expertise in Automotive, Manufacturing, AI, Tech, and B2B allows us to speak your language." },
-        { icon: <Handshake />, title: "Long-term Partnerships", description: "We aim to become an extension of your team, dedicated to your long-term growth and success." },
+        { icon: <Target />, title: "Real Business ROI", description: "Every project focuses on measurable operational outcomes, not cosmetic fluff." },
+        { icon: <ShieldCheck />, title: "Architecture & Trust", description: "Built on clean code, strong data security, and long-term maintainability." },
+        { icon: <Briefcase />, title: "Domain Expertise", description: "Deep specialization in Healthcare, Manufacturing, and Enterprise AI automation." },
+        { icon: <Handshake />, title: "Long-Term Partnership", description: "We act as your dedicated engineering arm from initial audit to scaling." },
     ];
     
     const teamMembers = [
@@ -24,24 +24,23 @@ const AboutPage: React.FC<AboutPageProps> = ({ onProfileClick }) => {
     ];
     
     const focusAreas = [
-        { icon: <Briefcase className="text-cyan" />, name: "LinkedIn Authority" },
-        { icon: <Nfc className="text-violet" />, name: "Digital Identity" },
+        { icon: <Building2 className="text-blue-500" />, name: "Hospital Systems" },
+        { icon: <Zap className="text-green-500" />, name: "AI Automation" },
+        { icon: <Calculator className="text-violet" />, name: "Cost Estimation" },
         { icon: <Bot className="text-orange" />, name: "AI Voice Agents" },
-        { icon: <Zap className="text-green" />, name: "AI Automation" },
-        { icon: <Megaphone className="text-cyan" />, name: "Personal Branding" },
+        { icon: <Briefcase className="text-cyan" />, name: "SaaS Platforms" },
     ];
 
     const { ref: storyRef, isVisible: storyVisible } = useScrollAnimation<HTMLDivElement>();
     const { ref: valuesRef, isVisible: valuesVisible } = useScrollAnimation<HTMLDivElement>();
     const { ref: teamRef, isVisible: teamVisible } = useScrollAnimation<HTMLDivElement>();
 
-
     return (
         <>
             <HeroSection
                 variant="subpage"
                 headline={<>About <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan to-violet">VIMS</span></>}
-                subtext="We are a modern digital transformation partner dedicated to helping businesses and their leaders build unshakable authority and automated growth systems."
+                subtext="We build specialized enterprise software: unified hospital ecosystems, autonomous AI workflows, and precision cost engineering."
                 primaryCta={{ text: 'Meet the Team', onClick: () => document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' }) }}
                 imageUrl="https://picsum.photos/1920/1080?random=7"
                 altText="Realistic team photo of diverse Indian professionals in a futuristic office with holographic screens showing business diagrams."
@@ -51,17 +50,21 @@ const AboutPage: React.FC<AboutPageProps> = ({ onProfileClick }) => {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <div className={`${storyVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-                            <h2 className="text-3xl font-bold font-poppins mb-4">Our Story</h2>
-                            <p className="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">VIMS was founded with a single mission: to bridge the gap between traditional business practices and the immense potential of digital technology and AI. We saw brilliant founders and established companies struggling to translate their real-world expertise into online authority and efficient operations.</p>
-                            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">Today, we are a dedicated partner for businesses in specialized industries, providing the strategic guidance and technical implementation needed to thrive in the digital age. Our integrated approach ensures that every piece of your digital presence—from your personal brand to your sales process—works together as a powerful, cohesive growth engine.</p>
+                            <h2 className="text-3xl font-bold font-poppins mb-4">Our Mission</h2>
+                            <p className="text-slate-600 dark:text-slate-400 mb-3 text-base sm:text-lg leading-relaxed">
+                                VIMS bridges complex operational challenges with modern software engineering and applied AI.
+                            </p>
+                            <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+                                From proprietary hospital operating systems (HMS) to autonomous AI agents and manufacturing should-costing, we design systems that replace manual chaos with automated precision.
+                            </p>
                         </div>
                         <div className={`bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-8 rounded-4xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl ${storyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
-                            <h3 className="text-xl font-bold mb-6 text-center">Our Core Focus Areas</h3>
+                            <h3 className="text-xl font-bold mb-6 text-center">Core Pillars</h3>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
                                 {focusAreas.map((area, i) => (
                                     <div key={area.name} className={`flex flex-col items-center text-center ${storyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: `${300 + i * 100}ms` }}>
-                                        <div className="w-16 h-16 mb-2 flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-full">{React.cloneElement(area.icon, {size: 28})}</div>
-                                        <p className="text-sm font-medium">{area.name}</p>
+                                        <div className="w-16 h-16 mb-2 flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-2xl">{React.cloneElement(area.icon, {size: 26})}</div>
+                                        <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">{area.name}</p>
                                     </div>
                                 ))}
                             </div>

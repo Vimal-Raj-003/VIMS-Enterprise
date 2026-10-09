@@ -115,12 +115,14 @@ const AiAutomationPage: React.FC = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <div>
-                            <h2 className={`text-3xl font-bold font-poppins mb-4 ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Our Automation Philosophy</h2>
-                            <p className={`text-slate-600 dark:text-slate-400 mb-6 ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>We believe automation should be custom, pain-point-driven, and seamlessly integrated into your existing processes. Our goal is to save you time, increase revenue, and eliminate manual work so you can focus on what you do best.</p>
+                            <h2 className={`text-3xl font-bold font-poppins mb-4 ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Our Approach</h2>
+                            <p className={`text-slate-600 dark:text-slate-400 mb-6 text-base sm:text-lg leading-relaxed ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>
+                                We build practical automation tailored to your exact operational bottlenecks, freeing your team from repetitive manual tasks.
+                            </p>
                             <div className="space-y-3">
-                                <div className={`flex items-center ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '300ms' }}><Zap className="h-5 w-5 text-green mr-2" /><span>Custom workflows designed for your specific needs.</span></div>
-                                <div className={`flex items-center ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}><Zap className="h-5 w-5 text-green mr-2" /><span>Integration with your favorite tools (Zoho, HubSpot, etc.).</span></div>
-                                <div className={`flex items-center ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '500ms' }}><Zap className="h-5 w-5 text-green mr-2" /><span>Focus on ROI: saving time and increasing revenue.</span></div>
+                                <div className={`flex items-center ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '300ms' }}><Zap className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" /><span>Custom agent flows tailored to your actual workflow.</span></div>
+                                <div className={`flex items-center ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '400ms' }}><Zap className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" /><span>Direct integration with your CRM, databases, and apps.</span></div>
+                                <div className={`flex items-center ${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '500ms' }}><Zap className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" /><span>Focused on measurable hours saved and fast response times.</span></div>
                             </div>
                         </div>
                         <div className={`${philosophyVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '200ms' }}>
@@ -132,11 +134,11 @@ const AiAutomationPage: React.FC = () => {
 
             <section ref={solutionsRef} className="bg-slate-100/30 dark:bg-navy-light/10 py-16 md:py-24 px-4 sm:px-6 lg:px-8 backdrop-blur-sm">
                 <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${solutionsVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Automation Solutions Infographic</h2>
-                        <p className={`mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400 ${solutionsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>Click on a workflow to see more details.</p>
+                    <div className="text-center mb-14">
+                        <h2 className={`text-3xl md:text-4xl font-poppins font-bold ${solutionsVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>Automation Workflows</h2>
+                        <p className={`mt-3 max-w-xl mx-auto text-base text-slate-600 dark:text-slate-400 ${solutionsVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '150ms' }}>Select a workflow to inspect integrations and automated triggers.</p>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                         {workflows.map((flow, i) => (
                             <div 
                                 key={i} 
@@ -155,15 +157,15 @@ const AiAutomationPage: React.FC = () => {
                         ))}
                     </div>
 
-                    <div className="mt-12 min-h-[250px]">
+                    <div className="mt-12 min-h-[220px]">
                         {selectedWorkflow !== null && (
-                            <div className="bg-white dark:bg-slate-900/50 rounded-4xl p-8 border border-cyan/50 transition-opacity duration-500 animate-fade-in-up">
-                                <h3 className="text-2xl font-bold font-poppins text-cyan mb-4">{workflows[selectedWorkflow].title}</h3>
-                                <p className="text-slate-700 dark:text-slate-300 mb-6">This workflow is designed to streamline the process of "{workflows[selectedWorkflow].title.toLowerCase()}" by integrating key tools and actions.</p>
-                                <ul className="space-y-3">
+                            <div className="bg-white dark:bg-slate-900/50 rounded-3xl p-6 sm:p-8 border border-cyan/50 transition-opacity duration-500 animate-fade-in-up">
+                                <h3 className="text-xl sm:text-2xl font-bold font-poppins text-cyan mb-2">{workflows[selectedWorkflow].title}</h3>
+                                <p className="text-slate-700 dark:text-slate-300 mb-5 text-sm sm:text-base">Integrated automated pipeline with instant triggers and zero manual copying.</p>
+                                <ul className="space-y-2.5">
                                     {workflows[selectedWorkflow].details.map((detail, index) => (
-                                        <li key={index} className="flex items-start">
-                                            <CheckCircle className="h-5 w-5 text-green mt-1 mr-3 flex-shrink-0" />
+                                        <li key={index} className="flex items-start text-sm">
+                                            <CheckCircle className="h-4 w-4 text-green-500 mt-1 mr-3 flex-shrink-0" />
                                             <span className="text-slate-600 dark:text-slate-400">{detail}</span>
                                         </li>
                                     ))}

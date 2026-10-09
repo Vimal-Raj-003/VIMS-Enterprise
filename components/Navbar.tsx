@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Page } from '../types';
 import { GROWTH_SUITE_PAGES, COMPANY_CONTACT } from '../constants';
-import { Menu, X, ChevronDown, Sun, Moon, Cpu, Calculator, Layers, Sparkles, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronDown, Sun, Moon, Cpu, Calculator, Layers, Sparkles, ArrowRight, Building2, Activity } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -61,6 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
   };
 
   const isAnyServiceActive = 
+    activePage === Page.HospitalManagement ||
     activePage === Page.AIAutomation || 
     activePage === Page.CostEstimation || 
     GROWTH_SUITE_PAGES.some(p => p.name === activePage);
@@ -88,15 +89,30 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
 
           {/* Desktop Nav */}
           <div className="hidden lg:block">
-            <div className="ml-8 flex items-center space-x-6 xl:space-x-8">
+            <div className="ml-8 flex items-center space-x-6 xl:space-x-7">
               <motion.a 
                 whileHover={{ y: -2 }}
                 onClick={() => handleLinkClick(Page.Home)} 
-                className={`cursor-pointer text-sm font-semibold transition-colors duration-200 ${
+                className={`cursor-pointer text-sm font-semibold transition-colors duration-200 whitespace-nowrap shrink-0 ${
                   activePage === Page.Home ? 'text-cyan' : 'text-slate-600 dark:text-slate-300 hover:text-cyan'
                 }`}
               >
                 Home
+              </motion.a>
+
+              {/* DIRECT FLAGSHIP: HMS Ecosystem */}
+              <motion.a 
+                whileHover={{ y: -2 }}
+                onClick={() => handleLinkClick(Page.HospitalManagement)} 
+                className={`cursor-pointer text-sm font-semibold transition-colors duration-200 whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
+                  activePage === Page.HospitalManagement 
+                    ? 'text-cyan font-bold' 
+                    : 'text-slate-700 dark:text-slate-200 hover:text-cyan'
+                }`}
+              >
+                <Activity size={15} className={activePage === Page.HospitalManagement ? 'text-cyan' : 'text-blue-500'} />
+                <span>HMS Ecosystem</span>
+                <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded-full bg-cyan/15 text-cyan font-bold">New</span>
               </motion.a>
 
               {/* SINGLE NAME DROPDOWN: Services (Housing AI Automation, Cost Estimation, Growth Suite) */}
@@ -109,7 +125,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
                 <motion.button 
                   whileHover={{ y: -2 }}
                   onClick={() => setIsServicesOpen(!isServicesOpen)} 
-                  className={`flex items-center gap-1.5 cursor-pointer text-sm font-semibold px-3 py-2 rounded-xl transition-all duration-200 ${
+                  className={`flex items-center gap-1.5 cursor-pointer text-sm font-semibold px-3 py-2 rounded-xl transition-all duration-200 whitespace-nowrap shrink-0 ${
                     isAnyServiceActive 
                       ? 'text-cyan bg-cyan/10 border border-cyan/30 shadow-[0_0_12px_rgba(34,211,238,0.15)]' 
                       : 'text-slate-700 dark:text-slate-200 hover:text-cyan hover:bg-slate-100 dark:hover:bg-slate-800/60'
@@ -117,7 +133,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
                   aria-expanded={isServicesOpen}
                 >
                   <Sparkles size={15} className={isAnyServiceActive ? 'text-cyan animate-pulse' : 'text-slate-400'} />
-                  <span>Services</span>
+                  <span>Enterprise Suites</span>
                   <ChevronDown size={14} className={`transition-transform duration-300 ${isServicesOpen ? 'rotate-180 text-cyan' : ''}`} />
                 </motion.button>
 
@@ -129,70 +145,93 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.18 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[620px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-50 p-3"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[680px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-50 p-3"
                     >
                       <div className="grid grid-cols-12 gap-3">
-                        {/* Left Column: Top 2 Flagship Pillars */}
-                        <div className="col-span-6 space-y-2 p-3 bg-slate-50/70 dark:bg-slate-800/40 rounded-2xl border border-slate-100 dark:border-slate-800/50">
+                        {/* Left Column: Top 3 Flagship Pillars */}
+                        <div className="col-span-7 space-y-2 p-3 bg-slate-50/70 dark:bg-slate-800/40 rounded-2xl border border-slate-100 dark:border-slate-800/50">
                           <div className="px-2 pb-1 text-[10px] font-mono uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                            <span>Core Flagship Pillars</span>
-                            <span className="text-cyan font-semibold">Priority</span>
+                            <span>Core Enterprise Products</span>
+                            <span className="text-cyan font-semibold">Proprietary</span>
                           </div>
 
-                          {/* 1. AI Automation */}
+                          {/* 1. HMS Hospital Ecosystem */}
+                          <a 
+                            onClick={() => handleLinkClick(Page.HospitalManagement)}
+                            className={`group block p-2.5 rounded-xl cursor-pointer transition-all border ${
+                              activePage === Page.HospitalManagement 
+                                ? 'bg-cyan/15 border-cyan/40 text-cyan shadow-sm' 
+                                : 'border-transparent bg-white/70 dark:bg-slate-900/60 hover:border-cyan/30 hover:bg-cyan/5 text-slate-800 dark:text-slate-200'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between mb-0.5">
+                              <div className="flex items-center gap-2">
+                                <div className="p-1 rounded-lg bg-blue-500/10 text-blue-500 group-hover:scale-110 transition-transform">
+                                  <Building2 size={15} />
+                                </div>
+                                <span className="font-semibold text-xs group-hover:text-cyan transition-colors">HMS Hospital Ecosystem</span>
+                              </div>
+                              <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded-full bg-cyan/20 text-cyan font-bold">Healthcare Flagship</span>
+                            </div>
+                            <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 pl-7">
+                              EMR/EHR, smart bed turnover, connected ICU telemetry, PACS/LIS & cashless TPA claims.
+                            </p>
+                          </a>
+
+                          {/* 2. AI Automation */}
                           <a 
                             onClick={() => handleLinkClick(Page.AIAutomation)}
-                            className={`group block p-3 rounded-xl cursor-pointer transition-all border ${
+                            className={`group block p-2.5 rounded-xl cursor-pointer transition-all border ${
                               activePage === Page.AIAutomation 
                                 ? 'bg-cyan/15 border-cyan/40 text-cyan shadow-sm' 
                                 : 'border-transparent bg-white/70 dark:bg-slate-900/60 hover:border-cyan/30 hover:bg-cyan/5 text-slate-800 dark:text-slate-200'
                             }`}
                           >
-                            <div className="flex items-center justify-between mb-1">
+                            <div className="flex items-center justify-between mb-0.5">
                               <div className="flex items-center gap-2">
-                                <div className="p-1.5 rounded-lg bg-cyan/10 text-cyan group-hover:scale-110 transition-transform">
-                                  <Cpu size={16} />
+                                <div className="p-1 rounded-lg bg-cyan/10 text-cyan group-hover:scale-110 transition-transform">
+                                  <Cpu size={15} />
                                 </div>
-                                <span className="font-semibold text-sm group-hover:text-cyan transition-colors">AI Automation</span>
+                                <span className="font-semibold text-xs group-hover:text-cyan transition-colors">AI Automation</span>
                               </div>
-                              <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded-full bg-cyan/20 text-cyan font-bold">Top Flagship</span>
+                              <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded-full bg-cyan/20 text-cyan font-bold">Autonomous AI</span>
                             </div>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 pl-8">
-                              Autonomous agent workflows, voice bots, LLM integrations & operational scaling.
+                            <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 pl-7">
+                              Autonomous agent workforces, voice bots & LLM business logic pipelines.
                             </p>
                           </a>
 
-                          {/* 2. Cost Estimation */}
+                          {/* 3. Cost Estimation */}
                           <a 
                             onClick={() => handleLinkClick(Page.CostEstimation)}
-                            className={`group block p-3 rounded-xl cursor-pointer transition-all border ${
+                            className={`group block p-2.5 rounded-xl cursor-pointer transition-all border ${
                               activePage === Page.CostEstimation 
                                 ? 'bg-violet/15 border-violet/40 text-violet shadow-sm' 
                                 : 'border-transparent bg-white/70 dark:bg-slate-900/60 hover:border-violet/30 hover:bg-violet/5 text-slate-800 dark:text-slate-200'
                             }`}
                           >
-                            <div className="flex items-center justify-between mb-1">
+                            <div className="flex items-center justify-between mb-0.5">
                               <div className="flex items-center gap-2">
-                                <div className="p-1.5 rounded-lg bg-violet/10 text-violet group-hover:scale-110 transition-transform">
-                                  <Calculator size={16} />
+                                <div className="p-1 rounded-lg bg-violet/10 text-violet group-hover:scale-110 transition-transform">
+                                  <Calculator size={15} />
                                 </div>
-                                <span className="font-semibold text-sm group-hover:text-violet transition-colors">Cost Estimation</span>
+                                <span className="font-semibold text-xs group-hover:text-violet transition-colors">Cost Estimation</span>
                               </div>
-                              <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded-full bg-violet/20 text-violet font-bold">Should-Cost</span>
+                              <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded-full bg-violet/20 text-violet font-bold">Should-Costing</span>
                             </div>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 pl-8">
-                              Sheet metal, die casting, plastic molding & CNC machining should-costing & negotiation.
+                            <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 pl-7">
+                              Sheet metal, casting, injection molding & CNC machining negotiation.
                             </p>
                           </a>
 
                           <div className="pt-1 px-2 flex items-center justify-between text-[11px] text-slate-400">
-                            <span>Tailored B2B Sourcing & Tech</span>
+                            <span>Tailored B2B Sourcing & Healthcare Tech</span>
                             <ArrowRight size={12} className="text-cyan" />
                           </div>
                         </div>
 
-                        {/* Right Column: 3. Growth Suite */}
-                        <div className="col-span-6 space-y-1.5 p-3 flex flex-col justify-between">
+                        {/* Right Column: Growth Suite */}
+                        <div className="col-span-5 space-y-1.5 p-3 flex flex-col justify-between">
                           <div>
                             <div className="px-2 pb-1.5 text-[10px] font-mono uppercase tracking-wider text-slate-400 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/60 mb-2">
                               <div className="flex items-center gap-1.5">
@@ -319,6 +358,22 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
                 Home
               </a>
 
+              {/* Direct Mobile Link: HMS Ecosystem */}
+              <a 
+                onClick={() => handleLinkClick(Page.HospitalManagement)} 
+                className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-base font-semibold ${
+                  activePage === Page.HospitalManagement 
+                    ? 'text-cyan bg-cyan/15 border border-cyan/30' 
+                    : 'text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-slate-800/40'
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <Activity size={18} className="text-cyan" />
+                  <span>HMS Hospital Ecosystem</span>
+                </div>
+                <span className="text-[9px] font-mono uppercase px-2 py-0.5 rounded-full bg-cyan/20 text-cyan font-bold">New</span>
+              </a>
+
               {/* SINGLE SERVICES ACCORDION (HOUSING AI AUTOMATION, COST ESTIMATION, GROWTH SUITE) */}
               <div className="border-t border-slate-100 dark:border-slate-800/60 pt-2">
                 <button 
@@ -329,7 +384,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
                 >
                     <div className="flex items-center gap-2">
                       <Sparkles size={16} className="text-cyan" />
-                      <span>Services</span>
+                      <span>Enterprise Suites</span>
                     </div>
                     <ChevronDown size={18} className={`transition-transform duration-300 ${isServicesOpen ? 'rotate-180 text-cyan' : ''}`} />
                 </button>
@@ -342,6 +397,25 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
                       exit={{ opacity: 0, height: 0 }}
                       className="pl-3 pr-1 pt-2 space-y-2 overflow-hidden"
                     >
+                        {/* 0. HMS Hospital Ecosystem */}
+                        <a 
+                          onClick={() => handleLinkClick(Page.HospitalManagement)} 
+                          className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold ${
+                            activePage === Page.HospitalManagement 
+                              ? 'text-cyan bg-cyan/15 border border-cyan/30' 
+                              : 'text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-slate-800/40'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2">
+                            <Building2 size={16} className="text-blue-500" />
+                            <div>
+                              <div>HMS Hospital Ecosystem</div>
+                              <div className="text-[11px] font-normal text-slate-400">EMR, Bed Flow, ICU Telemetry & PACS</div>
+                            </div>
+                          </div>
+                          <span className="text-[9px] font-mono uppercase px-2 py-0.5 rounded-full bg-cyan/20 text-cyan">Healthcare</span>
+                        </a>
+
                         {/* 1. AI Automation */}
                         <a 
                           onClick={() => handleLinkClick(Page.AIAutomation)} 

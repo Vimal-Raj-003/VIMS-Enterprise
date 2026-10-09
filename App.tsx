@@ -3,6 +3,7 @@ import { Page } from './types';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
+import HospitalManagementPage from './pages/HospitalManagementPage';
 import LinkedInGrowthPage from './pages/LinkedInGrowthPage';
 import VimsCardsPage from './pages/VimsCardsPage';
 import JillJillAiPage from './pages/JillJillAiPage';
@@ -53,6 +54,8 @@ const App = () => {
     switch (activePage) {
       case Page.Home:
         return <HomePage onNavigate={handleNavigate} />;
+      case Page.HospitalManagement:
+        return <HospitalManagementPage onNavigate={handleNavigate} />;
       case Page.LinkedInGrowth:
         return <LinkedInGrowthPage />;
       case Page.VIMSCards:

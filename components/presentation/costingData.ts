@@ -5,6 +5,35 @@ export interface CostRowItem {
   p: string;
 }
 
+export interface EngineeringToolSpec {
+  partDescription: string;
+  oemApplication: string;
+  criticalDimensions: string;
+  tooling: {
+    toolType: string;
+    dieMaterial: string;
+    cavitiesOrStations: string;
+    toolCapex: string;
+    amortizationPart: string;
+    toolLife: string;
+    maintenanceInterval: string;
+  };
+  physics: {
+    title: string;
+    stats: Array<{
+      key: string;
+      val: string;
+      formula: string;
+    }>;
+  };
+  dfmQuality: {
+    toleranceStandard: string;
+    qualityGate: string;
+    yieldRatio: string;
+    scrapCreditLogic: string;
+  };
+}
+
 export interface CommodityData {
   key: string;
   name: string;
@@ -19,6 +48,7 @@ export interface CommodityData {
   spm: string;
   cycleTime: string;
   color: string;
+  engineeringTool?: EngineeringToolSpec;
   costs: {
     material: CostRowItem[];
     process: CostRowItem[];
@@ -54,6 +84,35 @@ export const commoditiesData: Record<string, CommodityData> = {
     spm: '45 strokes/min',
     cycleTime: '1.33 sec',
     color: '#2f7df7',
+    engineeringTool: {
+      partDescription: 'Heavy-duty CRCA cold-rolled steel bracket for automotive inverter/chassis enclosures. 140 mm width × 80 mm height channel profile with two rear mounting holes, a base wireway slot, an embossed stiffening rib across the back wall to prevent resonance vibration, and formed 90° flanges with 2.5 mm bend reliefs.',
+      oemApplication: 'EV Power Electronics Enclosure Mounting Subassembly (Tier-1 Body-in-White)',
+      criticalDimensions: '140 mm (±0.25mm) width · 80 mm (±0.20mm) height · 2.5 mm uniform cold-rolled gauge',
+      tooling: {
+        toolType: 'Class-A 5-Stage Progressive Die with Carbide Inserts',
+        dieMaterial: 'AISI D2 Tool Steel (60–62 HRC) Punch/Die, Ground Nitrogen Spring Stripper',
+        cavitiesOrStations: '5 Active Stations (Pierce, Emboss, Form 1, Form 2, Cam Cutoff)',
+        toolCapex: '₹ 3,20,000 (One-time tooling asset)',
+        amortizationPart: '₹ 1.60 / pc (Amortized over 2,00,000 pcs volume)',
+        toolLife: '2,00,000 Strokes (Regrind every 25,000 strokes)',
+        maintenanceInterval: 'Preventive punch inspection every 10,000 strokes'
+      },
+      physics: {
+        title: 'Progressive Press Sizing & Strip Physics',
+        stats: [
+          { key: '1. Shearing / Cutting Force', val: '75.6 Tonnes', formula: 'F_cut = L × t × τ_shear = 926.5mm × 2.5mm × 320 N/mm² = 741.2 kN' },
+          { key: '2. Bending & Stripping Force', val: '25.5 Tonnes', formula: '2× 90° bends with R=2.5mm (1t) + 10% bottoming stripping reserve' },
+          { key: '3. Machine Tonnage Sized', val: '110 Tonne Mechanical Press', formula: 'Total 101.1 T required · 1.1x safety margin on 110T mechanical crank press' },
+          { key: '4. Strip Nesting & Scrap', val: '71.2% Yield · 0.154 kg Scrap', formula: 'Developed blank 195 × 140 mm · Gross 0.534 kg · Scrap credit @ ₹28/kg = −₹4.31' }
+        ]
+      },
+      dfmQuality: {
+        toleranceStandard: 'DIN ISO 2768-m (Fine-to-Medium Stamping Standard)',
+        qualityGate: '100% Go/No-Go Gauge on Hole Pitch · CMM 5-Piece First Article Inspection',
+        yieldRatio: '71.2% Strip Nesting Yield (140mm strip pitch)',
+        scrapCreditLogic: 'Offal skeleton recovered at ₹ 28.00/kg (₹ 4.31 recovery per piece)'
+      }
+    },
     costs: {
       material: [
         { l: 'Raw Material Rate', s: 'CRCA IS 513 Gr.D coil · per kg', v: '₹ 68.00', p: 'Base' },
@@ -108,9 +167,38 @@ export const commoditiesData: Record<string, CommodityData> = {
     operations: 'HPDC + trim + machine',
     complexity: 'Medium',
     machine: 'HPDC 400T',
-    spm: '—',
+    spm: 'N/A',
     cycleTime: '38 sec/shot',
     color: '#f97316',
+    engineeringTool: {
+      partDescription: 'High-Pressure Die Cast A380 Aluminum housing for automotive inverter/stator assembly. 160 mm × 110 mm with 3.0 mm uniform wall, integrated heat dissipation cooling fins, a central Ø55 mm stator bore, four corner M6 tapped mounting bosses with generous internal radii (R3.5mm), and a 1.5° draft angle.',
+      oemApplication: 'EV Traction Inverter & Power Electronic Housing Cell (Underhood Tier-1 Powertrain)',
+      criticalDimensions: '160 mm (±0.30mm) length · 110 mm (±0.25mm) width · 3.0 mm uniform wall thickness',
+      tooling: {
+        toolType: '2-Cavity Vacuum-Assisted HPDC Die with PVD Nitrided Inserts',
+        dieMaterial: 'Premium AISI H13 ESR Tool Steel (48–52 HRC) Core & Cavity Inserts',
+        cavitiesOrStations: '2-Cavity Balanced Runner with Chill Vents & Hydraulic Side Cores',
+        toolCapex: '₹ 4,80,000 (Die casting mold tooling asset)',
+        amortizationPart: '₹ 8.00 / pc (Amortized over 60,000 pcs volume)',
+        toolLife: '60,000 Shots (Thermal stress-relief temper every 15,000 shots)',
+        maintenanceInterval: 'Die parting line cleaning & ejector lubrication every shift'
+      },
+      physics: {
+        title: 'HPDC Thermal & Clamping Physics',
+        stats: [
+          { key: '1. Projected Shot Area', val: '435 cm²', formula: '2 cavities (2×175 cm²) + runner/biscuit (85 cm²) = 435 cm²' },
+          { key: '2. Specific Metal Pressure', val: '750 kg/cm² (73.5 MPa)', formula: 'High-integrity casting with minimal porosity requires 750 kg/cm² intensifier pressure' },
+          { key: '3. Clamping Tonnage Sized', val: '400 Tonne HPDC Cell', formula: 'F_clamp = 435 cm² × 750 kg/cm² ÷ 1000 = 326.25 T × 1.2 safety factor = 391.5 T → 400T Press' },
+          { key: '4. Thermal Cooling & Cycle', val: '38.0 sec Cycle Time', formula: 'Fill 28ms + solidification (t=3mm) 14.5s + dwell 8s + robot ladle/spray/eject 15.5s' }
+        ]
+      },
+      dfmQuality: {
+        toleranceStandard: 'NADCA Product Standard Grade 2 (Commercial High-Precision Die Casting)',
+        qualityGate: '100% Helium Leak Testing at 1.5 Bar · X-Ray ASTM E505 Radiographic Inspection',
+        yieldRatio: '82.3% Metal Recovery Yield (Runner remelt offset @ ₹ 140/kg = −₹ 17.64)',
+        scrapCreditLogic: 'Runners, biscuits, and overflows remelted in adjacent reverberatory furnace'
+      }
+    },
     costs: {
       material: [
         { l: 'Raw Material Rate', s: 'Aluminum A380 · per kg', v: '₹ 240.00', p: 'Base' },
@@ -167,9 +255,38 @@ export const commoditiesData: Record<string, CommodityData> = {
     operations: 'Molding + pad print',
     complexity: 'Medium',
     machine: 'IMM 180T',
-    spm: '—',
+    spm: 'N/A',
     cycleTime: '28 sec',
     color: '#8b5cf6',
+    engineeringTool: {
+      partDescription: 'Precision injection molded modular electronic enclosure top cover (180 × 130 mm, 2.0 mm nominal wall) molded in high-flow engineering ABS. Designed with 4 cantilever snap-fit hooks for screw-less assembly, internal orthogonal stiffening ribs (1.2 mm thick, 60% of wall) to avoid surface sink marks, cable pass-throughs, and a fine VDI 27 spark-textured cosmetic finish.',
+      oemApplication: 'Industrial Gateway & IoT Edge Controller Top Shell (Tier-1 Electronics Packaging)',
+      criticalDimensions: '180 mm (±0.20mm) length · 130 mm (±0.20mm) width · 2.0 mm uniform nominal wall',
+      tooling: {
+        toolType: '2-Cavity Valve-Gated Hot Runner Injection Mold with Beryllium Copper Chills',
+        dieMaterial: 'AISI P20+Ni Pre-Hardened Tool Steel (30–34 HRC) Cavity & Core Plates',
+        cavitiesOrStations: '2 Cavities with Direct Valve Pin Gating on Non-Cosmetic Underside',
+        toolCapex: '₹ 3,80,000 (Injection mold tooling asset)',
+        amortizationPart: '₹ 1.27 / pc (Amortized over 3,00,000 pcs volume)',
+        toolLife: '3,00,000 Shots (Complete strip & ultrasonic clean every 50,000 shots)',
+        maintenanceInterval: 'Ejector pin alignment check & parting line cleaning every 24h'
+      },
+      physics: {
+        title: 'Injection Pressure & Clamping Physics',
+        stats: [
+          { key: '1. Projected Mold Area', val: '265 cm²', formula: '2 cavities (2 × 115 cm²) + hot runner manifold drop area (35 cm²) = 265 cm²' },
+          { key: '2. Peak Cavity Pressure', val: '420 kg/cm² (41.2 MPa)', formula: 'Thin-wall flow length ratio (L/t = 90) requires 420 kg/cm² in cavity at transition' },
+          { key: '3. Machine Clamp Sized', val: '180 Tonne Servo IMM', formula: 'F_clamp = 265 cm² × 420 kg/cm² ÷ 1000 = 111.3 T × 1.3 clamp safety = 144.7 T → 180T IMM' },
+          { key: '4. Thermal Cooling & Cycle', val: '28.0 sec Cycle Time', formula: 'Injection 2.1s + hold 4.5s + cooling (t=2mm) 14.8s + mold open/eject/close 6.6s' }
+        ]
+      },
+      dfmQuality: {
+        toleranceStandard: 'DIN 16742-TG4 (Precision Engineering Thermoplastics Standard)',
+        qualityGate: 'Critical snap-fit retention pull force test (min 45 N) · 100% cosmetic inspection',
+        yieldRatio: '95.5% Production Yield (Hot runner direct drop with 20% reground runner offset)',
+        scrapCreditLogic: 'Cold sprue trim reground and blended at 20% controlled ratio (−₹ 1.32/pc)'
+      }
+    },
     costs: {
       material: [
         { l: 'Raw Material Rate', s: 'ABS Natural Hi-Flow · per kg', v: '₹ 165.00', p: 'Base' },
@@ -224,9 +341,38 @@ export const commoditiesData: Record<string, CommodityData> = {
     operations: 'Turn + mill + drill',
     complexity: 'Medium',
     machine: 'Turning Center + VMC',
-    spm: '—',
+    spm: 'N/A',
     cycleTime: '4.2 min',
     color: '#10b981',
+    engineeringTool: {
+      partDescription: 'High-precision stepped transmission drive shaft (Ø30 mm × 80 mm length) manufactured from cold-drawn EN8 bright carbon steel bar. Machined with precision stepped bearing seats (toleranced to ISO js6), an 8 mm wide DIN 6885 drive keyway slot, and a Ø6 mm cross-drilled lubrication hole. Bearing journals are precision centerless ground to Ra 0.8 μm surface finish.',
+      oemApplication: 'Agricultural Pump & Gearbox Input Pinion Drive Shaft (Tier-1 Drivetrain)',
+      criticalDimensions: 'Ø30 mm (+0.009/−0.004mm js6) bearing seats · 80 mm (±0.15mm) total length',
+      tooling: {
+        toolType: 'Precision 3-Jaw Hydraulic Chucking + VMC 4th-Axis Rotary Tombstone Fixture',
+        dieMaterial: 'Hardened Ground Steel Fixture Subplates with TiAlN-Coated Solid Carbide Endmills',
+        cavitiesOrStations: 'Dual Setup (Op 10 Turning CNC Lathe + Op 20 Milling/Drilling 3-Axis VMC)',
+        toolCapex: '₹ 78,000 (Fixture and bespoke soft jaw asset per annual model)',
+        amortizationPart: '₹ 6.50 / pc (Amortized over 12,000 pcs annual volume)',
+        toolLife: 'Insert tool life: 80 parts per corner index (CNMG 120408 Carbide Insert)',
+        maintenanceInterval: 'Spindle runout & backlash inspection every 500 operating hours'
+      },
+      physics: {
+        title: 'Machining Chip Formation & Power Physics',
+        stats: [
+          { key: '1. Metal Removal Rate (MRR)', val: '42.8 cm³/min', formula: 'MRR = V_c × d × f = 180 m/min × 2.5 mm depth × 0.28 mm/rev feed' },
+          { key: '2. Cutting Power Required', val: '4.65 kW at Spindle', formula: 'P_c = (MRR × k_c) ÷ 60,000 = (42.8 × 2,200 N/mm²) ÷ 60,000 = 1.57 kW specific' },
+          { key: '3. Machine Sizing & Tooling', val: '7.5 kW CNC Lathe + 5.5 kW VMC', formula: 'Turning Center (₹ 550/hr MHR) + 3-Axis VMC (₹ 650/hr MHR) blended @ ₹ 585/hr' },
+          { key: '4. Surface Finish & Grinding', val: 'Ra 0.8 μm Bearing Seats', formula: 'Cylindrical grind journal Ra = 0.8 μm · DIN 6885 Keyway width 8.0 mm (P9)' }
+        ]
+      },
+      dfmQuality: {
+        toleranceStandard: 'ISO 2768-f (Fine Precision Machining Grade)',
+        qualityGate: '100% Air-Gauging on Ø30 js6 bearing journal · CMM Keyway symmetry audit',
+        yieldRatio: '79.5% Material Buy-to-Fly (Input 0.78 kg → Net 0.62 kg finished part)',
+        scrapCreditLogic: 'EN8 curled chips recovered at dry machine shop scrap rate of ₹ 32.00/kg'
+      }
+    },
     costs: {
       material: [
         { l: 'Raw Material Rate', s: 'EN8 Bright Bar · per kg', v: '₹ 110.00', p: 'Base' },
@@ -282,9 +428,38 @@ export const commoditiesData: Record<string, CommodityData> = {
     operations: 'Forge + trim + machine',
     complexity: 'Complex',
     machine: 'Friction Screw Press 630T',
-    spm: '—',
+    spm: 'N/A',
     cycleTime: '45 sec',
     color: '#ef4444',
+    engineeringTool: {
+      partDescription: 'Closed-die hot forged automotive connecting rod / crank arm (210 mm center-to-center) forged from high-tensile EN19 (AISI 4140) alloy steel. Engineered with a balanced I-beam shank cross-section providing high strength-to-weight ratio under 45 kN dynamic cyclic tension-compression loads. Flash trimmed hot on a dedicated 150T press, followed by shot-peening and quench & temper heat treatment to 28–32 HRC.',
+      oemApplication: 'Commercial Vehicle & Industrial Engine Crankshaft Con-Rod Subassembly',
+      criticalDimensions: '210 mm (±0.40mm) c-to-c · Big end Ø52 mm · Small end pin eye Ø28 mm',
+      tooling: {
+        toolType: '2-Impression Closed Forging Die Block with Insert Pockets',
+        dieMaterial: 'AISI H13 / DIN 1.2344 Hot Work Tool Steel (42–46 HRC) Die Blocks with Hardfacing',
+        cavitiesOrStations: 'Dual Impression (Blower/Buster Rougher + Finisher with Flash Gutter)',
+        toolCapex: '₹ 8,50,000 (Die block, ejector mechanism, and hot trimming die asset)',
+        amortizationPart: '₹ 56.67 / pc (Amortized over 15,000 pcs production volume)',
+        toolLife: '15,000 Forgings (Weld hardfacing re-cut impression at 7,500 parts)',
+        maintenanceInterval: 'Die lubricant spray nozzle check & thermal crack inspection every shift'
+      },
+      physics: {
+        title: 'Hot Forging Pressure & Energy Physics',
+        stats: [
+          { key: '1. Total Forging Load', val: '585 Tonnes Force', formula: 'F_forge = A_proj × σ_flow × C_flash = 125 cm² × 32 kg/mm² × 1.45 flash factor = 580 T' },
+          { key: '2. Billet Induction Preheating', val: '1,150°C Uniform', formula: 'Billet (Ø45 × 185 mm) heated to 1,150°C in 35 kW induction coil · 45s cycle' },
+          { key: '3. Machine Sizing Sized', val: '630 Tonne Friction Screw Press', formula: 'F_req 585 T + 10% bottoming reserve → 630T Friction Screw Forging Press (₹ 950/hr MHR)' },
+          { key: '4. Heat Treatment & Hardness', val: '28–32 HRC Quench & Temper', formula: 'Austenitized 860°C + oil quench + tempered 580°C · Yield strength > 750 MPa' }
+        ]
+      },
+      dfmQuality: {
+        toleranceStandard: 'EN 10243-1 Grade F (Steel Die Forgings Precision Tolerances)',
+        qualityGate: '100% Magnetic Particle Inspection (MPI) for seam cracks · Hardness 28–32 HRC',
+        yieldRatio: '82.2% Material Utilization (Billet 2.25 kg → Net Part 1.85 kg)',
+        scrapCreditLogic: 'Parting line flash + scale (0.40 kg) recovered at ₹ 28.00/kg (−₹ 11.20/pc)'
+      }
+    },
     costs: {
       material: [
         { l: 'Raw Material Rate', s: 'EN19 (AISI 4140) · per kg', v: '₹ 95.00', p: 'Base' },

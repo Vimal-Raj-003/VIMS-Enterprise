@@ -24,7 +24,7 @@ export const COMMODITIES_DATA: CommodityCapability[] = [
     badge: 'Stamping, Laser & Bending',
     categoryTag: 'Fabrication & Forming',
     iconName: 'Layers',
-    imageUrl: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: '/images/manufacturing/sheetmetal_press.jpg',
     headline: 'High-speed progressive stamping, tandem press lines, laser blanking, CNC brake forming & deep drawing.',
     subcategories: [
       {
@@ -54,7 +54,7 @@ export const COMMODITIES_DATA: CommodityCapability[] = [
     badge: 'Injection, Blow & Thermo',
     categoryTag: 'Polymer Engineering',
     iconName: 'Box',
-    imageUrl: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: '/images/manufacturing/plastic_molding_machine.jpg',
     headline: 'Engineering resin mold flow simulation, hot-runner multi-cavity tooling & specialized polymer processes.',
     subcategories: [
       {
@@ -84,7 +84,7 @@ export const COMMODITIES_DATA: CommodityCapability[] = [
     badge: 'HPDC, LPDC & Iron Foundry',
     categoryTag: 'Melt & Metallurgy',
     iconName: 'Flame',
-    imageUrl: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: '/images/manufacturing/die_casting_machine.jpg',
     headline: 'High-pressure structural aluminum, magnesium & zinc casting with integrated vacuum and iron sand foundry.',
     subcategories: [
       {
@@ -114,7 +114,7 @@ export const COMMODITIES_DATA: CommodityCapability[] = [
     badge: 'VMC, HMC & 5-Axis Turning',
     categoryTag: 'Subtractive Precision',
     iconName: 'Cpu',
-    imageUrl: 'https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: '/images/manufacturing/vmc_machining_center.png',
     headline: '5-axis simultaneous milling, twin-spindle live tooling lathes & toolroom electrical discharge machining.',
     subcategories: [
       {
@@ -144,7 +144,7 @@ export const COMMODITIES_DATA: CommodityCapability[] = [
     badge: 'Closed Die, Open Die & Ring',
     categoryTag: 'Plastic Deformation',
     iconName: 'Wrench',
-    imageUrl: 'https://images.unsplash.com/photo-1589792905706-c875d654f15d?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: '/images/manufacturing/forging_press.jpg',
     headline: 'Continuous grain alignment for high-fatigue, safety-critical powertrain and structural components.',
     subcategories: [
       {
@@ -174,7 +174,7 @@ export const COMMODITIES_DATA: CommodityCapability[] = [
     badge: 'Electroplating & Coatings',
     categoryTag: 'Surface Engineering',
     iconName: 'Sparkles',
-    imageUrl: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: '/images/manufacturing/plating_booth.jpg',
     headline: 'Corrosion barrier protection, electrical conductivity, cosmetic appearance & engineered surface hardness.',
     subcategories: [
       {

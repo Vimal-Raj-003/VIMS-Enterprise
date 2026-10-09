@@ -1,6 +1,6 @@
 {
   "name": "VIMS-V0.1",
-  "description": "Enterprise AI Automation, Mechanical Should-Costing & Sheet Metal/Casting/Machining Cost Estimation, and Digital Identity Growth Suite for global engineering and enterprise teams.",
+  "description": "VIMS Enterprise – Next-Gen Hospital Management System (HMS) Ecosystem, Enterprise AI Automation & Mechanical Should-Costing Estimation Suite.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

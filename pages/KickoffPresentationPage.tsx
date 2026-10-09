@@ -11,11 +11,83 @@ import {
   SecondaryVisualSvg
 } from '../components/presentation/CommoditySVGs';
 import { PartHeroVisual } from '../components/presentation/PartHeroSVGs';
+import { CommodityProcessCardVisual, ProcessMediaInfo } from '../components/presentation/CommodityProcessCardVisual';
+import { ProcessDeepDiveModal } from '../components/presentation/ProcessDeepDiveModal';
+import { EngineeringDescriptionTool } from '../components/presentation/EngineeringDescriptionTool';
 
 interface KickoffPresentationPageProps {
   onNavigate?: (page: Page) => void;
   initialView?: 'view-landing' | 'view-slide1' | 'view-slide2' | 'view-slide3' | 'view-slide4';
 }
+
+const PRESENTATION_SLIDES = [
+  { id: 'view-slide1', num: 1, title: 'Commodities', short: 'Commodities' },
+  { id: 'view-slide2', num: 2, title: 'Compare Scenarios', short: 'Compare Scenarios' },
+  { id: 'view-slide3', num: 3, title: 'Cost Template & Simulator', short: 'Cost Template' },
+  { id: 'view-slide4', num: 4, title: 'Costing Lifecycle', short: 'Cost Lifecycle' },
+];
+
+const SlideNavHeader: React.FC<{
+  currentSlideNum?: number;
+  slideTag: string;
+  onShowView: (id: string) => void;
+  activeView: string;
+  onNavigate?: () => void;
+}> = ({ slideTag, onShowView, activeView, onNavigate }) => {
+  return (
+    <div className="slide-nav-header reveal">
+      {/* Left: Minimal Hub Overview Pill */}
+      <div className="flex items-center gap-2">
+        <button 
+          className={`nav-hub-btn ${activeView === 'view-landing' ? 'active' : ''}`} 
+          onClick={() => onShowView('view-landing')}
+          title="Return to Hub Overview (Esc)"
+        >
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span>Hub Overview</span>
+        </button>
+      </div>
+
+      {/* Center: Sleek Unified Segmented Navigation Control */}
+      <nav className="slide-stepper" aria-label="Slide Navigation">
+        {PRESENTATION_SLIDES.map(s => {
+          const isActive = activeView === s.id;
+          return (
+            <button
+              key={s.id}
+              className={`slide-step-btn ${isActive ? 'active' : ''}`}
+              onClick={() => onShowView(s.id)}
+              title={`Switch to Slide ${s.num}: ${s.title}`}
+            >
+              <span className="step-idx">{s.num}</span>
+              <span className="step-label">{s.short}</span>
+            </button>
+          );
+        })}
+      </nav>
+
+      {/* Right: Minimalist Indicator & Exit to Main Site */}
+      <div className="flex items-center gap-2">
+        <div className="slide-tag hidden md:inline-flex">{slideTag}</div>
+        {onNavigate && (
+          <button
+            className="nav-hub-btn hidden sm:inline-flex opacity-85 hover:opacity-100"
+            onClick={onNavigate}
+            title="Exit Presentation to Main Cost Estimation Site"
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+            <span>Main Site</span>
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = ({ 
   onNavigate,
@@ -25,10 +97,14 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [selectedCommodity, setSelectedCommodity] = useState<string>('sheetmetal');
   const [partViewMode, setPartViewMode] = useState<'cad' | 'photo'>('cad');
-  const [showPhysics, setShowPhysics] = useState<boolean>(false);
+  const [deepDiveInfo, setDeepDiveInfo] = useState<ProcessMediaInfo | null>(null);
 
   const chartRef = useRef<Chart | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  // Active slide helpers
+  const currentSlideIndex = PRESENTATION_SLIDES.findIndex(s => s.id === activeView);
+  const isSlide = currentSlideIndex !== -1;
 
   // Theme toggle
   const toggleTheme = () => {
@@ -40,6 +116,55 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
     setActiveView(viewId);
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
+
+  // Slide navigation
+  const goToPrevSlide = () => {
+    if (currentSlideIndex > 0) {
+      showView(PRESENTATION_SLIDES[currentSlideIndex - 1].id);
+    } else {
+      showView('view-landing');
+    }
+  };
+
+  const goToNextSlide = () => {
+    if (currentSlideIndex >= 0 && currentSlideIndex < PRESENTATION_SLIDES.length - 1) {
+      showView(PRESENTATION_SLIDES[currentSlideIndex + 1].id);
+    } else if (currentSlideIndex === PRESENTATION_SLIDES.length - 1) {
+      showView('view-landing');
+    } else if (activeView === 'view-landing') {
+      showView('view-slide1');
+    }
+  };
+
+  // Keyboard navigation support: ArrowRight/Left, numbers 1-4, Escape
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const activeTag = (document.activeElement?.tagName || '').toUpperCase();
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(activeTag)) return;
+
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        e.preventDefault();
+        goToNextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        goToPrevSlide();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        showView('view-landing');
+      } else if (e.key === '1') {
+        showView('view-slide1');
+      } else if (e.key === '2') {
+        showView('view-slide2');
+      } else if (e.key === '3') {
+        showView('view-slide3');
+      } else if (e.key === '4') {
+        showView('view-slide4');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeView, currentSlideIndex]);
 
   // Active commodity data
   const currentCommodity: CommodityData = commoditiesData[selectedCommodity] || commoditiesData.sheetmetal;
@@ -366,11 +491,34 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
         }
 
         /* Report */
-        .costing-presentation-root .report { display: grid; grid-template-columns: 1.3fr 1fr; gap: 22px; }
-        .costing-presentation-root .report .left, .costing-presentation-root .report .right {
-          background: var(--card); border: 1px solid var(--card-border);
-          border-radius: 18px; padding: 20px; display: flex; flex-direction: column;
-          max-height: calc(100vh - 220px); overflow: hidden;
+        .costing-presentation-root .report {
+          display: grid;
+          grid-template-columns: 1.35fr 1fr;
+          gap: 22px;
+          align-items: start;
+        }
+        .costing-presentation-root .report .left {
+          background: var(--card);
+          border: 1px solid var(--card-border);
+          border-radius: 18px;
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+        .costing-presentation-root .report .right {
+          background: var(--card);
+          border: 1px solid var(--card-border);
+          border-radius: 18px;
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          position: sticky;
+          top: 24px;
+        }
+        .costing-presentation-root .report .left .scroll-area {
+          overflow: visible;
+          padding-right: 0;
         }
         .costing-presentation-root .scroll-area { overflow-y: auto; flex: 1; padding-right: 6px; }
         .costing-presentation-root .scroll-area::-webkit-scrollbar { width: 6px; }
@@ -529,15 +677,14 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
         .costing-presentation-root .summary-list .row:last-child { border: none; }
         .costing-presentation-root .summary-list .row b { color: var(--ink); font-variant-numeric: tabular-nums; }
 
-        /* Updated lifecycle — 4 steps */
+        /* Updated lifecycle: 4 steps */
         .costing-presentation-root .workflow { position: relative; padding: 20px 0; }
         .costing-presentation-root .wf-track {
           position: relative; display: grid; grid-template-columns: repeat(4,1fr); gap: 18px;
         }
+        /* Big horizontal line removed across all screen sizes */
         .costing-presentation-root .wf-track::before {
-          content: ""; position: absolute; top: 44px; left: 8%; right: 8%; height: 3px;
-          background: linear-gradient(90deg,var(--accent) 0%,var(--accent-2) 40%,var(--gold) 75%,#10b981 100%);
-          opacity: .35; z-index: 0; border-radius: 2px;
+          display: none !important;
         }
         .costing-presentation-root .wf-step {
           position: relative; z-index: 1; text-align: center;
@@ -569,6 +716,56 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
         .costing-presentation-root .wf-step .deliverable ul { margin: 4px 0 0; padding-left: 14px; list-style: disc; }
         .costing-presentation-root .wf-step .deliverable li { margin: 2px 0; }
 
+        /* Slide Navigation Header Bar - Minimalistic & Executive */
+        .costing-presentation-root .slide-nav-header {
+          display: flex; align-items: center; justify-content: space-between;
+          gap: 10px; margin-bottom: 20px;
+          padding: 6px 12px; border-radius: 9999px;
+          background: var(--card); border: 1px solid var(--card-border);
+          backdrop-filter: blur(16px);
+          box-shadow: 0 2px 12px rgba(0,0,0,.03);
+        }
+        .costing-presentation-root .nav-hub-btn {
+          display: inline-flex; align-items: center; gap: 6px; padding: 6px 13px;
+          border-radius: 9999px; background: var(--soft2); border: 1px solid var(--card-border);
+          font-size: 11.5px; font-weight: 600; color: var(--ink); cursor: pointer;
+          transition: all .2s ease;
+        }
+        .costing-presentation-root .nav-hub-btn:hover {
+          background: var(--card); border-color: var(--accent); color: var(--accent);
+        }
+        .costing-presentation-root .nav-hub-btn.active {
+          background: var(--accent); border-color: var(--accent); color: #ffffff;
+          box-shadow: 0 2px 8px var(--glow);
+        }
+        .costing-presentation-root .slide-stepper {
+          display: inline-flex; align-items: center; gap: 3px; padding: 3px;
+          border-radius: 9999px; background: var(--soft2); border: 1px solid var(--card-border);
+        }
+        .costing-presentation-root .slide-step-btn {
+          display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px;
+          border-radius: 9999px; border: none; background: transparent;
+          font-size: 11.5px; font-weight: 600; color: var(--muted); cursor: pointer;
+          transition: all .2s ease; white-space: nowrap;
+        }
+        .costing-presentation-root .slide-step-btn:hover {
+          color: var(--ink); background: rgba(0,0,0,.04);
+        }
+        .costing-presentation-root .slide-step-btn.active {
+          background: var(--accent); color: #ffffff;
+          box-shadow: 0 2px 8px var(--glow);
+        }
+        .costing-presentation-root .slide-step-btn .step-idx {
+          width: 17px; height: 17px; border-radius: 50%; display: grid; place-items: center;
+          font-size: 10px; font-weight: 700; background: rgba(0,0,0,.08); color: inherit;
+        }
+        .costing-presentation-root .slide-step-btn.active .step-idx {
+          background: rgba(255,255,255,.28); color: #ffffff;
+        }
+        .costing-presentation-root .slide-step-btn .step-label {
+          font-size: 11.5px; letter-spacing: -0.01em;
+        }
+
         /* Reveal */
         .costing-presentation-root .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
         .costing-presentation-root .view.active .reveal { opacity: 1; transform: none; }
@@ -582,26 +779,13 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
         @media (max-width: 1100px) {
           .costing-presentation-root .btn-grid { grid-template-columns: 1fr; }
           .costing-presentation-root .report { grid-template-columns: 1fr; }
+          .costing-presentation-root .report .right { position: static; }
           .costing-presentation-root .wf-track { grid-template-columns: repeat(2,1fr); }
           .costing-presentation-root .wf-track::before { display: none; }
           .costing-presentation-root .landing, .costing-presentation-root .slide { padding: 60px 24px 60px; }
           .costing-presentation-root h1.title { font-size: 26px; }
         }
       `}</style>
-
-      {/* Return / Exit Button to Main Cost Estimation Page */}
-      {onNavigate && (
-        <button 
-          onClick={() => onNavigate(Page.CostEstimation)}
-          className="exit-site-btn"
-          title="Return to main Cost Estimation Engine"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-          <span>Main Site</span>
-        </button>
-      )}
 
       {/* Theme Toggle Knob */}
       <button 
@@ -620,16 +804,24 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
         </div>
       </button>
 
-      {/* ================= LANDING — COST ESTIMATION SUITE ================= */}
+      {/* ================= LANDING: COST ESTIMATION SUITE ================= */}
       <section className={`view ${activeView === 'view-landing' ? 'active' : ''}`} id="view-landing">
         <div className="landing">
+          <div className="max-w-[1200px] mx-auto mb-6">
+            <SlideNavHeader 
+              slideTag="Hub Overview" 
+              onShowView={showView} 
+              activeView={activeView} 
+              onNavigate={onNavigate ? () => onNavigate(Page.CostEstimation) : undefined}
+            />
+          </div>
           <div className="landing-head">
             <span className="eyebrow reveal">Cost Estimation Suite</span>
             <h1 className="reveal d1">
               Precision <span>Costing Services</span><br/>for Manufacturing Excellence
             </h1>
             <p className="reveal d2">
-              A unified workspace to strategize, simulate, compare and track part costing — from kickoff to final deliverable, across every commodity.
+              A unified workspace to strategize, simulate, compare, and track part costing from initial kickoff to final deliverable across every commodity.
             </p>
           </div>
 
@@ -645,7 +837,7 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
               <div>
                 <h3>Book Costing Strategy</h3>
                 <p className="desc">
-                  Define the costing framework — commodities, processes, secondary operations and overhead structures tailored to your program.
+                  Define your costing framework across commodities, manufacturing processes, secondary operations, and overhead structures tailored to your program.
                 </p>
                 <span className="go">
                   Open Strategy <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -664,7 +856,7 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
               <div>
                 <h3>Watch Costing Lifecycle</h3>
                 <p className="desc">
-                  Track every phase — from kickoff intake and feasibility readiness, through casting approach, to final deliverable handover.
+                  Track every phase from kickoff intake and feasibility readiness through costing approach to final deliverable handover.
                 </p>
                 <span className="go">
                   View Lifecycle <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -683,7 +875,7 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
               <div>
                 <h3>Test Interactive Cost Simulator</h3>
                 <p className="desc">
-                  Run a detailed, auditable cost build-up — material, process, secondary, overheads — with live breakdown and part-level traceability.
+                  Run a detailed, auditable cost build-up covering material, primary processes, secondary operations, and overheads with live breakdown and part-level traceability.
                 </p>
                 <span className="go">
                   Launch Simulator <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -701,7 +893,7 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
               <div>
                 <h3>Compare Cost Scenarios</h3>
                 <p className="desc">
-                  Evaluate forecast inputs, part complexity grades and sample requirements side-by-side to pick the optimal costing path before kickoff.
+                  Evaluate forecast inputs, part complexity grades, and sample requirements side by side to pick the optimal costing path before kickoff.
                 </p>
                 <span className="go">
                   Compare Scenarios <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -712,21 +904,20 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
         </div>
       </section>
 
-      {/* ================= SLIDE 1 — COMMODITIES ================= */}
+      {/* ================= SLIDE 1: COMMODITIES ================= */}
       <section className={`view ${activeView === 'view-slide1' ? 'active' : ''}`} id="view-slide1">
         <div className="slide">
           <div className="slide-inner">
-            <div className="topbar reveal">
-              <button className="back-btn" onClick={() => showView('view-landing')}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
-                Cost Estimation
-              </button>
-              <div className="slide-tag">Slide 01 · Commodities</div>
-            </div>
+            <SlideNavHeader 
+              slideTag="Slide 01 · Commodities" 
+              onShowView={showView} 
+              activeView={activeView} 
+              onNavigate={onNavigate ? () => onNavigate(Page.CostEstimation) : undefined}
+            />
 
             <div className="reveal d1">
               <h1 className="title">Over <span>11+ Years</span> of Manufacturing Expertise</h1>
-              <p className="subtitle">End-to-end costing capabilities across six core commodities — from prototype to volume production, with full process traceability.</p>
+              <p className="subtitle">End-to-end costing capabilities across six core commodities from prototype to volume production with full process traceability.</p>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4 reveal d2">
@@ -739,10 +930,11 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal d3">
               {/* Sheet Metal */}
               <div className="commodity">
-                <div className="visual">
-                  <div className="badge">Sheet Metal</div>
-                  <SheetMetalVisualSvg />
-                </div>
+                <CommodityProcessCardVisual 
+                  commodityKey="sheetmetal" 
+                  fallbackSvg={<SheetMetalVisualSvg />}
+                  onOpenDeepDive={(info) => setDeepDiveInfo(info)}
+                />
                 <div className="body">
                   <h3>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -764,10 +956,11 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
 
               {/* Plastic */}
               <div className="commodity">
-                <div className="visual">
-                  <div className="badge">Plastic</div>
-                  <PlasticVisualSvg />
-                </div>
+                <CommodityProcessCardVisual 
+                  commodityKey="plastic" 
+                  fallbackSvg={<PlasticVisualSvg />}
+                  onOpenDeepDive={(info) => setDeepDiveInfo(info)}
+                />
                 <div className="body">
                   <h3>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -786,10 +979,11 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
 
               {/* Die Casting */}
               <div className="commodity">
-                <div className="visual">
-                  <div className="badge">Die Casting</div>
-                  <DieCastingVisualSvg />
-                </div>
+                <CommodityProcessCardVisual 
+                  commodityKey="diecasting" 
+                  fallbackSvg={<DieCastingVisualSvg />}
+                  onOpenDeepDive={(info) => setDeepDiveInfo(info)}
+                />
                 <div className="body">
                   <h3>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -807,10 +1001,11 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
 
               {/* Machining */}
               <div className="commodity">
-                <div className="visual">
-                  <div className="badge">Machining</div>
-                  <MachiningVisualSvg />
-                </div>
+                <CommodityProcessCardVisual 
+                  commodityKey="machining" 
+                  fallbackSvg={<MachiningVisualSvg />}
+                  onOpenDeepDive={(info) => setDeepDiveInfo(info)}
+                />
                 <div className="body">
                   <h3>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -830,10 +1025,11 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
 
               {/* Forging */}
               <div className="commodity">
-                <div className="visual">
-                  <div className="badge">Forging</div>
-                  <ForgingVisualSvg />
-                </div>
+                <CommodityProcessCardVisual 
+                  commodityKey="forging" 
+                  fallbackSvg={<ForgingVisualSvg />}
+                  onOpenDeepDive={(info) => setDeepDiveInfo(info)}
+                />
                 <div className="body">
                   <h3>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -851,10 +1047,11 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
 
               {/* Secondary Process */}
               <div className="commodity">
-                <div className="visual">
-                  <div className="badge">Secondary</div>
-                  <SecondaryVisualSvg />
-                </div>
+                <CommodityProcessCardVisual 
+                  commodityKey="secondary" 
+                  fallbackSvg={<SecondaryVisualSvg />}
+                  onOpenDeepDive={(info) => setDeepDiveInfo(info)}
+                />
                 <div className="body">
                   <h3>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -878,21 +1075,20 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
         </div>
       </section>
 
-      {/* ================= SLIDE 2 — COMPARE SCENARIOS ================= */}
+      {/* ================= SLIDE 2: COMPARE SCENARIOS ================= */}
       <section className={`view ${activeView === 'view-slide2' ? 'active' : ''}`} id="view-slide2">
         <div className="slide">
           <div className="slide-inner">
-            <div className="topbar reveal">
-              <button className="back-btn" onClick={() => showView('view-landing')}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
-                Cost Estimation
-              </button>
-              <div className="slide-tag">Slide 02 · Compare Scenarios</div>
-            </div>
+            <SlideNavHeader 
+              slideTag="Slide 02 · Compare Scenarios" 
+              onShowView={showView} 
+              activeView={activeView} 
+              onNavigate={onNavigate ? () => onNavigate(Page.CostEstimation) : undefined}
+            />
 
             <div className="reveal d1">
               <h1 className="title">Compare <span>Cost Scenarios</span> Before Kickoff</h1>
-              <p className="subtitle">Capture every mandatory input, grade part complexity with visual references, and align on sample requirements — before any commercial commitment.</p>
+              <p className="subtitle">Capture every mandatory input, grade part complexity with visual references, and align on sample requirements before any commercial commitment.</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -1108,21 +1304,20 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
         </div>
       </section>
 
-      {/* ================= SLIDE 3 — COST SIMULATOR ================= */}
+      {/* ================= SLIDE 3: COST SIMULATOR ================= */}
       <section className={`view ${activeView === 'view-slide3' ? 'active' : ''}`} id="view-slide3">
         <div className="slide">
           <div className="slide-inner">
-            <div className="topbar reveal">
-              <button className="back-btn" onClick={() => showView('view-landing')}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
-                Cost Estimation
-              </button>
-              <div className="slide-tag">Slide 03 · Cost Simulator</div>
-            </div>
+            <SlideNavHeader 
+              slideTag="Slide 03 · Cost Template" 
+              onShowView={showView} 
+              activeView={activeView} 
+              onNavigate={onNavigate ? () => onNavigate(Page.CostEstimation) : undefined}
+            />
 
             <div className="reveal d1">
               <h1 className="title">Interactive <span>Cost Build-Up</span> Report</h1>
-              <p className="subtitle">A detailed, auditable costing report — every rupee traceable from raw material to finished part, with part-level visibility.</p>
+              <p className="subtitle">A detailed, auditable costing report with every rupee traceable from raw material to finished part, full tooling specifications, and engineering description tools.</p>
             </div>
 
             {/* Commodity Selector */}
@@ -1163,20 +1358,20 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
               {/* Left Column: Part Hero & Detailed Build-Up */}
               <div className="left">
                 <div className="part-hero-container">
-                  {/* Part Visual Controls: CAD vs Real Photo Toggle & Physics Expander */}
+                  {/* Part Visual Controls: 3D CAD vs Real Workshop Part Photo */}
                   <div className="part-controls-bar">
                     <div className="part-view-toggle">
                       <button
                         className={`part-mode-btn ${partViewMode === 'cad' ? 'active' : ''}`}
                         onClick={() => setPartViewMode('cad')}
-                        title="View dimensional CAD technical blueprint matching screenshot"
+                        title="View dimensional CAD technical blueprint with exact dimensions"
                       >
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
                           <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
                           <line x1="12" y1="22.08" x2="12" y2="12"/>
                         </svg>
-                        3D CAD Drawing
+                        3D CAD Blueprint
                       </button>
                       <button
                         className={`part-mode-btn ${partViewMode === 'photo' ? 'active' : ''}`}
@@ -1187,20 +1382,13 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
                           <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
                           <circle cx="12" cy="13" r="4"/>
                         </svg>
-                        Real Part Photo
+                        Workshop Part Photo
                       </button>
                     </div>
 
-                    <button
-                      className="physics-toggle-btn"
-                      onClick={() => setShowPhysics(!showPhysics)}
-                      title="Toggle manufacturing physics and press calculations"
-                    >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
-                      </svg>
-                      {showPhysics ? 'Hide Physics' : 'Physics & Tooling Logic ▾'}
-                    </button>
+                    <div className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
+                      OEM Grade · {currentCommodity.material}
+                    </div>
                   </div>
 
                   {/* Main Part Hero Card */}
@@ -1224,131 +1412,8 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
                     </div>
                   </div>
 
-                  {/* Expandable Manufacturing Physics & Practical Sizing Panel */}
-                  {showPhysics && (
-                    <div className="physics-panel">
-                      <h4>
-                        <span>⚡ Process Physics & Machine Feasibility Calculation</span>
-                        <span style={{ color: currentCommodity.color, fontSize: '11px' }}>{currentCommodity.commodity}</span>
-                      </h4>
-                      {selectedCommodity === 'sheetmetal' ? (
-                        <div className="physics-grid">
-                          <div className="physics-stat">
-                            <div className="key">1. Cutting & Shearing Force</div>
-                            <div className="val">75.6 Tonnes</div>
-                            <div className="formula">F_cut = L × t × τ_shear = 926.5mm × 2.5mm × 320 N/mm² = 741.2 kN</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">2. Bending & Stripping Force</div>
-                            <div className="val">25.5 Tonnes (18T bend + 7.5T strip)</div>
-                            <div className="formula">2× 90° bends with R=2.5mm (1t) + 10% bottoming stripping reserve</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">3. Machine Tonnage Sized</div>
-                            <div className="val">110 Tonne Progressive Press</div>
-                            <div className="formula">Total 101.1 T required · 1.1x safety margin on 110T mechanical crank press</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">4. Strip Nesting & Scrap Physics</div>
-                            <div className="val">71.2% Strip Yield · 0.154 kg Scrap</div>
-                            <div className="formula">Developed blank 195 × 140 mm · Gross 0.534 kg · Scrap credit @ ₹28/kg = −₹4.31</div>
-                          </div>
-                        </div>
-                      ) : selectedCommodity === 'diecasting' ? (
-                        <div className="physics-grid">
-                          <div className="physics-stat">
-                            <div className="key">1. Projected Cavity Area</div>
-                            <div className="val">420 cm² (2-Cavity + Runners)</div>
-                            <div className="formula">A_proj = 2 × 160mm × 110mm + runner system = 42,000 mm²</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">2. Specific Metal Pressure</div>
-                            <div className="val">750 kg/cm² (73.5 MPa)</div>
-                            <div className="formula">P_spec for sound structural A380 die casting with internal pressure tightness</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">3. Locking Clamping Force</div>
-                            <div className="val">HPDC 400 Tonne Machine</div>
-                            <div className="formula">F_lock = (420 cm² × 750 kg/cm²) × 1.25 safety factor = 393.7 Tonnes</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">4. Thermal Cycle Time</div>
-                            <div className="val">38.0 sec / shot (189 shots/hr)</div>
-                            <div className="formula">Fill 25ms + Solidification 12s + Die open/eject/spray 25.8s</div>
-                          </div>
-                        </div>
-                      ) : selectedCommodity === 'plastic' ? (
-                        <div className="physics-grid">
-                          <div className="physics-stat">
-                            <div className="key">1. Projected Mold Area</div>
-                            <div className="val">265 cm² (Part + Cold Runner)</div>
-                            <div className="formula">180mm × 130mm parting profile + sprue & sub-gates</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">2. Cavity Pressure (ABS)</div>
-                            <div className="val">400 bar (40 MPa)</div>
-                            <div className="formula">P_cavity for engineering ABS injection with 2.0mm nominal wall</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">3. Tonnage Sizing</div>
-                            <div className="val">120 Tonne Injection Press</div>
-                            <div className="formula">F_clamp = (265 cm² × 400 bar) ÷ 1000 = 106 Tonnes + 15% safety</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">4. Cooling Physics</div>
-                            <div className="val">22.0 sec total cycle</div>
-                            <div className="formula">t_cool = (h² / π²·α) × ln(4/π · (T_melt - T_mold)/(T_eject - T_mold)) ≈ 14.2s</div>
-                          </div>
-                        </div>
-                      ) : selectedCommodity === 'machining' ? (
-                        <div className="physics-grid">
-                          <div className="physics-stat">
-                            <div className="key">1. Cutting Speed & RPM</div>
-                            <div className="val">Vc = 180 m/min · 1,910 RPM</div>
-                            <div className="formula">N = (1000 × Vc) / (π × D) = (1000 × 180) / (3.1415 × 30mm)</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">2. Material Removal Rate</div>
-                            <div className="val">MRR = 48.6 cm³/min</div>
-                            <div className="formula">MRR = Vc × doc (2.0mm) × feed (0.25 mm/rev) on EN8 steel</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">3. Machine Power Required</div>
-                            <div className="val">3.85 kW spindle draw</div>
-                            <div className="formula">P = (MRR × Kc) / (60 × 10³ × η) · Kc_EN8 = 2200 N/mm²</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">4. Surface Finish Geometry</div>
-                            <div className="val">Ra 0.8 μm (Cylindrical Ground)</div>
-                            <div className="formula">Turned Ra 3.2μm followed by precision centerless grinding on bearing seats</div>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="physics-grid">
-                          <div className="physics-stat">
-                            <div className="key">1. Forging Blow Energy</div>
-                            <div className="val">42.5 kJ Deformation Work</div>
-                            <div className="formula">W = V × σ_flow × ln(h0 / h1) · Hot forged EN19 alloy steel @ 1180°C</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">2. Flash Load & Tonnage</div>
-                            <div className="val">1600 Tonne Forging Press</div>
-                            <div className="formula">F_forge = A_projected × σ_flow × shape factor (6.5 for I-beam conrod)</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">3. Billet Weight & Flash Offal</div>
-                            <div className="val">2.35 kg Billet · 1.85 kg Finished</div>
-                            <div className="formula">21% flash gutter & scale loss (0.50 kg flash trimmed on 150T trim press)</div>
-                          </div>
-                          <div className="physics-stat">
-                            <div className="key">4. Heat Treatment Microstructure</div>
-                            <div className="val">28–32 HRC (Quenched & Tempered)</div>
-                            <div className="formula">Austenitized 860°C, polymer quench, tempered 580°C for high fatigue toughness</div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                  {/* Interactive Engineering Description & Tooling Suite Tool */}
+                  <EngineeringDescriptionTool commodity={currentCommodity} />
                 </div>
 
                 <div className="scroll-area">
@@ -1455,21 +1520,20 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
         </div>
       </section>
 
-      {/* ================= SLIDE 4 — CASTING LIFECYCLE (Service-based 4-Step) ================= */}
+      {/* ================= SLIDE 4: COSTING LIFECYCLE (Service-based 4-Step) ================= */}
       <section className={`view ${activeView === 'view-slide4' ? 'active' : ''}`} id="view-slide4">
         <div className="slide">
           <div className="slide-inner">
-            <div className="topbar reveal">
-              <button className="back-btn" onClick={() => showView('view-landing')}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
-                Cost Estimation
-              </button>
-              <div className="slide-tag">Slide 04 · Lifecycle</div>
-            </div>
+            <SlideNavHeader 
+              slideTag="Slide 04 · Cost Lifecycle" 
+              onShowView={showView} 
+              activeView={activeView} 
+              onNavigate={onNavigate ? () => onNavigate(Page.CostEstimation) : undefined}
+            />
 
             <div className="reveal d1">
-              <h1 className="title">Casting Lifecycle · <span>Part to Deliverable</span></h1>
-              <p className="subtitle">A focused, service-driven lifecycle — we receive the part, analyse it, build the cost with full quality alignment, and hand over a complete deliverable to the end customer.</p>
+              <h1 className="title">Costing Lifecycle · <span>Part to Deliverable</span></h1>
+              <p className="subtitle">A focused, service-driven lifecycle where we receive the part, analyze it, build the cost with full quality alignment, and hand over a complete deliverable to the end customer.</p>
             </div>
 
             <div className="workflow reveal d2">
@@ -1481,7 +1545,7 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
                   </div>
                   <h4>Kickoff</h4>
-                  <p>Receive the part from the customer — capture 2D/3D data, annual volume, region, material and quality expectations.</p>
+                  <p>Receive the part from the customer, capturing 2D/3D data, annual volume, region, material, and quality expectations.</p>
                   <div className="deliverable">
                     <b>Key Activities</b>
                     <ul>
@@ -1500,7 +1564,7 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
                   </div>
                   <h4>Feasibility Readiness</h4>
-                  <p>Validate if the part can be costed accurately — check process fit, supplier readiness, sample availability and quality gate.</p>
+                  <p>Validate whether the part can be costed accurately by checking process fit, supplier readiness, sample availability, and quality gates.</p>
                   <div className="deliverable">
                     <b>Key Activities</b>
                     <ul>
@@ -1512,14 +1576,14 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
                   </div>
                 </div>
 
-                {/* STEP 3: Casting Approach */}
+                {/* STEP 3: Costing Approach */}
                 <div className="wf-step">
                   <div className="num">3</div>
                   <div className="ico">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
                   </div>
-                  <h4>Casting Approach</h4>
-                  <p>Build the complete cost — material, primary process, secondary, overheads, quality, margin — with open-book transparency.</p>
+                  <h4>Costing Approach</h4>
+                  <p>Build the complete cost covering material, primary process, secondary finishing, overheads, quality, and margin with open-book transparency.</p>
                   <div className="deliverable">
                     <b>Key Activities</b>
                     <ul>
@@ -1538,7 +1602,7 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                   </div>
                   <h4>Deliverable</h4>
-                  <p>Hand over the complete costing report to the end customer — with quality alignment, assumptions and audit trail.</p>
+                  <p>Hand over the complete costing report to the end customer with full quality alignment, verified assumptions, and a transparent audit trail.</p>
                   <div className="deliverable">
                     <b>Key Activities</b>
                     <ul>
@@ -1557,17 +1621,17 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
               <div className="card">
                 <div className="text-xs uppercase tracking-widest mb-1" style={{ color: 'var(--accent)' }}>Service Model</div>
                 <div className="text-sm font-semibold mb-1">Part-In, Report-Out</div>
-                <div className="text-xs" style={{ color: 'var(--muted)' }}>We receive the part from the customer, run the complete costing exercise, and deliver a quality-aligned cost report back — no tooling, no production, pure costing service.</div>
+                <div className="text-xs" style={{ color: 'var(--muted)' }}>We receive the part from the customer, run the complete costing exercise, and deliver a quality-aligned cost report back. Pure costing service with zero tooling or production lock-in.</div>
               </div>
               <div className="card">
                 <div className="text-xs uppercase tracking-widest mb-1" style={{ color: 'var(--accent)' }}>Quality Alignment</div>
                 <div className="text-sm font-semibold mb-1">Quality-First Costing</div>
-                <div className="text-xs" style={{ color: 'var(--muted)' }}>Every cost head is validated against the customer's quality expectations — CMM, PPAP, FAI, SPC — so the final number reflects real-world deliverability.</div>
+                <div className="text-xs" style={{ color: 'var(--muted)' }}>Every cost head is validated against the customer's quality expectations (including CMM, PPAP, FAI, and SPC) so the final number reflects real-world deliverability.</div>
               </div>
               <div className="card">
                 <div className="text-xs uppercase tracking-widest mb-1" style={{ color: 'var(--accent)' }}>Transparency</div>
                 <div className="text-sm font-semibold mb-1">Open-Book Costing</div>
-                <div className="text-xs" style={{ color: 'var(--muted)' }}>Material, process, secondary, overheads and margin visible line-by-line — auditable, revisitable on volume change, and fully traceable to the part.</div>
+                <div className="text-xs" style={{ color: 'var(--muted)' }}>Material, process, secondary finishing, overheads, and margin visible line by line: auditable, revisitable on volume change, and fully traceable to the part.</div>
               </div>
             </div>
 
@@ -1576,7 +1640,7 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
               <div className="card accent flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div>
                   <div className="text-xs uppercase tracking-widest mb-1" style={{ color: 'var(--accent)' }}>Our Commitment</div>
-                  <div className="text-lg font-semibold">A trusted costing partner — delivering clarity, quality alignment and transparency to every end customer.</div>
+                  <div className="text-lg font-semibold">A trusted costing partner delivering clarity, quality alignment, and transparency to every end customer.</div>
                 </div>
                 <div className="flex gap-2">
                   <span className="pill s">Quality</span>
@@ -1589,6 +1653,12 @@ export const KickoffPresentationPage: React.FC<KickoffPresentationPageProps> = (
           </div>
         </div>
       </section>
+
+      {/* Manufacturing Process Physics & Logic Deep Dive Modal */}
+      <ProcessDeepDiveModal 
+        info={deepDiveInfo} 
+        onClose={() => setDeepDiveInfo(null)} 
+      />
     </div>
   );
 };

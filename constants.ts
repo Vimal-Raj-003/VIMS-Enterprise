@@ -11,12 +11,14 @@ export const COMPANY_CONTACT = {
 
 export const NAV_LINKS = [
   { name: Page.Home, path: '#home' },
+  { name: Page.HospitalManagement, path: '#hms-ecosystem' },
   { name: Page.About, path: '#about' },
   { name: Page.Contact, path: '#contact' }
 ];
 
-// Highlighted Top Two Core Enterprise Pillars
+// Highlighted Core Enterprise Products & Pillars
 export const PRIMARY_SERVICES = [
+  { name: Page.HospitalManagement, path: '#hms-ecosystem', badge: 'Flagship Healthcare Product' },
   { name: Page.AIAutomation, path: '#ai-automation', badge: 'Flagship AI' },
   { name: Page.CostEstimation, path: '#cost-estimation', badge: 'Engineering & Sourcing' }
 ];
@@ -38,8 +40,12 @@ export const SERVICE_PAGES = ALL_SERVICES;
 
 export const PAGE_META: Record<Page, { title: string; description: string }> = {
     [Page.Home]: {
-        title: 'VIMS – AI Automation, Should-Costing & Digital Growth Ecosystem',
-        description: 'VIMS empowers enterprises and manufacturers with autonomous AI workflows, scientific mechanical should-costing (Sheet Metal, Plastic, Die Casting, Machining), and end-to-end digital growth.'
+        title: 'VIMS – HMS Hospital Management, AI Automation & Engineering Costing Ecosystem',
+        description: 'VIMS delivers complete enterprise solutions: Futuristic Hospital Management System (HMS), autonomous AI agent workflows, and precision mechanical should-costing intelligence.'
+    },
+    [Page.HospitalManagement]: {
+        title: 'VIMS HMS – Complete Hospital Management System & Connected Healthcare Ecosystem',
+        description: 'Next-generation hospital management system: unified EMR/EHR, smart OPD/IPD queue, connected ICU telemetry, automated diagnostic PACS/LIS, cashless insurance pre-authorization, and ABDM/NABH compliance.'
     },
     [Page.AIAutomation]: {
         title: 'Enterprise AI Automation & Autonomous Agents | VIMS',

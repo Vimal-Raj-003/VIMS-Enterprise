@@ -8,8 +8,9 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
-  const quickLinks = [Page.Home, Page.About, Page.Contact];
+  const quickLinks = [Page.Home, Page.HospitalManagement, Page.About, Page.Contact];
   const services = [
+    Page.HospitalManagement,
     Page.AIAutomation,
     Page.CostEstimation,
     Page.LinkedInGrowth,

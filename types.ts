@@ -3,6 +3,7 @@ import React from 'react';
 
 export enum Page {
   Home = 'Home',
+  HospitalManagement = 'HMS Hospital Ecosystem',
   AIAutomation = 'AI Automation',
   CostEstimation = 'Cost Estimation & Sheet Costing',
   KickoffPresentation = 'Client Kickoff Deck',
