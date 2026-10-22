@@ -70,6 +70,30 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Privacy Policy
                 </a>
               </li>
+              <li>
+                <a
+                  href="/terms-of-service"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(Page.TermsOfService);
+                  }}
+                  className="block cursor-pointer text-sm text-slate-600 dark:text-slate-400 hover:text-cyan transform hover:translate-x-1 transition-all duration-300"
+                >
+                  Terms of Service
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/data-deletion"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(Page.DataDeletion);
+                  }}
+                  className="block cursor-pointer text-sm text-slate-600 dark:text-slate-400 hover:text-cyan transform hover:translate-x-1 transition-all duration-300"
+                >
+                  Data Deletion
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -121,6 +145,28 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               className="text-slate-400 hover:text-cyan transition-colors underline underline-offset-4 cursor-pointer"
             >
               Privacy Policy
+            </a>
+            <span className="hidden sm:inline text-slate-700">&bull;</span>
+            <a
+              href="/terms-of-service"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate(Page.TermsOfService);
+              }}
+              className="text-slate-400 hover:text-cyan transition-colors underline underline-offset-4 cursor-pointer"
+            >
+              Terms of Service
+            </a>
+            <span className="hidden sm:inline text-slate-700">&bull;</span>
+            <a
+              href="/data-deletion"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate(Page.DataDeletion);
+              }}
+              className="text-slate-400 hover:text-cyan transition-colors underline underline-offset-4 cursor-pointer"
+            >
+              Data Deletion
             </a>
           </div>
           <p className="text-xs text-slate-400 font-mono">Precision Engineering &bull; AI Automation &bull; Value Negotiation</p>

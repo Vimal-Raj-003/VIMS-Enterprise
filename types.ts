@@ -15,6 +15,8 @@ export enum Page {
   Contact = 'Contact',
   TeamProfile = 'Team Profile',
   PrivacyPolicy = 'Privacy Policy',
+  TermsOfService = 'Terms of Service',
+  DataDeletion = 'Data Deletion',
 }
 
 export interface ServiceCardProps {

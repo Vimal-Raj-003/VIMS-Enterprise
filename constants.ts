@@ -90,5 +90,13 @@ export const PAGE_META: Record<Page, { title: string; description: string }> = {
     [Page.PrivacyPolicy]: {
         title: 'Privacy Policy | VIMS Enterprise',
         description: 'Privacy Policy for VIMS Enterprise covering customer data collection, WhatsApp communication, marketing consent, AI voice agents, data security, and data deletion requests.'
+    },
+    [Page.TermsOfService]: {
+        title: 'Terms of Service | VIMS Enterprise',
+        description: 'Terms of Service for VIMS Enterprise covering website usage conditions, enterprise software and AI services, customer responsibilities, intellectual property, and liability limitations.'
+    },
+    [Page.DataDeletion]: {
+        title: 'Personal Data Deletion Instructions | VIMS Enterprise',
+        description: 'Step-by-step instructions on how to request deletion of personal data held by VIMS Enterprise across website inquiries, WhatsApp communications, CRM records, and AI voice interactions.'
     }
 };
