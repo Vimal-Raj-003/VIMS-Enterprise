@@ -86,5 +86,9 @@ export const PAGE_META: Record<Page, { title: string; description: string }> = {
     [Page.TeamProfile]: {
         title: 'Team Profile | VIMS',
         description: 'Meet the engineering and growth minds behind VIMS driving digital transformation, costing intelligence, and AI innovation.'
+    },
+    [Page.PrivacyPolicy]: {
+        title: 'Privacy Policy | VIMS Enterprise',
+        description: 'Privacy Policy for VIMS Enterprise covering customer data collection, WhatsApp communication, marketing consent, AI voice agents, data security, and data deletion requests.'
     }
 };

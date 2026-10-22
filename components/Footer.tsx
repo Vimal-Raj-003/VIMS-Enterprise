@@ -58,6 +58,18 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   <a onClick={() => onNavigate(page)} className="block cursor-pointer text-sm text-slate-600 dark:text-slate-400 hover:text-cyan transform hover:translate-x-1 transition-all duration-300">{page}</a>
                 </li>
               ))}
+              <li>
+                <a
+                  href="/privacy-policy"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate(Page.PrivacyPolicy);
+                  }}
+                  className="block cursor-pointer text-sm text-slate-600 dark:text-slate-400 hover:text-cyan transform hover:translate-x-1 transition-all duration-300"
+                >
+                  Privacy Policy
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -97,7 +109,20 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
 
         <div className="mt-12 border-t border-slate-200 dark:border-slate-800 pt-8 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-slate-500">&copy; {new Date().getFullYear()} VIMS Enterprise. All rights reserved.</p>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-slate-500">
+            <p>&copy; {new Date().getFullYear()} VIMS Enterprise. All rights reserved.</p>
+            <span className="hidden sm:inline text-slate-700">&bull;</span>
+            <a
+              href="/privacy-policy"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate(Page.PrivacyPolicy);
+              }}
+              className="text-slate-400 hover:text-cyan transition-colors underline underline-offset-4 cursor-pointer"
+            >
+              Privacy Policy
+            </a>
+          </div>
           <p className="text-xs text-slate-400 font-mono">Precision Engineering &bull; AI Automation &bull; Value Negotiation</p>
         </div>
       </div>

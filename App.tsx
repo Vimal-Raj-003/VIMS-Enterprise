@@ -14,6 +14,7 @@ import KickoffPresentationPage from './pages/KickoffPresentationPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import TeamProfilePage from './pages/TeamProfilePage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import { PAGE_META } from './constants';
 import FloatingBookNowButton from './components/FloatingBookNowButton';
 import CtaSection from './components/CtaSection';
@@ -25,12 +26,39 @@ import ScrollProgressBar from './components/ScrollProgressBar';
 
 // FIX: Removed React.FC type from component definition to resolve issue with 'children' prop being implicitly required.
 const App = () => {
-  const [activePage, setActivePage] = useState<Page>(Page.Home);
+  const [activePage, setActivePage] = useState<Page>(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+      if (path === '/privacy-policy' || window.location.hash === '#privacy-policy') {
+        return Page.PrivacyPolicy;
+      }
+    }
+    return Page.Home;
+  });
   const [selectedMemberId, setSelectedMemberId] = useState<string>('');
 
   const handleNavigate = useCallback((page: Page) => {
     setActivePage(page);
+    if (typeof window !== 'undefined') {
+      const targetPath = page === Page.PrivacyPolicy ? '/privacy-policy' : '/';
+      if (window.location.pathname !== targetPath) {
+        window.history.pushState({ page }, '', targetPath);
+      }
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+      if (path === '/privacy-policy' || window.location.hash === '#privacy-policy') {
+        setActivePage(Page.PrivacyPolicy);
+      } else {
+        setActivePage(Page.Home);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   const handleViewProfile = useCallback((memberId: string) => {
@@ -76,6 +104,8 @@ const App = () => {
         return <ContactPage />;
       case Page.TeamProfile:
         return <TeamProfilePage memberId={selectedMemberId} onBack={() => handleNavigate(Page.About)} />;
+      case Page.PrivacyPolicy:
+        return <PrivacyPolicyPage onNavigate={handleNavigate} />;
       default:
         return <HomePage onNavigate={handleNavigate} />;
     }
