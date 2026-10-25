@@ -413,10 +413,10 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
                     <div>
                       <p className="text-xs font-mono text-slate-400">General Business Contact Number</p>
                       <a
-                        href="tel:+918122259505"
+                        href="tel:+919940660868"
                         className="text-sm md:text-base font-semibold text-white hover:text-cyan transition-colors"
                       >
-                        +91 8122259505
+                        +91 9940660868
                       </a>
                     </div>
                   </div>

@@ -3,9 +3,9 @@ import { Page } from './types';
 
 export const COMPANY_CONTACT = {
   email: 'Vimal@vimsenterprise.com',
-  phone: '8122259505',
-  phoneFormatted: '+91 8122259505',
-  whatsappUrl: 'https://wa.me/918122259505',
+  phone: '9940660868',
+  phoneFormatted: '+91 9940660868',
+  whatsappUrl: 'https://wa.me/919940660868',
   bookingUrl: 'https://cal.com/vims-003/vims-enterprise'
 };
 
@@ -81,7 +81,7 @@ export const PAGE_META: Record<Page, { title: string; description: string }> = {
     },
     [Page.Contact]: {
         title: 'Contact Us & Book a Strategy Call | VIMS',
-        description: 'Reach out to VIMS at Vimal@vimsenterprise.com or +91 8122259505 to discuss AI automation, mechanical should-costing, or digital growth.'
+        description: 'Reach out to VIMS at Vimal@vimsenterprise.com or +91 9940660868 to discuss AI automation, mechanical should-costing, or digital growth.'
     },
     [Page.TeamProfile]: {
         title: 'Team Profile | VIMS',
