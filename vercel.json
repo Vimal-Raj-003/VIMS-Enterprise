@@ -1,7 +1,35 @@
 {
   "rewrites": [
     {
-      "source": "/((?!api/|assets/|images/|.*\\..*).*)",
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "ads\\\\.vimsenterprise\\\\.com"
+        }
+      ],
+      "destination": "/ads/"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "ads\\\\.vimsenterprise\\\\.com"
+        }
+      ],
+      "destination": "/ads/index.html"
+    },
+    {
+      "source": "/ads",
+      "destination": "/ads/index.html"
+    },
+    {
+      "source": "/ads/",
+      "destination": "/ads/index.html"
+    },
+    {
+      "source": "/((?!api/|ads/|assets/|images/|.*\\\\..*).*)",
       "destination": "/index.html"
     }
   ]

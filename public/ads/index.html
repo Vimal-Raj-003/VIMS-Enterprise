@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIMS Enterprise — Meta Ads Performance Marketing Dashboard</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+  <!-- ====================================================================
+       1. AUTHENTICATION & FIRST-TIME ADMIN SETUP SCREEN
+       (No hardcoded shared credentials; binds locally to 127.0.0.1)
+       ==================================================================== -->
+  <div id="authScreen" class="auth-screen hidden">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="auth-logo-badge">VIMS</div>
+        <div>
+          <div style="font-weight: 800; font-size: 15px; color: #0f172a;">VIMS Enterprise</div>
+          <div style="font-size: 11.5px; color: #64748b;">Private Meta Ads Performance Dashboard</div>
+        </div>
+      </div>
+
+      <h2 id="authHeading" class="auth-title">Create Local Admin Account</h2>
+      <p id="authSubheading" class="auth-subtitle">
+        Set your private username and password for this local computer. Credentials are encrypted with scrypt and stored locally.
+      </p>
+
+      <div class="tanglish-box" style="margin-bottom: 16px;">
+        <strong>Tamil / Tanglish Guide:</strong> Indha dashboard ungal computer-il mattum private-aa run aagudhu. Mudhal murai use pannumbodhu ungalukku viruppamana Username matrum Password kuduthu "Create Admin &amp; Login" click pannunga.
+      </div>
+
+      <form id="authForm" style="display: flex; flex-direction: column; gap: 13px;">
+        <div id="displayNameWrap" class="filter-field">
+          <label for="authDisplayName">Your Name / Team Role</label>
+          <input id="authDisplayName" type="text" class="input" placeholder="e.g., Vimal Raj (VIMS Admin)" value="Vimal Raj" />
+        </div>
+        <div class="filter-field">
+          <label for="authUsername">Username</label>
+          <input id="authUsername" type="text" class="input" placeholder="e.g., vimsadmin" required autocomplete="username" />
+        </div>
+        <div class="filter-field">
+          <label for="authPassword">Password (min 6 characters)</label>
+          <input id="authPassword" type="password" class="input" placeholder="••••••••" required autocomplete="current-password" />
+        </div>
+        <div id="authErrorMsg" style="color: #dc2626; font-size: 12.5px; font-weight: 600;" class="hidden"></div>
+        <button id="authSubmitBtn" type="submit" class="btn btn-primary" style="height: 40px; margin-top: 4px;">
+          Create Admin &amp; Open Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       2. MAIN APPLICATION VIEW (Visible only when authenticated)
+       ==================================================================== -->
+  <div id="appShell" class="hidden">
+
+    <!-- Dynamic Data Source / Blocker Banner -->
+    <div id="sourceBanner" class="source-banner hidden"></div>
+
+    <!-- Top Executive Header (Matches Screenshot 1 & 2: ∞ Meta Ads Campaign Results Dashboard + BEE Account Switcher) -->
+    <header class="top-header">
+      <div class="top-header-row">
+        <div class="brand-group">
+          <span class="meta-infinity-logo">∞</span>
+          <div class="brand-titles">
+            <h1>Meta Ads Campaign Results Dashboard</h1>
+          </div>
+
+          <!-- BEE Account Switcher Pill ([V] # BEE (1717025589122647) ▾) -->
+          <div class="bee-account-pill">
+            <span class="bee-v-badge">V</span>
+            <span style="font-size: 12px; color: #94a3b8; font-weight: 700;">#</span>
+            <select id="mainBeeAccountSelect" class="bee-select">
+              <option value="act_1717025589122647">BEE (1717025589122647)</option>
+            </select>
+          </div>
+
+          <div class="opportunity-pill">
+            <span class="opportunity-ring">82</span>
+            <span>Opportunity score</span>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <!-- Reporting Period Dropdown (Matches Screenshot: Last 30 Days: 23 Oct – 21 Nov 2026 ▾) -->
+          <select id="topDatePresetSelect" class="select" style="font-weight: 600; min-width: 245px;">
+            <option value="last_30d" selected>Last 30 Days: 23 Oct – 21 Nov 2026</option>
+            <option value="today">Today (1-Day Live View)</option>
+            <option value="yesterday">Yesterday</option>
+            <option value="last_7d">Last 7 Days</option>
+            <option value="this_month">This Month (Nov 2026)</option>
+          </select>
+
+          <button id="btnRefreshSync" class="btn btn-primary" type="button">
+            ↻ Sync
+          </button>
+          <button id="btnDownloadExcel" class="btn btn-success" type="button">
+            ⬇ Excel (.xlsx)
+          </button>
+          <button id="btnOpenMetaSetup" class="btn btn-ghost-dark" type="button" title="Meta API Settings">
+            ⚙ Meta Auth
+          </button>
+          <button id="btnOpenUploadModal" class="btn btn-ghost-dark" type="button" title="Upload CSV/XLSX">
+            ↑ Upload
+          </button>
+        </div>
+      </div>
+
+      <!-- Hidden Legacy Header/Filter Elements Kept for Full JS Compatibility -->
+      <div class="hidden">
+        <span id="hdrAccountName"></span>
+        <span id="hdrPageName"></span>
+        <span id="hdrCurrencyTz"></span>
+        <span id="hdrConnStatus"></span>
+        <span id="hdrLastSync"></span>
+        <select id="topAdAccountSelect"></select>
+        <select id="dataSourceSelect"><option value="meta_api">meta_api</option><option value="uploaded_report">uploaded_report</option><option value="demo_mode">demo_mode</option></select>
+        <button id="btnLogout" type="button"></button>
+        <div id="presetPills">
+          <button type="button" class="preset-pill" data-preset="today"></button>
+          <button type="button" class="preset-pill active" data-preset="last_30d"></button>
+        </div>
+        <div id="customDateWrap"><input id="filterStartDate" type="date" /><input id="filterEndDate" type="date" /><button id="btnApplyCustomDates" type="button"></button></div>
+        <select id="filterPlatform"><option value="all">all</option></select>
+        <select id="filterStatus"><option value="ALL">ALL</option><option value="ACTIVE">ACTIVE</option><option value="PAUSED">PAUSED</option></select>
+        <select id="filterCampaign"><option value="">All</option></select>
+        <select id="filterAd"><option value="">All</option></select>
+        <button id="btnResetFilters" type="button"></button>
+        <span id="ctxDateWindow"></span><span id="ctxPrevWindow"></span><span id="ctxAttribution"></span><span id="ctxCoverageNote"></span>
+      </div>
+    </header>
+
+    <!-- Main Single-Page Executive Container -->
+    <main class="main-container">
+
+      <!-- ==================================================================
+           ROW 1: 5 BIG EXECUTIVE KPI CARDS (Matches Screenshot 1 Layout)
+           ================================================================== -->
+      <section class="exec-kpi-row">
+        <!-- Card 1: Total Spend (1-Month) & 1-Day Spend -->
+        <div class="exec-kpi-card">
+          <div class="exec-kpi-title">Total Spend (30 Days):</div>
+          <div id="kpiPeriodSpend" class="exec-kpi-big">₹16,485.76</div>
+          <div class="exec-kpi-sub amber">
+            (▲ 1-Day Today Spend: <span id="kpiTodaySpend">₹1,953.66</span>)
+          </div>
+        </div>
+
+        <!-- Card 2: Morning Budget -> Evening Remaining Balance -->
+        <div class="exec-kpi-card">
+          <div class="exec-kpi-title">
+            Evening Balance (Morning − Today):
+            <button type="button" onclick="promptMorningBudget()" style="border:none;background:rgba(24,119,242,0.25);color:#60a5fa;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:4px;cursor:pointer;margin-left:4px;">✏️ Edit</button>
+          </div>
+          <div id="topEveningBalanceVal" class="exec-kpi-big">₹7,839.24</div>
+          <div id="topEveningBalanceCalc" class="exec-kpi-sub">
+            (Morning <span id="topMorningBudgetVal">₹9,792.90</span> − Today ₹1,953.66)
+          </div>
+        </div>
+
+        <!-- Card 3: Impressions & Reach -->
+        <div class="exec-kpi-card">
+          <div class="exec-kpi-title">Impressions:</div>
+          <div id="kpiPeriodImpressions" class="exec-kpi-big">127,326</div>
+          <div class="exec-kpi-sub">
+            (▲ Reach: <span id="kpiPeriodReach">105,778</span> • <span id="kpiTodayLeadsSub">1-Day: 31,868</span>)
+          </div>
+        </div>
+
+        <!-- Card 4: Link Clicks -->
+        <div class="exec-kpi-card">
+          <div class="exec-kpi-title">Link Clicks:</div>
+          <div id="kpiPeriodLinkClicks" class="exec-kpi-big">1,412</div>
+          <div id="kpiPeriodCtrCpcSub" class="exec-kpi-sub">(▲ CTR: 1.11% • CPC: ₹11.68)</div>
+        </div>
+
+        <!-- Card 5: Results (Leads & CPL) -->
+        <div class="exec-kpi-card">
+          <div class="exec-kpi-title">Results (Leads):</div>
+          <div class="exec-kpi-big"><span id="kpiPeriodFormLeads">62</span> Leads</div>
+          <div class="exec-kpi-sub">
+            (▲ CPL: <span id="kpiPeriodCpl">₹265.90</span> • <span id="kpiActiveCampaigns">8</span> Active Ads)
+          </div>
+        </div>
+
+        <!-- Hidden legacy KPI spans -->
+        <div class="hidden">
+          <span id="topMorningBudgetSub"></span>
+          <span id="kpiTodayDateTag"></span>
+          <span id="kpiTotalCampaignsSub"></span>
+          <span id="kpiActiveAds"></span>
+          <span id="kpiTotalAdsSub"></span>
+          <span id="kpiPeriodSpendDelta"></span>
+          <span id="kpiPeriodReachNote"></span>
+          <span id="kpiPeriodLeadsDelta"></span>
+          <span id="kpiPeriodCplDelta"></span>
+          <span id="kpiPlannedRemaining"></span>
+          <span id="kpiPlannedSub"></span>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           ROW 2: 2 SIDE-BY-SIDE VISUAL CHARTS (Matches Screenshot 1 Layout)
+           ================================================================== -->
+      <section class="exec-charts-row">
+        <!-- Left Chart: Daily Spend vs. Results / Reach Trend -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <span class="chart-title">Daily Spend vs. Results Trend</span>
+            <span style="font-size: 11.5px; color: #94a3b8;">1-Day &amp; 30-Day Progression</span>
+          </div>
+          <div class="chart-subtitle">Daily Spend within period's budget</div>
+          <div id="chartSpendWrap" class="chart-svg-wrap"></div>
+        </div>
+
+        <!-- Right Chart: Performance by Campaign (Spend & Results Horizontal Bar Chart) -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <span class="chart-title">Performance by Campaign (Spend &amp; Results)</span>
+            <span style="font-size: 11.5px; color: #94a3b8;">BEE (1717025589122647)</span>
+          </div>
+          <div class="chart-subtitle">Campaign Spend (₹) vs. Reach &amp; Leads Efficiency</div>
+          <div id="chartCampaignBarsWrap" class="chart-svg-wrap"></div>
+        </div>
+
+        <!-- Hidden secondary chart containers -->
+        <div class="hidden">
+          <span id="chartComparisonSubtitle"></span>
+          <input id="togglePrevComparison" type="checkbox" checked />
+          <div id="chartLeadsWrap"></div>
+          <div id="chartCplWrap"></div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           ROW 3: CAMPAIGN BREAKDOWN TABLE (Matches Screenshot 1 & 2 Layout)
+           ================================================================== -->
+      <section class="card-panel">
+        <div class="breakdown-toolbar">
+          <div class="folder-tabs">
+            <button id="tabBtnCampaigns" type="button" class="tab-btn active" onclick="switchMainViewTab('campaigns')">
+              🟦 Campaigns (<span id="countCampaignsTab">8</span>)
+            </button>
+            <button id="tabBtnAdsets" type="button" class="tab-btn" onclick="switchMainViewTab('adsets')">
+              ⊞ Ad sets (<span id="countAdsetsTab">8</span>)
+            </button>
+            <button id="tabBtnAds" type="button" class="tab-btn" onclick="switchMainViewTab('ads')">
+              ▣ Ads (<span id="countAdsTab">8</span>)
+            </button>
+            <button id="tabBtnLeads" type="button" class="tab-btn" onclick="switchMainViewTab('leads')">
+              👥 Customer Leads (<span id="countLeadsTab">105</span>)
+            </button>
+          </div>
+
+          <div class="quick-pills">
+            <button type="button" class="quick-pill active" id="pillAllAds" onclick="applyQuickDeliveryFilter('ALL')">📁 All ads</button>
+            <button type="button" class="quick-pill" id="pillHadDelivery" onclick="applyQuickDeliveryFilter('DELIVERY')">✉️ Had delivery</button>
+            <button type="button" class="quick-pill" id="pillActiveAds" onclick="applyQuickDeliveryFilter('ACTIVE')">🚀 Active ads</button>
+            <input id="filterSearch" type="search" class="input btn-sm" placeholder="Search campaign or ad..." style="width: 195px;" />
+          </div>
+        </div>
+
+        <!-- TAB 1: CAMPAIGNS BREAKDOWN TABLE (Exact Columns from Screenshots 1 & 2) -->
+        <div id="campaignsTableWrap" class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 68px;">Off / On</th>
+                <th data-sort-camps="name">Campaign Name ⇅</th>
+                <th>Delivery</th>
+                <th>Actions</th>
+                <th data-sort-camps="dailyBudget" class="num">Budget &amp; 1-Day Spend</th>
+                <th data-sort-camps="spend" class="num">Spend (₹) ⇅</th>
+                <th data-sort-camps="impressions" class="num">Impressions ⇅</th>
+                <th data-sort-camps="reach" class="num">Reach ⇅</th>
+                <th class="num">CPM (₹)</th>
+                <th data-sort-camps="linkClicks" class="num">Link Clicks</th>
+                <th data-sort-camps="formLeads" class="num">Results ⇅</th>
+                <th data-sort-camps="cpl" class="num">Cost per result ⇅</th>
+              </tr>
+            </thead>
+            <tbody id="campaignsTableBody"></tbody>
+            <tfoot id="campaignsTableFoot"></tfoot>
+          </table>
+        </div>
+
+        <!-- TAB 2: AD SETS TABLE -->
+        <div id="adsetsTableWrap" class="table-scroll hidden">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 68px;">Off / On</th>
+                <th>Ad Set Name</th>
+                <th>Campaign</th>
+                <th>Delivery</th>
+                <th class="num">Daily Budget</th>
+                <th class="num">1-Day Spend</th>
+                <th class="num">Spend (₹)</th>
+                <th class="num">Impressions</th>
+                <th class="num">Reach</th>
+                <th class="num">Results</th>
+                <th>Ends</th>
+              </tr>
+            </thead>
+            <tbody id="adsetsTableBody"></tbody>
+            <tfoot id="adsetsTableFoot"></tfoot>
+          </table>
+        </div>
+
+        <!-- TAB 3: INDIVIDUAL ADS TABLE -->
+        <div id="adsTableWrap" class="table-scroll hidden">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 68px;">Off / On</th>
+                <th data-sort-ads="name">Ad Name &amp; Creative Preview</th>
+                <th data-sort-ads="campaignName">Campaign / Ad Set</th>
+                <th data-sort-ads="todaySpend" class="num">1-Day Spend &amp; Reach</th>
+                <th data-sort-ads="spend" class="num">Spend (₹) ▾</th>
+                <th data-sort-ads="impressions" class="num">Impressions</th>
+                <th data-sort-ads="reach" class="num">Reach</th>
+                <th data-sort-ads="linkClicks" class="num">Link Clicks (CTR)</th>
+                <th data-sort-ads="formLeads" class="num">Results</th>
+                <th data-sort-ads="cpl" class="num">Cost per result</th>
+                <th>Ends</th>
+              </tr>
+            </thead>
+            <tbody id="adsTableBody"></tbody>
+            <tfoot id="adsTableFoot"></tfoot>
+          </table>
+        </div>
+
+        <!-- TAB 4: CUSTOMER LEADS & FOLLOW-UPS TABLE (Inside the same unified panel!) -->
+        <div id="mainLeadsSectionWrap" class="hidden">
+          <div class="reconcile-grid">
+            <div class="reconcile-box">
+              <h4>1. Leads Reported in Ad Metrics</h4>
+              <div id="recAdMetricLeads" class="reconcile-val">62</div>
+              <div class="reconcile-sub">Counted by ad interaction date</div>
+            </div>
+            <div class="reconcile-box">
+              <h4>2. Retrieved Customer Lead Contacts</h4>
+              <div id="recRetrievedLeads" class="reconcile-val">105</div>
+              <div id="recDiscrepancyNote" class="reconcile-sub">Synced from vims2023@gmail.com Meta Lead Ads</div>
+            </div>
+            <div class="reconcile-box" style="display:flex;align-items:center;justify-content:space-between;">
+              <div>
+                <h4>3. Team Qualified &amp; Follow-up Filter</h4>
+                <div id="recQualifiedLeads" class="reconcile-val">15 Qualified</div>
+                <div id="recRevenueSub" class="reconcile-sub"></div>
+              </div>
+              <select id="leadStatusFilter" class="select btn-sm">
+                <option value="ALL">All Statuses (105)</option>
+                <option value="New">New</option>
+                <option value="Contacted">Contacted</option>
+                <option value="Interested">Interested</option>
+                <option value="Demo Scheduled">Demo Scheduled</option>
+                <option value="Won">Won</option>
+                <option value="Lost">Lost</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Customer Name &amp; Contact</th>
+                  <th>Campaign &amp; Form</th>
+                  <th>Details &amp; Call Status</th>
+                  <th>Follow-up Status</th>
+                  <th>Assigned Person</th>
+                  <th>Next Date</th>
+                  <th>Notes &amp; Save</th>
+                </tr>
+              </thead>
+              <tbody id="leadsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hidden Legacy Financial & Recommendations Containers for Compatibility -->
+      <div id="mainChartsAndFinancialsWrap" class="hidden">
+        <span id="finMetaDailyBudget"></span><span id="finMetaLifetimeBudget"></span><span id="finMetaActiveCampCount"></span>
+        <span id="finActualTodaySpend"></span><span id="finActualPeriodSpend"></span><span id="finActualLifetimeSpend"></span>
+        <span id="finPlanName"></span><span id="finPlanAmount"></span><span id="finPlanActualSpend"></span><span id="finPlanRemaining"></span><span id="finPlanStatusNote"></span>
+        <span id="finVerifiedAvailableFunds"></span><span id="finVerifiedAmountOwed"></span><span id="finFundingSource"></span><span id="finBillingVerificationNote"></span>
+        <button id="btnOpenBudgetModal" type="button"></button>
+        <button id="btnOpenTargetsModal" type="button"></button>
+        <div id="attentionContainer"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ====================================================================
+       3. AD CREATIVE & DAILY BREAKDOWN DRAWER (Opens when clicking any Ad)
+       ==================================================================== -->
+  <div id="adDetailDrawer" class="drawer-backdrop hidden">
+    <div class="drawer-panel">
+      <div class="modal-header">
+        <div>
+          <h3 id="drawerAdName">Ad Creative &amp; Detailed Performance</h3>
+          <div id="drawerAdMeta" style="font-size: 12px; color: #64748b;"></div>
+        </div>
+        <button id="btnCloseAdDrawer" type="button" class="btn btn-outline btn-sm">✕ Close</button>
+      </div>
+      <div id="drawerAdBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       4. META ACCOUNT CONNECTION & ASSET SELECTION MODAL
+       ==================================================================== -->
+  <div id="metaSetupModal" class="modal-backdrop hidden">
+    <div class="modal-panel" style="max-width: 840px;">
+      <div class="modal-header">
+        <div>
+          <h3>Official Meta Authorization &amp; Permission Wizard — vims2023@gmail.com</h3>
+          <div style="font-size: 12px; color: #64748b;">Connect your Facebook &amp; Meta Ads Manager account associated with <strong>vims2023@gmail.com</strong> (Read-Only Access)</div>
+        </div>
+        <button id="btnCloseMetaModal" type="button" class="btn btn-outline btn-sm">✕ Close</button>
+      </div>
+      <div class="modal-body">
+
+        <!-- Target Account Identity & Live Permission Checklist -->
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px;">
+            <div style="font-size: 13px;">
+              <strong>Target Meta Account:</strong> <span style="color: #1d4ed8; font-weight: 700;">vims2023@gmail.com</span>
+              <span id="metaVerifiedIdentityBadge" style="margin-left: 8px; font-size: 12px; color: #64748b;">(Not authorized yet)</span>
+            </div>
+            <div style="font-size: 11.5px; color: #475569;">
+              OAuth Callback URI: <code id="metaRedirectUriCode" style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px; user-select: all;">http://127.0.0.1:3400/api/meta/oauth-callback</code>
+            </div>
+          </div>
+
+          <div style="font-size: 12px; color: #334155;">
+            <strong>Required Permissions Checklist (Read + ON/OFF Ad Toggle):</strong>
+            <div id="metaPermissionsChecklist" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;">
+              <span class="badge badge-paused">ads_read</span>
+              <span class="badge badge-paused">ads_management (ON/OFF Switch)</span>
+              <span class="badge badge-paused">leads_retrieval</span>
+              <span class="badge badge-paused">pages_show_list</span>
+              <span class="badge badge-paused">pages_read_engagement</span>
+              <span class="badge badge-archived">business_management (All N Accounts)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tanglish-box">
+          <strong>Step-by-Step Permission Guide (Tamil / Tanglish — vims2023@gmail.com):</strong><br/>
+          <strong>Method A — Fastest 2-Minute Setup (Graph API Explorer / System User Token):</strong><br/>
+          1. Ungal browser-il <strong>vims2023@gmail.com</strong> Facebook account-il login panni <a href="https://developers.facebook.com/tools/explorer/" target="_blank" rel="noopener" style="font-weight:700;text-decoration:underline;">Meta Graph API Explorer</a> (alladhu <a href="https://business.facebook.com/settings/system-users" target="_blank" rel="noopener" style="font-weight:700;text-decoration:underline;">Meta Business Settings → System Users</a>) open pannunga.<br/>
+          2. Valadhu pakkam <em>"Permissions"</em> dropdown-il indha 4 permissions-ai add pannunga: <code>ads_read</code>, <code>leads_retrieval</code>, <code>pages_show_list</code>, <code>pages_read_engagement</code> (matrum <code>business_management</code>).<br/>
+          3. <strong>"Generate Access Token"</strong> click panni Facebook popup-il ungal VIMS Business, Ad Account matrum Facebook Page-ai tick panni Allow kudunga.<br/>
+          4. Andha Access Token-ai copy panni keezhe paste panni <strong>"Verify Token &amp; Discover Ad Accounts / Pages"</strong> click pannunga. (App ID &amp; Secret kuduthaal dashboard automatic-aa 60-day token-aa upgrade pannikkum).<br/><br/>
+          <strong>Method B — One-Click Browser OAuth Dialog:</strong><br/>
+          Ungal Meta App Settings → <em>Facebook Login → Valid OAuth Redirect URIs</em>-il <code>http://127.0.0.1:3400/api/meta/oauth-callback</code> add pannirundhaal, App ID &amp; App Secret enter panni <strong>"Launch Meta OAuth Dialog"</strong> click pannunga.
+        </div>
+
+        <div id="metaModalBlockerBox" class="source-banner blocked hidden" style="border-radius: 8px;"></div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="filter-field">
+            <label for="metaAppIdInput">Meta App ID (For OAuth Dialog or 60-Day Long-Lived Token Exchange)</label>
+            <input id="metaAppIdInput" type="text" class="input" placeholder="e.g., 123456789012345" />
+          </div>
+          <div class="filter-field">
+            <label for="metaAppSecretInput">Meta App Secret (Encrypted at rest on backend)</label>
+            <input id="metaAppSecretInput" type="password" class="input" placeholder="Paste App Secret (optional for token, required for OAuth)" />
+          </div>
+        </div>
+
+        <div class="filter-field">
+          <label for="metaAccessTokenInput">Meta Graph API Access Token (Generated while logged into vims2023@gmail.com)</label>
+          <input id="metaAccessTokenInput" type="password" class="input" placeholder="Paste EAA... access token here (never paste your Facebook password or OTP)" />
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+          <button id="btnConnectMetaToken" type="button" class="btn btn-primary">
+            Verify Token &amp; Discover Ad Accounts / Pages
+          </button>
+          <button id="btnLaunchMetaOAuth" type="button" class="btn btn-outline">
+            Launch Official Meta OAuth Dialog (vims2023@gmail.com)
+          </button>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #e2e8f0;" />
+
+        <h4 style="font-size: 14px; font-weight: 700;">Select Active Business, Ad Account &amp; Facebook Pages</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="filter-field">
+            <label for="metaSelectBusiness">Business Portfolio</label>
+            <select id="metaSelectBusiness" class="select">
+              <option value="">-- Discover assets first --</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="metaSelectAdAccount">Meta Ad Account</label>
+            <select id="metaSelectAdAccount" class="select">
+              <option value="">-- Discover assets first --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-field">
+          <label>Connected Facebook Pages (For Instant Form Lead Retrieval)</label>
+          <div id="metaPagesCheckboxes" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px; max-height: 120px; overflow-y: auto; font-size: 12.5px;">
+            No pages discovered yet.
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="filter-field">
+            <label for="metaAutoSyncMinutes">Automatic Background Sync Interval (While Local App Runs)</label>
+            <select id="metaAutoSyncMinutes" class="select">
+              <option value="15">Every 15 Minutes (Recommended)</option>
+              <option value="30">Every 30 Minutes</option>
+              <option value="60">Every 60 Minutes</option>
+              <option value="0">Manual Refresh Only</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="metaLookbackDays">Historical Sync / Backfill Window</label>
+            <select id="metaLookbackDays" class="select">
+              <option value="30">Last 30 Days (Fast Refresh)</option>
+              <option value="90" selected>Last 90 Days (Recommended)</option>
+              <option value="365">Last 365 Days (Full Year Backfill)</option>
+              <option value="1095">Maximum Meta History (37 Months)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="metaSetupFeedback" style="font-size: 12.5px; font-weight: 600;"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="btnSaveAssetSelection" type="button" class="btn btn-primary">Save Selection &amp; Sync All Campaigns / Ads / Leads Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       5. REPORT UPLOAD (CSV / XLSX) WITH COLUMN MAPPING PREVIEW MODAL
+       ==================================================================== -->
+  <div id="uploadReportModal" class="modal-backdrop hidden">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h3>Upload Meta Ads Manager Report (CSV or .XLSX)</h3>
+        <button id="btnCloseUploadModal" type="button" class="btn btn-outline btn-sm">✕ Close</button>
+      </div>
+      <div class="modal-body">
+        <div class="tanglish-box">
+          <strong>Tamil / Tanglish Guide:</strong> Meta Ads Manager-il irundhu export panna CSV alladhu Excel (.xlsx) file-ai upload pannunga. Column Mapping preview verify panniyadhum import pannalam. Idhu <em>"Uploaded Reports"</em> data source-il thaniyaaga save aagum (live API data-vudan silent-aa mix aagadhu).
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="filter-field">
+            <label for="uploadReportType">Report Type</label>
+            <select id="uploadReportType" class="select">
+              <option value="auto">Auto-Detect (Ads Performance or Leads)</option>
+              <option value="performance">Campaign / Ad Daily Performance Report</option>
+              <option value="leads">Lead Form Submissions Export</option>
+            </select>
+          </div>
+          <div class="filter-field">
+            <label for="uploadFileInput">Select .CSV or .XLSX File</label>
+            <input id="uploadFileInput" type="file" accept=".csv,.xlsx,.tsv" class="input" style="padding-top: 5px;" />
+          </div>
+        </div>
+
+        <div id="uploadPreviewSection" class="hidden" style="display: flex; flex-direction: column; gap: 12px;">
+          <div id="uploadWarningsBox" style="font-size: 12.5px; color: #b45309; background: #fffbeb; padding: 10px; border-radius: 6px; border: 1px solid #fde68a;" class="hidden"></div>
+
+          <h4 style="font-size: 13.5px; font-weight: 700;">Column Mapping Preview (Verify before importing)</h4>
+          <div id="uploadMappingGrid" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0;"></div>
+
+          <h4 style="font-size: 13.5px; font-weight: 700;">First 5 Sample Rows</h4>
+          <div id="uploadSampleTableWrap" class="table-scroll" style="max-height: 180px; border: 1px solid #e2e8f0; border-radius: 6px;"></div>
+        </div>
+
+        <div id="uploadFeedbackMsg" style="font-size: 12.5px; font-weight: 600;"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="btnCommitUpload" type="button" class="btn btn-primary" disabled>
+          Import &amp; View Uploaded Report
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       6. PLANNED BUDGET MANAGER MODAL (Section 4)
+       ==================================================================== -->
+  <div id="budgetModal" class="modal-backdrop hidden">
+    <div class="modal-panel" style="max-width: 640px;">
+      <div class="modal-header">
+        <h3>Manage Planned Advertising Spending Plan</h3>
+        <button id="btnCloseBudgetModal" type="button" class="btn btn-outline btn-sm">✕ Close</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 12.5px; color: #475569;">
+          Enter your internal spending plan for a specific period and scope. The dashboard calculates remaining planned budget by subtracting actual reported ad spend for that exact same scope and date range.
+        </p>
+
+        <form id="budgetForm" style="display: flex; flex-direction: column; gap: 12px;">
+          <div class="filter-field">
+            <label for="planNameInput">Plan Label</label>
+            <input id="planNameInput" type="text" class="input" placeholder="e.g., November 2026 Hospital & Academy Lead Budget" required />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="filter-field">
+              <label for="planScopeType">Budget Scope</label>
+              <select id="planScopeType" class="select">
+                <option value="account">All Campaigns (Account-Wide)</option>
+                <option value="campaign">Specific Campaign Only</option>
+              </select>
+            </div>
+            <div class="filter-field">
+              <label for="planScopeCampaign">Target Campaign (if Campaign Scope)</label>
+              <select id="planScopeCampaign" class="select" disabled>
+                <option value="">All Campaigns</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+            <div class="filter-field">
+              <label for="planStartDate">Start Date</label>
+              <input id="planStartDate" type="date" class="input" required />
+            </div>
+            <div class="filter-field">
+              <label for="planEndDate">End Date</label>
+              <input id="planEndDate" type="date" class="input" required />
+            </div>
+            <div class="filter-field">
+              <label for="planAmountInput">Planned Budget Amount</label>
+              <input id="planAmountInput" type="number" step="0.01" min="1" class="input" placeholder="e.g., 75000" required />
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="align-self: flex-start;">Save Planned Budget</button>
+        </form>
+
+        <hr style="border: none; border-top: 1px solid #e2e8f0;" />
+        <h4 style="font-size: 13.5px; font-weight: 700;">Saved Spending Plans</h4>
+        <div id="savedPlansList" style="display: flex; flex-direction: column; gap: 8px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       7. CONFIGURABLE PERFORMANCE TARGETS MODAL ("What Needs Attention?")
+       ==================================================================== -->
+  <div id="targetsModal" class="modal-backdrop hidden">
+    <div class="modal-panel" style="max-width: 560px;">
+      <div class="modal-header">
+        <h3>Configure "What Needs Attention?" Review Thresholds</h3>
+        <button id="btnCloseTargetsModal" type="button" class="btn btn-outline btn-sm">✕ Close</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 12.5px; color: #475569;">
+          Set your VIMS Enterprise target thresholds. We evaluate campaigns and ads against these explainable rules and your account's own history — never invented industry benchmarks.
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div class="filter-field">
+            <label for="targetCplInput">Target Cost Per Form Lead (CPL)</label>
+            <input id="targetCplInput" type="number" step="1" class="input" value="250" />
+          </div>
+          <div class="filter-field">
+            <label for="targetZeroLeadSpendInput">Alert Spend with Zero Leads</label>
+            <input id="targetZeroLeadSpendInput" type="number" step="10" class="input" value="400" />
+          </div>
+          <div class="filter-field">
+            <label for="targetMinCtrInput">Minimum Link CTR (%)</label>
+            <input id="targetMinCtrInput" type="number" step="0.05" class="input" value="0.85" />
+          </div>
+          <div class="filter-field">
+            <label for="targetMinConvInput">Minimum Click-to-Form-Lead Rate (%)</label>
+            <input id="targetMinConvInput" type="number" step="0.5" class="input" value="6.0" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btnSaveTargets" type="button" class="btn btn-primary">Save Review Targets</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./vims-cloud-data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
