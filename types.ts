@@ -1,19 +1,15 @@
-// FIX: Import React to resolve the "Cannot find namespace 'React'" error for React.ReactNode.
 import React from 'react';
 
 export enum Page {
   Home = 'Home',
-  HospitalManagement = 'HMS Hospital Ecosystem',
-  AIAutomation = 'AI Automation',
-  CostEstimation = 'Cost Estimation & Sheet Costing',
-  KickoffPresentation = 'Client Kickoff Deck',
-  LinkedInGrowth = 'LinkedIn Growth',
-  VIMSCards = 'VIMS Cards',
-  JillJillAI = 'JillJill AI Voice Agent',
-  DigitalMarketing = 'Digital Marketing',
-  About = 'About',
+  VoiceAgents = 'AI Voice Agents',
+  WebsiteCreation = 'Website & E-Commerce',
+  AIAutomation = 'AI Automations & Agents',
+  HospitalManagement = 'MediCore HMS',
+  MatlabAcademy = 'MATLAB & FDE Academy',
+  About = 'About & Leadership',
   Contact = 'Contact',
-  TeamProfile = 'Team Profile',
+  TeamProfile = 'Leadership Profile',
   PrivacyPolicy = 'Privacy Policy',
   TermsOfService = 'Terms of Service',
   DataDeletion = 'Data Deletion',
@@ -23,10 +19,19 @@ export interface ServiceCardProps {
   icon: React.ReactNode;
   title: string;
   description: string;
+  tag?: string;
 }
 
-export interface Testimonial {
-    quote: string;
-    name: string;
-    role: string;
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  badge: string;
+  imageUrl: string;
+  shortBio: string;
+  description: string;
+  expertise: string[];
+  experience: string;
+  email: string;
+  linkedin?: string;
 }

@@ -1,164 +1,110 @@
 import React from 'react';
-import { motion } from 'motion/react';
-import { Linkedin, Mail, Twitter, Globe, ArrowLeft } from 'lucide-react';
-import { Page } from '../types';
-
-export interface TeamMember {
-    id: string;
-    name: string;
-    role: string;
-    imageUrl: string;
-    description: string;
-    expertise: string[];
-    experience: string;
-    email: string;
-    linkedin?: string;
-    twitter?: string;
-}
-
-export const TEAM_MEMBERS: TeamMember[] = [
-    {
-        id: 'gowtham',
-        name: 'Gowtham Raj M',
-        role: 'CEO',
-        imageUrl: 'https://lh3.googleusercontent.com/d/1CKMyl3Nl2Q8PjlXdZ2ffj3DemiFrCjDm',
-        description: 'With over 15 years of industrial and enterprise expertise, Gowtham Raj leads VIMS as Chief Executive Officer. He steers the strategic vision, AI automation initiatives, and engineering should-costing ecosystem for our global clientele.',
-        expertise: ['Executive Leadership', 'Product Architecture', 'Scalable System Design', 'High-quality Solution Delivery', 'Industrial Strategy', 'Engineering & Operations'],
-        experience: '15+ years of Industrial Expertise specializing in product architecture, organizational leadership, and scalable systems across manufacturing, tech, and enterprise landscapes.',
-        email: 'gowtham@vimsenterprise.com',
-        linkedin: 'https://linkedin.com/in/gowthamraj-m'
-    },
-    {
-        id: 'guru',
-        name: 'GuruPrasath S',
-        role: 'Product Manager',
-        imageUrl: 'https://lh3.googleusercontent.com/d/12C1DyqVRs6jHiTz6gFjA910LtVWiay-d',
-        description: 'GuruPrasath is the engine room of our AI operations. He drives the execution of end-to-end SaaS platforms with a focus on workflow optimization and seamless AI integration.',
-        expertise: ['AI Automation', 'Workflow Optimization', 'End-to-End SaaS Operations', 'Process Engineering', 'Platform Management'],
-        experience: 'Specialist in driving AI automation and optimization, ensuring seamless execution of complex SaaS operations and digital transformations.',
-        email: 'guru@vimsenterprise.com',
-        linkedin: 'https://linkedin.com/in/guruprasath-s'
-    }
-];
+import { Linkedin, Mail, ArrowLeft, Calendar, CheckCircle2 } from 'lucide-react';
+import { TEAM_MEMBERS } from '../constants';
 
 interface TeamProfilePageProps {
-    memberId: string;
-    onBack: () => void;
+  memberId: string;
+  onBack: () => void;
+  onOpenBooking: (topic?: string) => void;
 }
 
-const TeamProfilePage: React.FC<TeamProfilePageProps> = ({ memberId, onBack }) => {
-    const member = TEAM_MEMBERS.find(m => m.id === memberId) || TEAM_MEMBERS[0];
+const TeamProfilePage: React.FC<TeamProfilePageProps> = ({ memberId, onBack, onOpenBooking }) => {
+  const member = TEAM_MEMBERS.find((m) => m.id === memberId) || TEAM_MEMBERS[0];
 
-    return (
-        <div className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-5xl mx-auto">
-                <button 
-                    onClick={onBack}
-                    className="flex items-center text-cyan hover:text-violet transition-colors mb-8 group"
+  return (
+    <div className="min-h-screen pt-12 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
+        <button
+          type="button"
+          onClick={onBack}
+          className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline mb-8"
+        >
+          <ArrowLeft size={17} />
+          <span>Back to About &amp; Leadership</span>
+        </button>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <div className="lg:col-span-4">
+            <div className="executive-card p-6 sticky top-28 space-y-5">
+              <img
+                src={member.imageUrl}
+                alt={member.name}
+                className="w-full aspect-square rounded-2xl object-cover object-top border border-slate-200 dark:border-white/10"
+              />
+              <div>
+                <span className="text-[11px] font-mono uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+                  {member.badge}
+                </span>
+                <h1 className="text-2xl font-poppins font-bold text-slate-900 dark:text-white mt-0.5">
+                  {member.name}
+                </h1>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">{member.role}</p>
+              </div>
+
+              <div className="space-y-2.5 pt-2 border-t border-slate-100 dark:border-white/[0.08]">
+                <a
+                  href={`mailto:${member.email}`}
+                  className="flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-300 hover:text-indigo-500 transition-colors"
                 >
-                    <ArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform" size={20} />
-                    Back to About
-                </button>
+                  <Mail size={15} className="text-indigo-500 shrink-0" />
+                  <span className="truncate">{member.email}</span>
+                </a>
+                {member.linkedin ? (
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-300 hover:text-indigo-500 transition-colors"
+                  >
+                    <Linkedin size={15} className="text-indigo-500 shrink-0" />
+                    <span>LinkedIn Profile</span>
+                  </a>
+                ) : null}
+              </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                    {/* Sidebar: Image & Info */}
-                    <div className="lg:col-span-1">
-                        <motion.div 
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-4xl p-6 border border-white/20 dark:border-slate-800/30 shadow-2xl sticky top-28"
-                        >
-                            <img 
-                                src={member.imageUrl} 
-                                alt={member.name} 
-                                className="w-full aspect-square rounded-3xl object-cover mb-6 border-2 border-slate-100 dark:border-slate-700"
-                                referrerPolicy="no-referrer"
-                            />
-                            <h1 className="text-2xl font-bold font-poppins text-center mb-1">{member.name}</h1>
-                            <p className="text-cyan font-medium text-center mb-6">{member.role}</p>
-
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-3 p-3 bg-slate-50/50 dark:bg-slate-800/50 rounded-xl">
-                                    <Mail className="text-cyan" size={18} />
-                                    <span className="text-sm truncate">{member.email}</span>
-                                </div>
-                                <div className="flex justify-center gap-4">
-                                    {member.linkedin && (
-                                        <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-50/50 dark:bg-slate-800/50 rounded-xl text-slate-600 dark:text-slate-400 hover:text-cyan transition-colors">
-                                            <Linkedin size={20} />
-                                        </a>
-                                    )}
-                                    {member.twitter && (
-                                        <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-50/50 dark:bg-slate-800/50 rounded-xl text-slate-600 dark:text-slate-400 hover:text-cyan transition-colors">
-                                            <Twitter size={20} />
-                                        </a>
-                                    )}
-                                    <a href="#" className="p-3 bg-slate-50/50 dark:bg-slate-800/50 rounded-xl text-slate-600 dark:text-slate-400 hover:text-cyan transition-colors">
-                                        <Globe size={20} />
-                                    </a>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </div>
-
-                    {/* Main Content */}
-                    <div className="lg:col-span-2">
-                        <motion.div 
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="space-y-12"
-                        >
-                            <section>
-                                <h2 className="text-3xl font-bold font-poppins mb-6 pb-2 border-b border-slate-200 dark:border-slate-800">Professional Profile</h2>
-                                <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed italic">"{member.description}"</p>
-                            </section>
-
-                            <section>
-                                <h3 className="text-2xl font-bold font-poppins mb-6">Experience & Impact</h3>
-                                <div className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-3xl p-8 border border-white/20 dark:border-slate-800/30 shadow-xl">
-                                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{member.experience}</p>
-                                </div>
-                            </section>
-
-                            <section>
-                                <h3 className="text-2xl font-bold font-poppins mb-6">Expertise</h3>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    {member.expertise.map((skill, i) => (
-                                        <motion.div 
-                                            key={skill}
-                                            initial={{ opacity: 0, x: -10 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: 0.3 + (i * 0.1) }}
-                                            className="flex items-center p-4 bg-white/20 dark:bg-slate-800/20 backdrop-blur-sm rounded-2xl border border-white/10 dark:border-slate-700/20"
-                                        >
-                                            <div className="w-2 h-2 rounded-full bg-cyan mr-3 shadow-[0_0_8px_rgba(34,211,238,1)]"></div>
-                                            <span className="font-medium">{skill}</span>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </section>
-
-                            <section className="pt-8">
-                                <motion.button 
-                                    whileHover={{ 
-                                      scale: 1.05, 
-                                      filter: 'brightness(1.1)',
-                                      boxShadow: "0 0 20px 5px rgba(139, 92, 246, 0.4)"
-                                    }}
-                                    whileTap={{ scale: 0.95 }}
-                                    onClick={() => window.open('https://cal.com/vims-003/vims-enterprise', '_blank')}
-                                    className="px-8 py-4 bg-gradient-to-r from-orange to-violet text-light-text font-bold rounded-full shadow-2xl flex items-center"
-                                >
-                                    Schedule a Call with {member.name.split(' ')[0]}
-                                </motion.button>
-                            </section>
-                        </motion.div>
-                    </div>
-                </div>
+              <button
+                type="button"
+                onClick={() => onOpenBooking(`Consultation with ${member.name}`)}
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition-all shadow-md"
+              >
+                <Calendar size={14} />
+                <span>Schedule Call with {member.name.split(' ')[0]}</span>
+              </button>
             </div>
+          </div>
+
+          <div className="lg:col-span-8 space-y-8">
+            <div className="executive-card p-8 space-y-4">
+              <h2 className="text-xl font-poppins font-bold text-slate-900 dark:text-white">Executive Overview</h2>
+              <p className="text-base text-slate-600 dark:text-slate-300 leading-relaxed">{member.description}</p>
+            </div>
+
+            <div className="executive-card p-8 space-y-4">
+              <h3 className="text-xl font-poppins font-bold text-slate-900 dark:text-white">Track Record &amp; Impact</h3>
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                {member.experience}
+              </p>
+            </div>
+
+            <div className="executive-card p-8 space-y-4">
+              <h3 className="text-xl font-poppins font-bold text-slate-900 dark:text-white">Areas of Focus</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {member.expertise.map((skill) => (
+                  <div
+                    key={skill}
+                    className="flex items-center gap-2.5 p-3.5 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/70 dark:border-white/[0.06] text-sm font-medium text-slate-800 dark:text-slate-200"
+                  >
+                    <CheckCircle2 size={15} className="text-indigo-500 shrink-0" />
+                    <span>{skill}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default TeamProfilePage;

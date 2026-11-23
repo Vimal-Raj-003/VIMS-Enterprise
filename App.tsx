@@ -1,78 +1,73 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Page } from './types';
+import { PAGE_META, PAGE_PATHS } from './constants';
+import { ThemeProvider } from './contexts/ThemeContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import CtaSection from './components/CtaSection';
+import BookingModal from './components/BookingModal';
+import VimsChatbot from './components/VimsChatbot';
+import DynamicBackground from './components/DynamicBackground';
+import CookieConsent from './components/CookieConsent';
+import ScrollProgressBar from './components/ScrollProgressBar';
+
 import HomePage from './pages/HomePage';
-import HospitalManagementPage from './pages/HospitalManagementPage';
-import LinkedInGrowthPage from './pages/LinkedInGrowthPage';
-import VimsCardsPage from './pages/VimsCardsPage';
-import JillJillAiPage from './pages/JillJillAiPage';
-import DigitalMarketingPage from './pages/DigitalMarketingPage';
+import VoiceAgentsPage from './pages/VoiceAgentsPage';
+import WebsiteCreationPage from './pages/WebsiteCreationPage';
 import AiAutomationPage from './pages/AiAutomationPage';
-import CostEstimationPage from './pages/CostEstimationPage';
-import KickoffPresentationPage from './pages/KickoffPresentationPage';
+import HospitalManagementPage from './pages/HospitalManagementPage';
+import MatlabAcademyPage from './pages/MatlabAcademyPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import TeamProfilePage from './pages/TeamProfilePage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
 import DataDeletionPage from './pages/DataDeletionPage';
-import { PAGE_META } from './constants';
-import FloatingBookNowButton from './components/FloatingBookNowButton';
-import CtaSection from './components/CtaSection';
-import { ThemeProvider } from './contexts/ThemeContext';
-import DynamicBackground from './components/DynamicBackground';
-import SystemTelemetry from './components/SystemTelemetry';
-import CookieConsent from './components/CookieConsent';
-import ScrollProgressBar from './components/ScrollProgressBar';
 
 const getPageFromLocation = (): Page => {
   if (typeof window === 'undefined') return Page.Home;
-  const normalizedPath = window.location.pathname
-    .toLowerCase()
-    .replace(/\/+$/, '')
-    .replace(/\.html$/, '');
-  const normalizedHash = window.location.hash.toLowerCase().replace(/^#\/?/, '');
+  const path = window.location.pathname.toLowerCase().replace(/\/+$/, '').replace(/\.html$/, '') || '/';
+  const hash = window.location.hash.toLowerCase().replace(/^#\/?/, '');
 
-  if (normalizedPath === '/privacy-policy' || normalizedHash === 'privacy-policy') {
-    return Page.PrivacyPolicy;
-  }
-  if (normalizedPath === '/terms-of-service' || normalizedHash === 'terms-of-service') {
-    return Page.TermsOfService;
-  }
-  if (normalizedPath === '/data-deletion' || normalizedHash === 'data-deletion') {
-    return Page.DataDeletion;
-  }
+  const matchByPath = (Object.entries(PAGE_PATHS) as [Page, string][]).find(
+    ([, p]) => p.toLowerCase() === path
+  );
+  if (matchByPath) return matchByPath[0];
+
+  if (hash === 'privacy-policy') return Page.PrivacyPolicy;
+  if (hash === 'terms-of-service') return Page.TermsOfService;
+  if (hash === 'data-deletion') return Page.DataDeletion;
+  if (hash === 'hms-ecosystem') return Page.HospitalManagement;
+  if (hash === 'ai-automation') return Page.AIAutomation;
+  if (hash === 'ai-voice-agents' || hash === 'jilljill-ai') return Page.VoiceAgents;
+  if (hash === 'website-creation') return Page.WebsiteCreation;
+  if (hash === 'matlab-fde-academy') return Page.MatlabAcademy;
+  if (hash === 'about') return Page.About;
+  if (hash === 'contact') return Page.Contact;
+
   return Page.Home;
 };
 
-const getPathForPage = (page: Page): string => {
-  switch (page) {
-    case Page.PrivacyPolicy:
-      return '/privacy-policy';
-    case Page.TermsOfService:
-      return '/terms-of-service';
-    case Page.DataDeletion:
-      return '/data-deletion';
-    default:
-      return '/';
-  }
-};
-
-// FIX: Removed React.FC type from component definition to resolve issue with 'children' prop being implicitly required.
 const App = () => {
   const [activePage, setActivePage] = useState<Page>(() => getPageFromLocation());
-  const [selectedMemberId, setSelectedMemberId] = useState<string>('');
+  const [selectedMemberId, setSelectedMemberId] = useState<string>('vimal');
+  const [bookingOpen, setBookingOpen] = useState<boolean>(false);
+  const [bookingTopic, setBookingTopic] = useState<string>('');
+
+  const handleOpenBooking = useCallback((topic?: string) => {
+    setBookingTopic(topic || '');
+    setBookingOpen(true);
+  }, []);
 
   const handleNavigate = useCallback((page: Page) => {
     setActivePage(page);
     if (typeof window !== 'undefined') {
-      const targetPath = getPathForPage(page);
+      const targetPath = PAGE_PATHS[page] || '/';
       if (window.location.pathname !== targetPath) {
         window.history.pushState({ page }, '', targetPath);
       }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   useEffect(() => {
@@ -90,46 +85,55 @@ const App = () => {
   const handleViewProfile = useCallback((memberId: string) => {
     setSelectedMemberId(memberId);
     setActivePage(Page.TeamProfile);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof window !== 'undefined') {
+      window.history.pushState({ page: Page.TeamProfile, memberId }, '', PAGE_PATHS[Page.TeamProfile]);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, []);
-  
+
   useEffect(() => {
     const meta = PAGE_META[activePage];
     if (meta) {
-        document.title = meta.title;
-        const descriptionTag = document.querySelector('meta[name="description"]');
-        if (descriptionTag) {
-          descriptionTag.setAttribute('content', meta.description);
-        }
+      document.title = meta.title;
+      const descriptionTag = document.querySelector('meta[name="description"]');
+      if (descriptionTag) {
+        descriptionTag.setAttribute('content', meta.description);
+      }
     }
   }, [activePage]);
 
   const renderPage = () => {
     switch (activePage) {
       case Page.Home:
-        return <HomePage onNavigate={handleNavigate} />;
-      case Page.HospitalManagement:
-        return <HospitalManagementPage onNavigate={handleNavigate} />;
-      case Page.LinkedInGrowth:
-        return <LinkedInGrowthPage />;
-      case Page.VIMSCards:
-        return <VimsCardsPage />;
-      case Page.JillJillAI:
-        return <JillJillAiPage />;
-      case Page.DigitalMarketing:
-        return <DigitalMarketingPage />;
+        return (
+          <HomePage
+            onNavigate={handleNavigate}
+            onOpenBooking={handleOpenBooking}
+            onViewLeader={handleViewProfile}
+          />
+        );
+      case Page.VoiceAgents:
+        return <VoiceAgentsPage onOpenBooking={handleOpenBooking} />;
+      case Page.WebsiteCreation:
+        return <WebsiteCreationPage onOpenBooking={handleOpenBooking} />;
       case Page.AIAutomation:
-        return <AiAutomationPage />;
-      case Page.CostEstimation:
-        return <CostEstimationPage onNavigate={handleNavigate} />;
-      case Page.KickoffPresentation:
-        return <KickoffPresentationPage onNavigate={handleNavigate} />;
+        return <AiAutomationPage onOpenBooking={handleOpenBooking} />;
+      case Page.HospitalManagement:
+        return <HospitalManagementPage onOpenBooking={handleOpenBooking} />;
+      case Page.MatlabAcademy:
+        return <MatlabAcademyPage onOpenBooking={handleOpenBooking} />;
       case Page.About:
-        return <AboutPage onProfileClick={handleViewProfile} />;
+        return <AboutPage onProfileClick={handleViewProfile} onOpenBooking={handleOpenBooking} />;
       case Page.Contact:
-        return <ContactPage />;
+        return <ContactPage onOpenBooking={handleOpenBooking} />;
       case Page.TeamProfile:
-        return <TeamProfilePage memberId={selectedMemberId} onBack={() => handleNavigate(Page.About)} />;
+        return (
+          <TeamProfilePage
+            memberId={selectedMemberId}
+            onBack={() => handleNavigate(Page.About)}
+            onOpenBooking={handleOpenBooking}
+          />
+        );
       case Page.PrivacyPolicy:
         return <PrivacyPolicyPage onNavigate={handleNavigate} />;
       case Page.TermsOfService:
@@ -137,38 +141,39 @@ const App = () => {
       case Page.DataDeletion:
         return <DataDeletionPage onNavigate={handleNavigate} />;
       default:
-        return <HomePage onNavigate={handleNavigate} />;
+        return (
+          <HomePage
+            onNavigate={handleNavigate}
+            onOpenBooking={handleOpenBooking}
+            onViewLeader={handleViewProfile}
+          />
+        );
     }
   };
 
-  if (activePage === Page.KickoffPresentation) {
-    return (
-      <ThemeProvider>
-        <div className="relative min-h-screen">
-          <DynamicBackground />
-          <SystemTelemetry />
-          <KickoffPresentationPage onNavigate={handleNavigate} />
-        </div>
-      </ThemeProvider>
-    );
-  }
-
   return (
     <ThemeProvider>
-      <div className="relative min-h-screen">
+      <div className="relative min-h-screen flex flex-col text-slate-900 dark:text-slate-100">
         <DynamicBackground />
-        <SystemTelemetry />
         <CookieConsent />
-        <div className="flex flex-col min-h-screen bg-transparent text-slate-900 dark:text-light-text overflow-x-hidden transition-colors duration-300">
-          <Navbar activePage={activePage} onNavigate={handleNavigate} />
-          <ScrollProgressBar activePage={activePage} />
-          <main className="flex-grow pt-20 relative z-10">
-            {renderPage()}
-          </main>
-          <CtaSection />
-          <FloatingBookNowButton />
-          <Footer onNavigate={handleNavigate} />
-        </div>
+        <Navbar
+          activePage={activePage}
+          onNavigate={handleNavigate}
+          onOpenBooking={handleOpenBooking}
+        />
+        <ScrollProgressBar activePage={activePage} />
+
+        <main className="flex-grow pt-20 relative z-10">{renderPage()}</main>
+
+        <CtaSection onOpenBooking={handleOpenBooking} />
+        <Footer onNavigate={handleNavigate} onOpenBooking={handleOpenBooking} />
+
+        <BookingModal
+          isOpen={bookingOpen}
+          onClose={() => setBookingOpen(false)}
+          defaultTopic={bookingTopic}
+        />
+        <VimsChatbot onNavigate={handleNavigate} onOpenBooking={handleOpenBooking} />
       </div>
     </ThemeProvider>
   );

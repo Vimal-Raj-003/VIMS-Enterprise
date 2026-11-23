@@ -1,14 +1,41 @@
-/* Global Styles */
-html {
-  scroll-behavior: smooth;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    overflow-x: hidden;
+  }
 }
 
-::selection {
-  background-color: rgba(14, 165, 233, 0.3);
-  color: inherit;
+@layer utilities {
+  .executive-grid {
+    background-size: 48px 48px;
+    background-image: 
+      linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+  }
+
+  .dark .executive-grid {
+    background-image: 
+      linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  }
+
+  .glass-panel {
+    @apply bg-white/85 dark:bg-[#0C1220]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/[0.08];
+  }
+
+  .executive-card {
+    @apply bg-white dark:bg-[#0C1220]/90 border border-slate-200/80 dark:border-white/[0.08] rounded-2xl shadow-sm hover:border-indigo-500/40 dark:hover:border-indigo-400/35 transition-all duration-300;
+  }
 }
 
-/* Custom scrollbar for modern sleek look */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -18,10 +45,10 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(100, 116, 139, 0.3);
+  background: rgba(100, 116, 139, 0.32);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(14, 165, 233, 0.6);
+  background: rgba(99, 102, 241, 0.6);
 }

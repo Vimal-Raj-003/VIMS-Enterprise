@@ -1,516 +1,413 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Page } from '../types';
-import { GROWTH_SUITE_PAGES, COMPANY_CONTACT } from '../constants';
-import { Menu, X, ChevronDown, Sun, Moon, Cpu, Calculator, Layers, Sparkles, ArrowRight, Building2, Activity } from 'lucide-react';
+import { CORE_PILLARS } from '../constants';
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Sun,
+  Moon,
+  PhoneCall,
+  Globe,
+  Cpu,
+  Activity,
+  GraduationCap,
+  Calendar,
+  ArrowUpRight,
+  Award,
+} from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface NavbarProps {
   activePage: Page;
   onNavigate: (page: Page) => void;
+  onOpenBooking: (topic?: string) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
+const PILLAR_ICONS: Record<Page, React.ReactNode> = {
+  [Page.Home]: null,
+  [Page.VoiceAgents]: <PhoneCall size={16} className="text-indigo-400" />,
+  [Page.WebsiteCreation]: <Globe size={16} className="text-sky-400" />,
+  [Page.AIAutomation]: <Cpu size={16} className="text-violet-400" />,
+  [Page.HospitalManagement]: <Activity size={16} className="text-emerald-400" />,
+  [Page.MatlabAcademy]: <GraduationCap size={16} className="text-amber-400" />,
+  [Page.About]: null,
+  [Page.Contact]: null,
+  [Page.TeamProfile]: null,
+  [Page.PrivacyPolicy]: null,
+  [Page.TermsOfService]: null,
+  [Page.DataDeletion]: null,
+};
+
+const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate, onOpenBooking }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  
-  const servicesRef = useRef<HTMLDivElement>(null);
-  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const solutionsRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 12);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-        const target = event.target as Node;
-        if (!servicesRef.current?.contains(target)) {
-            setIsServicesOpen(false);
-        }
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!solutionsRef.current?.contains(e.target as Node)) {
+        setIsSolutionsOpen(false);
+      }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  const handleMouseEnter = () => {
-    if (dropdownTimeoutRef.current) {
-      clearTimeout(dropdownTimeoutRef.current);
-    }
-    setIsServicesOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    dropdownTimeoutRef.current = setTimeout(() => {
-      setIsServicesOpen(false);
-    }, 150);
-  };
 
   const handleLinkClick = (page: Page) => {
     onNavigate(page);
     setIsOpen(false);
-    setIsServicesOpen(false);
+    setIsSolutionsOpen(false);
   };
 
-  const isAnyServiceActive = 
-    activePage === Page.HospitalManagement ||
-    activePage === Page.AIAutomation || 
-    activePage === Page.CostEstimation || 
-    GROWTH_SUITE_PAGES.some(p => p.name === activePage);
+  const isPillarActive = CORE_PILLARS.some((p) => p.page === activePage);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-sm' : 'bg-transparent'}`}>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-white/95 dark:bg-[#060911]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/10 shadow-sm'
+          : 'bg-white/70 dark:bg-[#060911]/75 backdrop-blur-md border-b border-transparent'
+      }`}
+    >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-             <a onClick={() => handleLinkClick(Page.Home)} className="flex items-center gap-2.5 cursor-pointer text-2xl font-poppins font-bold text-slate-900 dark:text-light-text group">
-              <motion.img 
-                whileHover={{ rotate: 5, scale: 1.1 }}
-                src="https://lh3.googleusercontent.com/d/1nFXxO-oUx6f3P6a_1nfI-VGpZWDHWxvu" 
-                alt="VIMS Logo" 
-                className="w-10 h-10 object-contain rounded-lg shadow-sm" 
-                referrerPolicy="no-referrer" 
-              />
-              <div className="flex flex-col">
-                <span className="group-hover:text-cyan transition-colors leading-none">VIMS</span>
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 dark:text-slate-400">Engineering & AI</span>
-              </div>
-            </a>
-          </div>
-
-          {/* Desktop Nav */}
-          <div className="hidden lg:block">
-            <div className="ml-8 flex items-center space-x-6 xl:space-x-7">
-              <motion.a 
-                whileHover={{ y: -2 }}
-                onClick={() => handleLinkClick(Page.Home)} 
-                className={`cursor-pointer text-sm font-semibold transition-colors duration-200 whitespace-nowrap shrink-0 ${
-                  activePage === Page.Home ? 'text-cyan' : 'text-slate-600 dark:text-slate-300 hover:text-cyan'
-                }`}
-              >
-                Home
-              </motion.a>
-
-              {/* DIRECT FLAGSHIP: HMS Ecosystem */}
-              <motion.a 
-                whileHover={{ y: -2 }}
-                onClick={() => handleLinkClick(Page.HospitalManagement)} 
-                className={`cursor-pointer text-sm font-semibold transition-colors duration-200 whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
-                  activePage === Page.HospitalManagement 
-                    ? 'text-cyan font-bold' 
-                    : 'text-slate-700 dark:text-slate-200 hover:text-cyan'
-                }`}
-              >
-                <Activity size={15} className={activePage === Page.HospitalManagement ? 'text-cyan' : 'text-blue-500'} />
-                <span>HMS Ecosystem</span>
-                <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded-full bg-cyan/15 text-cyan font-bold">New</span>
-              </motion.a>
-
-              {/* SINGLE NAME DROPDOWN: Services (Housing AI Automation, Cost Estimation, Growth Suite) */}
-              <div 
-                className="relative" 
-                ref={servicesRef}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <motion.button 
-                  whileHover={{ y: -2 }}
-                  onClick={() => setIsServicesOpen(!isServicesOpen)} 
-                  className={`flex items-center gap-1.5 cursor-pointer text-sm font-semibold px-3 py-2 rounded-xl transition-all duration-200 whitespace-nowrap shrink-0 ${
-                    isAnyServiceActive 
-                      ? 'text-cyan bg-cyan/10 border border-cyan/30 shadow-[0_0_12px_rgba(34,211,238,0.15)]' 
-                      : 'text-slate-700 dark:text-slate-200 hover:text-cyan hover:bg-slate-100 dark:hover:bg-slate-800/60'
-                  }`}
-                  aria-expanded={isServicesOpen}
-                >
-                  <Sparkles size={15} className={isAnyServiceActive ? 'text-cyan animate-pulse' : 'text-slate-400'} />
-                  <span>Enterprise Suites</span>
-                  <ChevronDown size={14} className={`transition-transform duration-300 ${isServicesOpen ? 'rotate-180 text-cyan' : ''}`} />
-                </motion.button>
-
-                {/* Dropdown Container */}
-                <AnimatePresence>
-                  {isServicesOpen && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10, scale: 0.96 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                      transition={{ duration: 0.18 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[680px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-50 p-3"
-                    >
-                      <div className="grid grid-cols-12 gap-3">
-                        {/* Left Column: Top 3 Flagship Pillars */}
-                        <div className="col-span-7 space-y-2 p-3 bg-slate-50/70 dark:bg-slate-800/40 rounded-2xl border border-slate-100 dark:border-slate-800/50">
-                          <div className="px-2 pb-1 text-[10px] font-mono uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                            <span>Core Enterprise Products</span>
-                            <span className="text-cyan font-semibold">Proprietary</span>
-                          </div>
-
-                          {/* 1. HMS Hospital Ecosystem */}
-                          <a 
-                            onClick={() => handleLinkClick(Page.HospitalManagement)}
-                            className={`group block p-2.5 rounded-xl cursor-pointer transition-all border ${
-                              activePage === Page.HospitalManagement 
-                                ? 'bg-cyan/15 border-cyan/40 text-cyan shadow-sm' 
-                                : 'border-transparent bg-white/70 dark:bg-slate-900/60 hover:border-cyan/30 hover:bg-cyan/5 text-slate-800 dark:text-slate-200'
-                            }`}
-                          >
-                            <div className="flex items-center justify-between mb-0.5">
-                              <div className="flex items-center gap-2">
-                                <div className="p-1 rounded-lg bg-blue-500/10 text-blue-500 group-hover:scale-110 transition-transform">
-                                  <Building2 size={15} />
-                                </div>
-                                <span className="font-semibold text-xs group-hover:text-cyan transition-colors">HMS Hospital Ecosystem</span>
-                              </div>
-                              <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded-full bg-cyan/20 text-cyan font-bold">Healthcare Flagship</span>
-                            </div>
-                            <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 pl-7">
-                              EMR/EHR, smart bed turnover, connected ICU telemetry, PACS/LIS & cashless TPA claims.
-                            </p>
-                          </a>
-
-                          {/* 2. AI Automation */}
-                          <a 
-                            onClick={() => handleLinkClick(Page.AIAutomation)}
-                            className={`group block p-2.5 rounded-xl cursor-pointer transition-all border ${
-                              activePage === Page.AIAutomation 
-                                ? 'bg-cyan/15 border-cyan/40 text-cyan shadow-sm' 
-                                : 'border-transparent bg-white/70 dark:bg-slate-900/60 hover:border-cyan/30 hover:bg-cyan/5 text-slate-800 dark:text-slate-200'
-                            }`}
-                          >
-                            <div className="flex items-center justify-between mb-0.5">
-                              <div className="flex items-center gap-2">
-                                <div className="p-1 rounded-lg bg-cyan/10 text-cyan group-hover:scale-110 transition-transform">
-                                  <Cpu size={15} />
-                                </div>
-                                <span className="font-semibold text-xs group-hover:text-cyan transition-colors">AI Automation</span>
-                              </div>
-                              <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded-full bg-cyan/20 text-cyan font-bold">Autonomous AI</span>
-                            </div>
-                            <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 pl-7">
-                              Autonomous agent workforces, voice bots & LLM business logic pipelines.
-                            </p>
-                          </a>
-
-                          {/* 3. Cost Estimation */}
-                          <a 
-                            onClick={() => handleLinkClick(Page.CostEstimation)}
-                            className={`group block p-2.5 rounded-xl cursor-pointer transition-all border ${
-                              activePage === Page.CostEstimation 
-                                ? 'bg-violet/15 border-violet/40 text-violet shadow-sm' 
-                                : 'border-transparent bg-white/70 dark:bg-slate-900/60 hover:border-violet/30 hover:bg-violet/5 text-slate-800 dark:text-slate-200'
-                            }`}
-                          >
-                            <div className="flex items-center justify-between mb-0.5">
-                              <div className="flex items-center gap-2">
-                                <div className="p-1 rounded-lg bg-violet/10 text-violet group-hover:scale-110 transition-transform">
-                                  <Calculator size={15} />
-                                </div>
-                                <span className="font-semibold text-xs group-hover:text-violet transition-colors">Cost Estimation</span>
-                              </div>
-                              <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded-full bg-violet/20 text-violet font-bold">Should-Costing</span>
-                            </div>
-                            <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 pl-7">
-                              Sheet metal, casting, injection molding & CNC machining negotiation.
-                            </p>
-                          </a>
-
-                          <div className="pt-1 px-2 flex items-center justify-between text-[11px] text-slate-400">
-                            <span>Tailored B2B Sourcing & Healthcare Tech</span>
-                            <ArrowRight size={12} className="text-cyan" />
-                          </div>
-                        </div>
-
-                        {/* Right Column: Growth Suite */}
-                        <div className="col-span-5 space-y-1.5 p-3 flex flex-col justify-between">
-                          <div>
-                            <div className="px-2 pb-1.5 text-[10px] font-mono uppercase tracking-wider text-slate-400 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/60 mb-2">
-                              <div className="flex items-center gap-1.5">
-                                <Layers size={12} className="text-orange" />
-                                <span className="text-slate-700 dark:text-slate-300 font-semibold">Growth Suite</span>
-                              </div>
-                              <span className="text-slate-400">Brand & Digital</span>
-                            </div>
-
-                            {GROWTH_SUITE_PAGES.map((service) => (
-                              <a 
-                                key={service.name} 
-                                onClick={() => handleLinkClick(service.name)} 
-                                className={`block w-full text-left px-2.5 py-2 rounded-xl cursor-pointer transition-all ${
-                                  activePage === service.name 
-                                    ? 'text-cyan bg-cyan/10 font-semibold' 
-                                    : 'text-slate-700 dark:text-slate-300 hover:text-cyan hover:bg-slate-100 dark:hover:bg-slate-800/70'
-                                }`}
-                              >
-                                <div className="text-xs font-semibold flex items-center justify-between">
-                                  <span>{service.name}</span>
-                                </div>
-                                <div className="text-[11px] text-slate-400 truncate">{service.desc}</div>
-                              </a>
-                            ))}
-                          </div>
-
-                          <div className="pt-2 border-t border-slate-100 dark:border-slate-800/60 px-2">
-                            <button 
-                              onClick={() => window.open(COMPANY_CONTACT.bookingUrl, '_blank')}
-                              className="w-full text-center py-1.5 text-xs font-bold text-cyan hover:text-light-text hover:bg-cyan/20 rounded-lg transition-colors flex items-center justify-center gap-1.5"
-                            >
-                              <span>Explore custom bundles</span>
-                              <ArrowRight size={12} />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              <motion.a 
-                whileHover={{ y: -2 }}
-                onClick={() => handleLinkClick(Page.About)} 
-                className={`cursor-pointer text-sm font-semibold transition-colors duration-200 ${
-                  activePage === Page.About ? 'text-cyan' : 'text-slate-600 dark:text-slate-300 hover:text-cyan'
-                }`}
-              >
-                About
-              </motion.a>
-
-              <motion.a 
-                whileHover={{ y: -2 }}
-                onClick={() => handleLinkClick(Page.Contact)} 
-                className={`cursor-pointer text-sm font-semibold transition-colors duration-200 ${
-                  activePage === Page.Contact ? 'text-cyan' : 'text-slate-600 dark:text-slate-300 hover:text-cyan'
-                }`}
-              >
-                Contact
-              </motion.a>
-              
-              {/* Theme Toggle */}
-              <motion.button 
-                whileHover={{ rotate: 15, scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={toggleTheme}
-                className="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-              </motion.button>
-
-              {/* Direct Booking CTA */}
-              <motion.button 
-                whileHover={{ 
-                  scale: 1.04,
-                  boxShadow: "0 0 20px 4px rgba(139, 92, 246, 0.35)",
-                }}
-                whileTap={{ scale: 0.96 }}
-                onClick={() => window.open(COMPANY_CONTACT.bookingUrl, '_blank')}
-                className="px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-light-text bg-gradient-to-r from-orange via-pink-600 to-violet rounded-full shadow-md transition-all duration-300"
-              >
-                Book Strategy Call
-              </motion.button>
+          {/* Brand Logo */}
+          <button
+            type="button"
+            onClick={() => handleLinkClick(Page.Home)}
+            className="flex items-center gap-3 text-left group focus:outline-none"
+          >
+            <img
+              src="/images/brand/vims-logo.webp"
+              alt="VIMS Enterprise Logo"
+              className="w-10 h-10 object-contain rounded-xl border border-slate-200/60 dark:border-white/10 shadow-sm group-hover:scale-105 transition-transform"
+            />
+            <div className="flex flex-col">
+              <span className="text-lg sm:text-xl font-poppins font-bold tracking-tight text-slate-900 dark:text-white leading-none">
+                VIMS <span className="font-semibold text-slate-500 dark:text-slate-400 text-sm">Enterprise</span>
+              </span>
+              <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-indigo-600 dark:text-indigo-400 mt-1">
+                AI · Web · HMS · Academy
+              </span>
             </div>
+          </button>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-1.5 xl:gap-2">
+            <button
+              type="button"
+              onClick={() => handleLinkClick(Page.Home)}
+              className={`px-3.5 py-2 rounded-xl text-sm font-medium transition-colors ${
+                activePage === Page.Home
+                  ? 'text-indigo-600 dark:text-white bg-indigo-500/10 dark:bg-white/[0.07]'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.04]'
+              }`}
+            >
+              Home
+            </button>
+
+            {/* Solutions Mega Dropdown */}
+            <div
+              ref={solutionsRef}
+              className="relative"
+              onMouseEnter={() => {
+                if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                setIsSolutionsOpen(true);
+              }}
+              onMouseLeave={() => {
+                timeoutRef.current = setTimeout(() => setIsSolutionsOpen(false), 140);
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
+                aria-expanded={isSolutionsOpen}
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-sm font-medium transition-colors ${
+                  isPillarActive
+                    ? 'text-indigo-600 dark:text-white bg-indigo-500/10 dark:bg-white/[0.07]'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.04]'
+                }`}
+              >
+                <span>Solutions</span>
+                <ChevronDown
+                  size={14}
+                  className={`transition-transform duration-200 ${isSolutionsOpen ? 'rotate-180 text-indigo-500' : ''}`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {isSolutionsOpen ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                    transition={{ duration: 0.16 }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[660px] bg-white dark:bg-[#0B101D] border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl p-4 z-50"
+                  >
+                    <div className="flex items-center justify-between px-2 pb-3 mb-3 border-b border-slate-100 dark:border-white/[0.06]">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
+                        VIMS Enterprise Core Ecosystem
+                      </span>
+                      <span className="inline-flex items-center gap-1 text-[11px] font-medium text-amber-600 dark:text-amber-400">
+                        <Award size={12} /> Social Eagle Award-Winning Team
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2.5">
+                      {CORE_PILLARS.map((pillar) => (
+                        <button
+                          key={pillar.page}
+                          type="button"
+                          onClick={() => handleLinkClick(pillar.page)}
+                          className={`group text-left p-3 rounded-xl border transition-all ${
+                            activePage === pillar.page
+                              ? 'bg-indigo-500/[0.08] border-indigo-500/35'
+                              : 'border-transparent hover:bg-slate-50 dark:hover:bg-white/[0.04] hover:border-slate-200/80 dark:hover:border-white/[0.08]'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between mb-1">
+                            <div className="flex items-center gap-2">
+                              <span className="p-1.5 rounded-lg bg-slate-100 dark:bg-white/[0.06]">
+                                {PILLAR_ICONS[pillar.page]}
+                              </span>
+                              <span className="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors">
+                                {pillar.shortTitle}
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-white/[0.06] text-slate-500 dark:text-slate-300">
+                              {pillar.badge}
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 pl-8 leading-relaxed">
+                            {pillar.summary}
+                          </p>
+                        </button>
+                      ))}
+
+                      {/* Direct Call Card in Mega Menu */}
+                      <div className="p-3.5 rounded-xl bg-gradient-to-br from-indigo-600/10 via-indigo-500/5 to-transparent border border-indigo-500/20 flex flex-col justify-between">
+                        <div>
+                          <div className="text-xs font-bold text-indigo-600 dark:text-indigo-300">
+                            Need a Custom Architecture?
+                          </div>
+                          <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                            Speak directly with Founder &amp; CEO Vimal Raj to map your scope, integrations, and rollout plan.
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsSolutionsOpen(false);
+                            onOpenBooking('Custom Architecture Consultation');
+                          }}
+                          className="mt-2.5 inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline"
+                        >
+                          <span>Schedule 30-min Meet</span>
+                          <ArrowUpRight size={13} />
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+                ) : null}
+              </AnimatePresence>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => handleLinkClick(Page.VoiceAgents)}
+              className={`px-3.5 py-2 rounded-xl text-sm font-medium transition-colors ${
+                activePage === Page.VoiceAgents
+                  ? 'text-indigo-600 dark:text-white bg-indigo-500/10 dark:bg-white/[0.07]'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.04]'
+              }`}
+            >
+              Voice Agents
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleLinkClick(Page.HospitalManagement)}
+              className={`px-3.5 py-2 rounded-xl text-sm font-medium transition-colors ${
+                activePage === Page.HospitalManagement
+                  ? 'text-indigo-600 dark:text-white bg-indigo-500/10 dark:bg-white/[0.07]'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.04]'
+              }`}
+            >
+              MediCore HMS
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleLinkClick(Page.MatlabAcademy)}
+              className={`px-3.5 py-2 rounded-xl text-sm font-medium transition-colors ${
+                activePage === Page.MatlabAcademy
+                  ? 'text-indigo-600 dark:text-white bg-indigo-500/10 dark:bg-white/[0.07]'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.04]'
+              }`}
+            >
+              MATLAB &amp; FDE Academy
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleLinkClick(Page.About)}
+              className={`px-3.5 py-2 rounded-xl text-sm font-medium transition-colors ${
+                activePage === Page.About || activePage === Page.TeamProfile
+                  ? 'text-indigo-600 dark:text-white bg-indigo-500/10 dark:bg-white/[0.07]'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.04]'
+              }`}
+            >
+              About &amp; Awards
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleLinkClick(Page.Contact)}
+              className={`px-3.5 py-2 rounded-xl text-sm font-medium transition-colors ${
+                activePage === Page.Contact
+                  ? 'text-indigo-600 dark:text-white bg-indigo-500/10 dark:bg-white/[0.07]'
+                  : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.04]'
+              }`}
+            >
+              Contact
+            </button>
           </div>
 
-          {/* Mobile Right Controls */}
+          {/* Right Controls */}
+          <div className="hidden lg:flex items-center gap-3">
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label="Toggle color theme"
+              className="p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/[0.06] border border-transparent hover:border-slate-200 dark:hover:border-white/10 transition-all"
+            >
+              {theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => onOpenBooking()}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold tracking-wide bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-600/20 transition-all"
+            >
+              <Calendar size={14} />
+              <span>Book Strategy Call</span>
+            </button>
+          </div>
+
+          {/* Mobile Controls */}
           <div className="lg:hidden flex items-center gap-2">
-             <motion.button 
-                whileTap={{ scale: 0.9 }}
-                onClick={toggleTheme}
-                className="p-2.5 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-              </motion.button>
-            <button onClick={() => setIsOpen(!isOpen)} className="text-slate-800 dark:text-light-text hover:text-cyan p-1.5 transition-colors" aria-label="Toggle menu">
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label="Toggle color theme"
+              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/[0.06]"
+            >
+              {theme === 'light' ? <Moon size={19} /> : <Sun size={19} />}
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle navigation menu"
+              className="p-2 rounded-xl text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-white/[0.06]"
+            >
+              {isOpen ? <X size={23} /> : <Menu size={23} />}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
-        {isOpen && (
-          <motion.div 
+        {isOpen ? (
+          <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="lg:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-b border-slate-200 dark:border-slate-800 overflow-hidden max-h-[85vh] overflow-y-auto"
+            className="lg:hidden bg-white dark:bg-[#080C16] border-b border-slate-200 dark:border-white/10 overflow-hidden"
           >
-            <div className="px-4 pt-3 pb-6 space-y-2">
-              <a 
-                onClick={() => handleLinkClick(Page.Home)} 
-                className={`block px-3 py-2.5 rounded-xl text-base font-semibold ${
-                  activePage === Page.Home ? 'text-cyan bg-cyan/10' : 'text-slate-700 dark:text-slate-200'
+            <div className="px-4 py-4 space-y-1.5 max-h-[82vh] overflow-y-auto">
+              <button
+                type="button"
+                onClick={() => handleLinkClick(Page.Home)}
+                className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold ${
+                  activePage === Page.Home ? 'bg-indigo-500/10 text-indigo-500' : 'text-slate-700 dark:text-slate-200'
                 }`}
               >
                 Home
-              </a>
+              </button>
 
-              {/* Direct Mobile Link: HMS Ecosystem */}
-              <a 
-                onClick={() => handleLinkClick(Page.HospitalManagement)} 
-                className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-base font-semibold ${
-                  activePage === Page.HospitalManagement 
-                    ? 'text-cyan bg-cyan/15 border border-cyan/30' 
-                    : 'text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-slate-800/40'
-                }`}
-              >
-                <div className="flex items-center gap-2">
-                  <Activity size={18} className="text-cyan" />
-                  <span>HMS Hospital Ecosystem</span>
-                </div>
-                <span className="text-[9px] font-mono uppercase px-2 py-0.5 rounded-full bg-cyan/20 text-cyan font-bold">New</span>
-              </a>
+              <div className="pt-2 pb-1 px-3.5 text-[11px] font-mono uppercase tracking-wider text-slate-400">
+                Core Solutions &amp; Academy
+              </div>
 
-              {/* SINGLE SERVICES ACCORDION (HOUSING AI AUTOMATION, COST ESTIMATION, GROWTH SUITE) */}
-              <div className="border-t border-slate-100 dark:border-slate-800/60 pt-2">
-                <button 
-                  onClick={() => setIsServicesOpen(!isServicesOpen)} 
-                  className={`w-full flex justify-between items-center px-3 py-2.5 rounded-xl text-base font-semibold ${
-                    isAnyServiceActive ? 'text-cyan bg-cyan/10' : 'text-slate-700 dark:text-slate-200'
+              {CORE_PILLARS.map((pillar) => (
+                <button
+                  key={pillar.page}
+                  type="button"
+                  onClick={() => handleLinkClick(pillar.page)}
+                  className={`w-full text-left px-3.5 py-2.5 rounded-xl flex items-center justify-between ${
+                    activePage === pillar.page
+                      ? 'bg-indigo-500/10 text-indigo-500 font-semibold'
+                      : 'text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/[0.04]'
                   }`}
                 >
-                    <div className="flex items-center gap-2">
-                      <Sparkles size={16} className="text-cyan" />
-                      <span>Enterprise Suites</span>
-                    </div>
-                    <ChevronDown size={18} className={`transition-transform duration-300 ${isServicesOpen ? 'rotate-180 text-cyan' : ''}`} />
+                  <span className="flex items-center gap-2.5 text-sm">
+                    {PILLAR_ICONS[pillar.page]}
+                    <span>{pillar.shortTitle}</span>
+                  </span>
+                  <span className="text-[10px] font-mono text-slate-400">{pillar.badge}</span>
                 </button>
-                
-                <AnimatePresence>
-                  {isServicesOpen && (
-                    <motion.div 
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="pl-3 pr-1 pt-2 space-y-2 overflow-hidden"
-                    >
-                        {/* 0. HMS Hospital Ecosystem */}
-                        <a 
-                          onClick={() => handleLinkClick(Page.HospitalManagement)} 
-                          className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold ${
-                            activePage === Page.HospitalManagement 
-                              ? 'text-cyan bg-cyan/15 border border-cyan/30' 
-                              : 'text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-slate-800/40'
-                          }`}
-                        >
-                          <div className="flex items-center gap-2">
-                            <Building2 size={16} className="text-blue-500" />
-                            <div>
-                              <div>HMS Hospital Ecosystem</div>
-                              <div className="text-[11px] font-normal text-slate-400">EMR, Bed Flow, ICU Telemetry & PACS</div>
-                            </div>
-                          </div>
-                          <span className="text-[9px] font-mono uppercase px-2 py-0.5 rounded-full bg-cyan/20 text-cyan">Healthcare</span>
-                        </a>
+              ))}
 
-                        {/* 1. AI Automation */}
-                        <a 
-                          onClick={() => handleLinkClick(Page.AIAutomation)} 
-                          className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold ${
-                            activePage === Page.AIAutomation 
-                              ? 'text-cyan bg-cyan/15 border border-cyan/30' 
-                              : 'text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-slate-800/40'
-                          }`}
-                        >
-                          <div className="flex items-center gap-2">
-                            <Cpu size={16} className="text-cyan" />
-                            <div>
-                              <div>AI Automation</div>
-                              <div className="text-[11px] font-normal text-slate-400">Workflows & Agent Systems</div>
-                            </div>
-                          </div>
-                          <span className="text-[9px] font-mono uppercase px-2 py-0.5 rounded-full bg-cyan/20 text-cyan">Flagship</span>
-                        </a>
-
-                        {/* 2. Cost Estimation */}
-                        <a 
-                          onClick={() => handleLinkClick(Page.CostEstimation)} 
-                          className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold ${
-                            activePage === Page.CostEstimation 
-                              ? 'text-violet bg-violet/15 border border-violet/30' 
-                              : 'text-slate-800 dark:text-slate-100 bg-slate-50 dark:bg-slate-800/40'
-                          }`}
-                        >
-                          <div className="flex items-center gap-2">
-                            <Calculator size={16} className="text-violet" />
-                            <div>
-                              <div>Cost Estimation</div>
-                              <div className="text-[11px] font-normal text-slate-400">Sheet Metal, Casting & Machining</div>
-                            </div>
-                          </div>
-                          <span className="text-[9px] font-mono uppercase px-2 py-0.5 rounded-full bg-violet/20 text-violet">Should-Cost</span>
-                        </a>
-
-                        {/* 3. Growth Suite */}
-                        <div className="pt-2 pl-2">
-                          <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-1 flex items-center gap-1.5">
-                            <Layers size={13} className="text-orange" />
-                            <span>Growth Suite (Brand & Digital)</span>
-                          </div>
-                          <div className="space-y-1 pl-2 border-l-2 border-slate-200 dark:border-slate-700">
-                            {GROWTH_SUITE_PAGES.map((service) => (
-                                <a 
-                                  key={service.name} 
-                                  onClick={() => handleLinkClick(service.name)} 
-                                  className={`block px-2.5 py-1.5 rounded-lg text-xs transition-all ${
-                                    activePage === service.name ? 'text-cyan bg-cyan/10 font-semibold' : 'text-slate-600 dark:text-slate-400'
-                                  }`}
-                                >
-                                    <div className="font-medium">{service.name}</div>
-                                    <div className="text-[10px] text-slate-400">{service.desc}</div>
-                                </a>
-                            ))}
-                          </div>
-                        </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              <div className="border-t border-slate-100 dark:border-slate-800/60 pt-2">
-                <a 
-                  onClick={() => handleLinkClick(Page.About)} 
-                  className={`block px-3 py-2.5 rounded-xl text-base font-medium ${
-                    activePage === Page.About ? 'text-cyan bg-cyan/10' : 'text-slate-700 dark:text-slate-300'
+              <div className="border-t border-slate-200 dark:border-white/[0.08] pt-2 mt-2 space-y-1">
+                <button
+                  type="button"
+                  onClick={() => handleLinkClick(Page.About)}
+                  className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium ${
+                    activePage === Page.About ? 'bg-indigo-500/10 text-indigo-500' : 'text-slate-700 dark:text-slate-200'
                   }`}
                 >
-                  About VIMS
-                </a>
-                <a 
-                  onClick={() => handleLinkClick(Page.Contact)} 
-                  className={`block px-3 py-2.5 rounded-xl text-base font-medium ${
-                    activePage === Page.Contact ? 'text-cyan bg-cyan/10' : 'text-slate-700 dark:text-slate-300'
+                  About, Leadership &amp; Awards
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleLinkClick(Page.Contact)}
+                  className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium ${
+                    activePage === Page.Contact ? 'bg-indigo-500/10 text-indigo-500' : 'text-slate-700 dark:text-slate-200'
                   }`}
                 >
-                  Contact & Sourcing Support
-                </a>
+                  Contact
+                </button>
               </div>
 
-              <div className="pt-4">
-                <motion.button 
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => window.open(COMPANY_CONTACT.bookingUrl, '_blank')}
-                  className="w-full px-5 py-3 text-sm font-bold uppercase tracking-wider text-light-text bg-gradient-to-r from-orange to-violet rounded-xl shadow-lg transition-all duration-300"
+              <div className="pt-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsOpen(false);
+                    onOpenBooking();
+                  }}
+                  className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/20"
                 >
-                  Book Strategy Call
-                </motion.button>
+                  <Calendar size={16} />
+                  <span>Book Strategy Call with Vimal Raj</span>
+                </button>
               </div>
             </div>
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </header>
   );

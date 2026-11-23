@@ -45,7 +45,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
         },
         {
           heading: 'Project-Specific Agreements',
-          text: 'Where you engage VIMS Enterprise for customized software, consulting, AI automation, engineering costing, or marketing services, the specific scope of work, deliverables, and commercial terms will be governed by the written proposal, statement of work, or service agreement executed between you and VIMS Enterprise.'
+          text: 'Where you engage VIMS Enterprise for customized software, web platforms, AI voice agents, workflow automation, or engineering training programs, the specific scope of work, deliverables, and commercial terms will be governed by the written proposal, statement of work, or service agreement executed between you and VIMS Enterprise.'
         }
       ]
     },
@@ -55,7 +55,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
       title: 'Description of VIMS Enterprise Services',
       icon: <Briefcase className="w-6 h-6 text-violet" />,
       badge: 'Enterprise Offerings',
-      summary: 'Overview of the software platforms, engineering intelligence, and AI growth solutions provided by VIMS Enterprise.',
+      summary: 'Overview of the software platforms, applied AI systems, web engineering, and academy programs provided by VIMS Enterprise.',
       points: [
         {
           heading: 'Healthcare & Enterprise Software',
@@ -63,11 +63,11 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
         },
         {
           heading: 'AI Automation & Voice Agents',
-          text: 'We design and deploy business workflow automation, CRM integrations, WhatsApp Business Platform messaging workflows, and AI voice agents (including JillJill AI Voice Agent) for customer engagement, lead qualification, and appointment coordination.'
+          text: 'We design and deploy business workflow automation, CRM integrations, WhatsApp Business Platform messaging workflows, and multilingual AI voice agents for customer engagement, lead qualification, and appointment coordination.'
         },
         {
-          heading: 'Engineering Costing & Digital Growth',
-          text: 'We also provide mechanical should-costing and manufacturing cost estimation services, smart digital identity solutions (VIMS Cards), LinkedIn personal branding, and digital marketing services.'
+          heading: 'Custom Web Platforms & Engineering Academy',
+          text: 'We engineer custom B2B websites, SaaS portals, and e-commerce storefronts, and deliver hands-on training programs in MATLAB, Simulink, Stateflow Model-Based Design (MBD), and Forward Deployed AI Engineering.'
         }
       ]
     },

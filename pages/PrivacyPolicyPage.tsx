@@ -42,7 +42,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
         },
         {
           heading: 'Purposes of Personal Data Processing',
-          text: 'We process personal and business information to respond to your enquiries, evaluate project requirements, deliver requested VIMS Enterprise products and services (including HMS software consultations, AI Automation workflows, Mechanical Cost Estimation, VIMS Cards, LinkedIn Growth, and Digital Marketing), manage client relationships, provide customer support, and comply with applicable legal obligations.'
+          text: 'We process personal and business information to respond to your enquiries, evaluate project requirements, deliver requested VIMS Enterprise products and services (including HMS software consultations, AI Voice Agents, Custom Website & E-Commerce Creation, AI Automation workflows, and MATLAB & Forward Deployed Engineer training programs), manage client relationships, provide customer support, and comply with applicable legal obligations.'
         },
         {
           heading: 'Cookies, Local Storage & Analytics',
