@@ -12,25 +12,29 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', '"Inter"', 'system-ui', 'sans-serif'],
-        poppins: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        poppins: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        sans: ['"Inter"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       colors: {
-        navy: '#060911',
-        'navy-light': '#0C1220',
-        surface: '#0F1626',
-        cyan: '#38BDF8',
-        indigo: {
-          400: '#818CF8',
-          500: '#6366F1',
-          600: '#4F46E5',
+        obsidian: '#09090B',
+        graphite: '#111114',
+        alabaster: '#FAF8F5',
+        vermilion: {
+          DEFAULT: '#E8451E',
+          hover: '#D93814',
+          soft: '#FF6B47',
         },
-        violet: '#8B5CF6',
-        green: '#10B981',
-        orange: '#F59E0B',
-        gold: '#EAB308',
-        'light-text': '#F8FAFC',
+        champagne: {
+          DEFAULT: '#D4AF37',
+          soft: '#E8CA6A',
+          dark: '#B8860B',
+        },
+        clinical: {
+          DEFAULT: '#10B981',
+          dark: '#059669',
+        },
       },
       borderRadius: {
         '4xl': '2rem',
@@ -45,10 +49,20 @@ export default {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-50%)' },
         },
+        'float-slow': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-8px)' },
+        },
+        'orbit-spin': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         'fade-in-up': 'fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-        marquee: 'marquee 32s linear infinite',
+        marquee: 'marquee 28s linear infinite',
+        'float-slow': 'float-slow 5.5s ease-in-out infinite',
+        'orbit-spin': 'orbit-spin 26s linear infinite',
       },
     },
   },

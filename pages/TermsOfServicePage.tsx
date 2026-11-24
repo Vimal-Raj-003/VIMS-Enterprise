@@ -31,7 +31,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
       id: 'introduction-acceptance',
       number: '01',
       title: 'Introduction & Acceptance of Terms',
-      icon: <FileText className="w-6 h-6 text-cyan" />,
+      icon: <FileText className="w-6 h-6 text-[#E8451E]" />,
       badge: 'Scope & Agreement',
       summary: 'How accessing the VIMS Enterprise website or engaging with our services constitutes agreement to these Terms of Service.',
       points: [
@@ -53,7 +53,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
       id: 'services-description',
       number: '02',
       title: 'Description of VIMS Enterprise Services',
-      icon: <Briefcase className="w-6 h-6 text-violet" />,
+      icon: <Briefcase className="w-6 h-6 text-[#D4AF37]" />,
       badge: 'Enterprise Offerings',
       summary: 'Overview of the software platforms, applied AI systems, web engineering, and academy programs provided by VIMS Enterprise.',
       points: [
@@ -75,7 +75,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
       id: 'website-usage',
       number: '03',
       title: 'Website Usage Conditions',
-      icon: <Globe className="w-6 h-6 text-cyan" />,
+      icon: <Globe className="w-6 h-6 text-[#E8451E]" />,
       badge: 'Acceptable Use',
       summary: 'Permitted use of our website and prohibitions against misuse or unauthorized interference.',
       points: [
@@ -97,7 +97,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
       id: 'intellectual-property',
       number: '04',
       title: 'Intellectual Property',
-      icon: <Shield className="w-6 h-6 text-violet" />,
+      icon: <Shield className="w-6 h-6 text-[#D4AF37]" />,
       badge: 'Ownership Rights',
       summary: 'Protection of VIMS Enterprise branding, software architecture, content, and client-provided materials.',
       points: [
@@ -119,7 +119,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
       id: 'customer-responsibilities',
       number: '05',
       title: 'Customer Responsibilities',
-      icon: <UserCheck className="w-6 h-6 text-cyan" />,
+      icon: <UserCheck className="w-6 h-6 text-[#E8451E]" />,
       badge: 'Client Obligations',
       summary: 'Your responsibilities when providing data, configuring workflows, or using our communication and automation tools.',
       points: [
@@ -141,7 +141,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
       id: 'ai-automation-limitations',
       number: '06',
       title: 'AI Automation Service Limitations',
-      icon: <Cpu className="w-6 h-6 text-violet" />,
+      icon: <Cpu className="w-6 h-6 text-[#D4AF37]" />,
       badge: 'AI & Automation',
       summary: 'Important operational considerations regarding AI-generated outputs, voice agents, and automated workflows.',
       points: [
@@ -163,7 +163,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
       id: 'third-party-services',
       number: '07',
       title: 'Third-Party Services & Platforms',
-      icon: <Layers className="w-6 h-6 text-cyan" />,
+      icon: <Layers className="w-6 h-6 text-[#E8451E]" />,
       badge: 'External Integrations',
       summary: 'How external platforms, scheduling tools, and messaging networks interact with our website and services.',
       points: [
@@ -207,7 +207,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
       id: 'changes-to-terms',
       number: '09',
       title: 'Changes to Terms',
-      icon: <RefreshCw className="w-6 h-6 text-cyan" />,
+      icon: <RefreshCw className="w-6 h-6 text-[#E8451E]" />,
       badge: 'Updates',
       summary: 'How VIMS Enterprise updates these Terms of Service as our products and operations evolve.',
       points: [
@@ -233,7 +233,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
         variant="subpage"
         headline={
           <>
-            Terms of <span className="text-cyan">Service</span>
+            Terms of <span className="text-[#E8451E]">Service</span>
           </>
         }
         subtext="Clear, professional terms governing the use of the VIMS Enterprise website, enterprise software ecosystems, AI automation workflows, and engineering services."
@@ -251,23 +251,23 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
         {/* Top Metadata & Back Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan/15 border border-cyan/30 text-cyan text-xs font-mono font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E8451E]/15 border border-[#E8451E]/30 text-[#E8451E] text-xs font-mono font-bold uppercase tracking-wider">
               <FileText className="w-3.5 h-3.5" />
               VIMS Enterprise
             </span>
             <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-              Path: <code className="text-cyan">/terms-of-service</code>
+              Path: <code className="text-[#E8451E]">/terms-of-service</code>
             </span>
             <span className="hidden sm:inline text-slate-600">•</span>
             <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-              Contact: <a href="mailto:vimal@vimsenterprise.com" className="text-cyan hover:underline">vimal@vimsenterprise.com</a>
+              Contact: <a href="mailto:vimal@vimsenterprise.com" className="text-[#E8451E] hover:underline">vimal@vimsenterprise.com</a>
             </span>
           </div>
 
           {onNavigate && (
             <button
               onClick={() => onNavigate(Page.Home)}
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-cyan transition-colors self-start sm:self-auto"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-[#E8451E] transition-colors self-start sm:self-auto"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Home
@@ -278,7 +278,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
         {/* Quick Section Jump Bar */}
         <div className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-200/50 dark:border-slate-800/30 shadow-lg">
           <p className="text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-            <FileText className="w-4 h-4 text-cyan" />
+            <FileText className="w-4 h-4 text-[#E8451E]" />
             Terms of Service Sections
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -286,35 +286,35 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
               <a
                 key={section.id}
                 href={`#${section.id}`}
-                className="group flex items-center justify-between px-4 py-3 rounded-2xl bg-slate-100/70 dark:bg-navy/60 border border-slate-200/60 dark:border-slate-800 hover:border-cyan/40 transition-all duration-300"
+                className="group flex items-center justify-between px-4 py-3 rounded-2xl bg-slate-100/70 dark:bg-[#111114]/60 border border-slate-200/60 dark:border-slate-800 hover:border-[#E8451E]/40 transition-all duration-300"
               >
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <span className="text-xs font-mono font-bold text-cyan">{section.number}</span>
-                  <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate group-hover:text-cyan transition-colors">
+                  <span className="text-xs font-mono font-bold text-[#E8451E]">{section.number}</span>
+                  <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate group-hover:text-[#E8451E] transition-colors">
                     {section.title}
                   </span>
                 </div>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-cyan group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#E8451E] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
               </a>
             ))}
             <a
               href="#contact-information"
-              className="group flex items-center justify-between px-4 py-3 rounded-2xl bg-cyan/10 border border-cyan/30 hover:bg-cyan/20 transition-all duration-300"
+              className="group flex items-center justify-between px-4 py-3 rounded-2xl bg-[#E8451E]/10 border border-[#E8451E]/30 hover:bg-[#E8451E]/20 transition-all duration-300"
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <span className="text-xs font-mono font-bold text-cyan">10</span>
+                <span className="text-xs font-mono font-bold text-[#E8451E]">10</span>
                 <span className="text-xs font-semibold text-slate-900 dark:text-white truncate">
                   Contact Information
                 </span>
               </div>
-              <ChevronRight className="w-4 h-4 text-cyan group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+              <ChevronRight className="w-4 h-4 text-[#E8451E] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
             </a>
           </div>
         </div>
 
         {/* Intro Overview Card */}
         <div className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-8 md:p-10 rounded-4xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl">
-          <h2 className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-light-text mb-4">
+          <h2 className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-zinc-100 mb-4">
             Overview
           </h2>
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base md:text-lg">
@@ -326,12 +326,12 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
                   e.preventDefault();
                   onNavigate(Page.PrivacyPolicy);
                 }}
-                className="text-cyan hover:underline font-medium"
+                className="text-[#E8451E] hover:underline font-medium"
               >
                 Privacy Policy
               </a>
             ) : (
-              <a href="/privacy-policy" className="text-cyan hover:underline font-medium">
+              <a href="/privacy-policy" className="text-[#E8451E] hover:underline font-medium">
                 Privacy Policy
               </a>
             )}{' '}
@@ -343,12 +343,12 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
                   e.preventDefault();
                   onNavigate(Page.DataDeletion);
                 }}
-                className="text-cyan hover:underline font-medium"
+                className="text-[#E8451E] hover:underline font-medium"
               >
                 Data Deletion Instructions
               </a>
             ) : (
-              <a href="/data-deletion" className="text-cyan hover:underline font-medium">
+              <a href="/data-deletion" className="text-[#E8451E] hover:underline font-medium">
                 Data Deletion Instructions
               </a>
             )}
@@ -367,16 +367,16 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
             <section
               key={section.id}
               id={section.id}
-              className="scroll-mt-28 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-8 md:p-10 rounded-4xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl hover:border-cyan/30 transition-all duration-300"
+              className="scroll-mt-28 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-8 md:p-10 rounded-4xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl hover:border-[#E8451E]/30 transition-all duration-300"
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200/60 dark:border-slate-800/80">
                 <div className="flex items-start sm:items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-navy flex items-center justify-center border border-slate-200/60 dark:border-slate-800 shadow-inner flex-shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-[#111114] flex items-center justify-center border border-slate-200/60 dark:border-slate-800 shadow-inner flex-shrink-0">
                     {section.icon}
                   </div>
                   <div>
                     <div className="flex items-center gap-2.5">
-                      <span className="text-xs font-mono font-bold text-cyan uppercase tracking-widest">
+                      <span className="text-xs font-mono font-bold text-[#E8451E] uppercase tracking-widest">
                         Section {section.number}
                       </span>
                       <span className="text-slate-400 dark:text-slate-600">•</span>
@@ -384,7 +384,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
                         {section.badge}
                       </span>
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-light-text mt-1">
+                    <h2 className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-zinc-100 mt-1">
                       {section.title}
                     </h2>
                   </div>
@@ -399,12 +399,12 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
                 {section.points.map((point, idx) => (
                   <div
                     key={idx}
-                    className="p-6 rounded-3xl bg-slate-50/70 dark:bg-navy/50 border border-slate-200/50 dark:border-slate-800/60 flex flex-col justify-between"
+                    className="p-6 rounded-3xl bg-slate-50/70 dark:bg-[#111114]/50 border border-slate-200/50 dark:border-slate-800/60 flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center gap-2 mb-3">
-                        <CheckCircle2 className="w-4 h-4 text-cyan flex-shrink-0" />
-                        <h3 className="text-base font-poppins font-bold text-slate-900 dark:text-light-text">
+                        <CheckCircle2 className="w-4 h-4 text-[#E8451E] flex-shrink-0" />
+                        <h3 className="text-base font-poppins font-bold text-slate-900 dark:text-zinc-100">
                           {point.heading}
                         </h3>
                       </div>
@@ -421,14 +421,14 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
           {/* Section 10: Contact Information */}
           <section
             id="contact-information"
-            className="scroll-mt-28 bg-gradient-to-br from-navy/90 via-slate-900/90 to-navy/90 text-white p-8 md:p-12 rounded-4xl border border-cyan/30 shadow-2xl relative overflow-hidden"
+            className="scroll-mt-28 bg-gradient-to-br from-[#111114]/90 via-slate-900/90 to-[#111114]/90 text-white p-8 md:p-12 rounded-4xl border border-[#E8451E]/30 shadow-2xl relative overflow-hidden"
           >
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-cyan/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-violet/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#E8451E]/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#D4AF37]/10 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan/20 border border-cyan/30 text-cyan text-xs font-mono uppercase tracking-widest">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8451E]/20 border border-[#E8451E]/30 text-[#E8451E] text-xs font-mono uppercase tracking-widest">
                   Section 10 • Contact Information
                 </div>
                 <h2 className="text-2xl md:text-4xl font-poppins font-bold text-white">
@@ -441,20 +441,20 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
 
               <div className="lg:col-span-5 bg-white/5 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/10 space-y-5">
                 <div>
-                  <p className="text-xs font-mono uppercase tracking-widest text-cyan mb-1">Company</p>
+                  <p className="text-xs font-mono uppercase tracking-widest text-[#E8451E] mb-1">Company</p>
                   <p className="text-xl font-poppins font-bold text-white">VIMS Enterprise</p>
                 </div>
 
                 <div className="space-y-3 pt-2 border-t border-white/10">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-cyan/20 flex items-center justify-center text-cyan flex-shrink-0">
+                    <div className="w-10 h-10 rounded-2xl bg-[#E8451E]/20 flex items-center justify-center text-[#E8451E] flex-shrink-0">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-xs font-mono text-slate-400">Official Contact Email</p>
                       <a
                         href="mailto:vimal@vimsenterprise.com"
-                        className="text-sm md:text-base font-semibold text-cyan hover:underline break-all"
+                        className="text-sm md:text-base font-semibold text-[#E8451E] hover:underline break-all"
                       >
                         vimal@vimsenterprise.com
                       </a>
@@ -462,14 +462,14 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-cyan/20 flex items-center justify-center text-cyan flex-shrink-0">
+                    <div className="w-10 h-10 rounded-2xl bg-[#E8451E]/20 flex items-center justify-center text-[#E8451E] flex-shrink-0">
                       <Phone className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-xs font-mono text-slate-400">General Business Contact Number</p>
                       <a
                         href="tel:+919940660868"
-                        className="text-sm md:text-base font-semibold text-white hover:text-cyan transition-colors"
+                        className="text-sm md:text-base font-semibold text-white hover:text-[#E8451E] transition-colors"
                       >
                         +91 9940660868
                       </a>
@@ -480,7 +480,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
                 <div className="pt-2">
                   <a
                     href="mailto:vimal@vimsenterprise.com?subject=Terms%20of%20Service%20Inquiry"
-                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-gradient-to-r from-cyan to-violet text-white font-bold text-sm shadow-lg hover:opacity-95 transition-opacity"
+                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-gradient-to-r from-[#E8451E] to-[#D4AF37] text-white font-bold text-sm shadow-lg hover:opacity-95 transition-opacity"
                   >
                     <Mail className="w-4 h-4" />
                     Email vimal@vimsenterprise.com

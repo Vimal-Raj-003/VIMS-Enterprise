@@ -29,7 +29,7 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
       id: 'processed-data',
       number: '01',
       title: 'What Personal Data May Be Processed',
-      icon: <Database className="w-6 h-6 text-cyan" />,
+      icon: <Database className="w-6 h-6 text-[#E8451E]" />,
       badge: 'Scope of Data',
       summary: 'Categories of personal and business contact data held by VIMS Enterprise that may be subject to a deletion request.',
       points: [
@@ -51,7 +51,7 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
       id: 'how-to-request-deletion',
       number: '02',
       title: 'How to Request Personal Data Deletion',
-      icon: <Mail className="w-6 h-6 text-violet" />,
+      icon: <Mail className="w-6 h-6 text-[#D4AF37]" />,
       badge: 'Step-by-Step Instructions',
       summary: 'Follow these clear steps to submit a formal personal data deletion request to VIMS Enterprise.',
       points: [
@@ -73,7 +73,7 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
       id: 'verification-and-security',
       number: '03',
       title: 'Identity Verification & Credential Safety',
-      icon: <UserCheck className="w-6 h-6 text-cyan" />,
+      icon: <UserCheck className="w-6 h-6 text-[#E8451E]" />,
       badge: 'Verification & Safety',
       summary: 'How we protect your records against unauthorized deletion requests and keep your credentials safe.',
       points: [
@@ -117,7 +117,7 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
       id: 'status-updates',
       number: '05',
       title: 'Requesting an Update on Your Deletion Request',
-      icon: <RefreshCw className="w-6 h-6 text-cyan" />,
+      icon: <RefreshCw className="w-6 h-6 text-[#E8451E]" />,
       badge: 'Status Follow-Up',
       summary: 'How to check the status of a pending deletion request or ask follow-up questions.',
       points: [
@@ -143,7 +143,7 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
         variant="subpage"
         headline={
           <>
-            Data Deletion <span className="text-cyan">Instructions</span>
+            Data Deletion <span className="text-[#E8451E]">Instructions</span>
           </>
         }
         subtext="Clear, step-by-step instructions on how to request the deletion of your personal data held by VIMS Enterprise across our website, WhatsApp channels, CRM, and AI voice services."
@@ -162,23 +162,23 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
         {/* Top Metadata & Back Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan/15 border border-cyan/30 text-cyan text-xs font-mono font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E8451E]/15 border border-[#E8451E]/30 text-[#E8451E] text-xs font-mono font-bold uppercase tracking-wider">
               <Trash2 className="w-3.5 h-3.5" />
               VIMS Enterprise
             </span>
             <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-              Path: <code className="text-cyan">/data-deletion</code>
+              Path: <code className="text-[#E8451E]">/data-deletion</code>
             </span>
             <span className="hidden sm:inline text-slate-600">•</span>
             <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-              Official Privacy Contact: <a href="mailto:vimal@vimsenterprise.com" className="text-cyan hover:underline">vimal@vimsenterprise.com</a>
+              Official Privacy Contact: <a href="mailto:vimal@vimsenterprise.com" className="text-[#E8451E] hover:underline">vimal@vimsenterprise.com</a>
             </span>
           </div>
 
           {onNavigate && (
             <button
               onClick={() => onNavigate(Page.Home)}
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-cyan transition-colors self-start sm:self-auto"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-[#E8451E] transition-colors self-start sm:self-auto"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Home
@@ -187,21 +187,21 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
         </div>
 
         {/* Quick Action Summary Card */}
-        <div className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-8 md:p-10 rounded-4xl border border-cyan/30 shadow-xl">
+        <div className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-8 md:p-10 rounded-4xl border border-[#E8451E]/30 shadow-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4">
-              <span className="text-xs font-mono uppercase tracking-widest text-cyan font-bold">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#E8451E] font-bold">
                 Quick Summary • Publicly Accessible (No Login Required)
               </span>
-              <h2 className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-light-text">
+              <h2 className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-zinc-100">
                 How to Submit a Personal Data Deletion Request
               </h2>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base">
                 To request the deletion of personal data held by <strong className="text-slate-900 dark:text-white font-semibold">VIMS Enterprise</strong>, send an email to{' '}
-                <a href="mailto:vimal@vimsenterprise.com?subject=Personal%20Data%20Deletion%20Request" className="text-cyan hover:underline font-semibold">
+                <a href="mailto:vimal@vimsenterprise.com?subject=Personal%20Data%20Deletion%20Request" className="text-[#E8451E] hover:underline font-semibold">
                   vimal@vimsenterprise.com
                 </a>{' '}
-                with the subject line <code className="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-navy text-cyan font-mono text-sm">Personal Data Deletion Request</code> and include the email address or phone number associated with your data.
+                with the subject line <code className="px-2 py-0.5 rounded bg-slate-200/70 dark:bg-[#111114] text-[#E8451E] font-mono text-sm">Personal Data Deletion Request</code> and include the email address or phone number associated with your data.
               </p>
               <div className="flex items-start gap-2.5 pt-2 text-xs md:text-sm text-amber-600 dark:text-amber-400">
                 <ShieldAlert className="w-5 h-5 flex-shrink-0 mt-0.5" />
@@ -211,10 +211,10 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            <div className="lg:col-span-4 bg-slate-100/80 dark:bg-navy/70 p-6 rounded-3xl border border-slate-200/70 dark:border-slate-800 space-y-4">
+            <div className="lg:col-span-4 bg-slate-100/80 dark:bg-[#111114]/70 p-6 rounded-3xl border border-slate-200/70 dark:border-slate-800 space-y-4">
               <div>
                 <p className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">Send Request To</p>
-                <p className="text-sm md:text-base font-mono font-bold text-cyan break-all mt-1">vimal@vimsenterprise.com</p>
+                <p className="text-sm md:text-base font-mono font-bold text-[#E8451E] break-all mt-1">vimal@vimsenterprise.com</p>
               </div>
               <div>
                 <p className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">Suggested Email Subject</p>
@@ -226,7 +226,7 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
               </div>
               <a
                 href="mailto:vimal@vimsenterprise.com?subject=Personal%20Data%20Deletion%20Request"
-                className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-gradient-to-r from-cyan to-violet text-white font-bold text-xs md:text-sm shadow-md hover:opacity-95 transition-opacity"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-gradient-to-r from-[#E8451E] to-[#D4AF37] text-white font-bold text-xs md:text-sm shadow-md hover:opacity-95 transition-opacity"
               >
                 <Mail className="w-4 h-4" />
                 Compose Deletion Email
@@ -238,7 +238,7 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
         {/* Quick Section Jump Bar */}
         <div className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-200/50 dark:border-slate-800/30 shadow-lg">
           <p className="text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-            <FileText className="w-4 h-4 text-cyan" />
+            <FileText className="w-4 h-4 text-[#E8451E]" />
             Data Deletion Guide Sections
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -246,28 +246,28 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
               <a
                 key={section.id}
                 href={`#${section.id}`}
-                className="group flex items-center justify-between px-4 py-3 rounded-2xl bg-slate-100/70 dark:bg-navy/60 border border-slate-200/60 dark:border-slate-800 hover:border-cyan/40 transition-all duration-300"
+                className="group flex items-center justify-between px-4 py-3 rounded-2xl bg-slate-100/70 dark:bg-[#111114]/60 border border-slate-200/60 dark:border-slate-800 hover:border-[#E8451E]/40 transition-all duration-300"
               >
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <span className="text-xs font-mono font-bold text-cyan">{section.number}</span>
-                  <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate group-hover:text-cyan transition-colors">
+                  <span className="text-xs font-mono font-bold text-[#E8451E]">{section.number}</span>
+                  <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate group-hover:text-[#E8451E] transition-colors">
                     {section.title}
                   </span>
                 </div>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-cyan group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#E8451E] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
               </a>
             ))}
             <a
               href="#contact-privacy-team"
-              className="group flex items-center justify-between px-4 py-3 rounded-2xl bg-cyan/10 border border-cyan/30 hover:bg-cyan/20 transition-all duration-300"
+              className="group flex items-center justify-between px-4 py-3 rounded-2xl bg-[#E8451E]/10 border border-[#E8451E]/30 hover:bg-[#E8451E]/20 transition-all duration-300"
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <span className="text-xs font-mono font-bold text-cyan">06</span>
+                <span className="text-xs font-mono font-bold text-[#E8451E]">06</span>
                 <span className="text-xs font-semibold text-slate-900 dark:text-white truncate">
                   Contact & Follow-Up
                 </span>
               </div>
-              <ChevronRight className="w-4 h-4 text-cyan group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+              <ChevronRight className="w-4 h-4 text-[#E8451E] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
             </a>
           </div>
         </div>
@@ -283,16 +283,16 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
             <section
               key={section.id}
               id={section.id}
-              className="scroll-mt-28 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-8 md:p-10 rounded-4xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl hover:border-cyan/30 transition-all duration-300"
+              className="scroll-mt-28 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-8 md:p-10 rounded-4xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl hover:border-[#E8451E]/30 transition-all duration-300"
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200/60 dark:border-slate-800/80">
                 <div className="flex items-start sm:items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-navy flex items-center justify-center border border-slate-200/60 dark:border-slate-800 shadow-inner flex-shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-[#111114] flex items-center justify-center border border-slate-200/60 dark:border-slate-800 shadow-inner flex-shrink-0">
                     {section.icon}
                   </div>
                   <div>
                     <div className="flex items-center gap-2.5">
-                      <span className="text-xs font-mono font-bold text-cyan uppercase tracking-widest">
+                      <span className="text-xs font-mono font-bold text-[#E8451E] uppercase tracking-widest">
                         Section {section.number}
                       </span>
                       <span className="text-slate-400 dark:text-slate-600">•</span>
@@ -300,7 +300,7 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
                         {section.badge}
                       </span>
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-light-text mt-1">
+                    <h2 className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-zinc-100 mt-1">
                       {section.title}
                     </h2>
                   </div>
@@ -315,12 +315,12 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
                 {section.points.map((point, idx) => (
                   <div
                     key={idx}
-                    className="p-6 rounded-3xl bg-slate-50/70 dark:bg-navy/50 border border-slate-200/50 dark:border-slate-800/60 flex flex-col justify-between"
+                    className="p-6 rounded-3xl bg-slate-50/70 dark:bg-[#111114]/50 border border-slate-200/50 dark:border-slate-800/60 flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center gap-2 mb-3">
-                        <CheckCircle2 className="w-4 h-4 text-cyan flex-shrink-0" />
-                        <h3 className="text-base font-poppins font-bold text-slate-900 dark:text-light-text">
+                        <CheckCircle2 className="w-4 h-4 text-[#E8451E] flex-shrink-0" />
+                        <h3 className="text-base font-poppins font-bold text-slate-900 dark:text-zinc-100">
                           {point.heading}
                         </h3>
                       </div>
@@ -337,44 +337,44 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
           {/* Section 06: Contact & Follow-Up */}
           <section
             id="contact-privacy-team"
-            className="scroll-mt-28 bg-gradient-to-br from-navy/90 via-slate-900/90 to-navy/90 text-white p-8 md:p-12 rounded-4xl border border-cyan/30 shadow-2xl relative overflow-hidden"
+            className="scroll-mt-28 bg-gradient-to-br from-[#111114]/90 via-slate-900/90 to-[#111114]/90 text-white p-8 md:p-12 rounded-4xl border border-[#E8451E]/30 shadow-2xl relative overflow-hidden"
           >
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-cyan/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-violet/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#E8451E]/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#D4AF37]/10 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-7 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan/20 border border-cyan/30 text-cyan text-xs font-mono uppercase tracking-widest">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8451E]/20 border border-[#E8451E]/30 text-[#E8451E] text-xs font-mono uppercase tracking-widest">
                   Section 06 • Contact & Status Updates
                 </div>
                 <h2 className="text-2xl md:text-4xl font-poppins font-bold text-white">
                   Submit or Track a Deletion Request
                 </h2>
                 <p className="text-slate-300 leading-relaxed text-sm md:text-base max-w-2xl">
-                  To submit a new deletion request or ask for an update on an existing request, email <strong className="text-white">VIMS Enterprise</strong> at <a href="mailto:vimal@vimsenterprise.com?subject=Personal%20Data%20Deletion%20Request" className="text-cyan hover:underline">vimal@vimsenterprise.com</a> with the email address or phone number associated with your records.
+                  To submit a new deletion request or ask for an update on an existing request, email <strong className="text-white">VIMS Enterprise</strong> at <a href="mailto:vimal@vimsenterprise.com?subject=Personal%20Data%20Deletion%20Request" className="text-[#E8451E] hover:underline">vimal@vimsenterprise.com</a> with the email address or phone number associated with your records.
                 </p>
                 <div className="flex flex-wrap items-center gap-3 pt-2 text-xs text-slate-300">
-                  <Lock className="w-4 h-4 text-cyan flex-shrink-0" />
+                  <Lock className="w-4 h-4 text-[#E8451E] flex-shrink-0" />
                   <span>Remember: Never send passwords, OTPs, or sensitive credentials in your request.</span>
                 </div>
               </div>
 
               <div className="lg:col-span-5 bg-white/5 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/10 space-y-5">
                 <div>
-                  <p className="text-xs font-mono uppercase tracking-widest text-cyan mb-1">Company</p>
+                  <p className="text-xs font-mono uppercase tracking-widest text-[#E8451E] mb-1">Company</p>
                   <p className="text-xl font-poppins font-bold text-white">VIMS Enterprise</p>
                 </div>
 
                 <div className="space-y-3 pt-2 border-t border-white/10">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-cyan/20 flex items-center justify-center text-cyan flex-shrink-0">
+                    <div className="w-10 h-10 rounded-2xl bg-[#E8451E]/20 flex items-center justify-center text-[#E8451E] flex-shrink-0">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-xs font-mono text-slate-400">Official Data Deletion & Privacy Email</p>
                       <a
                         href="mailto:vimal@vimsenterprise.com?subject=Personal%20Data%20Deletion%20Request"
-                        className="text-sm md:text-base font-semibold text-cyan hover:underline break-all"
+                        className="text-sm md:text-base font-semibold text-[#E8451E] hover:underline break-all"
                       >
                         vimal@vimsenterprise.com
                       </a>
@@ -382,14 +382,14 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-cyan/20 flex items-center justify-center text-cyan flex-shrink-0">
+                    <div className="w-10 h-10 rounded-2xl bg-[#E8451E]/20 flex items-center justify-center text-[#E8451E] flex-shrink-0">
                       <Phone className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-xs font-mono text-slate-400">General Business Contact Number</p>
                       <a
                         href="tel:+919940660868"
-                        className="text-sm md:text-base font-semibold text-white hover:text-cyan transition-colors"
+                        className="text-sm md:text-base font-semibold text-white hover:text-[#E8451E] transition-colors"
                       >
                         +91 9940660868
                       </a>
@@ -400,7 +400,7 @@ const DataDeletionPage: React.FC<DataDeletionPageProps> = ({ onNavigate }) => {
                 <div className="pt-2">
                   <a
                     href="mailto:vimal@vimsenterprise.com?subject=Personal%20Data%20Deletion%20Request"
-                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-gradient-to-r from-cyan to-violet text-white font-bold text-sm shadow-lg hover:opacity-95 transition-opacity"
+                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-gradient-to-r from-[#E8451E] to-[#D4AF37] text-white font-bold text-sm shadow-lg hover:opacity-95 transition-opacity"
                   >
                     <Mail className="w-4 h-4" />
                     Email vimal@vimsenterprise.com

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Mail, Phone, MessageSquare, Calendar, ShieldCheck, Award } from 'lucide-react';
+import { Mail, Phone, MessageSquare, Calendar, ShieldCheck, Award, ExternalLink } from 'lucide-react';
 import { Page } from '../types';
-import { COMPANY_CONTACT, CORE_PILLARS } from '../constants';
+import { COMPANY_CONTACT, CORE_PILLARS, GROUP_PLATFORMS } from '../constants';
 
 interface FooterProps {
   onNavigate: (page: Page) => void;
@@ -10,10 +10,10 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => {
   return (
-    <footer className="bg-white dark:bg-[#050811] border-t border-slate-200/80 dark:border-white/[0.08]">
-      <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-white dark:bg-[#070709] border-t border-zinc-200/80 dark:border-white/10">
+      <div className="max-w-7xl mx-auto py-14 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
-          {/* Brand & Credentials */}
+          {/* Brand & Authentic Social Eagle Badge */}
           <div className="lg:col-span-4 space-y-4">
             <button
               type="button"
@@ -22,37 +22,36 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => {
             >
               <img
                 src="/images/brand/vims-logo.webp"
-                alt="VIMS Enterprise Logo"
-                className="w-10 h-10 object-contain rounded-xl border border-slate-200 dark:border-white/10"
+                alt="VIMS Enterprise"
+                className="w-9 h-9 object-contain rounded-xl border border-zinc-200 dark:border-white/10"
               />
-              <div>
-                <div className="text-xl font-poppins font-bold text-slate-900 dark:text-white leading-none">
-                  VIMS Enterprise
-                </div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-indigo-600 dark:text-indigo-400 mt-1">
-                  Applied AI · Web Systems · Healthcare OS
-                </div>
-              </div>
+              <span className="text-xl font-display font-bold text-zinc-900 dark:text-white leading-none">
+                VIMS <span className="font-medium text-zinc-500 dark:text-zinc-400">Enterprise</span>
+              </span>
             </button>
 
-            <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
-              Human-centered enterprise engineering partner building multilingual AI voice agents, high-converting web platforms, autonomous agent workflows, MediCore HMS, and industry-ready engineering talent.
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-sm">
+              B2B engineering group building Jill-Jill Voice AI, MediCore HMS, custom web systems, autonomous workflows, and Embedded Skills Academy.
             </p>
 
             <div className="flex flex-wrap gap-2 pt-1">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-[11px] font-medium text-amber-700 dark:text-amber-300">
+              <button
+                type="button"
+                onClick={() => onNavigate(Page.About)}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/30 text-[11px] font-medium text-[#B8860B] dark:text-[#E8CA6A] hover:bg-[#D4AF37]/25 transition-colors"
+              >
                 <Award size={12} /> Social Eagle Award Recipient
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/[0.05] border border-slate-200 dark:border-white/10 text-[11px] font-mono text-slate-600 dark:text-slate-300">
-                <ShieldCheck size={12} className="text-indigo-500" /> MSME Registered
+              </button>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 text-[11px] font-mono text-zinc-600 dark:text-zinc-300">
+                <ShieldCheck size={12} className="text-[#10B981]" /> MSME Registered
               </span>
             </div>
           </div>
 
-          {/* Core Ecosystem */}
+          {/* 5 Specialized Niches */}
           <div className="lg:col-span-3">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold">
-              Solutions &amp; Academy
+            <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+              Solutions
             </h4>
             <ul className="mt-4 space-y-2.5">
               {CORE_PILLARS.map((p) => (
@@ -60,7 +59,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => {
                   <button
                     type="button"
                     onClick={() => onNavigate(p.page)}
-                    className="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-colors text-left"
+                    className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-[#E8451E] dark:hover:text-white transition-colors text-left"
                   >
                     {p.shortTitle}
                   </button>
@@ -69,106 +68,83 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => {
             </ul>
           </div>
 
-          {/* Company & Compliance */}
+          {/* VIMS Group & Company */}
           <div className="lg:col-span-2">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold">
-              Company
+            <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+              VIMS Group
             </h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate(Page.Home)}
-                  className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-colors"
+                <a
+                  href={GROUP_PLATFORMS.jilljill.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-zinc-600 dark:text-zinc-400 hover:text-[#E8451E] dark:hover:text-white transition-colors"
                 >
-                  Home
-                </button>
+                  <span>Jill-Jill Voice</span>
+                  <ExternalLink size={12} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href={GROUP_PLATFORMS.embskills.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-zinc-600 dark:text-zinc-400 hover:text-[#E8451E] dark:hover:text-white transition-colors"
+                >
+                  <span>Embedded Skills</span>
+                  <ExternalLink size={12} />
+                </a>
               </li>
               <li>
                 <button
                   type="button"
                   onClick={() => onNavigate(Page.About)}
-                  className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-colors"
+                  className="text-zinc-600 dark:text-zinc-400 hover:text-[#E8451E] dark:hover:text-white transition-colors"
                 >
-                  About &amp; Awards
+                  About
                 </button>
               </li>
               <li>
                 <button
                   type="button"
                   onClick={() => onNavigate(Page.Contact)}
-                  className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-colors"
+                  className="text-zinc-600 dark:text-zinc-400 hover:text-[#E8451E] dark:hover:text-white transition-colors"
                 >
                   Contact
                 </button>
               </li>
-              <li>
-                <a
-                  href="/privacy-policy"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigate(Page.PrivacyPolicy);
-                  }}
-                  className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-colors"
-                >
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/terms-of-service"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigate(Page.TermsOfService);
-                  }}
-                  className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-colors"
-                >
-                  Terms of Service
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/data-deletion"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigate(Page.DataDeletion);
-                  }}
-                  className="text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-colors"
-                >
-                  Data Deletion
-                </a>
-              </li>
             </ul>
           </div>
 
-          {/* Direct Executive Contact */}
+          {/* Direct Desk */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold">
-              Direct Executive Desk
+            <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+              Direct Desk
             </h4>
-            <div className="space-y-2.5 text-sm text-slate-600 dark:text-slate-400 pt-1">
+            <div className="space-y-2.5 text-sm text-zinc-600 dark:text-zinc-400 pt-1">
               <a
                 href={`mailto:${COMPANY_CONTACT.email}`}
-                className="flex items-center gap-2.5 hover:text-indigo-600 dark:hover:text-white transition-colors"
+                className="flex items-center gap-2.5 hover:text-[#E8451E] dark:hover:text-white transition-colors"
               >
-                <Mail size={15} className="text-indigo-500 shrink-0" />
+                <Mail size={15} className="text-[#E8451E] shrink-0" />
                 <span>{COMPANY_CONTACT.email}</span>
               </a>
               <a
                 href={`tel:+91${COMPANY_CONTACT.phone}`}
-                className="flex items-center gap-2.5 hover:text-indigo-600 dark:hover:text-white transition-colors"
+                className="flex items-center gap-2.5 hover:text-[#E8451E] dark:hover:text-white transition-colors"
               >
-                <Phone size={15} className="text-indigo-500 shrink-0" />
+                <Phone size={15} className="text-[#D4AF37] shrink-0" />
                 <span>{COMPANY_CONTACT.phoneFormatted}</span>
               </a>
               <a
                 href={COMPANY_CONTACT.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 hover:text-emerald-500 transition-colors"
+                className="flex items-center gap-2.5 hover:text-[#10B981] transition-colors"
               >
-                <MessageSquare size={15} className="text-emerald-500 shrink-0" />
-                <span>WhatsApp Direct</span>
+                <MessageSquare size={15} className="text-[#10B981] shrink-0" />
+                <span>WhatsApp Vimal Raj (CTO)</span>
               </a>
             </div>
 
@@ -176,32 +152,32 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => {
               <button
                 type="button"
                 onClick={() => onOpenBooking()}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold transition-all shadow-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#E8451E] hover:bg-[#D93814] text-white text-xs font-semibold transition-all shadow-sm"
               >
                 <Calendar size={14} />
-                <span>Book a 30-Min Strategy Call</span>
+                <span>Book a Strategy Call</span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Bottom Legal & Registration Bar */}
-        <div className="mt-12 pt-8 border-t border-slate-200/80 dark:border-white/[0.06] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+        {/* Bottom Legal Bar */}
+        <div className="mt-12 pt-7 border-t border-zinc-200/80 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500 dark:text-zinc-400">
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
             <span>&copy; {new Date().getFullYear()} VIMS Enterprise. All rights reserved.</span>
-            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">&bull;</span>
+            <span className="hidden sm:inline text-zinc-300 dark:text-zinc-700">&bull;</span>
             <span className="font-mono text-[11px]">GSTIN: {COMPANY_CONTACT.gstin}</span>
-            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">&bull;</span>
+            <span className="hidden sm:inline text-zinc-300 dark:text-zinc-700">&bull;</span>
             <span className="font-mono text-[11px]">Udyam: {COMPANY_CONTACT.udyam}</span>
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-5">
             <a
               href="/privacy-policy"
               onClick={(e) => {
                 e.preventDefault();
                 onNavigate(Page.PrivacyPolicy);
               }}
-              className="hover:text-indigo-500 transition-colors"
+              className="hover:text-[#E8451E] transition-colors"
             >
               Privacy
             </a>
@@ -211,7 +187,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => {
                 e.preventDefault();
                 onNavigate(Page.TermsOfService);
               }}
-              className="hover:text-indigo-500 transition-colors"
+              className="hover:text-[#E8451E] transition-colors"
             >
               Terms
             </a>
@@ -221,7 +197,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenBooking }) => {
                 e.preventDefault();
                 onNavigate(Page.DataDeletion);
               }}
-              className="hover:text-indigo-500 transition-colors"
+              className="hover:text-[#E8451E] transition-colors"
             >
               Data Deletion
             </a>

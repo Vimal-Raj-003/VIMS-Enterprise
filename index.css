@@ -11,28 +11,70 @@
   body {
     overflow-x: hidden;
   }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+  }
 }
 
 @layer utilities {
   .executive-grid {
-    background-size: 48px 48px;
-    background-image: 
-      linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    background-image:
+      linear-gradient(to right, rgba(24, 24, 27, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(24, 24, 27, 0.045) 1px, transparent 1px);
   }
 
   .dark .executive-grid {
-    background-image: 
-      linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
   }
 
   .glass-panel {
-    @apply bg-white/85 dark:bg-[#0C1220]/80 backdrop-blur-xl border border-slate-200/80 dark:border-white/[0.08];
+    @apply bg-white/85 dark:bg-[#111114]/85 backdrop-blur-xl border border-zinc-200/80 dark:border-white/10;
   }
 
   .executive-card {
-    @apply bg-white dark:bg-[#0C1220]/90 border border-slate-200/80 dark:border-white/[0.08] rounded-2xl shadow-sm hover:border-indigo-500/40 dark:hover:border-indigo-400/35 transition-all duration-300;
+    @apply bg-white dark:bg-[#111114] border border-zinc-200/80 dark:border-white/10 rounded-2xl shadow-sm hover:border-[#E8451E]/40 dark:hover:border-[#E8451E]/40 transition-all duration-300;
+  }
+
+  /* 3D Perspective & Card Flip Helpers */
+  .perspective-1200 {
+    perspective: 1200px;
+    -webkit-perspective: 1200px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  /* Edge-faded Marquee */
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-orbit-spin,
+  .animate-float-slow {
+    animation: none !important;
   }
 }
 
@@ -45,10 +87,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(100, 116, 139, 0.32);
+  background: rgba(113, 113, 122, 0.35);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.6);
+  background: rgba(232, 69, 30, 0.65);
 }

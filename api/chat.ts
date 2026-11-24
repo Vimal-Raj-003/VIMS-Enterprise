@@ -1,76 +1,97 @@
 const VIMS_SYSTEM_PROMPT = `You are the official VIMS Enterprise AI Concierge on www.vimsenterprise.com.
-Be warm, concise, executive, and genuinely helpful (2 to 4 short paragraphs or crisp bullet points max).
+Be warm, concise, executive, and strictly factual (2 to 3 short paragraphs or crisp bullet points max).
 
-OFFICIAL VIMS ENTERPRISE KNOWLEDGE BASE:
-- Company: VIMS Enterprise (Established March 2022, MSME Registered: UDYAM-TN-04-0082183, GSTIN: 33BSRPS0448G1ZH, Tamil Nadu, India, serving global B2B & healthcare clients).
-- Leadership:
-  1. Vimal Raj — Founder & Chief Executive Officer (Systems architect, Applied GenAI & Voice AI strategist, MATLAB/MBD & Forward Deployed Engineering mentor).
-  2. Gowtham Raj M — Chief Financial Officer & Enterprise Strategy (15+ years industrial & enterprise governance).
-  3. GuruPrasath S — Product & Project Manager (End-to-end web, voice & automation delivery).
-- Awards & Recognition:
-  - Honored by Social Eagle at the TN Digital Summit with the Award for Digital Presence & Growth Innovation, plus recognition for Applied AI & Engineering Talent Excellence.
-- Verified Clients (30+ organizations): Hexuno Technologies, Radent Engineering, Piest Systems, Nangai Pharmacy, Ameer Jewellery, ChipTip, Mocha, and multi-specialty hospitals.
+OFFICIAL VIMS ENTERPRISE GROUP KNOWLEDGE BASE:
+- Parent Company: VIMS Enterprise (Established March 2022, MSME Registered: UDYAM-TN-04-0082183, GSTIN: 33BSRPS0448G1ZH, Tamil Nadu, India, serving global B2B & healthcare teams).
+- Group Ecosystem: VIMS Enterprise is the parent B2B engineering group powering Jill-Jill (Voice AI: https://www.jilljill.in/) and Embedded Skills (Automotive & MATLAB Academy: https://embskills.vimsenterprise.com/).
+- Verified Leadership Roster:
+  1. Gowtham Raj M — Chief Executive Officer (CEO) · 15+ years automotive & industrial engineering leadership across APTIV, KPIT & Danlaw (ADAS, V2X, IVI, ISO-26262, Agile Scrum).
+  2. Vimal Raj — Founder & Chief Technology Officer (CTO) · Systems architect driving applied AI, Jill-Jill Voice AI, custom web systems, MediCore HMS, and FDE mentorship.
+  3. GuruPrasath S — Project Manager · Leads sprint execution across voice, web, CRM & automation delivery.
+- Verified Recognition & Summit Presence:
+  - Honored on stage by Social Eagle at the TN Digital Summit for Digital Presence & Growth.
+- Verified Clients (30+ organizations): Hexuno Technologies, Radent Engineering, Piest Systems, Nangai Pharmacy, Ameer Jewellery, ChipTip, and multi-specialty hospitals.
 - Direct Contact & Booking:
   - Email: vimal@vimsenterprise.com
-  - Phone / WhatsApp: +91 99406 60868 (Secondary: +91 97896 92447)
-  - 30-Minute Google Meet Strategy Call: https://cal.com/vims-003/vims-enterprise (or click "Book Strategy Call" right on this page).
+  - Direct CTO WhatsApp / Phone: +91 99406 60868 (Secondary: +91 97896 92447)
+  - 30-Minute Google Meet Discovery Call: https://cal.com/vims-003/vims-enterprise
 
-FIVE CORE PILLARS OF VIMS ENTERPRISE:
-1. Multilingual AI Voice Agents (/ai-voice-agents):
-   - Human-like 24/7 inbound & outbound voice agents in Tamil, English, Hindi & regional languages.
-   - Answers approved FAQs, qualifies leads (BANT), checks live Google/Outlook/Cal.com availability before confirming appointments, transfers complex calls to live staff, and logs call summaries to CRM.
+FIVE SPECIALIZED B2B NICHES:
+1. Voice AI (/ai-voice-agents · Powered by Jill-Jill: https://www.jilljill.in/):
+   - Multilingual 24/7 inbound & outbound voice agents (Tamil, English, Hindi & regional languages).
+   - Answers FAQs, qualifies leads, books live Google Calendar / Cal.com slots, transfers priority callers to humans, and logs structured CRM call summaries.
 2. Custom Website & E-Commerce Creation (/website-creation):
-   - Bespoke B2B corporate websites, AI-ready React/TypeScript web apps, and complete online stores (catalog, variants, cart, verified payment gateway checkout, order emails, analytics, SEO foundation, and admin handover).
-   - Structured 7-step launch: Plan -> Design -> Content/Catalog -> Conversion Flow -> Integrations -> QA -> Handover.
+   - Bespoke B2B websites, React/TypeScript web applications, and online stores (catalog, variants, cart, payment checkout, SEO, analytics, and team handover).
 3. AI Automations & Autonomous Agent Deployments (/ai-automation):
-   - Custom n8n & LLM multi-agent pipelines, multi-source lead deduplication (Meta/LinkedIn/Web/WhatsApp -> Zoho/HubSpot/Sheets), sub-60-second automated WhatsApp & email follow-up, appointment reminders, review routing, and document intelligence.
-4. VIMS MediCore Hospital Management System — HMS (/hms-ecosystem):
-   - Multi-tenant cloud-native Hospital OS with 40+ OP & IP clinical modules (Front Office, ABHA, OPD/CPOE, Ambient AI SOAP Voice Scribe, Drug-Allergy Safety Check, Lab LIS, Radiology, FEFO Pharmacy, OT, Labour Room, ICU/NICU Telemetry, Blood Bank, TPA Cashless Insurance, Infection Control).
-   - Includes 3 React Native iOS/Android mobile apps (Doctor, Nursing barcode MAR, Patient) and meets ABDM/ABHA & DPDPA 2023 compliance.
-5. MATLAB MBD & Forward Deployed Engineer (FDE) Academy (/matlab-fde-academy):
-   - Track 1: MATLAB, Simulink, Stateflow & Model-Based Design (MBD) — vectorized M-script, PID/LQR control design, FSM logic, automotive/aerospace MIL/SIL/HIL verification, and Embedded Coder C/C++.
-   - Track 2: Forward Deployed Engineer (FDE) Bootcamp — training students and engineers to solve real client bottlenecks and ship full-stack LLM, voice, and automation systems into production. Available for college workshops and student cohorts.
+   - Custom n8n & grounded LLM agent pipelines, Meta/LinkedIn/Web lead deduplication into Zoho/HubSpot CRMs, sub-60s WhatsApp/email outreach, and document workflows.
+4. VIMS MediCore HMS (/hms-ecosystem):
+   - Connected hospital OS with 40+ OP/IP clinical modules (ABHA, OPD/CPOE, Ambient AI SOAP Scribe, Drug Safety, Lab LIS, Cloud PACS, FEFO Pharmacy, OT, ICU Telemetry, Blood Bank, Cashless TPA).
+   - Includes native Doctor, Nursing, and Patient iOS/Android apps with ABDM/ABHA & DPDPA 2023 compliance.
+5. Academy (/matlab-fde-academy · Integrated with Embedded Skills: https://embskills.vimsenterprise.com/):
+   - Automotive Embedded & MATLAB/Simulink/Stateflow MBD (CAN/CAN FD, LIN, UDS, AUTOSAR, ISO 26262, MIL/SIL/HIL) via Embedded Skills.
+   - Forward Deployed Engineer (FDE) Bootcamp: client-facing production AI & agent engineering for students & college cohorts.
 
 STRICT GUARDRAILS (NEVER VIOLATE):
-1. ZERO PRICING DISCLOSURE: Never mention, guess, or quote any rupee (₹) or dollar ($) prices, package fees, hourly rates, or cost figures under any circumstance. If asked about pricing, budget, or cost, explain that every VIMS engagement is scoped around the client's exact workflows, modules, or cohort requirements, and invite them to book a 30-minute discovery call with Vimal Raj.
-2. NO VIMS CARDS & NO HOSTING SERVICES: VIMS Enterprise does NOT offer NFC/digital business cards (VIMS Cards) and does NOT sell standalone web/cloud hosting packages. Politely redirect to our 5 core engineering, AI, HMS, and academy pillars.`;
+1. ZERO PRICING DISCLOSURE: Never quote, guess, or mention any currency prices, rupees, dollars, fees, or packages under any circumstance. Explain that every VIMS scope is custom tailored and invite them to book a discovery call with Founder & CTO Vimal Raj.
+2. NO VIMS CARDS & NO HOSTING SERVICES: VIMS Enterprise does not sell NFC cards (VIMS Cards) or standalone web hosting packages.`;
 
 function buildGroundedReply(userText: string): string {
   const q = userText.toLowerCase();
+  const sections: string[] = [];
 
-  if (/(price|pricing|cost|rate|fee|budget|charge|package|how much|rupee|inr|\$|₹)/i.test(q)) {
-    return 'Every VIMS Enterprise engagement is scoped around your exact workflows, modules, languages, or cohort goals—so we never publish fixed one-size-fits-all price tags.\n\nClick **Book Strategy Call** below to schedule a 30-minute Google Meet with Founder & CEO **Vimal Raj** (or reach us on WhatsApp at **+91 99406 60868**) for a tailored architecture walkthrough and scope document.';
+  if (/(hosting|hostinger|vps hosting|domain hosting|vims card|nfc card|business card|mocha)/i.test(q)) {
+    sections.push(
+      'VIMS Enterprise does not offer hosting packages or NFC cards. We focus exclusively on five B2B niches: **Voice AI (Jill-Jill)**, **Custom Web Creation**, **AI Automations**, **VIMS MediCore HMS**, and **Academy (Embedded Skills & FDE)**.'
+    );
   }
 
-  if (/(hosting|hostinger|vps hosting|domain hosting|vims card|nfc card|business card)/i.test(q)) {
-    return 'We do not offer standalone web-hosting packages or NFC business cards. VIMS Enterprise focuses on five specialized capabilities:\n\n• **Multilingual AI Voice Agents**\n• **Custom B2B Website & E-Commerce Engineering**\n• **AI Automations & Autonomous Agent Deployments**\n• **VIMS MediCore Hospital Management System (HMS)**\n• **MATLAB MBD & Forward Deployed Engineer (FDE) Academy**\n\nWhich of these can I walk you through?';
+  if (/(award|social eagle|summit|ceo|cto|founder|gowtham|vimal|guru|team|about|who)/i.test(q)) {
+    sections.push(
+      '**VIMS Enterprise** is led by **Gowtham Raj M (CEO · 15+ yrs automotive & enterprise leadership)**, **Vimal Raj (Founder & CTO)**, and **GuruPrasath S (Project Manager)**, recognized on stage by **Social Eagle** at the TN Digital Summit.'
+    );
   }
 
-  if (/(voice|call|reception|inbound|outbound|telephony|tamil|multilingual)/i.test(q)) {
-    return 'Our **Multilingual AI Voice Agents** handle inbound calls and outbound follow-ups 24/7 in Tamil, English, Hindi, and regional languages:\n\n• **Verified Calendar Booking:** Checks live Google/Outlook/Cal.com slots and confirms only after calendar acceptance.\n• **Human Transfer & CRM Sync:** Routes priority callers to your live team with context and logs automatic call transcripts & summaries.';
+  if (/(voice|call|reception|inbound|outbound|telephony|tamil|jill)/i.test(q)) {
+    sections.push(
+      'Our **Voice AI** platform (**Jill-Jill**, https://www.jilljill.in/) handles 24/7 inbound and outbound conversations in Tamil, English, Hindi & regional languages—with verified calendar booking, human handoff, and automatic CRM sync.'
+    );
   }
 
   if (/(hms|hospital|clinic|emr|ehr|opd|ipd|icu|pharmacy|abdm|abha|doctor|patient)/i.test(q)) {
-    return '**VIMS MediCore HMS** unites **40+ Outpatient and Inpatient clinical modules** on a multi-tenant cloud platform:\n\n• **Clinical AI:** Ambient SOAP voice scribe, ICD-10 coding assistance, and drug-allergy safety validation.\n• **Connected Hospital Ops:** Live OPD mobile tokens, <28-min synchronized IP discharge, ICU/NICU & OT suites, FEFO Pharmacy, Lab LIS, Radiology, and Cashless TPA.\n• **Mobile & Compliance:** Includes Doctor, Nursing, and Patient iOS/Android apps with ABDM/ABHA & DPDPA 2023 readiness.';
+    sections.push(
+      '**VIMS MediCore HMS** connects **40+ OP and IP clinical modules**—uniting Patient Apps, Ambient AI SOAP Scribe, Cloud PACS/LIS, ICU Telemetry, OT, FEFO Pharmacy, and Cashless TPA with ABDM & DPDPA 2023 compliance.'
+    );
   }
 
-  if (/(matlab|simulink|stateflow|mbd|hil|sil|mil|student|training|academy|workshop|college|fde|forward deploy)/i.test(q)) {
-    return 'Our **VIMS Engineering & Applied AI Academy** runs two practical tracks for students, colleges, and aspiring engineers:\n\n1. **MATLAB, Simulink & Stateflow (MBD):** Vectorized M-Script, PID/LQR control loops, Stateflow FSMs, automotive/aerospace MIL/SIL/HIL verification, and Embedded Coder C/C++.\n2. **Forward Deployed Engineer (FDE) Bootcamp:** Hands-on client-facing AI engineering—shipping production Voice Agents, LLM pipelines, and full-stack automations.';
+  if (/(matlab|simulink|stateflow|mbd|hil|sil|mil|student|training|academy|workshop|college|fde|forward|embedded|embskills)/i.test(q)) {
+    sections.push(
+      'Our **VIMS Academy** pairs **Embedded Skills** (https://embskills.vimsenterprise.com/ — 24 automotive ECU protocol & MATLAB/Simulink MBD modules) with our **Forward Deployed Engineer (FDE)** AI bootcamp for students and colleges.'
+    );
   }
 
   if (/(website|web|ecommerce|e-commerce|store|shop|landing|portal|redesign)/i.test(q)) {
-    return 'We engineer **custom B2B websites, React/TypeScript web applications, and complete e-commerce stores** built around your brand:\n\n• High-speed responsive layouts, technical SEO foundation, embedded scheduling, and CRM lead pipelines.\n• Full online store architecture with product variants, search/filters, verified payment gateways, automated order emails, and team admin handover.';
+    sections.push(
+      'We architect custom B2B websites, React web apps, and end-to-end e-commerce stores—built cleanly with responsive speed, search filters, verified payment checkout, SEO foundations, and full admin handover.'
+    );
   }
 
   if (/(automation|workflow|agent|n8n|crm|zoho|hubspot|whatsapp|lead)/i.test(q)) {
-    return 'Our **AI Automations & Autonomous Agent Deployments** connect your ads, website, WhatsApp Business, and CRM (Zoho, HubSpot, Sheets) with zero manual copy-pasting:\n\n• Sub-60-second automated WhatsApp & email lead follow-up.\n• Multi-source lead deduplication, demo reminders, review routing, and custom tool-calling LLM agents.';
+    sections.push(
+      'Our **AI Automations & Agent Deployments** connect Meta/LinkedIn Ads, websites, WhatsApp Business, and CRM systems (Zoho, HubSpot, Sheets) with sub-60s lead response and grounded tool-calling LLM workflows.'
+    );
   }
 
-  if (/(award|social eagle|summit|ceo|founder|vimal|team|about|who)/i.test(q)) {
-    return '**VIMS Enterprise** is led by **Vimal Raj (Founder & CEO)** alongside **Gowtham Raj M (CFO)** and **GuruPrasath S (Product Manager)**.\n\nWe were honored on stage by **Social Eagle at the TN Digital Summit** for Digital Presence & Growth Innovation and recognized for Applied AI & Talent Excellence, serving 30+ organizations across healthcare, engineering, and commerce.';
+  if (/(price|pricing|cost|rate|fee|budget|charge|package|how much|rupee|inr|\$|₹)/i.test(q)) {
+    sections.push(
+      'Every VIMS Enterprise engagement is tailored to your workflows, clinical modules, or cohort goals—so we never publish generic pricing. Tap **Book a Call** below to schedule a 30-minute session with Founder & CTO **Vimal Raj** (or WhatsApp **+91 99406 60868**) for a custom scope.'
+    );
   }
 
-  return 'Hello! I am the **VIMS Enterprise AI Concierge**. Ask me anything about:\n\n• **AI Voice Agents** (multilingual inbound/outbound calls & booking)\n• **Custom Website & E-Commerce Creation**\n• **AI Automations & Agent Deployments**\n• **VIMS MediCore HMS** (40+ hospital modules)\n• **MATLAB MBD & Forward Deployed Engineer Academy**\n\nOr tap **Book Strategy Call** below to speak directly with Founder & CEO **Vimal Raj**.';
+  if (sections.length > 0) {
+    return sections.join('\n\n');
+  }
+
+  return 'Hello! I’m the **VIMS Enterprise Concierge**. Ask me about **Voice AI (Jill-Jill)**, **Web Creation**, **AI Automations**, **MediCore HMS**, or **Academy (Embedded Skills & FDE)**—or book directly with **Vimal Raj (Founder & CTO)**.';
 }
 
 export async function POST(request: Request): Promise<Response> {
@@ -85,7 +106,7 @@ export async function POST(request: Request): Promise<Response> {
     }
 
     if (
-      /(price|pricing|cost|rate|fee|budget|how much|rupee|inr|\$|₹|hosting|hostinger|vims card|nfc card)/i.test(
+      /(price|pricing|cost|rate|fee|budget|how much|rupee|inr|\$|₹|hosting|hostinger|vims card|nfc card|mocha)/i.test(
         latestUserMsg
       )
     ) {
@@ -112,7 +133,7 @@ export async function POST(request: Request): Promise<Response> {
               role: m.role === 'assistant' ? 'model' : 'user',
               parts: [{ text: String(m.content || '').slice(0, 1500) }],
             })),
-            generationConfig: { temperature: 0.3, maxOutputTokens: 420 },
+            generationConfig: { temperature: 0.3, maxOutputTokens: 360 },
           }),
         }
       );
@@ -134,7 +155,7 @@ export async function POST(request: Request): Promise<Response> {
         body: JSON.stringify({
           model: 'google/gemini-2.5-flash',
           temperature: 0.3,
-          max_tokens: 420,
+          max_tokens: 360,
           messages: [
             { role: 'system', content: VIMS_SYSTEM_PROMPT },
             ...messages.slice(-8).map((m: any) => ({

@@ -2,12 +2,12 @@ import React from 'react';
 
 export enum Page {
   Home = 'Home',
-  VoiceAgents = 'AI Voice Agents',
-  WebsiteCreation = 'Website & E-Commerce',
-  AIAutomation = 'AI Automations & Agents',
-  HospitalManagement = 'MediCore HMS',
-  MatlabAcademy = 'MATLAB & FDE Academy',
-  About = 'About & Leadership',
+  VoiceAgents = 'Voice AI',
+  WebsiteCreation = 'Web Creation',
+  AIAutomation = 'AI Automations',
+  HospitalManagement = 'HMS',
+  MatlabAcademy = 'Academy',
+  About = 'About',
   Contact = 'Contact',
   TeamProfile = 'Leadership Profile',
   PrivacyPolicy = 'Privacy Policy',
@@ -33,5 +33,15 @@ export interface TeamMember {
   expertise: string[];
   experience: string;
   email: string;
+  phone?: string;
+  whatsappUrl?: string;
   linkedin?: string;
+}
+
+export interface SummitPhoto {
+  id: string;
+  src: string;
+  badge: string;
+  title: string;
+  caption: string;
 }

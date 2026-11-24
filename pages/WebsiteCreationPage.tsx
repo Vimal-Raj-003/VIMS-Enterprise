@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import HeroSection from '../components/HeroSection';
 import {
-  Globe,
-  ShoppingBag,
-  LayoutDashboard,
-  Smartphone,
-  CreditCard,
-  Search,
-  BarChart3,
   CheckCircle2,
   ArrowRight,
   Calendar,
   Sparkles,
-  ShieldCheck,
+  Smartphone,
+  Search,
+  CreditCard,
+  BarChart3,
 } from 'lucide-react';
 
 interface WebsiteCreationPageProps {
@@ -23,75 +19,52 @@ const ARCHITECTURE_TRACKS = [
   {
     id: 'b2b',
     badge: 'Executive Corporate & B2B',
-    title: 'High-Authority B2B Websites & Conversion Portals',
+    title: 'High-Authority B2B Websites & Portals',
     summary:
-      'Designed for engineering firms, healthcare institutions, SaaS companies, and service leaders who need world-class credibility, crystal-clear positioning, and frictionless consultation booking.',
+      'Custom React/TypeScript corporate sites engineered for speed, clear positioning, and calendar booking—zero templates.',
     deliverables: [
-      'Custom architectural design system (Light & Dark modes, zero generic templates)',
-      'Interactive capability showcases, case-study storytelling & executive trust sections',
-      'Embedded calendar scheduling, CRM-connected lead forms & WhatsApp routing',
-      'Core Web Vitals speed optimization, schema markup & technical SEO foundation',
+      'Bespoke design system (Dark & Light modes)',
+      'Interactive showcases & executive trust galleries',
+      'Embedded Cal.com booking, CRM forms & WhatsApp',
+      'Core Web Vitals speed & technical SEO setup',
     ],
   },
   {
     id: 'ecommerce',
     badge: 'Online Stores & D2C',
-    title: 'Clear Path From Browse to Buy: Custom E-Commerce Platforms',
+    title: 'End-to-End Custom E-Commerce Platforms',
     summary:
-      'Replace scattered chat messages and manual payment links with one cohesive online store where customers discover products, select variants, pay securely, and receive instant order updates.',
+      'Cohesive online storefronts where buyers browse variants, pay securely, and receive instant automated updates.',
     deliverables: [
-      'Structured product catalog with variant selectors, search & smart category filters',
-      'Streamlined cart, shipping rule logic & verified payment gateway checkout',
-      'Automated customer order emails, payment status verification & stock controls',
-      'Complete admin dashboard handover & team walkthrough for effortless catalog updates',
+      'Product catalog, variants, search & filters',
+      'Streamlined cart, shipping logic & checkout',
+      'Automated order emails & payment status tracking',
+      'Complete admin console handover & walkthrough',
     ],
   },
   {
     id: 'webapps',
-    badge: 'Custom Web Applications',
-    title: 'Bespoke Client Portals, Dashboards & AI-Native Web Apps',
+    badge: 'SaaS & Internal Portals',
+    title: 'AI-Native Web Apps & Dashboards',
     summary:
-      'Full-stack React, TypeScript, and Node/PostgreSQL web applications engineered around your internal workflows, multi-role permissions, and live operational analytics.',
+      'Full-stack custom web apps engineered around your team permissions, dashboards, and AI concierge workflows.',
     deliverables: [
-      'Role-based access portals for clients, operations teams, or field executives',
-      'Real-time analytics dashboards, automated PDF/Excel reporting & API webhooks',
-      'Built-in AI concierge chatbots grounded in your company knowledge base',
-      'Rigorous mobile layout QA, security validation & clean codebase documentation',
+      'Role-based multi-tenant client & staff portals',
+      'Real-time dashboards, exports & API webhooks',
+      'Grounded AI assistants inside your application',
+      'Mobile QA & production observability',
     ],
   },
 ];
 
-const CUSTOMER_JOURNEY = [
-  {
-    num: '01',
-    title: 'Discover & Trust',
-    desc: 'Visitors immediately grasp what you do, see authentic proof, and browse services or products effortlessly.',
-  },
-  {
-    num: '02',
-    title: 'Compare & Select',
-    desc: 'Interactive filters, clear feature breakdowns, or variant options guide buyers without confusion.',
-  },
-  {
-    num: '03',
-    title: 'Enquire, Book or Checkout',
-    desc: 'Frictionless calendar booking, structured lead intake, or connected payment gateway completion.',
-  },
-  {
-    num: '04',
-    title: 'Actionable Team Fulfilment',
-    desc: 'Your team receives verified enquiries or paid orders with every detail organized in one place.',
-  },
-];
-
-const SEVEN_STEP_LAUNCH = [
-  { step: '1. Plan', detail: 'Align on business goals, target personas, sitemap, and conversion flows.' },
-  { step: '2. Design', detail: 'Craft bespoke typography, color architecture, and responsive UI layouts.' },
-  { step: '3. Content & Catalog', detail: 'Structure service narratives, product variants, and authentic visual assets.' },
-  { step: '4. Conversion Flow', detail: 'Wire booking calendars, enquiry pipelines, or cart and shipping logic.' },
-  { step: '5. Integrations', detail: 'Connect payment gateways, CRM webhooks, WhatsApp, and analytics.' },
-  { step: '6. QA & Speed Test', detail: 'Test across mobile/desktop viewports, forms, edge cases, and Core Web Vitals.' },
-  { step: '7. Launch & Handover', detail: 'Smooth go-live followed by admin access and a live walkthrough for your team.' },
+const SEVEN_STEPS = [
+  { step: '01 Plan', detail: 'Align on goals, sitemap & user flow.' },
+  { step: '02 Design', detail: 'Craft custom visual system & layout.' },
+  { step: '03 Catalog', detail: 'Structure copy, services & imagery.' },
+  { step: '04 Funnel', detail: 'Wire calendars, forms or cart checkout.' },
+  { step: '05 Integrate', detail: 'Connect payment gateways, CRM & WhatsApp.' },
+  { step: '06 QA Test', detail: 'Verify speed & responsiveness across devices.' },
+  { step: '07 Launch', detail: 'Deploy cleanly & train your admin team.' },
 ];
 
 const WebsiteCreationPage: React.FC<WebsiteCreationPageProps> = ({ onOpenBooking }) => {
@@ -101,18 +74,20 @@ const WebsiteCreationPage: React.FC<WebsiteCreationPageProps> = ({ onOpenBooking
   return (
     <div>
       <HeroSection
-        badge="Custom Web & E-Commerce Engineering"
+        badge="Custom Web & E-Commerce Studio"
         headline={
           <>
-            Your Business Online.{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-sky-400">
-              Engineered Around You.
+            Custom B2B Websites{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8451E] to-[#D4AF37]">
+              Engineered From Scratch.
             </span>
           </>
         }
-        subtext="Bespoke B2B websites, AI-ready web applications, and end-to-end online stores engineered for speed, human trust, and measurable conversion—built from the ground up without generic slop."
+        subtext="High-converting B2B platforms, AI-native React web applications, and complete online stores built cleanly around your brand."
+        imageUrl="/images/niches/web-studio.webp"
+        altText="Smoked-Glass Architectural Web Studio"
         primaryCta={{
-          text: 'Plan My Website With VIMS',
+          text: 'Scope Your Website',
           onClick: () => onOpenBooking('Custom Website & E-Commerce Consultation'),
         }}
         secondaryCta={{
@@ -121,15 +96,15 @@ const WebsiteCreationPage: React.FC<WebsiteCreationPageProps> = ({ onOpenBooking
         }}
       />
 
-      {/* Interactive Web Architecture Tracks */}
-      <section id="web-tracks" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      {/* Interactive Web Tracks */}
+      <section id="web-tracks" className="py-16 md:py-22 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="max-w-2xl mb-12">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400 font-semibold">
-              Tailored Web Engineering
+          <div className="max-w-2xl mb-10">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#E8451E] font-semibold">
+              Platform Architecture
             </p>
-            <h2 className="mt-2 text-3xl sm:text-4xl font-poppins font-bold text-slate-900 dark:text-white">
-              Select the Digital Platform Your Business Needs
+            <h2 className="mt-2 text-3xl sm:text-4xl font-display font-bold text-zinc-900 dark:text-white">
+              Select the Digital System Your Business Needs
             </h2>
           </div>
 
@@ -142,92 +117,61 @@ const WebsiteCreationPage: React.FC<WebsiteCreationPageProps> = ({ onOpenBooking
                   onClick={() => setSelectedTrack(i)}
                   className={`w-full text-left p-5 rounded-2xl border transition-all ${
                     selectedTrack === i
-                      ? 'bg-indigo-600 text-white border-indigo-500 shadow-lg shadow-indigo-600/20'
-                      : 'executive-card text-slate-800 dark:text-slate-200'
+                      ? 'bg-[#E8451E] text-white border-[#E8451E] shadow-lg shadow-[#E8451E]/25'
+                      : 'executive-card text-zinc-900 dark:text-white'
                   }`}
                 >
-                  <span className="text-[11px] font-mono uppercase tracking-wider opacity-80">{t.badge}</span>
-                  <h3 className="text-base sm:text-lg font-poppins font-bold mt-1">{t.title}</h3>
+                  <span className="text-[11px] font-mono uppercase tracking-wider opacity-85">{t.badge}</span>
+                  <h3 className="text-base sm:text-lg font-display font-bold mt-1">{t.title}</h3>
                 </button>
               ))}
             </div>
 
             <div className="lg:col-span-7 executive-card p-7 sm:p-10 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-xs font-mono uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#D4AF37]/15 text-[#9A7209] dark:text-[#E8CA6A] text-xs font-mono uppercase tracking-wider">
                 <Sparkles size={13} />
                 <span>{track.badge}</span>
               </div>
 
-              <h3 className="text-2xl font-poppins font-bold text-slate-900 dark:text-white">{track.title}</h3>
-              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-                {track.summary}
-              </p>
+              <h3 className="text-2xl font-display font-bold text-zinc-900 dark:text-white">{track.title}</h3>
+              <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">{track.summary}</p>
 
-              <div className="space-y-3 pt-2">
-                <div className="text-xs font-mono uppercase tracking-wider text-slate-400">
-                  Included Engineering Capabilities
-                </div>
+              <div className="space-y-3 pt-1">
                 {track.deliverables.map((d) => (
                   <div
                     key={d}
-                    className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/70 dark:border-white/[0.06] text-sm text-slate-700 dark:text-slate-200"
+                    className="flex items-start gap-3 p-3.5 rounded-xl bg-zinc-50 dark:bg-white/5 border border-zinc-200/70 dark:border-white/10 text-sm text-zinc-700 dark:text-zinc-200"
                   >
-                    <CheckCircle2 size={16} className="text-indigo-500 shrink-0 mt-0.5" />
+                    <CheckCircle2 size={16} className="text-[#10B981] shrink-0 mt-0.5" />
                     <span>{d}</span>
                   </div>
                 ))}
               </div>
 
-              <div className="pt-3">
-                <button
-                  type="button"
-                  onClick={() => onOpenBooking(track.title)}
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs sm:text-sm font-semibold transition-all"
-                >
-                  <Calendar size={15} />
-                  <span>Discuss Scope for {track.badge}</span>
-                  <ArrowRight size={15} />
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => onOpenBooking(track.title)}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#E8451E] hover:bg-[#D93814] text-white text-xs sm:text-sm font-semibold transition-all"
+              >
+                <Calendar size={15} />
+                <span>Discuss {track.badge}</span>
+                <ArrowRight size={15} />
+              </button>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Customer Journey Architecture */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-100/70 dark:bg-[#080C17] border-y border-slate-200/80 dark:border-white/[0.06]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="text-3xl font-poppins font-bold text-slate-900 dark:text-white">
-              A Clear Journey From First Impression to Actionable Conversion
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {CUSTOMER_JOURNEY.map((c) => (
-              <div key={c.num} className="executive-card p-6 space-y-3">
-                <span className="font-mono text-xs font-bold text-indigo-600 dark:text-indigo-400">
-                  STAGE {c.num}
-                </span>
-                <h3 className="text-lg font-poppins font-bold text-slate-900 dark:text-white">{c.title}</h3>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{c.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Foundation Pillars */}
           <div className="mt-10 grid grid-cols-1 md:grid-cols-4 gap-4">
             {[
-              { icon: <Smartphone size={18} />, label: 'Mobile-First Responsive Layouts' },
-              { icon: <Search size={18} />, label: 'Technical SEO & Search Visibility' },
-              { icon: <CreditCard size={18} />, label: 'Verified Payment & Booking Flows' },
-              { icon: <BarChart3 size={18} />, label: 'Analytics & Conversion Tracking' },
+              { icon: <Smartphone size={17} />, label: 'Mobile-First Responsive UX' },
+              { icon: <Search size={17} />, label: 'Technical SEO & Schema' },
+              { icon: <CreditCard size={17} />, label: 'Payment & Booking Flows' },
+              { icon: <BarChart3 size={17} />, label: 'Conversion Analytics' },
             ].map((f) => (
               <div
                 key={f.label}
-                className="flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/[0.08] text-xs font-semibold text-slate-800 dark:text-slate-200"
+                className="executive-card flex items-center gap-3 p-4 text-xs font-semibold text-zinc-800 dark:text-zinc-200"
               >
-                <span className="text-indigo-500">{f.icon}</span>
+                <span className="text-[#E8451E]">{f.icon}</span>
                 <span>{f.label}</span>
               </div>
             ))}
@@ -235,37 +179,32 @@ const WebsiteCreationPage: React.FC<WebsiteCreationPageProps> = ({ onOpenBooking
         </div>
       </section>
 
-      {/* 7 Steps From Idea to Launch */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
+      {/* 7-Step Launch Process */}
+      <section className="py-16 md:py-22 px-4 sm:px-6 lg:px-8 bg-zinc-100/80 dark:bg-[#111114]/70 border-t border-zinc-200/80 dark:border-white/10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-indigo-600 dark:text-indigo-400 font-semibold">
-              Structured Execution
-            </p>
-            <h2 className="mt-2 text-3xl font-poppins font-bold text-slate-900 dark:text-white">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h2 className="text-3xl font-display font-bold text-zinc-900 dark:text-white">
               Seven Steps From Idea to Launch
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {SEVEN_STEP_LAUNCH.map((s) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {SEVEN_STEPS.map((s) => (
               <div key={s.step} className="executive-card p-5 space-y-2">
-                <div className="text-sm font-poppins font-bold text-indigo-600 dark:text-indigo-400">{s.step}</div>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{s.detail}</p>
+                <div className="font-mono text-sm font-bold text-[#E8451E]">{s.step}</div>
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">{s.detail}</p>
               </div>
             ))}
 
-            <div className="p-5 rounded-2xl bg-indigo-600 text-white flex flex-col justify-between">
+            <div className="p-5 rounded-2xl bg-[#111114] border border-white/15 text-white flex flex-col justify-between">
               <div>
-                <div className="text-sm font-poppins font-bold">Ready to Scope Your Build?</div>
-                <p className="text-xs text-indigo-100 mt-1">
-                  Share your reference ideas and feature goals in a 30-minute session with Vimal Raj.
-                </p>
+                <div className="text-sm font-display font-bold">Ready to Scope Your Site?</div>
+                <p className="text-xs text-zinc-400 mt-1">Map pages, flows, and timeline with Vimal Raj.</p>
               </div>
               <button
                 type="button"
-                onClick={() => onOpenBooking('Website Build Scope Session')}
-                className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold underline underline-offset-4"
+                onClick={() => onOpenBooking('Website Build Scope')}
+                className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#E8CA6A] hover:underline"
               >
                 <span>Book Discovery Call</span>
                 <ArrowRight size={13} />

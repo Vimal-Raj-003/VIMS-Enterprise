@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Shield, X, Settings, Check } from 'lucide-react';
+import { ShieldCheck, X, SlidersHorizontal } from 'lucide-react';
 
 const CookieConsent: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -14,132 +14,162 @@ const CookieConsent: React.FC = () => {
   useEffect(() => {
     const consent = localStorage.getItem('vims_cookie_consent');
     if (!consent) {
-      const timer = setTimeout(() => setIsVisible(true), 1500);
+      const timer = setTimeout(() => setIsVisible(true), 1200);
       return () => clearTimeout(timer);
     }
   }, []);
 
   const handleAcceptAll = () => {
-    localStorage.setItem('vims_cookie_consent', JSON.stringify({
-      essential: true,
-      analytics: true,
-      marketing: true,
-      timestamp: new Date().toISOString(),
-    }));
+    localStorage.setItem(
+      'vims_cookie_consent',
+      JSON.stringify({
+        essential: true,
+        analytics: true,
+        marketing: true,
+        timestamp: new Date().toISOString(),
+      })
+    );
     setIsVisible(false);
   };
 
   const handleSavePreferences = () => {
-    localStorage.setItem('vims_cookie_consent', JSON.stringify({
-      ...preferences,
-      timestamp: new Date().toISOString(),
-    }));
+    localStorage.setItem(
+      'vims_cookie_consent',
+      JSON.stringify({
+        ...preferences,
+        timestamp: new Date().toISOString(),
+      })
+    );
     setIsVisible(false);
   };
 
-  if (!isVisible) return null;
-
   return (
     <AnimatePresence>
-      <motion.div
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 100, opacity: 0 }}
-        className="fixed bottom-6 left-6 right-6 md:left-auto md:max-w-md z-[100]"
-      >
-        <div className="bg-white/90 dark:bg-navy/90 backdrop-blur-xl border border-slate-200 dark:border-cyan/20 p-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden">
-          {/* Futuristic Accent */}
-          <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-cyan to-violet"></div>
-          
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-cyan/10 dark:bg-cyan/20 rounded-2xl">
-              <Shield className="text-cyan w-6 h-6" />
-            </div>
-            
-            <div className="flex-1">
-              {!showPreferences ? (
-                <>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-light-text mb-2">Privacy & Cookies</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 mb-6 font-mono leading-relaxed">
-                    We use cookies to optimize neural performance and analyze data flow. Acceptance ensures full system throughput.
-                  </p>
-                  
-                  <div className="flex flex-col gap-3">
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={handleAcceptAll}
-                      className="w-full py-3 bg-cyan text-navy font-bold rounded-xl shadow-lg shadow-cyan/20 transition-all hover:shadow-cyan/40"
-                    >
-                      Accept All Systems
-                    </motion.button>
-                    
-                    <button 
-                      onClick={() => setShowPreferences(true)}
-                      className="text-xs text-slate-500 hover:text-cyan font-mono transition-colors flex items-center justify-center gap-2"
-                    >
-                      <Settings size={14} />
-                      CONFIGURE_MODULES
-                    </button>
-                  </div>
-                </>
-              ) : (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-light-text mb-4">Module Configuration</h3>
-                  
+      {isVisible ? (
+        <motion.div
+          initial={{ y: 80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 80, opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-sm z-[100]"
+        >
+          <div className="relative rounded-2xl bg-white dark:bg-[#111114] border border-zinc-200 dark:border-white/15 p-5 shadow-2xl overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#E8451E] to-[#D4AF37]" />
+
+            <div className="flex items-start gap-3.5 pt-1">
+              <div className="p-2.5 rounded-xl bg-[#E8451E]/10 text-[#E8451E] shrink-0">
+                <ShieldCheck size={19} />
+              </div>
+
+              <div className="flex-1 min-w-0">
+                {!showPreferences ? (
+                  <>
+                    <h3 className="text-sm font-display font-bold text-zinc-900 dark:text-white">
+                      Privacy &amp; Cookies
+                    </h3>
+                    <p className="text-xs text-zinc-600 dark:text-zinc-300 mt-1.5 leading-relaxed">
+                      We use essential cookies to keep bookings, chat, and preferences working reliably.
+                    </p>
+
+                    <div className="mt-4 flex items-center gap-2.5">
+                      <button
+                        type="button"
+                        onClick={handleAcceptAll}
+                        className="flex-1 py-2.5 px-4 rounded-xl bg-[#E8451E] hover:bg-[#D93814] text-white text-xs font-semibold transition-all shadow-sm"
+                      >
+                        Accept All
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setShowPreferences(true)}
+                        className="inline-flex items-center gap-1.5 py-2.5 px-3 rounded-xl bg-zinc-100 dark:bg-white/5 hover:bg-zinc-200/70 dark:hover:bg-white/10 border border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-200 text-xs font-medium transition-colors"
+                      >
+                        <SlidersHorizontal size={12} />
+                        <span>Settings</span>
+                      </button>
+                    </div>
+                  </>
+                ) : (
                   <div className="space-y-3">
-                    {[
-                      { id: 'essential', label: 'Essential Core', desc: 'Required for system stability' },
-                      { id: 'analytics', label: 'Analytics Node', desc: 'Performance monitoring' },
-                      { id: 'marketing', label: 'Marketing Layer', desc: 'External sync services' },
-                    ].map((m) => (
-                      <div key={m.id} className="flex items-center justify-between p-3 rounded-2xl bg-slate-100 dark:bg-white/5 border border-transparent hover:border-cyan/20 transition-all">
-                        <div>
-                          <p className="text-xs font-bold font-mono text-cyan">{m.label}</p>
-                          <p className="text-[10px] text-slate-500">{m.desc}</p>
-                        </div>
-                        <button
-                          onClick={() => m.id !== 'essential' && setPreferences(prev => ({ ...prev, [m.id]: !prev[m.id as keyof typeof prev] }))}
-                          className={`w-10 h-6 rounded-full relative transition-colors ${
-                              preferences[m.id as keyof typeof preferences] ? 'bg-cyan' : 'bg-slate-300 dark:bg-slate-700'
-                          } ${m.id === 'essential' ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                    <h3 className="text-sm font-display font-bold text-zinc-900 dark:text-white">
+                      Cookie Preferences
+                    </h3>
+
+                    <div className="space-y-2">
+                      {[
+                        { id: 'essential', label: 'Essential', desc: 'Required for bookings & navigation' },
+                        { id: 'analytics', label: 'Analytics', desc: 'Helps improve page experience' },
+                        { id: 'marketing', label: 'Communications', desc: 'Campaign attribution signals' },
+                      ].map((m) => (
+                        <div
+                          key={m.id}
+                          className="flex items-center justify-between p-2.5 rounded-xl bg-zinc-50 dark:bg-white/5 border border-zinc-200/70 dark:border-white/10"
                         >
-                          <motion.div
-                            animate={{ x: preferences[m.id as keyof typeof preferences] ? 18 : 2 }}
-                            className="absolute top-1 w-4 h-4 bg-white dark:bg-navy rounded-full shadow-sm"
-                          />
-                        </button>
-                      </div>
-                    ))}
+                          <div>
+                            <p className="text-xs font-semibold text-zinc-900 dark:text-white">{m.label}</p>
+                            <p className="text-[11px] text-zinc-500 dark:text-zinc-400">{m.desc}</p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              m.id !== 'essential' &&
+                              setPreferences((prev) => ({
+                                ...prev,
+                                [m.id]: !prev[m.id as keyof typeof prev],
+                              }))
+                            }
+                            aria-label={`Toggle ${m.label} cookies`}
+                            className={`w-9 h-5 rounded-full relative transition-colors ${
+                              preferences[m.id as keyof typeof preferences]
+                                ? 'bg-[#E8451E]'
+                                : 'bg-zinc-300 dark:bg-zinc-700'
+                            } ${m.id === 'essential' ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}
+                          >
+                            <span
+                              className={`block w-3.5 h-3.5 rounded-full bg-white shadow transition-transform ${
+                                preferences[m.id as keyof typeof preferences]
+                                  ? 'translate-x-4'
+                                  : 'translate-x-1'
+                              }`}
+                            />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex gap-2 pt-1">
+                      <button
+                        type="button"
+                        onClick={() => setShowPreferences(false)}
+                        className="flex-1 py-2 text-xs font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-white/5 rounded-xl transition-all"
+                      >
+                        Back
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleSavePreferences}
+                        className="flex-[2] py-2 bg-[#E8451E] hover:bg-[#D93814] text-white text-xs font-semibold rounded-xl transition-all"
+                      >
+                        Save Preferences
+                      </button>
+                    </div>
                   </div>
-                  
-                  <div className="flex gap-2 pt-2">
-                    <button 
-                      onClick={() => setShowPreferences(false)}
-                      className="flex-1 py-2 text-xs font-bold text-slate-500 hover:text-cyan hover:bg-cyan/5 rounded-xl transition-all"
-                    >
-                      BACK
-                    </button>
-                    <button 
-                      onClick={handleSavePreferences}
-                      className="flex-[2] py-2 bg-slate-900 dark:bg-white text-white dark:text-navy text-xs font-bold rounded-xl transition-all hover:opacity-90"
-                    >
-                      SAVE_CONFIG
-                    </button>
-                  </div>
-                </div>
-              )}
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsVisible(false)}
+                aria-label="Close cookie notice"
+                className="text-zinc-400 hover:text-zinc-700 dark:hover:text-white p-1"
+              >
+                <X size={16} />
+              </button>
             </div>
-            
-            <button 
-              onClick={() => setIsVisible(false)}
-              className="text-slate-400 hover:text-slate-600 dark:hover:text-light-text p-1"
-            >
-              <X size={20} />
-            </button>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      ) : null}
     </AnimatePresence>
   );
 };

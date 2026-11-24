@@ -1,13 +1,30 @@
-import { Page, TeamMember } from './types';
+import { Page, SummitPhoto, TeamMember } from './types';
+
+export const GROUP_PLATFORMS = {
+  jilljill: {
+    name: 'Jill-Jill',
+    url: 'https://www.jilljill.in/',
+    tagline: 'AI Voice Agents Platform',
+  },
+  embskills: {
+    name: 'Embedded Skills',
+    url: 'https://embskills.vimsenterprise.com/',
+    tagline: 'Automotive Embedded & MATLAB Academy',
+  },
+};
 
 export const COMPANY_CONTACT = {
   companyName: 'VIMS Enterprise',
+  ceoName: 'Gowtham Raj M',
   founderName: 'Vimal Raj',
+  ctoName: 'Vimal Raj',
+  pmName: 'GuruPrasath S',
   email: 'vimal@vimsenterprise.com',
   phone: '9940660868',
   phoneFormatted: '+91 99406 60868',
   secondaryPhoneFormatted: '+91 97896 92447',
-  whatsappUrl: 'https://wa.me/919940660868?text=Hi%20Vimal%2C%20I%20visited%20vimsenterprise.com%20and%20would%20like%20to%20schedule%20a%20discovery%20call.',
+  whatsappUrl:
+    'https://wa.me/919940660868?text=Hi%20Vimal%2C%20I%20visited%20vimsenterprise.com%20and%20would%20like%20to%20schedule%20a%20discovery%20call.',
   bookingUrl: 'https://cal.com/vims-003/vims-enterprise',
   gstin: '33BSRPS0448G1ZH',
   udyam: 'UDYAM-TN-04-0082183',
@@ -15,54 +32,105 @@ export const COMPANY_CONTACT = {
 };
 
 export interface SolutionPillarMeta {
+  index: string;
   page: Page;
   slug: string;
   shortTitle: string;
   title: string;
   badge: string;
   summary: string;
+  imageUrl: string;
+  platformName?: string;
+  externalUrl?: string;
+  bullets: string[];
+  accentColor: string;
 }
 
 export const CORE_PILLARS: SolutionPillarMeta[] = [
   {
+    index: '01',
     page: Page.VoiceAgents,
     slug: '/ai-voice-agents',
-    shortTitle: 'AI Voice Agents',
+    shortTitle: 'Voice AI',
     title: 'Multilingual AI Voice Agents',
-    badge: 'Conversational AI',
-    summary: 'Human-like inbound & outbound voice agents that answer enquiries, qualify leads, route calls, and book calendar appointments 24/7.',
+    badge: 'Powered by Jill-Jill',
+    summary: '24/7 inbound & outbound voice agents that qualify leads, book slots, and sync CRMs.',
+    imageUrl: '/images/niches/voice-ai-orb.webp',
+    platformName: 'Jill-Jill',
+    externalUrl: GROUP_PLATFORMS.jilljill.url,
+    bullets: [
+      'Natural Tamil, English & Hindi voice conversations',
+      'Live Google Calendar & Cal.com slot booking',
+      'Instant warm human transfer & CRM transcripts',
+    ],
+    accentColor: '#E8451E',
   },
   {
+    index: '02',
     page: Page.WebsiteCreation,
     slug: '/website-creation',
-    shortTitle: 'Website & E-Commerce',
-    title: 'Custom Website & Store Engineering',
-    badge: 'Web Architecture',
-    summary: 'Bespoke B2B web platforms, conversion-engineered SaaS portals, and end-to-end e-commerce stores built around your brand.',
+    shortTitle: 'Web Creation',
+    title: 'B2B Websites & Online Stores',
+    badge: 'Custom Web Studio',
+    summary: 'Conversion-focused corporate sites, web apps, and stores engineered from scratch.',
+    imageUrl: '/images/niches/web-studio.webp',
+    bullets: [
+      'Bespoke B2B corporate & SaaS React portals',
+      'Full variant catalogs, carts & verified checkouts',
+      'Core Web Vitals speed & technical SEO setup',
+    ],
+    accentColor: '#D4AF37',
   },
   {
+    index: '03',
     page: Page.AIAutomation,
     slug: '/ai-automation',
-    shortTitle: 'AI Automations & Agents',
-    title: 'Autonomous Workflows & Agent Deployments',
-    badge: 'Agentic Ops',
-    summary: 'Production multi-agent pipelines, CRM & WhatsApp orchestration, lead consolidation, and intelligent operational workflows.',
+    shortTitle: 'AI Automations',
+    title: 'Autonomous Agent Workflows',
+    badge: 'Agentic Pipelines',
+    summary: 'End-to-end CRM, WhatsApp, and grounded LLM pipelines with zero manual handoffs.',
+    imageUrl: '/images/niches/ai-automations.webp',
+    bullets: [
+      'Sub-60s WhatsApp & email lead response engine',
+      'Multi-source CRM deduplication (Zoho / HubSpot)',
+      'Tool-calling AI agents for documents & ops',
+    ],
+    accentColor: '#10B981',
   },
   {
+    index: '04',
     page: Page.HospitalManagement,
     slug: '/hms-ecosystem',
-    shortTitle: 'MediCore HMS',
+    shortTitle: 'HMS',
     title: 'VIMS MediCore Hospital OS',
-    badge: 'Healthcare Flagship',
-    summary: '40+ OP/IP clinical modules, ambient AI voice scribe, ICU telemetry, PACS/LIS diagnostics, mobile apps, and ABDM/ABHA compliance.',
+    badge: '40+ Clinical Modules',
+    summary: 'Cloud hospital OS uniting OPD/IPD, Ambient AI Scribe, ICU telemetry, and ABDM apps.',
+    imageUrl: '/images/hms/hms-command-center.webp',
+    platformName: 'MediCore OS',
+    bullets: [
+      '21 OP + 19 IP modules incl. OT, ICU & Blood Bank',
+      'Ambient AI SOAP voice scribe & drug-safety alerts',
+      'Doctor, Nurse & Patient apps · ABDM & DPDPA ready',
+    ],
+    accentColor: '#10B981',
   },
   {
+    index: '05',
     page: Page.MatlabAcademy,
     slug: '/matlab-fde-academy',
-    shortTitle: 'MATLAB & FDE Academy',
-    title: 'MATLAB MBD & Forward Deployed Engineer Training',
-    badge: 'Talent & Academy',
-    summary: 'Industry-grade mentorship for students & engineers in MATLAB, Simulink, Stateflow (MIL/SIL/HIL), and Forward Deployed AI Engineering.',
+    shortTitle: 'Academy',
+    title: 'MATLAB MBD & FDE Academy',
+    badge: 'Embedded Skills Group',
+    summary: 'Automotive embedded systems, MATLAB/Simulink MBD, and Forward Deployed AI tracks.',
+    imageUrl: '/images/niches/academy-mbd.webp',
+    platformName: 'Embedded Skills',
+    externalUrl: GROUP_PLATFORMS.embskills.url,
+    bullets: [
+      '24 ECU protocol labs via Embedded Skills platform',
+      'MATLAB, Simulink & Stateflow MIL / SIL / HIL',
+      'Forward Deployed Engineer (FDE) AI mentorship',
+    ],
+    accentColor: '#E8451E',
   },
 ];
 
@@ -82,137 +150,218 @@ export const PAGE_PATHS: Record<Page, string> = {
 };
 
 export const VERIFIED_CLIENTS = [
-  { name: 'Hexuno Technologies', logo: '/images/clients/hexuno.webp', sector: 'Engineering Technology' },
-  { name: 'Radent Engineering', logo: '/images/clients/radent.webp', sector: 'Precision Manufacturing' },
-  { name: 'Piest Systems', logo: '/images/clients/piest.webp', sector: 'Embedded & IoT Systems' },
-  { name: 'Nangai Pharmacy', logo: '/images/clients/nangai-pharmacy.webp', sector: 'Healthcare & Retail' },
-  { name: 'Ameer Jewellery', logo: '/images/clients/ameer-jewellery.webp', sector: 'Luxury Commerce' },
-  { name: 'ChipTip', logo: '/images/clients/chiptip.webp', sector: 'Digital Commerce' },
-  { name: 'Mocha', logo: '/images/clients/mocha.webp', sector: 'Consumer Brand' },
+  {
+    name: 'Hexuno Technologies',
+    logo: '/images/clients/hexuno-clean.webp',
+    logoDark: '/images/clients/hexuno-dark.webp',
+    sector: 'Engineering Systems',
+  },
+  {
+    name: 'Radent Engineering',
+    logo: '/images/clients/radent-clean.webp',
+    logoDark: '/images/clients/radent-dark.webp',
+    sector: 'Precision Manufacturing',
+  },
+  {
+    name: 'Piest Systems',
+    logo: '/images/clients/piest-clean.webp',
+    logoDark: '/images/clients/piest-dark.webp',
+    sector: 'Embedded & IoT',
+  },
+  {
+    name: 'Nangai Pharmacy',
+    logo: '/images/clients/nangai-pharmacy-clean.webp',
+    logoDark: '/images/clients/nangai-pharmacy-dark.webp',
+    sector: 'Healthcare & Retail',
+  },
+  {
+    name: 'Ameer Jewellery',
+    logo: '/images/clients/ameer-jewellery-clean.webp',
+    logoDark: '/images/clients/ameer-jewellery-dark.webp',
+    sector: 'Luxury Commerce',
+  },
+  {
+    name: 'ChipTip',
+    logo: '/images/clients/chiptip-clean.webp',
+    logoDark: '/images/clients/chiptip-dark.webp',
+    sector: 'Digital Commerce',
+  },
 ];
 
 export const TEAM_MEMBERS: TeamMember[] = [
   {
-    id: 'vimal',
-    name: 'Vimal Raj',
-    role: 'Founder & Chief Executive Officer',
-    badge: 'Founder & CEO',
-    imageUrl: '/images/brand/vimal-ceo.webp',
-    shortBio: 'Systems architect and AI strategist leading VIMS Enterprise across conversational voice AI, bespoke web engineering, MediCore HMS, and Forward Deployed Engineer mentorship.',
-    description:
-      'Vimal Raj founded VIMS Enterprise with a clear conviction: enterprise technology should feel human, move fast, and solve real operational bottlenecks without complexity. Blending deep systems engineering roots—spanning automotive/control-systems MATLAB architecture, multi-tenant healthcare platforms, and applied generative AI—he works directly with founders, hospital directors, and engineering teams from initial blueprint to production launch.',
-    expertise: [
-      'Applied GenAI & Voice Agent Architecture',
-      'Forward Deployed AI Engineering',
-      'Enterprise Web & SaaS Systems',
-      'Healthcare Digital Transformation (HMS)',
-      'MATLAB, Simulink & Control Systems (MBD)',
-      'Executive Product Strategy',
-    ],
-    experience:
-      'Recognized at the TN Digital Summit by Social Eagle for Digital Presence & AI Innovation, Vimal has guided 30+ organizations across healthcare, engineering, and B2B commerce while mentoring the next generation of MATLAB and Forward Deployed Engineers.',
-    email: 'vimal@vimsenterprise.com',
-  },
-  {
     id: 'gowtham',
     name: 'Gowtham Raj M',
-    role: 'Chief Financial Officer & Enterprise Strategy',
-    badge: 'CFO & Strategy',
-    imageUrl: '/images/brand/gowtham-cfo.webp',
-    shortBio: '15+ years of industrial and enterprise governance steering financial architecture, operational scale, and long-term B2B client partnerships.',
+    role: 'Chief Executive Officer (CEO)',
+    badge: 'CEO · 15+ Yrs Experience',
+    imageUrl: '/images/brand/gowtham-ceo.webp',
+    shortBio:
+      '15+ years across APTIV, KPIT & Danlaw steering automotive systems engineering, Agile governance, and B2B growth.',
     description:
-      'With over 15 years of industrial and enterprise leadership, Gowtham Raj oversees financial governance, enterprise structuring, and delivery discipline at VIMS Enterprise—ensuring every software and AI deployment aligns with measurable business outcomes.',
+      'As Chief Executive Officer of VIMS Enterprise, Gowtham Raj brings over 15 years of mission-critical automotive and industrial systems leadership across APTIV, KPIT, and Danlaw. A veteran Agile Scrum Master and Technical Leader spanning ADAS, V2X, IVI, and ISO-26262 safety compliance, he ensures every VIMS engagement runs with industrial rigor and measurable ROI.',
     expertise: [
-      'Enterprise Governance & Strategy',
-      'B2B Partnership Structuring',
-      'Operational Risk & Compliance',
-      'Scalable Delivery Operations',
-      'Industrial Systems Advisory',
-      'Program Execution Oversight',
+      'Executive B2B Strategy & Governance',
+      'Automotive Systems (ADAS · V2X · IVI)',
+      'ISO-26262 Functional Safety & V&V',
+      'Agile Scrum & Enterprise Delivery',
+      'OEM & Tier-1 Partnership Architecture',
     ],
     experience:
-      '15+ years of cross-sector experience guiding multi-disciplinary engineering and digital programs from scoping through sustained multi-year operations.',
+      '15+ years leading cross-functional automotive engineering, validation, and digital transformation programs with Tier-1 leaders including APTIV, Danlaw, and KPIT.',
     email: 'gowtham@vimsenterprise.com',
     linkedin: 'https://linkedin.com/in/gowthamraj-m',
   },
   {
-    id: 'guru',
-    name: 'GuruPrasath S',
-    role: 'Product & Project Manager',
-    badge: 'Product Delivery',
-    imageUrl: '/images/brand/guru-pm.webp',
-    shortBio: 'Drives end-to-end execution of AI voice agents, custom web platforms, and multi-system CRM/automation deployments.',
+    id: 'vimal',
+    name: 'Vimal Raj',
+    role: 'Founder & Chief Technology Officer (CTO)',
+    badge: 'Founder & CTO',
+    imageUrl: '/images/brand/vimal-ceo.webp',
+    shortBio:
+      'Systems architect leading applied AI, Jill-Jill Voice AI, MediCore HMS, custom web systems, and FDE mentorship.',
     description:
-      'GuruPrasath orchestrates day-to-day product delivery across VIMS Enterprise—translating client discovery blueprints into tested, production-ready web platforms, voice workflows, and autonomous agent pipelines.',
+      'Vimal Raj founded VIMS Enterprise in 2022 to make industrial-grade AI and full-stack software feel effortlessly human. Architecting across conversational voice agents (Jill-Jill), multi-tenant healthcare platforms (MediCore HMS), custom B2B web systems, and MATLAB MBD / Forward Deployed Engineer cohorts (Embedded Skills), he works directly with clients from blueprint to live production.',
     expertise: [
-      'Agile Product & Sprint Delivery',
-      'AI Workflow & CRM Integration',
-      'Voice Agent QA & Call-Flow Mapping',
-      'Full-Lifecycle Client Onboarding',
-      'SaaS Operations Management',
+      'Conversational Voice AI (Jill-Jill)',
+      'Multi-Agent LLM & CRM Architectures',
+      'MediCore Hospital OS Engineering',
+      'MATLAB MBD & Forward Deployed AI',
+      'Full-Stack B2B Web Systems',
     ],
     experience:
-      'Specialist in taking B2B web systems, e-commerce platforms, and multi-channel AI automation pipelines from wireframe to reliable production launch.',
+      'Honored on stage by Social Eagle at the TN Digital Summit for Digital Presence & Growth, Vimal has architected systems for 30+ organizations while mentoring aspiring MATLAB and Forward Deployed AI engineers.',
+    email: 'vimal@vimsenterprise.com',
+    phone: '+91 99406 60868',
+    whatsappUrl:
+      'https://wa.me/919940660868?text=Hi%20Vimal%2C%20I%20would%20like%20to%20discuss%20a%20project%20with%20VIMS%20Enterprise.',
+  },
+  {
+    id: 'guru',
+    name: 'GuruPrasath S',
+    role: 'Project Manager',
+    badge: 'Project Manager',
+    imageUrl: '/images/brand/guru-pm.webp',
+    shortBio:
+      'Orchestrates sprint execution across Voice AI, custom websites, CRM pipelines, and live client onboarding.',
+    description:
+      'GuruPrasath leads project delivery and operational execution across VIMS Enterprise—turning technical blueprints into thoroughly tested web platforms, multilingual voice call flows, and reliable multi-system CRM automations.',
+    expertise: [
+      'Agile Sprint & Delivery Management',
+      'Voice Agent QA & Call-Flow Mapping',
+      'CRM & WhatsApp Workflow Rollout',
+      'Client Onboarding & Admin Training',
+      'Web & Storefront Launch Operations',
+    ],
+    experience:
+      'Coordinates multi-disciplinary engineering, design, and client operations teams from discovery scoping through production launch and post-go-live support.',
     email: 'guru@vimsenterprise.com',
     linkedin: 'https://linkedin.com/in/guruprasath-s',
   },
 ];
 
+export const SUMMIT_GALLERY: SummitPhoto[] = [
+  {
+    id: 'social-eagle-trophy',
+    src: '/images/brand/social-eagle-award-stage.webp',
+    badge: 'TN Digital Summit · Stage Honour',
+    title: 'Social Eagle Award — Digital Presence & Growth',
+    caption: 'VIMS Enterprise team honored on stage with the Social Eagle trophy at the TN Digital Summit.',
+  },
+  {
+    id: 'dr-velumani',
+    src: '/images/brand/summit-dr-velumani.webp',
+    badge: 'Industry Leadership Connect',
+    title: 'With Dr. A. Velumani · Founder, Thyrocare',
+    caption: 'Vimal Raj and VIMS leadership connecting with healthcare & business icon Dr. A. Velumani.',
+  },
+  {
+    id: 'irfan-view',
+    src: '/images/brand/summit-irfan.webp',
+    badge: 'Creator & Digital Presence',
+    title: "With Irfan (Irfan's View) · Digital Creator",
+    caption: "Behind the scenes with prominent YouTube creator Irfan at the TN Digital Summit.",
+  },
+  {
+    id: 'actor-karunakaran',
+    src: '/images/brand/summit-karunakaran.webp',
+    badge: 'Summit Spotlight',
+    title: 'With Actor Karunakaran · Gowtham & Vimal',
+    caption: 'CEO Gowtham Raj and Founder & CTO Vimal Raj meeting Actor Karunakaran at the summit.',
+  },
+  {
+    id: 'blue-carpet',
+    src: '/images/brand/summit-blue-carpet.webp',
+    badge: 'Social Eagle Blue Carpet',
+    title: 'VIMS Leadership on the Blue Carpet',
+    caption: 'Gowtham Raj and Vimal Raj representing VIMS Enterprise Group at the TN Digital Summit.',
+  },
+  {
+    id: 'ai-delegation',
+    src: '/images/brand/tn-summit-ai-automation.jpg',
+    badge: 'AI Automation Practice',
+    title: 'VIMS Enterprise AI Automation Delegation',
+    caption: 'Showcasing applied conversational AI, automations, and B2B engineering solutions.',
+  },
+];
+
 export const PAGE_META: Record<Page, { title: string; description: string }> = {
   [Page.Home]: {
-    title: 'VIMS Enterprise — AI Voice Agents, Custom Web Systems, MediCore HMS & Engineering Academy',
+    title: 'VIMS Enterprise — Voice AI, Custom Web Systems, AI Automations, HMS & Engineering Academy',
     description:
-      'Award-winning B2B engineering & AI partner led by Vimal Raj. Multilingual AI Voice Agents, Custom Websites & E-Commerce, Autonomous Agent Deployments, MediCore HMS, and MATLAB/FDE Training.',
+      'VIMS Enterprise Group: Multilingual Voice AI (Jill-Jill), Custom B2B Websites, Autonomous AI Agents, MediCore HMS, and MATLAB/Automotive Academy (Embedded Skills).',
   },
   [Page.VoiceAgents]: {
-    title: 'AI Voice Agents for Inbound & Outbound Business Calls | VIMS Enterprise',
+    title: 'Voice AI · Powered by Jill-Jill | VIMS Enterprise',
     description:
-      'Human-like, multilingual AI voice agents configured around your business to answer routine enquiries, qualify leads, book calendar appointments, and sync your CRM.',
+      'Multilingual B2B AI voice agents for inbound enquiries, outbound sales, live calendar booking, and automatic CRM sync — powered by Jill-Jill.',
   },
   [Page.WebsiteCreation]: {
-    title: 'Custom B2B Website & E-Commerce Engineering | VIMS Enterprise',
+    title: 'Custom Website & E-Commerce Creation | VIMS Enterprise',
     description:
-      'High-converting custom websites, SaaS web applications, and e-commerce platforms engineered with clean UX, mobile speed, payment integration, and conversion architecture.',
+      'Bespoke B2B corporate websites, custom React web apps, and high-converting online stores engineered around your brand.',
   },
   [Page.AIAutomation]: {
     title: 'AI Automations & Autonomous Agent Deployments | VIMS Enterprise',
     description:
-      'Production multi-agent workflows, WhatsApp & CRM automation, instant lead follow-up, and custom LLM pipelines engineered for zero manual bottlenecks.',
+      'Production multi-agent pipelines connecting WhatsApp Business, CRM, Meta/LinkedIn Ads, and internal databases.',
   },
   [Page.HospitalManagement]: {
-    title: 'VIMS MediCore HMS — Connected Hospital Management System & Clinical AI',
+    title: 'HMS · VIMS MediCore Hospital Operating System',
     description:
-      '40+ OP & IP clinical modules, ambient AI voice scribe, connected ICU telemetry, cloud PACS/LIS, Doctor/Patient/Nursing apps, and ABDM/ABHA compliance.',
+      'Visual connected hospital ecosystem: 40+ OP/IP clinical modules, Ambient AI voice scribe, ICU telemetry, PACS/LIS, and ABDM/ABHA apps.',
   },
   [Page.MatlabAcademy]: {
-    title: 'MATLAB, Simulink MBD & Forward Deployed Engineer (FDE) Training | VIMS Academy',
+    title: 'Academy · Embedded Skills & Forward Deployed AI | VIMS Enterprise',
     description:
-      'Practical engineering mentorship for students and professionals: MATLAB, Simulink, Stateflow, MIL/SIL/HIL control systems, and Forward Deployed AI Engineering.',
+      'Hands-on automotive ECU protocols, MATLAB, Simulink & Stateflow MBD via Embedded Skills, plus Forward Deployed Engineer (FDE) AI mentorship.',
   },
   [Page.About]: {
-    title: 'About VIMS Enterprise — Leadership, Story & Social Eagle Recognition',
+    title: 'About VIMS Enterprise — Leadership, Story & Summit Recognition',
     description:
-      'Meet Founder & CEO Vimal Raj and the VIMS Enterprise team—recognized by Social Eagle at the TN Digital Summit for Digital Presence and Talent Excellence.',
+      'Meet CEO Gowtham Raj M, Founder & CTO Vimal Raj, Project Manager GuruPrasath S, and explore our Social Eagle Award & TN Digital Summit moments.',
   },
   [Page.Contact]: {
-    title: 'Book a Strategy Call with Vimal Raj | VIMS Enterprise',
+    title: 'Contact VIMS Enterprise — Book a Strategy Call',
     description:
-      'Schedule a 30-minute discovery session or connect with VIMS Enterprise at vimal@vimsenterprise.com or +91 99406 60868.',
+      'Schedule a 30-minute discovery call or message Vimal Raj directly on WhatsApp (+91 99406 60868) or at vimal@vimsenterprise.com.',
   },
   [Page.TeamProfile]: {
-    title: 'Leadership Profile | VIMS Enterprise',
-    description: 'Meet the leadership and product engineering team behind VIMS Enterprise.',
+    title: 'Executive Leadership Profile | VIMS Enterprise',
+    description: 'Executive profile and engineering background at VIMS Enterprise.',
   },
   [Page.PrivacyPolicy]: {
     title: 'Privacy Policy | VIMS Enterprise',
-    description: 'Privacy Policy for VIMS Enterprise covering customer data collection, WhatsApp communication, AI voice agents, data security, and deletion requests.',
+    description:
+      'Privacy Policy for VIMS Enterprise covering customer data collection, WhatsApp communication, AI voice agents, data security, and deletion requests.',
   },
   [Page.TermsOfService]: {
     title: 'Terms of Service | VIMS Enterprise',
-    description: 'Terms of Service governing access to VIMS Enterprise websites, software platforms, AI deployments, and training programs.',
+    description:
+      'Terms of Service governing access to VIMS Enterprise websites, software platforms, AI deployments, and training programs.',
   },
   [Page.DataDeletion]: {
     title: 'Personal Data Deletion Instructions | VIMS Enterprise',
-    description: 'Instructions to request deletion of personal data held by VIMS Enterprise across web enquiries, WhatsApp, CRM records, and AI voice interactions.',
+    description:
+      'Instructions to request deletion of personal data held by VIMS Enterprise across web enquiries, WhatsApp, CRM records, and AI voice interactions.',
   },
 };
