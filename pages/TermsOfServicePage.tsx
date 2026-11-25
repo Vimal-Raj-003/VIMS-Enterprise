@@ -1,495 +1,139 @@
 import React from 'react';
-import {
-  FileText,
-  Briefcase,
-  Globe,
-  Shield,
-  UserCheck,
-  Cpu,
-  Layers,
-  Scale,
-  RefreshCw,
-  Mail,
-  Phone,
-  CheckCircle2,
-  ArrowLeft,
-  ChevronRight
-} from 'lucide-react';
-import HeroSection from '../components/HeroSection';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { FileText, Mail, Phone, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import { Page } from '../types';
+import { COMPANY_CONTACT } from '../constants';
 
 interface TermsOfServicePageProps {
   onNavigate?: (page: Page) => void;
 }
 
 const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) => {
-  const { ref: contentRef, isVisible: isContentVisible } = useScrollAnimation<HTMLDivElement>();
-
-  const termsSections = [
-    {
-      id: 'introduction-acceptance',
-      number: '01',
-      title: 'Introduction & Acceptance of Terms',
-      icon: <FileText className="w-6 h-6 text-[#E8451E]" />,
-      badge: 'Scope & Agreement',
-      summary: 'How accessing the VIMS Enterprise website or engaging with our services constitutes agreement to these Terms of Service.',
-      points: [
-        {
-          heading: 'Overview',
-          text: 'These Terms of Service ("Terms") govern your access to and use of the VIMS Enterprise website, digital channels, and related service enquiries operated by VIMS Enterprise ("VIMS", "we", "us", or "our").'
-        },
-        {
-          heading: 'Acceptance by Use',
-          text: 'By accessing this website, submitting an enquiry, communicating with our business channels, or using our public digital resources, you acknowledge that you have read, understood, and agree to follow these Terms.'
-        },
-        {
-          heading: 'Project-Specific Agreements',
-          text: 'Where you engage VIMS Enterprise for customized software, web platforms, AI voice agents, workflow automation, or engineering training programs, the specific scope of work, deliverables, and commercial terms will be governed by the written proposal, statement of work, or service agreement executed between you and VIMS Enterprise.'
-        }
-      ]
-    },
-    {
-      id: 'services-description',
-      number: '02',
-      title: 'Description of VIMS Enterprise Services',
-      icon: <Briefcase className="w-6 h-6 text-[#D4AF37]" />,
-      badge: 'Enterprise Offerings',
-      summary: 'Overview of the software platforms, applied AI systems, web engineering, and academy programs provided by VIMS Enterprise.',
-      points: [
-        {
-          heading: 'Healthcare & Enterprise Software',
-          text: 'VIMS Enterprise develops and provides Hospital Management System (HMS) software solutions and connected administrative, clinical, and operational workflow tools tailored for healthcare organizations.'
-        },
-        {
-          heading: 'AI Automation & Voice Agents',
-          text: 'We design and deploy business workflow automation, CRM integrations, WhatsApp Business Platform messaging workflows, and multilingual AI voice agents for customer engagement, lead qualification, and appointment coordination.'
-        },
-        {
-          heading: 'Custom Web Platforms & Engineering Academy',
-          text: 'We engineer custom B2B websites, SaaS portals, and e-commerce storefronts, and deliver hands-on training programs in MATLAB, Simulink, Stateflow Model-Based Design (MBD), and Forward Deployed AI Engineering.'
-        }
-      ]
-    },
-    {
-      id: 'website-usage',
-      number: '03',
-      title: 'Website Usage Conditions',
-      icon: <Globe className="w-6 h-6 text-[#E8451E]" />,
-      badge: 'Acceptable Use',
-      summary: 'Permitted use of our website and prohibitions against misuse or unauthorized interference.',
-      points: [
-        {
-          heading: 'Lawful & Authorized Use',
-          text: 'You agree to use this website solely for lawful business and informational purposes, such as learning about VIMS Enterprise solutions, submitting genuine business enquiries, or scheduling consultations.'
-        },
-        {
-          heading: 'Prohibited Activities',
-          text: 'You must not attempt to gain unauthorized access to any portion of the website, interfere with server or network operations, introduce malicious code, scrape content at scale, or use our contact and messaging channels to transmit spam or unlawful material.'
-        },
-        {
-          heading: 'Availability & Modifications',
-          text: 'We strive to keep our website accurate and accessible, but we may update, suspend, or modify website content, calculators, interactive previews, or features at any time without prior notice.'
-        }
-      ]
-    },
-    {
-      id: 'intellectual-property',
-      number: '04',
-      title: 'Intellectual Property',
-      icon: <Shield className="w-6 h-6 text-[#D4AF37]" />,
-      badge: 'Ownership Rights',
-      summary: 'Protection of VIMS Enterprise branding, software architecture, content, and client-provided materials.',
-      points: [
-        {
-          heading: 'VIMS Enterprise Property',
-          text: 'All content on this website—including text, visual design, graphics, logos, software demonstrations, documentation, and underlying code—is owned by or licensed to VIMS Enterprise and is protected by applicable intellectual property laws.'
-        },
-        {
-          heading: 'Limited Viewing License',
-          text: 'You may view and download publicly available pages for your internal business evaluation of VIMS Enterprise services. You may not copy, republish, redistribute, reverse-engineer, or commercially exploit our website materials without prior written consent.'
-        },
-        {
-          heading: 'Client Materials',
-          text: 'Any proprietary business information, engineering drawings, or project specifications you submit to VIMS Enterprise for an enquiry or engagement remain your property and are used only for evaluating or delivering the requested services.'
-        }
-      ]
-    },
-    {
-      id: 'customer-responsibilities',
-      number: '05',
-      title: 'Customer Responsibilities',
-      icon: <UserCheck className="w-6 h-6 text-[#E8451E]" />,
-      badge: 'Client Obligations',
-      summary: 'Your responsibilities when providing data, configuring workflows, or using our communication and automation tools.',
-      points: [
-        {
-          heading: 'Accuracy of Information',
-          text: 'You are responsible for ensuring that all contact details, technical specifications, and business information you provide to VIMS Enterprise are accurate, current, and authorized for sharing.'
-        },
-        {
-          heading: 'Compliance in Communications & Data',
-          text: 'When utilizing VIMS Enterprise software, CRM workflows, WhatsApp integrations, or AI voice agents in your business operations, you are responsible for obtaining any necessary consents from your end-customers and complying with applicable data protection, telecommunications, and platform rules.'
-        },
-        {
-          heading: 'Account & Credential Security',
-          text: 'Where you are provided access to client portals, dashboards, or configured integrations, you are responsible for maintaining the confidentiality of your access credentials and notifying us promptly of any suspected unauthorized use.'
-        }
-      ]
-    },
-    {
-      id: 'ai-automation-limitations',
-      number: '06',
-      title: 'AI Automation Service Limitations',
-      icon: <Cpu className="w-6 h-6 text-[#D4AF37]" />,
-      badge: 'AI & Automation',
-      summary: 'Important operational considerations regarding AI-generated outputs, voice agents, and automated workflows.',
-      points: [
-        {
-          heading: 'Probabilistic Nature of AI Outputs',
-          text: 'AI voice agents, conversational assistants, and automated workflows rely on machine learning models that generate responses probabilistically. While designed for accuracy and business alignment, AI outputs may occasionally be incomplete, inaccurate, or require human review.'
-        },
-        {
-          heading: 'Human Oversight & Critical Decisions',
-          text: 'AI automation and software tools provided by VIMS Enterprise are intended to assist operational efficiency and are not a substitute for qualified human judgment—particularly in clinical healthcare decisions, legal compliance, financial commitments, or final manufacturing engineering sign-off.'
-        },
-        {
-          heading: 'Dependency on Underlying Inputs',
-          text: 'The performance of automated workflows, cost estimations, and AI voice interactions depends on the quality of configured prompts, client-supplied data, telephony connectivity, and third-party platform availability.'
-        }
-      ]
-    },
-    {
-      id: 'third-party-services',
-      number: '07',
-      title: 'Third-Party Services & Platforms',
-      icon: <Layers className="w-6 h-6 text-[#E8451E]" />,
-      badge: 'External Integrations',
-      summary: 'How external platforms, scheduling tools, and messaging networks interact with our website and services.',
-      points: [
-        {
-          heading: 'External Links & Embedded Tools',
-          text: 'Our website and solutions may integrate with or link to third-party platforms—such as WhatsApp Business Platform (Meta), calendar scheduling services (such as Cal.com), cloud hosting providers, telephony carriers, and AI model providers.'
-        },
-        {
-          heading: 'Independent Platform Terms',
-          text: 'Your use of third-party applications or platforms is subject to the respective terms, acceptable use policies, and privacy practices of those third-party providers.'
-        },
-        {
-          heading: 'Platform Availability',
-          text: 'VIMS Enterprise does not control and is not responsible for unplanned outages, API policy changes, or service interruptions originating from independent third-party platforms or telecommunications networks.'
-        }
-      ]
-    },
-    {
-      id: 'liability-limitations',
-      number: '08',
-      title: 'Liability Limitations',
-      icon: <Scale className="w-6 h-6 text-rose-400" />,
-      badge: 'Legal Boundaries',
-      summary: 'Allocation of risk and limitations of liability to the extent permitted by applicable law.',
-      points: [
-        {
-          heading: 'Website Provided "As Is"',
-          text: 'This website and its general informational content, interactive previews, and sample calculators are provided on an "as is" and "as available" basis for informational purposes without implied warranties of uninterrupted availability or fitness for a particular purpose.'
-        },
-        {
-          heading: 'Exclusion of Indirect Damages',
-          text: 'To the maximum extent permitted by applicable law, VIMS Enterprise shall not be liable for any indirect, incidental, consequential, or special damages, or for loss of profits, revenue, data, or business opportunities arising from your use of, or inability to use, this website.'
-        },
-        {
-          heading: 'Non-Excludable Rights',
-          text: 'Nothing in these Terms excludes or limits any liability that cannot be excluded or limited under applicable law, or alters specific remedies expressly agreed in a signed written contract between you and VIMS Enterprise.'
-        }
-      ]
-    },
-    {
-      id: 'changes-to-terms',
-      number: '09',
-      title: 'Changes to Terms',
-      icon: <RefreshCw className="w-6 h-6 text-[#E8451E]" />,
-      badge: 'Updates',
-      summary: 'How VIMS Enterprise updates these Terms of Service as our products and operations evolve.',
-      points: [
-        {
-          heading: 'Periodic Revisions',
-          text: 'We may revise these Terms of Service from time to time to reflect new service capabilities, operational adjustments, or changes in applicable legal and platform requirements.'
-        },
-        {
-          heading: 'Publication on Website',
-          text: 'Updated Terms will be posted on this page at /terms-of-service. We encourage you to review this page periodically when visiting our website or engaging our services.'
-        },
-        {
-          heading: 'Continued Use',
-          text: 'Your continued use of the VIMS Enterprise website following the posting of revised Terms constitutes your acceptance of the updated Terms.'
-        }
-      ]
-    }
-  ];
-
   return (
-    <div className="space-y-16 md:space-y-24 pb-16">
-      <HeroSection
-        variant="subpage"
-        headline={
-          <>
-            Terms of <span className="text-[#E8451E]">Service</span>
-          </>
-        }
-        subtext="Clear, professional terms governing the use of the VIMS Enterprise website, enterprise software ecosystems, AI automation workflows, and engineering services."
-        primaryCta={{
-          text: 'Contact VIMS Enterprise',
-          onClick: () => {
-            window.location.href = 'mailto:vimal@vimsenterprise.com?subject=Terms%20of%20Service%20Inquiry';
-          }
-        }}
-        imageUrl="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1920&q=80"
-        altText="VIMS Enterprise Terms of Service"
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Top Metadata & Back Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E8451E]/15 border border-[#E8451E]/30 text-[#E8451E] text-xs font-mono font-bold uppercase tracking-wider">
-              <FileText className="w-3.5 h-3.5" />
-              VIMS Enterprise
+    <div className="bg-white dark:bg-[#0B0F19]">
+      <header className="bg-[#F8F7F4] dark:bg-[#0F1420] border-b border-slate-200/80 dark:border-slate-800 py-14 md:py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <span className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#1D4ED8] dark:text-blue-400 font-semibold">
+              <FileText size={15} />
+              <span>VIMS Enterprise &middot; Legal Terms</span>
             </span>
-            <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-              Path: <code className="text-[#E8451E]">/terms-of-service</code>
-            </span>
-            <span className="hidden sm:inline text-slate-600">•</span>
-            <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-              Contact: <a href="mailto:vimal@vimsenterprise.com" className="text-[#E8451E] hover:underline">vimal@vimsenterprise.com</a>
-            </span>
-          </div>
-
-          {onNavigate && (
-            <button
-              onClick={() => onNavigate(Page.Home)}
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-[#E8451E] transition-colors self-start sm:self-auto"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </button>
-          )}
-        </div>
-
-        {/* Quick Section Jump Bar */}
-        <div className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-200/50 dark:border-slate-800/30 shadow-lg">
-          <p className="text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-            <FileText className="w-4 h-4 text-[#E8451E]" />
-            Terms of Service Sections
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {termsSections.map((section) => (
-              <a
-                key={section.id}
-                href={`#${section.id}`}
-                className="group flex items-center justify-between px-4 py-3 rounded-2xl bg-slate-100/70 dark:bg-[#111114]/60 border border-slate-200/60 dark:border-slate-800 hover:border-[#E8451E]/40 transition-all duration-300"
-              >
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <span className="text-xs font-mono font-bold text-[#E8451E]">{section.number}</span>
-                  <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate group-hover:text-[#E8451E] transition-colors">
-                    {section.title}
-                  </span>
-                </div>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#E8451E] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-              </a>
-            ))}
-            <a
-              href="#contact-information"
-              className="group flex items-center justify-between px-4 py-3 rounded-2xl bg-[#E8451E]/10 border border-[#E8451E]/30 hover:bg-[#E8451E]/20 transition-all duration-300"
-            >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <span className="text-xs font-mono font-bold text-[#E8451E]">10</span>
-                <span className="text-xs font-semibold text-slate-900 dark:text-white truncate">
-                  Contact Information
-                </span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-[#E8451E] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-            </a>
-          </div>
-        </div>
-
-        {/* Intro Overview Card */}
-        <div className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-8 md:p-10 rounded-4xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl">
-          <h2 className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-zinc-100 mb-4">
-            Overview
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base md:text-lg">
-            Welcome to <strong className="text-slate-900 dark:text-white font-semibold">VIMS Enterprise</strong>. These Terms of Service outline the conditions for using our website, interacting with our communication and AI automation channels, and engaging our software and engineering services. For information on how we handle personal data, please also review our{' '}
             {onNavigate ? (
-              <a
-                href="/privacy-policy"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onNavigate(Page.PrivacyPolicy);
-                }}
-                className="text-[#E8451E] hover:underline font-medium"
+              <button
+                type="button"
+                onClick={() => onNavigate(Page.Home)}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[#1D4ED8]"
+              >
+                <ArrowLeft size={14} />
+                <span>Back to Home</span>
+              </button>
+            ) : null}
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl font-display font-bold tracking-tight text-slate-900 dark:text-white max-w-3xl">
+            Terms of Service
+          </h1>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
+            Governing terms for accessing VIMS Enterprise websites, AI voice demos, software consultations, MediCore HMS evaluations, and engineering academy programmes.
+          </p>
+
+          <div className="mt-8 pt-6 border-t border-slate-200/80 dark:border-slate-800 flex flex-wrap gap-x-8 gap-y-2 text-xs font-mono text-slate-500 dark:text-slate-400">
+            <span>
+              Effective Date: <strong className="text-slate-900 dark:text-white">November 25, 2026</strong>
+            </span>
+            <span>
+              Entity: <strong className="text-slate-900 dark:text-white">VIMS Enterprise</strong> ({COMPANY_CONTACT.udyam})
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 space-y-10 text-slate-700 dark:text-slate-300 leading-relaxed">
+        <section className="space-y-3">
+          <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-white">1. Acceptance &amp; Scope</h2>
+          <p>
+            By accessing <strong>www.vimsenterprise.com</strong>, submitting an enquiry form, or participating in a discovery consultation with VIMS Enterprise, you agree to these Terms of Service. Custom commercial engagements (software development, Jill-Jill Voice AI deployments, MediCore HMS hospital licensing, or institutional training contracts) are governed by the signed Statement of Work (SOW) between you and VIMS Enterprise.
+          </p>
+        </section>
+
+        <hr className="border-slate-200 dark:border-slate-800" />
+
+        <section className="space-y-3">
+          <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-white">2. Core B2B Capabilities Covered</h2>
+          <ul className="space-y-2 text-sm sm:text-base">
+            {[
+              'Multilingual AI Voice Agents (Jill-Jill) for business enquiry & appointment workflows.',
+              'Custom B2B corporate websites, React web applications & e-commerce stores.',
+              'AI automations, CRM/WhatsApp integrations & autonomous multi-agent deployments.',
+              'VIMS MediCore Hospital Management System (HMS) multi-tenant clinical software.',
+              'Engineering & Applied AI education via Embedded Skills & Forward Deployed Engineer mentorship.',
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-2.5">
+                <CheckCircle2 size={16} className="text-[#1D4ED8] dark:text-blue-400 shrink-0 mt-1" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <hr className="border-slate-200 dark:border-slate-800" />
+
+        <section className="space-y-3">
+          <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-white">3. Intellectual Property &amp; Acceptable Use</h2>
+          <p>
+            All website design, source code, brand photography, trademarks, and documentation remain the property of VIMS Enterprise. Client-supplied briefs, brand assets, and proprietary specifications remain client property and are held strictly in confidence. Visitors agree not to scrape, disrupt, reverse-engineer, or misuse website APIs or AI chat endpoints.
+          </p>
+        </section>
+
+        <hr className="border-slate-200 dark:border-slate-800" />
+
+        <section className="space-y-3">
+          <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-white">4. Clinical &amp; AI Advisory Disclaimers</h2>
+          <p>
+            Automated AI demos, chatbot responses, and MediCore HMS decision-support tools assist trained professionals and administrators—they never replace licensed medical judgment or independent legal/regulatory counsel.
+          </p>
+        </section>
+
+        <hr className="border-slate-200 dark:border-slate-800" />
+
+        <section className="space-y-3">
+          <h2 className="text-2xl font-display font-bold text-slate-900 dark:text-white">5. Governing Law &amp; Contact</h2>
+          <p>
+            These Terms are governed by the laws of India, with jurisdiction in Tamil Nadu. Questions regarding these Terms or our{' '}
+            {onNavigate ? (
+              <button
+                type="button"
+                onClick={() => onNavigate(Page.PrivacyPolicy)}
+                className="text-[#1D4ED8] dark:text-blue-400 underline font-semibold"
               >
                 Privacy Policy
-              </a>
+              </button>
             ) : (
-              <a href="/privacy-policy" className="text-[#E8451E] hover:underline font-medium">
+              <a href="/privacy-policy" className="text-[#1D4ED8] underline font-semibold">
                 Privacy Policy
               </a>
             )}{' '}
-            and{' '}
-            {onNavigate ? (
-              <a
-                href="/data-deletion"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onNavigate(Page.DataDeletion);
-                }}
-                className="text-[#E8451E] hover:underline font-medium"
-              >
-                Data Deletion Instructions
-              </a>
-            ) : (
-              <a href="/data-deletion" className="text-[#E8451E] hover:underline font-medium">
-                Data Deletion Instructions
-              </a>
-            )}
-            .
+            may be directed to:
           </p>
-        </div>
-
-        {/* Main Terms Sections */}
-        <div
-          ref={contentRef}
-          className={`space-y-8 transition-all duration-1000 ${
-            isContentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
-        >
-          {termsSections.map((section) => (
-            <section
-              key={section.id}
-              id={section.id}
-              className="scroll-mt-28 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-8 md:p-10 rounded-4xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl hover:border-[#E8451E]/30 transition-all duration-300"
-            >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200/60 dark:border-slate-800/80">
-                <div className="flex items-start sm:items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-[#111114] flex items-center justify-center border border-slate-200/60 dark:border-slate-800 shadow-inner flex-shrink-0">
-                    {section.icon}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2.5">
-                      <span className="text-xs font-mono font-bold text-[#E8451E] uppercase tracking-widest">
-                        Section {section.number}
-                      </span>
-                      <span className="text-slate-400 dark:text-slate-600">•</span>
-                      <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-                        {section.badge}
-                      </span>
-                    </div>
-                    <h2 className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-zinc-100 mt-1">
-                      {section.title}
-                    </h2>
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-slate-600 dark:text-slate-300 mb-6 font-medium">
-                {section.summary}
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {section.points.map((point, idx) => (
-                  <div
-                    key={idx}
-                    className="p-6 rounded-3xl bg-slate-50/70 dark:bg-[#111114]/50 border border-slate-200/50 dark:border-slate-800/60 flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <CheckCircle2 className="w-4 h-4 text-[#E8451E] flex-shrink-0" />
-                        <h3 className="text-base font-poppins font-bold text-slate-900 dark:text-zinc-100">
-                          {point.heading}
-                        </h3>
-                      </div>
-                      <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                        {point.text}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          ))}
-
-          {/* Section 10: Contact Information */}
-          <section
-            id="contact-information"
-            className="scroll-mt-28 bg-gradient-to-br from-[#111114]/90 via-slate-900/90 to-[#111114]/90 text-white p-8 md:p-12 rounded-4xl border border-[#E8451E]/30 shadow-2xl relative overflow-hidden"
-          >
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#E8451E]/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#D4AF37]/10 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-7 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8451E]/20 border border-[#E8451E]/30 text-[#E8451E] text-xs font-mono uppercase tracking-widest">
-                  Section 10 • Contact Information
-                </div>
-                <h2 className="text-2xl md:text-4xl font-poppins font-bold text-white">
-                  Questions About These Terms
-                </h2>
-                <p className="text-slate-300 leading-relaxed text-sm md:text-base max-w-2xl">
-                  If you have any questions regarding these Terms of Service, our enterprise software solutions, or service agreements, please contact <strong className="text-white">VIMS Enterprise</strong> directly using the contact details below.
-                </p>
-              </div>
-
-              <div className="lg:col-span-5 bg-white/5 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/10 space-y-5">
-                <div>
-                  <p className="text-xs font-mono uppercase tracking-widest text-[#E8451E] mb-1">Company</p>
-                  <p className="text-xl font-poppins font-bold text-white">VIMS Enterprise</p>
-                </div>
-
-                <div className="space-y-3 pt-2 border-t border-white/10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-[#E8451E]/20 flex items-center justify-center text-[#E8451E] flex-shrink-0">
-                      <Mail className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-mono text-slate-400">Official Contact Email</p>
-                      <a
-                        href="mailto:vimal@vimsenterprise.com"
-                        className="text-sm md:text-base font-semibold text-[#E8451E] hover:underline break-all"
-                      >
-                        vimal@vimsenterprise.com
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-[#E8451E]/20 flex items-center justify-center text-[#E8451E] flex-shrink-0">
-                      <Phone className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-mono text-slate-400">General Business Contact Number</p>
-                      <a
-                        href="tel:+919940660868"
-                        className="text-sm md:text-base font-semibold text-white hover:text-[#E8451E] transition-colors"
-                      >
-                        +91 9940660868
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-2">
-                  <a
-                    href="mailto:vimal@vimsenterprise.com?subject=Terms%20of%20Service%20Inquiry"
-                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-gradient-to-r from-[#E8451E] to-[#D4AF37] text-white font-bold text-sm shadow-lg hover:opacity-95 transition-opacity"
-                  >
-                    <Mail className="w-4 h-4" />
-                    Email vimal@vimsenterprise.com
-                  </a>
-                </div>
-              </div>
+          <div className="border-l-2 border-[#1D4ED8] pl-5 space-y-1.5 text-sm">
+            <p className="font-bold text-slate-900 dark:text-white">VIMS Enterprise</p>
+            <div className="flex flex-wrap gap-6">
+              <a
+                href={`mailto:${COMPANY_CONTACT.email}`}
+                className="inline-flex items-center gap-2 text-[#1D4ED8] dark:text-blue-400 font-semibold hover:underline"
+              >
+                <Mail size={14} />
+                <span>{COMPANY_CONTACT.email}</span>
+              </a>
+              <a
+                href={`tel:+91${COMPANY_CONTACT.phone}`}
+                className="inline-flex items-center gap-2 text-slate-700 dark:text-slate-200 font-semibold"
+              >
+                <Phone size={14} />
+                <span>{COMPANY_CONTACT.phoneFormatted}</span>
+              </a>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </div>
     </div>
   );

@@ -5,7 +5,6 @@ import {
   X,
   Send,
   Calendar,
-  Sparkles,
   ArrowUpRight,
   MessageSquare,
 } from 'lucide-react';
@@ -88,8 +87,7 @@ function localSmartReply(input: string): { reply: string; suggestedPage?: { labe
   }
 
   return {
-    reply:
-      `Ask me about **Voice AI (${GROUP_PLATFORMS.jilljill.name})**, **Web Creation**, **AI Automations**, **MediCore HMS**, or **Academy (${GROUP_PLATFORMS.embskills.name})**—or tap **Book a Call** below.`,
+    reply: `Ask me about **Voice AI (${GROUP_PLATFORMS.jilljill.name})**, **Web Creation**, **AI Automations**, **MediCore HMS**, or **Academy (${GROUP_PLATFORMS.embskills.name})**—or tap **Book a Call** below.`,
   };
 }
 
@@ -106,7 +104,7 @@ const VimsChatbot: React.FC<VimsChatbotProps> = ({ onNavigate, onOpenBooking }) 
       id: 'welcome',
       role: 'assistant',
       content:
-        'Hi! I’m the **VIMS Enterprise Concierge**. Ask about **Voice AI (Jill-Jill)**, **Web Creation**, **AI Automations**, **HMS**, or **Academy (Embedded Skills)**.',
+        'Hi! I’m the **VIMS Enterprise Assistant**. Ask about **Voice AI (Jill-Jill)**, **Web Creation**, **AI Automations**, **HMS**, or **Academy (Embedded Skills)**.',
     },
   ]);
 
@@ -182,7 +180,7 @@ const VimsChatbot: React.FC<VimsChatbotProps> = ({ onNavigate, onOpenBooking }) 
         <p key={idx} className={idx > 0 ? 'mt-1.5' : ''}>
           {parts.map((part, i) =>
             part.startsWith('**') && part.endsWith('**') ? (
-              <strong key={i} className="font-semibold text-zinc-900 dark:text-white">
+              <strong key={i} className="font-semibold text-slate-900 dark:text-white">
                 {part.slice(2, -2)}
               </strong>
             ) : (
@@ -200,17 +198,16 @@ const VimsChatbot: React.FC<VimsChatbotProps> = ({ onNavigate, onOpenBooking }) 
         {!isOpen ? (
           <motion.button
             type="button"
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => setIsOpen(true)}
-            aria-label="Open VIMS AI Concierge"
-            className="flex items-center gap-2 pl-3.5 pr-4 py-2.5 sm:pl-4 sm:pr-5 sm:py-3.5 rounded-full bg-[#111114] hover:bg-[#1A1A1F] text-white shadow-2xl border border-white/15 transition-all"
+            aria-label="Open VIMS Assistant"
+            className="flex items-center gap-2 px-4 py-3 rounded-full bg-[#1D4ED8] hover:bg-[#1E40AF] text-white shadow-lg transition-all"
           >
-            <MessageSquareText size={17} className="text-[#E8451E]" />
-            <span className="text-xs sm:text-sm font-semibold">Ask VIMS AI</span>
-            <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
+            <MessageSquareText size={17} />
+            <span className="text-xs sm:text-sm font-semibold">Ask VIMS</span>
           </motion.button>
         ) : null}
       </div>
@@ -222,34 +219,26 @@ const VimsChatbot: React.FC<VimsChatbotProps> = ({ onNavigate, onOpenBooking }) 
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 18, scale: 0.96 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[70] w-[calc(100vw-2rem)] sm:w-[400px] max-h-[82vh] bg-white dark:bg-[#111114] border border-zinc-200 dark:border-white/15 rounded-3xl shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[70] w-[calc(100vw-2rem)] sm:w-[390px] max-h-[82vh] bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="px-5 py-4 bg-[#09090B] border-b border-white/10 flex items-center justify-between text-white">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#E8451E]/20 border border-[#E8451E]/40 flex items-center justify-center text-[#E8451E]">
-                  <Sparkles size={17} />
-                </div>
-                <div>
-                  <div className="text-sm font-display font-bold leading-none">VIMS AI Concierge</div>
-                  <div className="text-[11px] text-[#10B981] flex items-center gap-1.5 mt-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
-                    <span>VIMS Group Assistant</span>
-                  </div>
-                </div>
+            <div className="px-5 py-4 bg-[#1D4ED8] flex items-center justify-between text-white">
+              <div>
+                <div className="text-sm font-display font-bold leading-none">VIMS Assistant</div>
+                <div className="text-[11px] text-blue-100 mt-1">Solutions &amp; Scheduling Desk</div>
               </div>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                aria-label="Close VIMS AI Concierge"
-                className="p-1.5 rounded-xl text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+                aria-label="Close VIMS Assistant"
+                className="p-1.5 rounded-lg text-blue-100 hover:text-white hover:bg-white/10 transition-colors"
               >
                 <X size={18} />
               </button>
             </div>
 
             {/* Messages */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3.5 max-h-[370px]">
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-3.5 max-h-[360px]">
               {messages.map((m) => (
                 <div
                   key={m.id}
@@ -258,8 +247,8 @@ const VimsChatbot: React.FC<VimsChatbotProps> = ({ onNavigate, onOpenBooking }) 
                   <div
                     className={`max-w-[88%] px-4 py-3 rounded-2xl text-xs sm:text-[13px] leading-relaxed ${
                       m.role === 'user'
-                        ? 'bg-[#E8451E] text-white rounded-br-sm'
-                        : 'bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-200 border border-zinc-200/70 dark:border-white/10 rounded-bl-sm'
+                        ? 'bg-[#1D4ED8] text-white rounded-br-sm'
+                        : 'bg-[#F8F7F4] dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-bl-sm'
                     }`}
                   >
                     {m.role === 'assistant' ? renderFormattedText(m.content) : m.content}
@@ -272,7 +261,7 @@ const VimsChatbot: React.FC<VimsChatbotProps> = ({ onNavigate, onOpenBooking }) 
                         onNavigate(m.suggestedPage!.page);
                         setIsOpen(false);
                       }}
-                      className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-[#E8451E] hover:underline px-1"
+                      className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-[#1D4ED8] dark:text-blue-400 hover:underline px-1"
                     >
                       <span>{m.suggestedPage.label}</span>
                       <ArrowUpRight size={12} />
@@ -282,10 +271,10 @@ const VimsChatbot: React.FC<VimsChatbotProps> = ({ onNavigate, onOpenBooking }) 
               ))}
 
               {loading ? (
-                <div className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-zinc-100 dark:bg-white/5 text-xs text-zinc-500 dark:text-zinc-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E8451E] animate-bounce" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E8451E] animate-bounce [animation-delay:120ms]" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E8451E] animate-bounce [animation-delay:240ms]" />
+                <div className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-[#F8F7F4] dark:bg-slate-800 text-xs text-slate-500">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1D4ED8] animate-bounce" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1D4ED8] animate-bounce [animation-delay:120ms]" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#1D4ED8] animate-bounce [animation-delay:240ms]" />
                 </div>
               ) : null}
 
@@ -296,7 +285,7 @@ const VimsChatbot: React.FC<VimsChatbotProps> = ({ onNavigate, onOpenBooking }) 
                       key={qp}
                       type="button"
                       onClick={() => sendQuestion(qp)}
-                      className="text-left px-2.5 py-1.5 rounded-xl bg-zinc-50 dark:bg-white/5 hover:bg-[#E8451E]/10 border border-zinc-200 dark:border-white/10 text-[11px] text-zinc-600 dark:text-zinc-300 transition-colors"
+                      className="text-left px-2.5 py-1.5 rounded-lg bg-[#F8F7F4] dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 text-[11px] text-slate-700 dark:text-slate-200 transition-colors"
                     >
                       {qp}
                     </button>
@@ -306,14 +295,14 @@ const VimsChatbot: React.FC<VimsChatbotProps> = ({ onNavigate, onOpenBooking }) 
             </div>
 
             {/* Direct Actions */}
-            <div className="px-4 py-2 bg-zinc-50 dark:bg-white/5 border-t border-zinc-200/80 dark:border-white/10 flex items-center justify-between gap-2">
+            <div className="px-4 py-2 bg-[#F8F7F4] dark:bg-slate-800/60 border-t border-slate-200/80 dark:border-slate-700 flex items-center justify-between gap-2">
               <button
                 type="button"
                 onClick={() => {
                   setIsOpen(false);
                   onOpenBooking('Concierge Call');
                 }}
-                className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#E8451E] hover:underline"
+                className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#1D4ED8] dark:text-blue-400 hover:underline"
               >
                 <Calendar size={12} />
                 <span>Book a Call</span>
@@ -322,7 +311,7 @@ const VimsChatbot: React.FC<VimsChatbotProps> = ({ onNavigate, onOpenBooking }) 
                 href={COMPANY_CONTACT.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#059669] dark:text-[#10B981] hover:underline"
+                className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-[#0F766E] dark:text-teal-400 hover:underline"
               >
                 <MessageSquare size={12} />
                 <span>WhatsApp Vimal (CTO)</span>
@@ -335,20 +324,20 @@ const VimsChatbot: React.FC<VimsChatbotProps> = ({ onNavigate, onOpenBooking }) 
                 e.preventDefault();
                 sendQuestion(input);
               }}
-              className="p-3 border-t border-zinc-200 dark:border-white/10 flex items-center gap-2 bg-white dark:bg-[#111114]"
+              className="p-3 border-t border-slate-200 dark:border-slate-700 flex items-center gap-2 bg-white dark:bg-[#111827]"
             >
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about Voice AI, HMS, Academy..."
-                className="flex-1 px-3.5 py-2.5 rounded-xl bg-zinc-100 dark:bg-white/5 text-xs sm:text-sm text-zinc-900 dark:text-white placeholder:text-zinc-400 outline-none focus:ring-1 focus:ring-[#E8451E]"
+                className="flex-1 px-3.5 py-2 rounded-xl bg-[#F8F7F4] dark:bg-slate-800 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:ring-1 focus:ring-[#1D4ED8]"
               />
               <button
                 type="submit"
                 disabled={!input.trim() || loading}
                 aria-label="Send message"
-                className="p-2.5 rounded-xl bg-[#E8451E] hover:bg-[#D93814] text-white disabled:opacity-40 transition-colors"
+                className="p-2.5 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] text-white disabled:opacity-40 transition-colors"
               >
                 <Send size={15} />
               </button>

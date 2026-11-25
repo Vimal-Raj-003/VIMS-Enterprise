@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/webp" href="/images/brand/vims-logo.webp" />
@@ -11,10 +11,10 @@
     />
 
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="VIMS Enterprise — B2B AI Systems, Custom Web &amp; Healthcare OS" />
+    <meta property="og:title" content="VIMS Enterprise — Human-Centered B2B Systems &amp; Applied AI" />
     <meta
       property="og:description"
-      content="The B2B engineering group powering Jill-Jill Voice AI, MediCore HMS, Embedded Skills Academy, custom web platforms, and autonomous workflows."
+      content="Technology built around people: Jill-Jill Voice AI, MediCore HMS, Embedded Skills Academy, custom B2B websites, and operational automations."
     />
     <meta property="og:image" content="https://www.vimsenterprise.com/images/brand/social-eagle-award-stage.webp" />
     <meta property="og:url" content="https://www.vimsenterprise.com" />
@@ -23,19 +23,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
     <script>
-      if (localStorage.getItem('theme') === 'light') {
-        document.documentElement.classList.remove('dark');
-      } else {
+      if (localStorage.getItem('vims_theme_v3') === 'dark') {
         document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
       }
     </script>
   </head>
-  <body class="bg-[#FAF8F5] dark:bg-[#09090B] font-sans text-zinc-900 dark:text-zinc-100 antialiased selection:bg-[#E8451E]/25 selection:text-white transition-colors duration-300">
+  <body class="bg-white dark:bg-[#0B0F19] font-sans text-slate-900 dark:text-slate-100 antialiased selection:bg-[#1D4ED8]/15 selection:text-[#1D4ED8] dark:selection:text-white transition-colors duration-300">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

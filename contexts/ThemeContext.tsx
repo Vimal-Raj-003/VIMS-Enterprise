@@ -12,24 +12,24 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
-        const storedTheme = localStorage.getItem('theme') as Theme | null;
-        return storedTheme || 'dark'; // Default to dark
+      const storedTheme = localStorage.getItem('vims_theme_v3') as Theme | null;
+      return storedTheme === 'dark' ? 'dark' : 'light';
     }
-    return 'dark';
+    return 'light';
   });
 
   useEffect(() => {
     const root = window.document.documentElement;
-    if (theme === 'light') {
-      root.classList.remove('dark');
-    } else {
+    if (theme === 'dark') {
       root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
     }
-    localStorage.setItem('theme', theme);
+    localStorage.setItem('vims_theme_v3', theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
   return (

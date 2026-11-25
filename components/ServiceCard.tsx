@@ -1,29 +1,19 @@
 import React from 'react';
+import { ServiceCardProps } from '../types';
 
-import { motion } from 'motion/react';
-
-interface ServiceCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description }) => {
+export const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, description, tag }) => {
   return (
-    <motion.div 
-      whileHover={{ y: -5, boxShadow: "0 20px 40px -15px rgba(34, 211, 238, 0.3)" }}
-      className="group relative p-8 h-full bg-white dark:bg-slate-900/50 rounded-4xl border border-slate-200 dark:border-slate-800 overflow-hidden transition-all duration-300 hover:border-[#E8451E]/50"
-    >
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#E8451E]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-      <div className="relative z-10">
-        <div className="mb-6 w-16 h-16 flex items-center justify-center bg-slate-100 dark:bg-slate-800 rounded-2xl text-[#E8451E] group-hover:shadow-[0_0_15px_rgba(34,211,238,0.4)] transition-shadow">
-          {icon}
-        </div>
-        <h3 className="text-xl font-bold font-poppins text-slate-900 dark:text-zinc-100 mb-3 group-hover:text-[#E8451E] transition-colors">{title}</h3>
-        <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{description}</p>
+    <div className="group border-t border-slate-200 dark:border-slate-800 pt-6 space-y-2.5">
+      <div className="flex items-center justify-between">
+        <div className="text-[#1D4ED8] dark:text-blue-400">{icon}</div>
+        {tag ? (
+          <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">{tag}</span>
+        ) : null}
       </div>
-    </motion.div>
+      <h3 className="text-lg font-display font-bold text-slate-900 dark:text-white group-hover:text-[#1D4ED8] transition-colors">
+        {title}
+      </h3>
+      <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{description}</p>
+    </div>
   );
 };
-
-export default ServiceCard;

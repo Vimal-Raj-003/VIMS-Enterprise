@@ -84,7 +84,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/75 backdrop-blur-md"
+            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
           />
 
           <motion.div
@@ -95,27 +95,26 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
             role="dialog"
             aria-modal="true"
             aria-label="Schedule a Strategy Call with VIMS Enterprise"
-            className="relative w-full max-w-5xl max-h-[92vh] bg-white dark:bg-[#111114] border border-zinc-200 dark:border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+            className="relative w-full max-w-5xl max-h-[92vh] bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col"
           >
             {/* Header */}
-            <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4 border-b border-zinc-200 dark:border-white/10 bg-[#FAF8F5] dark:bg-[#09090B]">
+            <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-[#F8F7F4] dark:bg-[#0B0F19]">
               <div className="flex items-center gap-3.5">
                 <img
                   src="/images/brand/vimal-ceo.webp"
                   alt="Vimal Raj — Founder & CTO"
-                  className="w-11 h-11 rounded-full object-cover border border-[#E8451E]/40"
+                  className="w-11 h-11 rounded-full object-cover border border-slate-300 dark:border-slate-700"
                 />
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-base sm:text-lg font-display font-bold text-zinc-900 dark:text-white">
+                    <h3 className="text-base sm:text-lg font-display font-bold text-slate-900 dark:text-white">
                       Book a Discovery Call with Vimal Raj
                     </h3>
-                    <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-[#10B981]/10 text-[#059669] dark:text-[#10B981] border border-[#10B981]/25">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
+                    <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-teal-50 dark:bg-teal-500/15 text-[#0F766E] dark:text-teal-300">
                       Founder &amp; CTO
                     </span>
                   </div>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-3 mt-0.5">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-3 mt-0.5">
                     <span className="inline-flex items-center gap-1">
                       <Clock size={12} /> 30 Minutes
                     </span>
@@ -123,21 +122,21 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                       <Video size={12} /> Google Meet
                     </span>
                     <span className="hidden md:inline-flex items-center gap-1">
-                      <ShieldCheck size={12} /> Tailored Architecture Scope
+                      <ShieldCheck size={12} /> Architecture Walkthrough
                     </span>
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-2">
-                <div className="inline-flex rounded-xl p-1 bg-zinc-200/70 dark:bg-white/5 text-xs font-semibold">
+                <div className="inline-flex rounded-xl p-1 bg-slate-200/70 dark:bg-slate-800 text-xs font-semibold">
                   <button
                     type="button"
                     onClick={() => setActiveTab('calendar')}
                     className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
                       activeTab === 'calendar'
-                        ? 'bg-white dark:bg-[#E8451E] text-zinc-900 dark:text-white shadow-sm'
-                        : 'text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white'
+                        ? 'bg-white dark:bg-[#1D4ED8] text-slate-900 dark:text-white shadow-sm'
+                        : 'text-slate-600 dark:text-slate-300'
                     }`}
                   >
                     <Calendar size={13} />
@@ -148,8 +147,8 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                     onClick={() => setActiveTab('brief')}
                     className={`px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
                       activeTab === 'brief'
-                        ? 'bg-white dark:bg-[#E8451E] text-zinc-900 dark:text-white shadow-sm'
-                        : 'text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white'
+                        ? 'bg-white dark:bg-[#1D4ED8] text-slate-900 dark:text-white shadow-sm'
+                        : 'text-slate-600 dark:text-slate-300'
                     }`}
                   >
                     <Send size={13} />
@@ -161,7 +160,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                   type="button"
                   onClick={onClose}
                   aria-label="Close booking dialog"
-                  className="p-2 rounded-xl text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-200/60 dark:hover:bg-white/10 transition-colors"
+                  className="p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-colors"
                 >
                   <X size={20} />
                 </button>
@@ -171,37 +170,37 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
             {/* Body */}
             <div className="flex-1 overflow-y-auto">
               {activeTab === 'calendar' ? (
-                <div className="flex flex-col h-[540px] sm:h-[580px] bg-zinc-50 dark:bg-[#09090B]">
+                <div className="flex flex-col h-[540px] sm:h-[580px] bg-white dark:bg-[#0B0F19]">
                   <iframe
                     src={`${COMPANY_CONTACT.bookingUrl}?layout=month_view&theme=${theme}`}
                     title="VIMS Enterprise Strategy Call Calendar"
                     style={{ colorScheme: theme }}
-                    className="w-full flex-1 border-0 bg-white dark:bg-[#09090B]"
+                    className="w-full flex-1 border-0 bg-white dark:bg-[#0B0F19]"
                     loading="lazy"
                   />
-                  <div className="px-6 py-3 bg-white dark:bg-[#111114] border-t border-zinc-200 dark:border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-zinc-500 dark:text-zinc-400">
+                  <div className="px-6 py-3 bg-[#F8F7F4] dark:bg-[#080C14] border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
                     <div className="flex flex-wrap items-center gap-4">
                       <a
                         href={`tel:+91${COMPANY_CONTACT.phone}`}
-                        className="inline-flex items-center gap-1.5 hover:text-[#E8451E] transition-colors font-medium"
+                        className="inline-flex items-center gap-1.5 hover:text-[#1D4ED8] transition-colors font-medium"
                       >
-                        <Phone size={13} className="text-[#E8451E]" />
+                        <Phone size={13} className="text-[#1D4ED8]" />
                         {COMPANY_CONTACT.phoneFormatted}
                       </a>
                       <a
                         href={COMPANY_CONTACT.whatsappUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 hover:text-[#10B981] transition-colors font-medium"
+                        className="inline-flex items-center gap-1.5 hover:text-[#0F766E] transition-colors font-medium"
                       >
-                        <MessageSquare size={13} className="text-[#10B981]" />
+                        <MessageSquare size={13} className="text-[#0F766E]" />
                         Instant WhatsApp
                       </a>
                       <a
                         href={`mailto:${COMPANY_CONTACT.email}`}
-                        className="inline-flex items-center gap-1.5 hover:text-[#E8451E] transition-colors"
+                        className="inline-flex items-center gap-1.5 hover:text-[#1D4ED8] transition-colors"
                       >
-                        <Mail size={13} className="text-[#D4AF37]" />
+                        <Mail size={13} className="text-slate-500" />
                         {COMPANY_CONTACT.email}
                       </a>
                     </div>
@@ -209,7 +208,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                       href={COMPANY_CONTACT.bookingUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[#E8451E] hover:underline font-semibold"
+                      className="inline-flex items-center gap-1 text-[#1D4ED8] dark:text-blue-400 hover:underline font-semibold"
                     >
                       <span>Open full-screen scheduler</span>
                       <ExternalLink size={12} />
@@ -220,22 +219,22 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                 <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
                   <div className="lg:col-span-7">
                     {submitted ? (
-                      <div className="p-8 rounded-2xl bg-[#10B981]/10 border border-[#10B981]/25 text-center space-y-4">
-                        <div className="w-12 h-12 rounded-2xl bg-[#10B981]/20 text-[#10B981] flex items-center justify-center mx-auto">
-                          <CheckCircle2 size={26} />
+                      <div className="p-8 rounded-2xl bg-[#F8F7F4] dark:bg-slate-800/50 space-y-4">
+                        <div className="w-11 h-11 rounded-full bg-teal-100 dark:bg-teal-500/20 text-[#0F766E] dark:text-teal-300 flex items-center justify-center">
+                          <CheckCircle2 size={24} />
                         </div>
-                        <h4 className="text-xl font-display font-bold text-zinc-900 dark:text-white">
+                        <h4 className="text-xl font-display font-bold text-slate-900 dark:text-white">
                           Brief Received — We&apos;ll Reach Out Shortly
                         </h4>
-                        <p className="text-sm text-zinc-600 dark:text-zinc-300 max-w-md mx-auto">
+                        <p className="text-sm text-slate-600 dark:text-slate-300">
                           Thank you! Founder &amp; CTO Vimal Raj and the VIMS engineering team have logged your brief.
                         </p>
-                        <div className="flex flex-wrap justify-center gap-3 pt-2">
+                        <div className="flex flex-wrap gap-3 pt-2">
                           <a
                             href={whatsappDirectHref}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white text-sm font-semibold transition-all"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0F766E] hover:bg-teal-800 text-white text-sm font-semibold"
                           >
                             <MessageSquare size={16} />
                             <span>Continue on WhatsApp</span>
@@ -243,7 +242,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                           <button
                             type="button"
                             onClick={() => setActiveTab('calendar')}
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#E8451E] hover:bg-[#D93814] text-white text-sm font-semibold transition-all"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] text-white text-sm font-semibold"
                           >
                             <Calendar size={16} />
                             <span>Pick a Meet Slot</span>
@@ -254,7 +253,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                       <form onSubmit={handleSubmitBrief} className="space-y-4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
                               Full Name *
                             </label>
                             <input
@@ -263,11 +262,11 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                               value={form.name}
                               onChange={(e) => setForm({ ...form, name: e.target.value })}
                               placeholder="Your full name"
-                              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 text-sm focus:border-[#E8451E] outline-none"
+                              className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8F7F4] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:border-[#1D4ED8] outline-none"
                             />
                           </div>
                           <div>
-                            <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
                               Work Email *
                             </label>
                             <input
@@ -276,14 +275,14 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                               value={form.email}
                               onChange={(e) => setForm({ ...form, email: e.target.value })}
                               placeholder="you@company.com"
-                              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 text-sm focus:border-[#E8451E] outline-none"
+                              className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8F7F4] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:border-[#1D4ED8] outline-none"
                             />
                           </div>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
                               Phone / WhatsApp *
                             </label>
                             <input
@@ -292,11 +291,11 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                               value={form.phone}
                               onChange={(e) => setForm({ ...form, phone: e.target.value })}
                               placeholder="+91 98765 43210"
-                              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 text-sm focus:border-[#E8451E] outline-none"
+                              className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8F7F4] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:border-[#1D4ED8] outline-none"
                             />
                           </div>
                           <div>
-                            <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
                               Organization / Institution
                             </label>
                             <input
@@ -304,19 +303,19 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                               value={form.company}
                               onChange={(e) => setForm({ ...form, company: e.target.value })}
                               placeholder="Company, Hospital, or College"
-                              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 text-sm focus:border-[#E8451E] outline-none"
+                              className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8F7F4] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:border-[#1D4ED8] outline-none"
                             />
                           </div>
                         </div>
 
                         <div>
-                          <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
-                            Focus Niche
+                          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                            Focus Area
                           </label>
                           <select
                             value={form.topic}
                             onChange={(e) => setForm({ ...form, topic: e.target.value })}
-                            className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-[#18181B] border border-zinc-200 dark:border-white/10 text-sm focus:border-[#E8451E] outline-none"
+                            className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8F7F4] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:border-[#1D4ED8] outline-none"
                           >
                             {CORE_PILLARS.map((p) => (
                               <option key={p.page} value={p.title}>
@@ -328,7 +327,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                         </div>
 
                         <div>
-                          <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-1.5">
+                          <label className="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
                             What are you building or solving? *
                           </label>
                           <textarea
@@ -337,7 +336,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                             value={form.notes}
                             onChange={(e) => setForm({ ...form, notes: e.target.value })}
                             placeholder="Share your workflow, outcomes, languages, or cohort goals..."
-                            className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 text-sm focus:border-[#E8451E] outline-none"
+                            className="w-full px-3.5 py-2.5 rounded-xl bg-[#F8F7F4] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:border-[#1D4ED8] outline-none"
                           />
                         </div>
 
@@ -345,7 +344,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                           <button
                             type="submit"
                             disabled={submitting}
-                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#E8451E] hover:bg-[#D93814] text-white font-semibold text-sm shadow-lg shadow-[#E8451E]/20 transition-all disabled:opacity-60"
+                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] text-white font-semibold text-sm transition-all disabled:opacity-60"
                           >
                             <Send size={15} />
                             <span>{submitting ? 'Submitting...' : 'Submit Brief'}</span>
@@ -355,7 +354,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                             href={whatsappDirectHref}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#10B981]/10 hover:bg-[#10B981]/20 text-[#059669] dark:text-[#10B981] border border-[#10B981]/25 font-semibold text-sm transition-all"
+                            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-teal-50 dark:bg-teal-500/15 text-[#0F766E] dark:text-teal-300 font-semibold text-sm transition-all"
                           >
                             <MessageSquare size={15} />
                             <span>WhatsApp Instead</span>
@@ -365,39 +364,39 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, defaultTop
                     )}
                   </div>
 
-                  <div className="lg:col-span-5 space-y-4">
-                    <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 space-y-3">
-                      <h4 className="text-sm font-display font-bold text-zinc-900 dark:text-white">
+                  <div className="lg:col-span-5 space-y-6 border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-800 pt-6 lg:pt-0 lg:pl-8">
+                    <div className="space-y-3">
+                      <h4 className="text-sm font-display font-bold text-slate-900 dark:text-white">
                         On Your 30-Min Discovery Call
                       </h4>
-                      <ul className="space-y-2.5 text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                      <ul className="space-y-2.5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 size={15} className="text-[#E8451E] shrink-0 mt-0.5" />
+                          <CheckCircle2 size={15} className="text-[#1D4ED8] shrink-0 mt-0.5" />
                           <span>Direct architecture review with Founder &amp; CTO Vimal Raj.</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 size={15} className="text-[#E8451E] shrink-0 mt-0.5" />
+                          <CheckCircle2 size={15} className="text-[#1D4ED8] shrink-0 mt-0.5" />
                           <span>Live walkthrough of Jill-Jill Voice AI, MediCore HMS, Web, or Embedded Skills labs.</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <CheckCircle2 size={15} className="text-[#E8451E] shrink-0 mt-0.5" />
+                          <CheckCircle2 size={15} className="text-[#1D4ED8] shrink-0 mt-0.5" />
                           <span>Clear milestone roadmap &amp; integration plan tailored to your team.</span>
                         </li>
                       </ul>
                     </div>
 
-                    <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/10 space-y-2.5 text-xs">
-                      <div className="font-bold text-zinc-900 dark:text-white">Direct Desk</div>
-                      <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-300">
-                        <Phone size={14} className="text-[#E8451E]" />
+                    <div className="pt-5 border-t border-slate-200 dark:border-slate-800 space-y-2.5 text-xs">
+                      <div className="font-bold text-slate-900 dark:text-white">Direct Desk</div>
+                      <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                        <Phone size={14} className="text-[#1D4ED8]" />
                         <a href={`tel:+91${COMPANY_CONTACT.phone}`} className="hover:underline">
                           {COMPANY_CONTACT.phoneFormatted}
                         </a>
-                        <span className="text-zinc-400">·</span>
+                        <span className="text-slate-400">·</span>
                         <span>{COMPANY_CONTACT.secondaryPhoneFormatted}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-300">
-                        <Mail size={14} className="text-[#D4AF37]" />
+                      <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                        <Mail size={14} className="text-slate-500" />
                         <a href={`mailto:${COMPANY_CONTACT.email}`} className="hover:underline">
                           {COMPANY_CONTACT.email}
                         </a>

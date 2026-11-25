@@ -35,11 +35,11 @@ const WORKFLOWS = [
     icon: <MessageCircle size={18} />,
     title: 'Sub-60s Autonomous Outreach',
     tag: 'Instant Follow-Up',
-    description: 'Dispatch personalized WhatsApp & email sequences seconds after an enquiry.',
+    description: 'Dispatch tailored WhatsApp & email follow-ups seconds after an enquiry arrives.',
     nodes: ['Inbound Lead', 'Context Enrichment', '<60s WhatsApp Touch', 'Sales Escalation'],
     details: [
       'Sub-minute automated greeting & intake questions.',
-      'Smart pause rules when a live prospect replies.',
+      'Smart pause rules the moment a live prospect replies.',
       'Instant handoff alert to human account closers.',
     ],
   },
@@ -47,7 +47,7 @@ const WORKFLOWS = [
     icon: <BrainCircuit size={18} />,
     title: 'Multi-Agent Operations',
     tag: 'Agentic Pipelines',
-    description: 'Deploy grounded tool-calling agents for documents, inbox triage & internal knowledge.',
+    description: 'Grounded tool-calling agents for documents, inbox triage & internal knowledge.',
     nodes: ['Doc / Inbox Event', 'Grounded LLM Agent', 'Policy Validation', 'ERP / Slack Sync'],
     details: [
       'Grounded strictly in your SOPs, PDFs & databases.',
@@ -71,7 +71,7 @@ const WORKFLOWS = [
     icon: <Star size={18} />,
     title: 'Feedback & Review Routing',
     tag: 'CX Intelligence',
-    description: 'Collect client pulse checks—guiding 4–5 star ratings to Google and issues to support.',
+    description: 'Collect pulse checks—guiding satisfied clients to Google and issues to priority support.',
     nodes: ['Delivery Complete', 'Pulse Check Sent', '5-Star Review Link', 'Priority Escalation'],
     details: [
       'Triggers automatically after project or visit sign-off.',
@@ -83,10 +83,10 @@ const WORKFLOWS = [
     icon: <Megaphone size={18} />,
     title: 'Content & Social Pipelines',
     tag: 'Brand Engine',
-    description: 'Streamline content formatting, approvals & analytics across LinkedIn and web channels.',
+    description: 'Streamline formatting, leader approvals & analytics across LinkedIn and web channels.',
     nodes: ['Core Asset Brief', 'Channel Formatting', 'Leader Approval', 'Scheduled Publish'],
     details: [
-      'Turns founder briefings into platform-ready updates.',
+      'Turns founder insights into platform-ready updates.',
       'Centralized sign-off queue before publication.',
       'Unified performance tracking across campaigns.',
     ],
@@ -98,20 +98,18 @@ const AiAutomationPage: React.FC<AiAutomationPageProps> = ({ onOpenBooking }) =>
   const activeFlow = WORKFLOWS[selectedIdx];
 
   return (
-    <div>
+    <div className="bg-white dark:bg-[#0B0F19]">
       <HeroSection
         badge="Autonomous Agents & n8n Pipelines"
         headline={
           <>
-            Eliminate Manual Handoffs{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#10B981] to-[#D4AF37]">
-              Across Operations.
-            </span>
+            Remove Manual Handoffs{' '}
+            <span className="text-[#1D4ED8] dark:text-blue-400">Across Your Operations.</span>
           </>
         }
-        subtext="Production multi-agent workflows connecting your ads, websites, WhatsApp Business, and CRM with sub-60s autonomous speed."
-        imageUrl="/images/niches/ai-automations.webp"
-        altText="Modular Autonomous Agent Pipeline Cube Matrix"
+        subtext="Practical multi-agent workflows connecting your ads, website, WhatsApp Business, and CRM so teams spend time serving real customers."
+        imageUrl="/images/human/ai-automation-human.webp"
+        altText="Operations director reviewing streamlined team workflows in sunlit office"
         primaryCta={{
           text: 'Book an Automation Audit',
           onClick: () => onOpenBooking('AI Automation & Agent Audit'),
@@ -122,87 +120,81 @@ const AiAutomationPage: React.FC<AiAutomationPageProps> = ({ onOpenBooking }) =>
         }}
       />
 
-      {/* Interactive Workflow Blueprint */}
+      {/* Open Pipeline Explorer */}
       <section id="workflows" className="py-16 md:py-22 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto space-y-10">
+        <div className="max-w-7xl mx-auto space-y-12">
           <div className="max-w-2xl">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#10B981] font-semibold">
-              Interactive Pipeline Architecture
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#1D4ED8] dark:text-blue-400 font-semibold">
+              Interactive Pipeline Explorer
             </p>
-            <h2 className="mt-2 text-3xl sm:text-4xl font-display font-bold text-zinc-900 dark:text-white">
+            <h2 className="mt-2 text-3xl sm:text-4xl font-display font-bold text-slate-900 dark:text-white">
               Select a Workflow Blueprint
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {WORKFLOWS.map((flow, i) => (
-              <button
-                key={flow.title}
-                type="button"
-                onClick={() => setSelectedIdx(i)}
-                className={`text-left p-6 rounded-2xl border transition-all ${
-                  selectedIdx === i
-                    ? 'bg-[#E8451E] text-white border-[#E8451E] shadow-xl shadow-[#E8451E]/25'
-                    : 'executive-card text-zinc-900 dark:text-white'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <div
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                      selectedIdx === i ? 'bg-white/15 text-white' : 'bg-[#10B981]/10 text-[#10B981]'
-                    }`}
-                  >
-                    {flow.icon}
-                  </div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider opacity-85">{flow.tag}</span>
-                </div>
-                <h3 className="text-base font-display font-bold">{flow.title}</h3>
-                <p
-                  className={`text-xs mt-2 leading-relaxed ${
-                    selectedIdx === i ? 'text-white/90' : 'text-zinc-600 dark:text-zinc-400'
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {WORKFLOWS.map((flow, i) => {
+              const active = selectedIdx === i;
+              return (
+                <button
+                  key={flow.title}
+                  type="button"
+                  onClick={() => setSelectedIdx(i)}
+                  className={`text-left p-5 rounded-xl transition-all ${
+                    active
+                      ? 'bg-[#1D4ED8] text-white shadow-sm'
+                      : 'bg-[#F8F7F4] dark:bg-slate-800/70 text-slate-900 dark:text-white hover:bg-slate-200/70'
                   }`}
                 >
-                  {flow.description}
-                </p>
-              </button>
-            ))}
+                  <div className="flex items-center justify-between mb-2.5">
+                    <span className={active ? 'text-white' : 'text-[#1D4ED8] dark:text-blue-400'}>{flow.icon}</span>
+                    <span className="text-[10px] font-mono uppercase tracking-wider opacity-80">{flow.tag}</span>
+                  </div>
+                  <h3 className="text-base font-display font-bold">{flow.title}</h3>
+                  <p className={`text-xs mt-1.5 leading-relaxed ${active ? 'text-blue-100' : 'text-slate-600 dark:text-slate-400'}`}>
+                    {flow.description}
+                  </p>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Selected Node Trace */}
-          <div className="rounded-3xl bg-[#111114] border border-white/15 p-7 sm:p-10 text-white shadow-2xl space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4">
+          {/* Open 4-Step Pipeline Trace */}
+          <div className="rounded-2xl bg-[#F8F7F4] dark:bg-[#0F1420] p-7 sm:p-10 space-y-6">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-5">
               <div>
-                <span className="text-xs font-mono uppercase tracking-wider text-[#10B981]">
-                  Selected Pipeline Topology
+                <span className="text-xs font-mono uppercase tracking-wider text-[#0F766E] dark:text-teal-400 font-semibold">
+                  Selected Workflow Topology
                 </span>
-                <h3 className="text-2xl font-display font-bold mt-1">{activeFlow.title}</h3>
+                <h3 className="text-2xl font-display font-bold text-slate-900 dark:text-white mt-1">
+                  {activeFlow.title}
+                </h3>
               </div>
               <button
                 type="button"
                 onClick={() => onOpenBooking(`Automation Pipeline: ${activeFlow.title}`)}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#E8451E] hover:bg-[#D93814] text-xs font-semibold transition-all"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] text-white text-xs font-semibold transition-all"
               >
                 <span>Deploy This Workflow</span>
                 <ArrowRight size={14} />
               </button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
               {activeFlow.nodes.map((node, idx) => (
-                <div
-                  key={node}
-                  className="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col justify-between"
-                >
-                  <span className="text-[10px] font-mono text-[#E8CA6A]">NODE 0{idx + 1}</span>
-                  <span className="text-xs sm:text-sm font-semibold text-white mt-1.5">{node}</span>
+                <div key={node} className="bg-white dark:bg-slate-900 p-4 rounded-xl space-y-1">
+                  <span className="text-[10px] font-mono text-[#1D4ED8] dark:text-blue-400 font-bold">
+                    STEP 0{idx + 1}
+                  </span>
+                  <div className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">{node}</div>
                 </div>
               ))}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-white/10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
               {activeFlow.details.map((detail) => (
-                <div key={detail} className="flex items-start gap-2.5 text-xs text-zinc-300 leading-relaxed">
-                  <CheckCircle2 size={15} className="text-[#10B981] shrink-0 mt-0.5" />
+                <div key={detail} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                  <CheckCircle2 size={15} className="text-[#0F766E] dark:text-teal-400 shrink-0 mt-0.5" />
                   <span>{detail}</span>
                 </div>
               ))}
@@ -212,19 +204,17 @@ const AiAutomationPage: React.FC<AiAutomationPageProps> = ({ onOpenBooking }) =>
       </section>
 
       {/* Core Deliverables */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-zinc-100/80 dark:bg-[#111114]/70 border-t border-zinc-200/80 dark:border-white/10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 editorial-section-alt">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           {[
             { icon: <Cpu size={19} />, title: 'Production Agent Runtimes', desc: 'Engineered in n8n, TypeScript & Python with retry resilience.' },
             { icon: <Database size={19} />, title: 'Authenticated API & CRM Links', desc: 'Reliable bi-directional sync across WhatsApp, CRMs & databases.' },
             { icon: <FileText size={19} />, title: 'Documentation & Handover', desc: 'Complete architecture diagrams, runbooks & error monitoring.' },
           ].map((item) => (
-            <div key={item.title} className="executive-card p-6 space-y-2.5">
-              <div className="w-10 h-10 rounded-xl bg-[#E8451E]/10 text-[#E8451E] flex items-center justify-center">
-                {item.icon}
-              </div>
-              <h3 className="text-lg font-display font-bold text-zinc-900 dark:text-white">{item.title}</h3>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400">{item.desc}</p>
+            <div key={item.title} className="space-y-2 border-t border-slate-200 dark:border-slate-800 pt-5">
+              <div className="text-[#1D4ED8] dark:text-blue-400">{item.icon}</div>
+              <h3 className="text-lg font-display font-bold text-slate-900 dark:text-white">{item.title}</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">{item.desc}</p>
             </div>
           ))}
         </div>

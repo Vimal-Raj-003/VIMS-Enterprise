@@ -62,12 +62,12 @@ const FDE_MODULES = [
   {
     code: 'FDE-01',
     name: 'Client Systems Discovery',
-    desc: 'Translating live business problems into crisp APIs, schemas, and production deliverables.',
+    desc: 'Translating real client challenges into clear APIs, schemas & deliverables.',
   },
   {
     code: 'FDE-02',
     name: 'Applied LLM & Voice AI',
-    desc: 'Tool calling, guardrailed RAG, and multilingual Voice AI orchestration.',
+    desc: 'Tool calling, guardrailed RAG & multilingual Voice AI workflows.',
   },
   {
     code: 'FDE-03',
@@ -87,20 +87,18 @@ const MatlabAcademyPage: React.FC<MatlabAcademyPageProps> = ({ onOpenBooking }) 
   const sig = SIGNAL_MODES[signalIdx];
 
   return (
-    <div>
+    <div className="bg-white dark:bg-[#0B0F19]">
       <HeroSection
         badge="VIMS Enterprise × Embedded Skills Academy"
         headline={
           <>
-            Engineering Mastery:{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8451E] to-[#10B981]">
-              Embedded Skills &amp; FDE AI.
-            </span>
+            Engineering Mentorship:{' '}
+            <span className="text-[#1D4ED8] dark:text-blue-400">Embedded Skills &amp; FDE AI.</span>
           </>
         }
-        subtext="Bridging university engineering to OEM & Tier-1 production through our Embedded Skills platform (24 ECU & MATLAB MBD labs) and Forward Deployed Engineer cohorts."
-        imageUrl="/images/niches/academy-mbd.webp"
-        altText="Automotive Embedded ECU & MATLAB Oscillographic Prism"
+        subtext="Preparing engineering students and graduates with hands-on automotive ECU protocols, MATLAB/Simulink MBD (Embedded Skills), and Forward Deployed AI engineering."
+        imageUrl="/images/human/academy-students-human.webp"
+        altText="Senior mentor guiding engineering students at laptops beside automotive electronics bench"
         primaryCta={{
           text: 'Book Cohort / Campus Workshop',
           onClick: () => onOpenBooking('Academy Cohort / Campus Workshop'),
@@ -112,27 +110,27 @@ const MatlabAcademyPage: React.FC<MatlabAcademyPageProps> = ({ onOpenBooking }) 
         }}
       />
 
-      {/* Live CAN Bus & MATLAB Signal Visualizer */}
-      <section className="py-14 md:py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      {/* Live CAN Bus & MATLAB Lab Preview — Clean Light Surface */}
+      <section className="py-16 md:py-22 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-5 space-y-4">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#E8451E] font-semibold">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#1D4ED8] dark:text-blue-400 font-semibold">
               Live Embedded &amp; MATLAB Lab Preview
             </p>
-            <h2 className="text-3xl font-display font-bold text-zinc-900 dark:text-white leading-tight">
+            <h2 className="text-3xl font-display font-bold text-slate-900 dark:text-white leading-tight">
               Train on Real Bus Frames &amp; Control Loops
             </h2>
-            <p className="text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
               Integrated directly with{' '}
               <a
                 href={GROUP_PLATFORMS.embskills.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-[#E8451E] hover:underline"
+                className="font-semibold text-[#1D4ED8] dark:text-blue-400 hover:underline"
               >
                 embskills.vimsenterprise.com
               </a>
-              —learners decode real ECUs, build Simulink MBD loops, and ship deployed AI systems.
+              —learners decode real ECUs, build Simulink models, and deploy real software.
             </p>
 
             <div className="flex flex-wrap gap-2 pt-2">
@@ -141,10 +139,10 @@ const MatlabAcademyPage: React.FC<MatlabAcademyPageProps> = ({ onOpenBooking }) 
                   key={m.id}
                   type="button"
                   onClick={() => setSignalIdx(idx)}
-                  className={`px-3.5 py-2 rounded-xl text-xs font-mono font-semibold border transition-all ${
+                  className={`px-3.5 py-2 rounded-xl text-xs font-mono font-semibold transition-all ${
                     signalIdx === idx
-                      ? 'bg-[#E8451E] border-[#E8451E] text-white'
-                      : 'bg-white dark:bg-[#111114] border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300'
+                      ? 'bg-[#1D4ED8] text-white'
+                      : 'bg-[#F8F7F4] dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200/70'
                   }`}
                 >
                   {m.label}
@@ -153,23 +151,22 @@ const MatlabAcademyPage: React.FC<MatlabAcademyPageProps> = ({ onOpenBooking }) 
             </div>
           </div>
 
-          {/* Signal Scope Widget */}
-          <div className="lg:col-span-7 rounded-3xl bg-[#111114] border border-white/15 p-6 sm:p-8 text-white shadow-2xl space-y-5">
-            <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-white/10 font-mono text-xs">
-              <span className="inline-flex items-center gap-2 text-[#10B981]">
-                <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
+          <div className="lg:col-span-7 rounded-2xl bg-[#F8F7F4] dark:bg-[#0F1420] p-6 sm:p-8 space-y-5 border border-slate-200/80 dark:border-slate-800">
+            <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-200 dark:border-slate-800 font-mono text-xs">
+              <span className="inline-flex items-center gap-2 text-[#0F766E] dark:text-teal-400 font-semibold">
+                <span className="w-2 h-2 rounded-full bg-[#0F766E]" />
                 DECODING LIVE // {sig.frameId}
               </span>
-              <span className="text-zinc-400">{sig.dlc}</span>
+              <span className="text-slate-500">{sig.dlc}</span>
             </div>
 
-            <div className="p-4 rounded-2xl bg-[#09090B] border border-white/10">
+            <div className="p-4 rounded-xl bg-white dark:bg-slate-900">
               <svg viewBox="0 0 320 52" className="w-full h-24 overflow-visible">
-                <line x1="0" y1="26" x2="320" y2="26" stroke="rgba(255,255,255,0.08)" strokeDasharray="4 4" />
+                <line x1="0" y1="26" x2="320" y2="26" stroke="rgba(148,163,184,0.35)" strokeDasharray="4 4" />
                 <path
                   d={sig.pathD}
                   fill="none"
-                  stroke="#10B981"
+                  stroke="#0F766E"
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -177,37 +174,37 @@ const MatlabAcademyPage: React.FC<MatlabAcademyPageProps> = ({ onOpenBooking }) 
               </svg>
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-xs bg-white/5 px-4 py-3 rounded-xl border border-white/10">
-              <span className="text-[#E8CA6A]">{sig.payload}</span>
+            <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-xs bg-white dark:bg-slate-900 px-4 py-3 rounded-xl">
+              <span className="text-[#1D4ED8] dark:text-blue-400 font-semibold">{sig.payload}</span>
               <a
                 href={GROUP_PLATFORMS.embskills.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-white hover:text-[#E8451E] font-semibold"
+                className="inline-flex items-center gap-1 text-slate-800 dark:text-white hover:text-[#1D4ED8] font-semibold"
               >
                 <span>Open Full Embedded Skills Labs</span>
                 <ExternalLink size={12} />
               </a>
             </div>
-            <p className="text-xs text-zinc-400">{sig.summary}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">{sig.summary}</p>
           </div>
         </div>
       </section>
 
-      {/* Two Track Architecture Switcher */}
-      <section className="py-16 md:py-22 px-4 sm:px-6 lg:px-8 bg-zinc-100/80 dark:bg-[#111114]/70 border-t border-zinc-200/80 dark:border-white/10">
-        <div className="max-w-7xl mx-auto space-y-8">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <h2 className="text-2xl sm:text-3xl font-display font-bold text-zinc-900 dark:text-white">
-              Two Specialized Industry Tracks
+      {/* Two Track Directory */}
+      <section className="py-16 md:py-22 px-4 sm:px-6 lg:px-8 editorial-section-alt">
+        <div className="max-w-7xl mx-auto space-y-10">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
+            <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+              Two Practical Industry Tracks
             </h2>
 
-            <div className="inline-flex rounded-xl p-1 bg-white dark:bg-[#09090B] border border-zinc-200 dark:border-white/10">
+            <div className="inline-flex rounded-xl p-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <button
                 type="button"
                 onClick={() => setTrackIdx('mbd')}
                 className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all ${
-                  trackIdx === 'mbd' ? 'bg-[#E8451E] text-white' : 'text-zinc-600 dark:text-zinc-300'
+                  trackIdx === 'mbd' ? 'bg-[#1D4ED8] text-white' : 'text-slate-600 dark:text-slate-300'
                 }`}
               >
                 <Gauge size={14} />
@@ -217,7 +214,7 @@ const MatlabAcademyPage: React.FC<MatlabAcademyPageProps> = ({ onOpenBooking }) 
                 type="button"
                 onClick={() => setTrackIdx('fde')}
                 className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all ${
-                  trackIdx === 'fde' ? 'bg-[#E8451E] text-white' : 'text-zinc-600 dark:text-zinc-300'
+                  trackIdx === 'fde' ? 'bg-[#1D4ED8] text-white' : 'text-slate-600 dark:text-slate-300'
                 }`}
               >
                 <Code2 size={14} />
@@ -227,13 +224,13 @@ const MatlabAcademyPage: React.FC<MatlabAcademyPageProps> = ({ onOpenBooking }) 
           </div>
 
           {trackIdx === 'mbd' ? (
-            <div className="executive-card p-7 sm:p-10 space-y-6">
-              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200/80 dark:border-white/10 pb-5">
+            <div className="space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <span className="text-xs font-mono uppercase tracking-wider text-[#E8451E]">
+                  <span className="text-xs font-mono uppercase tracking-wider text-[#1D4ED8] dark:text-blue-400 font-semibold">
                     Powered by Embedded Skills
                   </span>
-                  <h3 className="text-2xl font-display font-bold text-zinc-900 dark:text-white mt-1">
+                  <h3 className="text-2xl font-display font-bold text-slate-900 dark:text-white mt-1">
                     Automotive ECUs, CAN/AUTOSAR &amp; MATLAB Model-Based Design
                   </h3>
                 </div>
@@ -241,73 +238,68 @@ const MatlabAcademyPage: React.FC<MatlabAcademyPageProps> = ({ onOpenBooking }) 
                   href={GROUP_PLATFORMS.embskills.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#111114] dark:bg-white text-white dark:text-[#09090B] text-xs font-semibold"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-semibold"
                 >
                   <span>Explore embskills.vimsenterprise.com</span>
                   <ExternalLink size={13} />
                 </a>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-4 pt-2">
                 {EMBEDDED_SKILLS_DOMAINS.map((mod) => (
                   <div
                     key={mod}
-                    className="p-4 rounded-xl bg-zinc-50 dark:bg-white/5 border border-zinc-200/70 dark:border-white/10 flex items-start gap-2.5 text-xs sm:text-sm font-medium text-zinc-800 dark:text-zinc-200"
+                    className="py-2.5 border-b border-slate-200 dark:border-slate-800 flex items-start gap-2.5 text-sm font-medium text-slate-800 dark:text-slate-200"
                   >
-                    <CheckCircle2 size={15} className="text-[#10B981] shrink-0 mt-0.5" />
+                    <CheckCircle2 size={16} className="text-[#0F766E] dark:text-teal-400 shrink-0 mt-0.5" />
                     <span>{mod}</span>
                   </div>
                 ))}
               </div>
             </div>
           ) : (
-            <div className="executive-card p-7 sm:p-10 space-y-6">
-              <div className="border-b border-zinc-200/80 dark:border-white/10 pb-5">
-                <span className="text-xs font-mono uppercase tracking-wider text-[#10B981]">
+            <div className="space-y-6">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-[#0F766E] dark:text-teal-400 font-semibold">
                   VIMS Applied AI Cohort
                 </span>
-                <h3 className="text-2xl font-display font-bold text-zinc-900 dark:text-white mt-1">
+                <h3 className="text-2xl font-display font-bold text-slate-900 dark:text-white mt-1">
                   Forward Deployed Engineer (FDE) Training
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
                 {FDE_MODULES.map((m) => (
-                  <div
-                    key={m.code}
-                    className="p-5 rounded-2xl bg-zinc-50 dark:bg-white/5 border border-zinc-200/80 dark:border-white/10 space-y-2"
-                  >
-                    <span className="font-mono text-xs font-bold text-[#E8451E]">{m.code}</span>
-                    <h4 className="text-base font-display font-bold text-zinc-900 dark:text-white">{m.name}</h4>
-                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">{m.desc}</p>
+                  <div key={m.code} className="border-t border-slate-200 dark:border-slate-800 pt-4 space-y-1.5">
+                    <span className="font-mono text-xs font-bold text-[#1D4ED8] dark:text-blue-400">{m.code}</span>
+                    <h4 className="text-base font-display font-bold text-slate-900 dark:text-white">{m.name}</h4>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">{m.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Formats Row */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Delivery Formats */}
+          <div className="pt-8 border-t border-slate-200/80 dark:border-slate-800 grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { icon: <Users size={18} />, title: 'Campus & Department Workshops', desc: 'Tailored bootcamps for ECE, EEE, Mechanical & CSE cohorts.' },
-              { icon: <Terminal size={18} />, title: 'Live Engineer Reviews', desc: 'Hands-on bus decoding, Simulink & LLM agent code evaluations.' },
+              { icon: <Terminal size={18} />, title: 'Live Engineer Reviews', desc: 'Hands-on bus decoding, Simulink & LLM agent evaluations.' },
               { icon: <Cpu size={18} />, title: 'Capstone Portfolio', desc: 'Practical simulations & live deployments reviewed by engineers.' },
             ].map((f) => (
-              <div key={f.title} className="executive-card p-6 space-y-2">
-                <div className="w-10 h-10 rounded-xl bg-[#D4AF37]/15 text-[#D4AF37] flex items-center justify-center">
-                  {f.icon}
-                </div>
-                <h4 className="text-base font-display font-bold text-zinc-900 dark:text-white">{f.title}</h4>
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">{f.desc}</p>
+              <div key={f.title} className="space-y-2">
+                <div className="text-[#1D4ED8] dark:text-blue-400">{f.icon}</div>
+                <h4 className="text-base font-display font-bold text-slate-900 dark:text-white">{f.title}</h4>
+                <p className="text-sm text-slate-600 dark:text-slate-400">{f.desc}</p>
               </div>
             ))}
           </div>
 
-          <div className="text-center pt-2">
+          <div className="pt-2">
             <button
               type="button"
               onClick={() => onOpenBooking('Academy Cohort or Campus Workshop')}
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#E8451E] hover:bg-[#D93814] text-white text-sm font-semibold shadow-lg transition-all"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] text-white text-sm font-semibold transition-all"
             >
               <Calendar size={16} />
               <span>Request Batch or College Workshop</span>

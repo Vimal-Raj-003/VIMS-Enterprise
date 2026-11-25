@@ -8,13 +8,13 @@ const CookieConsent: React.FC = () => {
   const [preferences, setPreferences] = useState({
     essential: true,
     analytics: true,
-    marketing: false,
+    marketing: true,
   });
 
   useEffect(() => {
     const consent = localStorage.getItem('vims_cookie_consent');
     if (!consent) {
-      const timer = setTimeout(() => setIsVisible(true), 1200);
+      const timer = setTimeout(() => setIsVisible(true), 1000);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -47,35 +47,33 @@ const CookieConsent: React.FC = () => {
     <AnimatePresence>
       {isVisible ? (
         <motion.div
-          initial={{ y: 80, opacity: 0 }}
+          initial={{ y: 60, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 80, opacity: 0 }}
+          exit={{ y: 60, opacity: 0 }}
           transition={{ duration: 0.25 }}
           className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-sm z-[100]"
         >
-          <div className="relative rounded-2xl bg-white dark:bg-[#111114] border border-zinc-200 dark:border-white/15 p-5 shadow-2xl overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#E8451E] to-[#D4AF37]" />
-
-            <div className="flex items-start gap-3.5 pt-1">
-              <div className="p-2.5 rounded-xl bg-[#E8451E]/10 text-[#E8451E] shrink-0">
-                <ShieldCheck size={19} />
+          <div className="rounded-2xl bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700 p-5 shadow-xl">
+            <div className="flex items-start gap-3">
+              <div className="p-2 rounded-lg bg-blue-50 dark:bg-blue-500/15 text-[#1D4ED8] dark:text-blue-400 shrink-0">
+                <ShieldCheck size={18} />
               </div>
 
               <div className="flex-1 min-w-0">
                 {!showPreferences ? (
                   <>
-                    <h3 className="text-sm font-display font-bold text-zinc-900 dark:text-white">
+                    <h3 className="text-sm font-display font-bold text-slate-900 dark:text-white">
                       Privacy &amp; Cookies
                     </h3>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-300 mt-1.5 leading-relaxed">
-                      We use essential cookies to keep bookings, chat, and preferences working reliably.
+                    <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                      We use essential and measurement cookies to keep bookings reliable and comply with our Privacy Policy.
                     </p>
 
-                    <div className="mt-4 flex items-center gap-2.5">
+                    <div className="mt-3.5 flex items-center gap-2">
                       <button
                         type="button"
                         onClick={handleAcceptAll}
-                        className="flex-1 py-2.5 px-4 rounded-xl bg-[#E8451E] hover:bg-[#D93814] text-white text-xs font-semibold transition-all shadow-sm"
+                        className="flex-1 py-2 px-3.5 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] text-white text-xs font-semibold transition-colors"
                       >
                         Accept All
                       </button>
@@ -83,7 +81,7 @@ const CookieConsent: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setShowPreferences(true)}
-                        className="inline-flex items-center gap-1.5 py-2.5 px-3 rounded-xl bg-zinc-100 dark:bg-white/5 hover:bg-zinc-200/70 dark:hover:bg-white/10 border border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-200 text-xs font-medium transition-colors"
+                        className="inline-flex items-center gap-1.5 py-2 px-3 rounded-xl bg-[#F8F7F4] dark:bg-slate-800 hover:bg-slate-200/70 text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors"
                       >
                         <SlidersHorizontal size={12} />
                         <span>Settings</span>
@@ -92,23 +90,22 @@ const CookieConsent: React.FC = () => {
                   </>
                 ) : (
                   <div className="space-y-3">
-                    <h3 className="text-sm font-display font-bold text-zinc-900 dark:text-white">
+                    <h3 className="text-sm font-display font-bold text-slate-900 dark:text-white">
                       Cookie Preferences
                     </h3>
-
                     <div className="space-y-2">
                       {[
-                        { id: 'essential', label: 'Essential', desc: 'Required for bookings & navigation' },
-                        { id: 'analytics', label: 'Analytics', desc: 'Helps improve page experience' },
-                        { id: 'marketing', label: 'Communications', desc: 'Campaign attribution signals' },
+                        { id: 'essential', label: 'Essential', desc: 'Navigation & booking state' },
+                        { id: 'analytics', label: 'Analytics', desc: 'Site performance measurement' },
+                        { id: 'marketing', label: 'Ad Attribution', desc: 'Meta campaign reporting' },
                       ].map((m) => (
                         <div
                           key={m.id}
-                          className="flex items-center justify-between p-2.5 rounded-xl bg-zinc-50 dark:bg-white/5 border border-zinc-200/70 dark:border-white/10"
+                          className="flex items-center justify-between p-2.5 rounded-xl bg-[#F8F7F4] dark:bg-slate-800/70"
                         >
                           <div>
-                            <p className="text-xs font-semibold text-zinc-900 dark:text-white">{m.label}</p>
-                            <p className="text-[11px] text-zinc-500 dark:text-zinc-400">{m.desc}</p>
+                            <p className="text-xs font-semibold text-slate-900 dark:text-white">{m.label}</p>
+                            <p className="text-[11px] text-slate-500 dark:text-slate-400">{m.desc}</p>
                           </div>
                           <button
                             type="button"
@@ -119,11 +116,11 @@ const CookieConsent: React.FC = () => {
                                 [m.id]: !prev[m.id as keyof typeof prev],
                               }))
                             }
-                            aria-label={`Toggle ${m.label} cookies`}
+                            aria-label={`Toggle ${m.label}`}
                             className={`w-9 h-5 rounded-full relative transition-colors ${
                               preferences[m.id as keyof typeof preferences]
-                                ? 'bg-[#E8451E]'
-                                : 'bg-zinc-300 dark:bg-zinc-700'
+                                ? 'bg-[#1D4ED8]'
+                                : 'bg-slate-300 dark:bg-slate-600'
                             } ${m.id === 'essential' ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer'}`}
                           >
                             <span
@@ -142,16 +139,16 @@ const CookieConsent: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setShowPreferences(false)}
-                        className="flex-1 py-2 text-xs font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-white/5 rounded-xl transition-all"
+                        className="flex-1 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 rounded-xl"
                       >
                         Back
                       </button>
                       <button
                         type="button"
                         onClick={handleSavePreferences}
-                        className="flex-[2] py-2 bg-[#E8451E] hover:bg-[#D93814] text-white text-xs font-semibold rounded-xl transition-all"
+                        className="flex-[2] py-2 bg-[#1D4ED8] hover:bg-[#1E40AF] text-white text-xs font-semibold rounded-xl"
                       >
-                        Save Preferences
+                        Save
                       </button>
                     </div>
                   </div>
@@ -161,8 +158,8 @@ const CookieConsent: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsVisible(false)}
-                aria-label="Close cookie notice"
-                className="text-zinc-400 hover:text-zinc-700 dark:hover:text-white p-1"
+                aria-label="Dismiss cookies dialog"
+                className="text-slate-400 hover:text-slate-700 dark:hover:text-white p-1"
               >
                 <X size={16} />
               </button>

@@ -1,439 +1,455 @@
 import React from 'react';
 import {
-  Shield,
-  Database,
-  MessageSquare,
-  Bell,
-  Mic,
-  Lock,
-  Trash2,
+  ShieldCheck,
   Mail,
   Phone,
-  CheckCircle2,
   ArrowLeft,
-  ChevronRight,
+  ExternalLink,
+  Trash2,
+  CheckCircle2,
   FileText,
-  Globe,
-  RefreshCw
 } from 'lucide-react';
-import HeroSection from '../components/HeroSection';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { Page } from '../types';
+import { COMPANY_CONTACT } from '../constants';
 
 interface PrivacyPolicyPageProps {
   onNavigate?: (page: Page) => void;
 }
 
+const TOC_ITEMS = [
+  { id: 'overview', num: '01', label: 'Overview & Legal Entity' },
+  { id: 'data-collected', num: '02', label: 'Information We Collect' },
+  { id: 'meta-facebook-ads', num: '03', label: 'Meta / Facebook Ads & Pixel' },
+  { id: 'whatsapp-business', num: '04', label: 'WhatsApp Business & Consent' },
+  { id: 'ai-voice-agents', num: '05', label: 'AI Voice Agents (Jill-Jill)' },
+  { id: 'how-we-use', num: '06', label: 'How We Use Information' },
+  { id: 'sharing-transfers', num: '07', label: 'Third-Party Processors' },
+  { id: 'retention-security', num: '08', label: 'Retention, Security & HMS' },
+  { id: 'rights-deletion', num: '09', label: 'Privacy Rights & Deletion' },
+  { id: 'children-updates', num: '10', label: 'Children & Policy Updates' },
+  { id: 'grievance-contact', num: '11', label: 'Grievance Officer Contact' },
+];
+
+const DATA_TABLE = [
+  {
+    category: 'Direct Business & Enquiry Details',
+    examples: 'Full name, work/personal email, phone/WhatsApp number, organization/hospital/college name, role, project brief.',
+    source: 'Website forms, Cal.com booking, email & direct phone enquiries',
+  },
+  {
+    category: 'Meta / Facebook & Instagram Lead Ads',
+    examples: 'Contact fields you actively submit via Meta Instant Forms, selected service interest, campaign & ad set identifier.',
+    source: 'Meta Lead Ads forms on Facebook & Instagram',
+  },
+  {
+    category: 'WhatsApp Business Messaging',
+    examples: 'Mobile number, WhatsApp display name, conversation messages, opt-in / opt-out status, scheduling confirmations.',
+    source: 'WhatsApp Business Platform chats initiated by you or consented updates',
+  },
+  {
+    category: 'AI Voice Agents (Jill-Jill)',
+    examples: 'Spoken enquiry inputs, automated transcripts, caller number, call timestamp & duration, appointment booking logs.',
+    source: 'Inbound or requested outbound voice agent calls (recording conditional)',
+  },
+  {
+    category: 'Technical, Cookie & Ad Attribution',
+    examples: 'Browser type, device viewport, page URL, theme & cookie preference (vims_cookie_consent), referral/campaign tags.',
+    source: 'Essential browser storage, server logs & ad measurement tags',
+  },
+];
+
 const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => {
-  const { ref: contentRef, isVisible: isContentVisible } = useScrollAnimation<HTMLDivElement>();
-
-  const policySections = [
-    {
-      id: 'data-collection',
-      number: '01',
-      title: 'Customer Data Collection & Processing Purposes',
-      icon: <Database className="w-6 h-6 text-[#E8451E]" />,
-      badge: 'Data Intake & Purpose',
-      summary: 'What personal and business information VIMS Enterprise collects and the specific purposes for which it is processed.',
-      points: [
-        {
-          heading: 'Information You Provide Directly',
-          text: 'When you submit a contact form, book a strategy call, request a quotation, or communicate with us, we may collect your name, business email address, phone number, company name, role/designation, and service or project enquiry details.'
-        },
-        {
-          heading: 'Purposes of Personal Data Processing',
-          text: 'We process personal and business information to respond to your enquiries, evaluate project requirements, deliver requested VIMS Enterprise products and services (including HMS software consultations, AI Voice Agents, Custom Website & E-Commerce Creation, AI Automation workflows, and MATLAB & Forward Deployed Engineer training programs), manage client relationships, provide customer support, and comply with applicable legal obligations.'
-        },
-        {
-          heading: 'Cookies, Local Storage & Analytics',
-          text: 'Our website uses browser local storage (such as the "vims_cookie_consent" setting) to remember your interface theme and cookie preferences (Essential, Analytics, and Marketing modules), alongside basic technical metadata (such as browser type, device type, and page interactions) to maintain website stability and performance.'
-        }
-      ]
-    },
-    {
-      id: 'whatsapp-communication',
-      number: '02',
-      title: 'WhatsApp Business Platform & Communication',
-      icon: <MessageSquare className="w-6 h-6 text-green-400" />,
-      badge: 'Messaging & Opt-Out',
-      summary: 'How we handle customer communications, service updates, and opt-out requests across WhatsApp Business Platform integrations.',
-      points: [
-        {
-          heading: 'Service & Transactional Messaging',
-          text: 'When you initiate a WhatsApp chat with us or request project coordination over WhatsApp, we process your mobile number, profile name, and message content through WhatsApp Business Platform tools and our internal CRM to respond to enquiries, confirm appointments, and deliver customer support.'
-        },
-        {
-          heading: 'Channel Rules & Platform Governance',
-          text: 'Service and conversational messages are sent in response to your direct enquiries or active engagements. Communications conducted via WhatsApp are also subject to Meta / WhatsApp’s applicable platform terms and privacy policies.'
-        },
-        {
-          heading: 'Withdrawing Consent & Opt-Out Requests',
-          text: 'You can opt out of WhatsApp marketing or non-essential communications at any time by emailing vimal@vimsenterprise.com with your phone number, using a supported unsubscribe option where provided in a message, or requesting removal directly in chat for manual processing by our team.'
-        }
-      ]
-    },
-    {
-      id: 'marketing-consent',
-      number: '03',
-      title: 'Marketing Consent & Preferences',
-      icon: <Bell className="w-6 h-6 text-[#D4AF37]" />,
-      badge: 'Opt-In Standards',
-      summary: 'How promotional outreach is governed and how you can withdraw marketing consent at any time.',
-      points: [
-        {
-          heading: 'Enquiries Do Not Equal Marketing Consent',
-          text: 'Submitting a business enquiry, providing a phone number for a consultation or quote, or being added to our CRM does not automatically constitute consent to receive promotional WhatsApp broadcasts or marketing messages.'
-        },
-        {
-          heading: 'Permitted Opt-In Marketing Only',
-          text: 'Promotional or marketing messages (including WhatsApp marketing communications or email updates) are sent only when appropriate opt-in consent has been obtained and where permitted by applicable WhatsApp Business Platform policies and data protection laws.'
-        },
-        {
-          heading: 'Marketing Consent Withdrawal',
-          text: 'You may withdraw your marketing consent at any time by contacting vimal@vimsenterprise.com or by using any supported unsubscribe channel provided in our communications. Upon receiving your request, our team will update your CRM communication preferences so you no longer receive promotional outreach, without affecting active project or support communications.'
-        }
-      ]
-    },
-    {
-      id: 'ai-voice-agents',
-      number: '04',
-      title: 'AI Voice Agents & Automated Interactions',
-      icon: <Mic className="w-6 h-6 text-[#E8451E]" />,
-      badge: 'AI Services',
-      summary: 'How our AI voice agents (including JillJill AI Voice Agent) process audio, transcripts, call metadata, and appointment details.',
-      points: [
-        {
-          heading: 'Audio, Transcripts & Appointment Data',
-          text: 'When you interact with VIMS Enterprise AI voice agents, the system may process spoken audio inputs, generate real-time or post-call text transcripts, log call metadata (such as caller phone number, call timestamps, duration, and interaction status), and capture appointment or enquiry details you provide during the call.'
-        },
-        {
-          heading: 'Conditional Call Recording',
-          text: 'Not all calls are recorded by default. Where call recording is enabled for a specific service workflow or quality review, audio recordings are captured conditionally and in accordance with applicable notice and consent requirements.'
-        },
-        {
-          heading: 'Human Assistance & Exclusion Requests',
-          text: 'You may request to speak with a human team member or ask to be excluded from automated AI voice follow-ups at any time by stating your preference during the interaction or by contacting vimal@vimsenterprise.com.'
-        }
-      ]
-    },
-    {
-      id: 'service-providers-sharing',
-      number: '05',
-      title: 'Service Providers, Data Sharing & Transfers',
-      icon: <Globe className="w-6 h-6 text-[#E8451E]" />,
-      badge: 'Sharing & Transfers',
-      summary: 'How we work with infrastructure providers and protect data across operational environments.',
-      points: [
-        {
-          heading: 'No Sale of Personal Data',
-          text: 'VIMS Enterprise does not sell, rent, or trade your personal contact information, enquiry records, or project files to unaffiliated third parties.'
-        },
-        {
-          heading: 'Authorized Service Providers',
-          text: 'To operate our website, CRM, WhatsApp Business Platform messaging, telephony/AI voice services, and cloud infrastructure, we may share necessary data with trusted third-party service providers and platform partners strictly to perform services on our behalf, or when required by applicable law.'
-        },
-        {
-          heading: 'International Data Transfers',
-          text: 'Where our communications platforms, AI service providers, or cloud hosting infrastructure process data outside your country of residence, we take reasonable steps to ensure such transfers are handled through reputable providers with appropriate contractual and technical protections.'
-        }
-      ]
-    },
-    {
-      id: 'data-security-retention',
-      number: '06',
-      title: 'Data Security & Data Retention',
-      icon: <Lock className="w-6 h-6 text-[#D4AF37]" />,
-      badge: 'Safeguards & Lifecycle',
-      summary: 'How we safeguard your information and determine how long personal data is retained.',
-      points: [
-        {
-          heading: 'Data Security Safeguards',
-          text: 'We apply reasonable administrative, technical, and organizational safeguards—including encrypted web transport (HTTPS/TLS) and restricted internal access controls—to protect personal data, communications, and confidential business or engineering files against unauthorized access, alteration, or misuse.'
-        },
-        {
-          heading: 'Data Retention Principles',
-          text: 'Personal data is retained only for as long as reasonably necessary to fulfill the specified service or enquiry purpose, support legitimate operational and business record-keeping needs, resolve disputes, and comply with applicable legal, tax, or regulatory requirements.'
-        },
-        {
-          heading: 'Security Reporting & Limitations',
-          text: 'Because no electronic transmission or storage system can be guaranteed to be completely free of risk, we encourage you to contact us immediately at vimal@vimsenterprise.com if you have any reason to believe your interaction with us has been compromised.'
-        }
-      ]
-    },
-    {
-      id: 'privacy-rights-deletion',
-      number: '07',
-      title: 'Privacy Rights & Access, Correction or Deletion Requests',
-      icon: <Trash2 className="w-6 h-6 text-rose-400" />,
-      badge: 'User Rights',
-      summary: 'Your applicable privacy rights and how to request access, correction, consent withdrawal, or deletion of your data.',
-      points: [
-        {
-          heading: 'Applicable Privacy Rights',
-          text: 'Depending on applicable data protection laws, you have the right to request access to the personal data we hold about you, ask for inaccurate or incomplete information to be corrected, withdraw marketing consent, or request deletion of your personal data.'
-        },
-        {
-          heading: 'Submitting Access, Correction or Deletion Requests',
-          text: 'To exercise your rights—including requesting permanent deletion of your contact details, WhatsApp messaging history, CRM records, or AI voice interaction data—please email vimal@vimsenterprise.com with your request and the email address or phone number associated with your interactions.'
-        },
-        {
-          heading: 'Identity Verification & Handling',
-          text: 'To protect your information from unauthorized requests, we may verify your identity before completing access, correction, or deletion actions. Once verified, we will process your request and remove or update eligible personal data unless retention is required for active contractual obligations or applicable law.'
-        }
-      ]
-    },
-    {
-      id: 'updates-effective-date',
-      number: '08',
-      title: 'Effective Date & Policy Updates',
-      icon: <RefreshCw className="w-6 h-6 text-[#E8451E]" />,
-      badge: 'Governance',
-      summary: 'How this policy is maintained as our website, AI services, and messaging integrations evolve.',
-      points: [
-        {
-          heading: 'Current Policy Scope',
-          text: 'This Privacy Policy applies to the VIMS Enterprise website, customer and prospect enquiries, relevant AI voice and automation services, and our WhatsApp Business Platform communications.'
-        },
-        {
-          heading: 'Future Policy Updates',
-          text: 'We may update this Privacy Policy periodically to reflect operational changes, new product capabilities, or updated legal and platform requirements. Any revised version will be posted at /privacy-policy.'
-        },
-        {
-          heading: 'Effective Date & Review',
-          text: 'This Privacy Policy is currently in effect and is reviewed regularly to maintain alignment with our active business practices. Please check this page periodically for the latest information on our privacy practices.'
-        }
-      ]
-    }
-  ];
-
   return (
-    <div className="space-y-16 md:space-y-24 pb-16">
-      <HeroSection
-        variant="subpage"
-        headline={
-          <>
-            Privacy <span className="text-[#E8451E]">Policy</span>
-          </>
-        }
-        subtext="Transparent information on how VIMS Enterprise collects, communicates, secures, and respects your data across our website, WhatsApp Business Platform channels, and AI voice solutions."
-        primaryCta={{
-          text: 'Contact Privacy Team',
-          onClick: () => {
-            window.location.href = 'mailto:vimal@vimsenterprise.com?subject=Privacy%20Policy%20Inquiry';
-          }
-        }}
-        imageUrl="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1920&q=80"
-        altText="VIMS Enterprise Privacy Policy and Data Security"
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Top Metadata & Back Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E8451E]/15 border border-[#E8451E]/30 text-[#E8451E] text-xs font-mono font-bold uppercase tracking-wider">
-              <Shield className="w-3.5 h-3.5" />
-              VIMS Enterprise
+    <div className="bg-white dark:bg-[#0B0F19]">
+      {/* Clean Open Editorial Header */}
+      <header className="bg-[#F8F7F4] dark:bg-[#0F1420] border-b border-slate-200/80 dark:border-slate-800 py-14 md:py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <span className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#1D4ED8] dark:text-blue-400 font-semibold">
+              <ShieldCheck size={15} />
+              <span>VIMS Enterprise &middot; Legal &amp; Meta Compliance</span>
             </span>
-            <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-              Path: <code className="text-[#E8451E]">/privacy-policy</code>
-            </span>
-            <span className="hidden sm:inline text-slate-600">•</span>
-            <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-              Official Privacy Contact: <a href="mailto:vimal@vimsenterprise.com" className="text-[#E8451E] hover:underline">vimal@vimsenterprise.com</a>
-            </span>
+            {onNavigate ? (
+              <button
+                type="button"
+                onClick={() => onNavigate(Page.Home)}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-[#1D4ED8] transition-colors"
+              >
+                <ArrowLeft size={14} />
+                <span>Back to Home</span>
+              </button>
+            ) : null}
           </div>
 
-          {onNavigate && (
-            <button
-              onClick={() => onNavigate(Page.Home)}
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-[#E8451E] transition-colors self-start sm:self-auto"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </button>
-          )}
-        </div>
-
-        {/* Quick Section Jump Bar */}
-        <div className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-6 rounded-3xl border border-slate-200/50 dark:border-slate-800/30 shadow-lg">
-          <p className="text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-            <FileText className="w-4 h-4 text-[#E8451E]" />
-            Policy Sections
+          <h1 className="text-3xl sm:text-5xl font-display font-bold tracking-tight text-slate-900 dark:text-white max-w-3xl">
+            Privacy Policy
+          </h1>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
+            Clear, human-readable commitment explaining how VIMS Enterprise collects, uses, protects, and deletes personal data across our website, Meta/Facebook Lead Ads, WhatsApp Business channels, and AI voice solutions.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {policySections.map((section) => (
-              <a
-                key={section.id}
-                href={`#${section.id}`}
-                className="group flex items-center justify-between px-4 py-3 rounded-2xl bg-slate-100/70 dark:bg-[#111114]/60 border border-slate-200/60 dark:border-slate-800 hover:border-[#E8451E]/40 transition-all duration-300"
-              >
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <span className="text-xs font-mono font-bold text-[#E8451E]">{section.number}</span>
-                  <span className="text-xs font-semibold text-slate-800 dark:text-slate-200 truncate group-hover:text-[#E8451E] transition-colors">
-                    {section.title}
-                  </span>
-                </div>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#E8451E] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
-              </a>
-            ))}
+
+          <div className="mt-8 pt-6 border-t border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center gap-x-8 gap-y-2 text-xs font-mono text-slate-500 dark:text-slate-400">
+            <span>
+              Effective Date: <strong className="text-slate-900 dark:text-white">November 25, 2026</strong>
+            </span>
+            <span>
+              Last Updated: <strong className="text-slate-900 dark:text-white">November 25, 2026</strong>
+            </span>
+            <span>
+              Entity: <strong className="text-slate-900 dark:text-white">VIMS Enterprise</strong> (MSME: {COMPANY_CONTACT.udyam})
+            </span>
             <a
-              href="#contact-details"
-              className="group flex items-center justify-between px-4 py-3 rounded-2xl bg-[#E8451E]/10 border border-[#E8451E]/30 hover:bg-[#E8451E]/20 transition-all duration-300"
+              href={`mailto:${COMPANY_CONTACT.email}`}
+              className="text-[#1D4ED8] dark:text-blue-400 hover:underline font-semibold"
             >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <span className="text-xs font-mono font-bold text-[#E8451E]">09</span>
-                <span className="text-xs font-semibold text-slate-900 dark:text-white truncate">
-                  Contact Details
-                </span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-[#E8451E] group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+              {COMPANY_CONTACT.email}
             </a>
           </div>
         </div>
+      </header>
 
-        {/* Intro Overview Card */}
-        <div className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-8 md:p-10 rounded-4xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl">
-          <h2 className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-zinc-100 mb-4">
-            Overview & Scope
-          </h2>
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base md:text-lg">
-            This Privacy Policy describes how <strong className="text-slate-900 dark:text-white font-semibold">VIMS Enterprise</strong> (&ldquo;VIMS&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) collects, uses, shares, and safeguards personal and business information across the VIMS Enterprise website, our WhatsApp Business Platform communications, our AI voice and automation services, and related customer interactions. We are committed to transparent, consent-respecting data practices and clear channels for exercising your privacy rights.
-          </p>
-        </div>
-
-        {/* Main Policy Sections */}
-        <div
-          ref={contentRef}
-          className={`space-y-8 transition-all duration-1000 ${
-            isContentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
-        >
-          {policySections.map((section) => (
-            <section
-              key={section.id}
-              id={section.id}
-              className="scroll-mt-28 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md p-8 md:p-10 rounded-4xl border border-slate-200/50 dark:border-slate-800/30 shadow-xl hover:border-[#E8451E]/30 transition-all duration-300"
-            >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-slate-200/60 dark:border-slate-800/80">
-                <div className="flex items-start sm:items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-[#111114] flex items-center justify-center border border-slate-200/60 dark:border-slate-800 shadow-inner flex-shrink-0">
-                    {section.icon}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2.5">
-                      <span className="text-xs font-mono font-bold text-[#E8451E] uppercase tracking-widest">
-                        Section {section.number}
-                      </span>
-                      <span className="text-slate-400 dark:text-slate-600">•</span>
-                      <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-                        {section.badge}
-                      </span>
-                    </div>
-                    <h2 className="text-2xl md:text-3xl font-poppins font-bold text-slate-900 dark:text-zinc-100 mt-1">
-                      {section.title}
-                    </h2>
-                  </div>
-                </div>
+      {/* Editorial 2-Column Reading Canvas (No Boxes) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          {/* Left Sticky Table of Contents */}
+          <aside className="lg:col-span-3">
+            <div className="lg:sticky lg:top-28 space-y-6">
+              <div>
+                <p className="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold mb-3 flex items-center gap-1.5">
+                  <FileText size={13} />
+                  <span>Contents</span>
+                </p>
+                <nav aria-label="Privacy Policy Sections" className="border-l border-slate-200 dark:border-slate-800 space-y-1">
+                  {TOC_ITEMS.map((item) => (
+                    <a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      className="block pl-4 py-1.5 -ml-px border-l-2 border-transparent hover:border-[#1D4ED8] text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-[#1D4ED8] dark:hover:text-white transition-colors"
+                    >
+                      <span className="font-mono text-[11px] text-slate-400 mr-2">{item.num}</span>
+                      <span>{item.label}</span>
+                    </a>
+                  ))}
+                </nav>
               </div>
 
-              <p className="text-slate-600 dark:text-slate-300 mb-6 font-medium">
-                {section.summary}
+              <div className="pt-5 border-t border-slate-200 dark:border-slate-800 space-y-2.5 text-xs">
+                <p className="font-semibold text-slate-900 dark:text-white">Need Data Removed?</p>
+                <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
+                  Request permanent erasure of your lead, WhatsApp, or voice records at any time.
+                </p>
+                {onNavigate ? (
+                  <button
+                    type="button"
+                    onClick={() => onNavigate(Page.DataDeletion)}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1D4ED8] dark:text-blue-400 hover:underline"
+                  >
+                    <Trash2 size={13} />
+                    <span>Data Deletion Instructions &rarr;</span>
+                  </button>
+                ) : (
+                  <a
+                    href="/data-deletion"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1D4ED8] dark:text-blue-400 hover:underline"
+                  >
+                    <Trash2 size={13} />
+                    <span>Data Deletion Instructions &rarr;</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </aside>
+
+          {/* Right Wide Editorial Prose */}
+          <article className="lg:col-span-9 max-w-3xl space-y-12 text-slate-700 dark:text-slate-300 leading-relaxed">
+            {/* 01 */}
+            <section id="overview" className="scroll-mt-28 space-y-4">
+              <div className="text-xs font-mono font-semibold text-[#1D4ED8] dark:text-blue-400">SECTION 01</div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+                Overview, Scope &amp; Legal Entity Identity
+              </h2>
+              <p>
+                This Privacy Policy explains how <strong>VIMS Enterprise</strong> (&ldquo;VIMS&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) collects, uses, discloses, and safeguards personal information when you visit{' '}
+                <a href="https://www.vimsenterprise.com" className="text-[#1D4ED8] dark:text-blue-400 underline">
+                  https://www.vimsenterprise.com
+                </a>
+                , interact with our Meta (Facebook and Instagram) advertisements and Lead Ads instant forms, message our WhatsApp Business accounts, speak with our AI voice agents (including <strong>Jill-Jill</strong>), or enquire about <strong>MediCore HMS</strong>, custom website engineering, AI automations, and <strong>Embedded Skills / FDE Academy</strong> programmes.
+              </p>
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                <strong>Legal Entity Details:</strong> VIMS Enterprise &middot; Registered MSME ({COMPANY_CONTACT.udyam}) &middot; GSTIN: {COMPANY_CONTACT.gstin} &middot; Established March 2022 &middot; Operating from Tamil Nadu, India and serving enterprise clients globally.
+              </p>
+            </section>
+
+            <hr className="border-slate-200 dark:border-slate-800" />
+
+            {/* 02 */}
+            <section id="data-collected" className="scroll-mt-28 space-y-5">
+              <div className="text-xs font-mono font-semibold text-[#1D4ED8] dark:text-blue-400">SECTION 02</div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+                Information We Collect
+              </h2>
+              <p>
+                We collect only the information reasonably necessary to respond to your enquiries, schedule consultations, deliver engineering projects, and measure the relevance of our communications.
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {section.points.map((point, idx) => (
-                  <div
-                    key={idx}
-                    className="p-6 rounded-3xl bg-slate-50/70 dark:bg-[#111114]/50 border border-slate-200/50 dark:border-slate-800/60 flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="flex items-center gap-2 mb-3">
-                        <CheckCircle2 className="w-4 h-4 text-[#E8451E] flex-shrink-0" />
-                        <h3 className="text-base font-poppins font-bold text-slate-900 dark:text-zinc-100">
-                          {point.heading}
-                        </h3>
-                      </div>
-                      <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                        {point.text}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+              <div className="overflow-x-auto border-y border-slate-200 dark:border-slate-800">
+                <table className="w-full text-left border-collapse text-sm">
+                  <thead>
+                    <tr className="border-b border-slate-200 dark:border-slate-800 text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                      <th className="py-3.5 pr-4">Category</th>
+                      <th className="py-3.5 px-4">Personal Information</th>
+                      <th className="py-3.5 pl-4">Source</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200/80 dark:divide-slate-800/80">
+                    {DATA_TABLE.map((row) => (
+                      <tr key={row.category} className="align-top">
+                        <td className="py-4 pr-4 font-semibold text-slate-900 dark:text-white whitespace-nowrap sm:whitespace-normal">
+                          {row.category}
+                        </td>
+                        <td className="py-4 px-4 text-slate-600 dark:text-slate-300">{row.examples}</td>
+                        <td className="py-4 pl-4 text-slate-500 dark:text-slate-400 text-xs">{row.source}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </section>
-          ))}
 
-          {/* Section 09: Contact Details */}
-          <section
-            id="contact-details"
-            className="scroll-mt-28 bg-gradient-to-br from-[#111114]/90 via-slate-900/90 to-[#111114]/90 text-white p-8 md:p-12 rounded-4xl border border-[#E8451E]/30 shadow-2xl relative overflow-hidden"
-          >
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#E8451E]/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#D4AF37]/10 rounded-full blur-3xl pointer-events-none" />
+            <hr className="border-slate-200 dark:border-slate-800" />
 
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-7 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8451E]/20 border border-[#E8451E]/30 text-[#E8451E] text-xs font-mono uppercase tracking-widest">
-                  Section 09 • Contact Details
-                </div>
-                <h2 className="text-2xl md:text-4xl font-poppins font-bold text-white">
-                  Privacy Inquiries & Data Requests
-                </h2>
-                <p className="text-slate-300 leading-relaxed text-sm md:text-base max-w-2xl">
-                  If you have questions about this Privacy Policy, wish to withdraw marketing consent, or want to submit a data access, correction, or deletion request, please contact <strong className="text-white">VIMS Enterprise</strong> via our official privacy contact email below.
-                </p>
-              </div>
+            {/* 03 */}
+            <section id="meta-facebook-ads" className="scroll-mt-28 space-y-4">
+              <div className="text-xs font-mono font-semibold text-[#1D4ED8] dark:text-blue-400">SECTION 03</div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+                Meta Platforms, Facebook Ads, Lead Ads &amp; Attribution Technologies
+              </h2>
+              <p>
+                VIMS Enterprise runs informational and lead-generation advertising campaigns on <strong>Meta Platforms</strong> (Facebook and Instagram). When you interact with our ads or submit a Meta Lead Ad Instant Form:
+              </p>
+              <ul className="space-y-2.5 pl-1">
+                {[
+                  'Information you voluntarily submit in Facebook or Instagram Instant Lead Forms (such as name, phone number, email address, city, or service interest) is securely transmitted to VIMS Enterprise solely to follow up on your specific request.',
+                  'We may use the Meta Pixel, Conversions API, and cookie-controlled campaign parameters on our website solely when analytics/marketing preferences allow, in order to measure ad campaign effectiveness and understand which services visitors find helpful.',
+                  'We strictly NEVER sell, rent, broker, or distribute Meta/Facebook Lead Ads contact lists or user data to any external marketers or unaffiliated third parties.',
+                  'You can opt out of interest-based advertising or modify your Meta ad preferences anytime at Facebook Ad Preferences or withdraw consent directly by emailing vimal@vimsenterprise.com.',
+                ].map((pt) => (
+                  <li key={pt} className="flex items-start gap-2.5 text-sm sm:text-base">
+                    <CheckCircle2 size={17} className="text-[#0F766E] dark:text-teal-400 shrink-0 mt-1" />
+                    <span>{pt}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-sm">
+                Manage your Meta ad controls anytime:{' '}
+                <a
+                  href="https://www.facebook.com/adpreferences/ad_settings"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[#1D4ED8] dark:text-blue-400 hover:underline font-medium"
+                >
+                  <span>Meta Ad Preferences</span>
+                  <ExternalLink size={12} />
+                </a>
+                .
+              </p>
+            </section>
 
-              <div className="lg:col-span-5 bg-white/5 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/10 space-y-5">
-                <div>
-                  <p className="text-xs font-mono uppercase tracking-widest text-[#E8451E] mb-1">Company</p>
-                  <p className="text-xl font-poppins font-bold text-white">VIMS Enterprise</p>
-                </div>
+            <hr className="border-slate-200 dark:border-slate-800" />
 
-                <div className="space-y-3 pt-2 border-t border-white/10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-[#E8451E]/20 flex items-center justify-center text-[#E8451E] flex-shrink-0">
-                      <Mail className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-mono text-slate-400">Official Privacy & Data Requests Contact</p>
-                      <a
-                        href="mailto:vimal@vimsenterprise.com"
-                        className="text-sm md:text-base font-semibold text-[#E8451E] hover:underline break-all"
-                      >
-                        vimal@vimsenterprise.com
-                      </a>
-                    </div>
-                  </div>
+            {/* 04 */}
+            <section id="whatsapp-business" className="scroll-mt-28 space-y-4">
+              <div className="text-xs font-mono font-semibold text-[#1D4ED8] dark:text-blue-400">SECTION 04</div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+                WhatsApp Business Platform &amp; Promotional Consent Rules
+              </h2>
+              <p>
+                When you message VIMS Enterprise on WhatsApp or ask to receive consultation details, calendar invitations, or technical proposals on WhatsApp, we process your mobile number and chat messages to respond promptly.
+              </p>
+              <ul className="space-y-2.5 pl-1 text-sm sm:text-base">
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 size={17} className="text-[#0F766E] dark:text-teal-400 shrink-0 mt-1" />
+                  <span>
+                    <strong>Enquiries Are Not Blanket Marketing Opt-Ins:</strong> Submitting a contact form or Meta Lead Ad enquiry for a quote or demo does not enroll you in unrelated promotional broadcasts. Promotional messages are sent only where explicit opt-in permission has been given.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 size={17} className="text-[#0F766E] dark:text-teal-400 shrink-0 mt-1" />
+                  <span>
+                    <strong>Instant Opt-Out:</strong> Reply <strong>STOP</strong> in any WhatsApp thread or email{' '}
+                    <a href={`mailto:${COMPANY_CONTACT.email}`} className="text-[#1D4ED8] dark:text-blue-400 underline">
+                      {COMPANY_CONTACT.email}
+                    </a>{' '}
+                    to stop future WhatsApp updates immediately.
+                  </span>
+                </li>
+              </ul>
+            </section>
 
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-[#E8451E]/20 flex items-center justify-center text-[#E8451E] flex-shrink-0">
-                      <Phone className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-mono text-slate-400">General Business Contact Number</p>
-                      <a
-                        href="tel:+919940660868"
-                        className="text-sm md:text-base font-semibold text-white hover:text-[#E8451E] transition-colors"
-                      >
-                        +91 9940660868
-                      </a>
-                    </div>
-                  </div>
-                </div>
+            <hr className="border-slate-200 dark:border-slate-800" />
 
-                <div className="pt-2">
-                  <a
-                    href="mailto:vimal@vimsenterprise.com?subject=Data%20Deletion%20or%20Privacy%20Request"
-                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-full bg-gradient-to-r from-[#E8451E] to-[#D4AF37] text-white font-bold text-sm shadow-lg hover:opacity-95 transition-opacity"
+            {/* 05 */}
+            <section id="ai-voice-agents" className="scroll-mt-28 space-y-4">
+              <div className="text-xs font-mono font-semibold text-[#1D4ED8] dark:text-blue-400">SECTION 05</div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+                AI Voice Agents (Jill-Jill) &amp; Automated Interactions
+              </h2>
+              <p>
+                Interactions with VIMS Enterprise voice demonstrations or automated reception/qualification workflows (powered by <strong>Jill-Jill</strong>) process spoken audio in real time to detect language (such as Tamil, English, or Hindi), verify calendar slots, and summarize your request for our team.
+              </p>
+              <p>
+                <strong>Human Control &amp; Recording Notice:</strong> Audio recordings are enabled only where required for demonstration review or explicit workflow configuration. Callers may request a live human team member or ask to be excluded from automated follow-up calls at any time.
+              </p>
+            </section>
+
+            <hr className="border-slate-200 dark:border-slate-800" />
+
+            {/* 06 */}
+            <section id="how-we-use" className="scroll-mt-28 space-y-4">
+              <div className="text-xs font-mono font-semibold text-[#1D4ED8] dark:text-blue-400">SECTION 06</div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+                How We Use Information &amp; Lawful Bases
+              </h2>
+              <ul className="space-y-2.5 pl-1 text-sm sm:text-base">
+                {[
+                  'Responding to consultation requests, demo bookings (Cal.com / Google Meet), and technical scoping enquiries.',
+                  'Delivering contracted B2B web systems, AI voice/automation workflows, MediCore HMS deployments, and student training cohorts.',
+                  'Verifying caller/user requests, maintaining site reliability, preventing spam or fraudulent access, and keeping consent suppression lists accurate.',
+                  'Complying with statutory Indian accounting, GST invoicing, and regulatory obligations.',
+                ].map((useItem) => (
+                  <li key={useItem} className="flex items-start gap-2.5">
+                    <CheckCircle2 size={17} className="text-[#1D4ED8] dark:text-blue-400 shrink-0 mt-1" />
+                    <span>{useItem}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <hr className="border-slate-200 dark:border-slate-800" />
+
+            {/* 07 */}
+            <section id="sharing-transfers" className="scroll-mt-28 space-y-4">
+              <div className="text-xs font-mono font-semibold text-[#1D4ED8] dark:text-blue-400">SECTION 07</div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+                Third-Party Service Providers &amp; Data Sharing
+              </h2>
+              <p>
+                We share minimum necessary data only with vetted infrastructure partners strictly required to operate our communications, scheduling, and application services—including <strong>Meta Platforms</strong> (Facebook/Instagram Ads &amp; WhatsApp Business), <strong>Google Workspace / Calendar</strong>, <strong>Cal.com</strong>, <strong>Vercel</strong> (cloud edge/serverless hosting), and authorized CRM/AI inference providers operating under confidentiality obligations. We do not sell personal data.
+              </p>
+            </section>
+
+            <hr className="border-slate-200 dark:border-slate-800" />
+
+            {/* 08 */}
+            <section id="retention-security" className="scroll-mt-28 space-y-4">
+              <div className="text-xs font-mono font-semibold text-[#1D4ED8] dark:text-blue-400">SECTION 08</div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+                Data Retention, Security Safeguards &amp; MediCore HMS Distinction
+              </h2>
+              <p>
+                <strong>Retention Lifecycles:</strong> Prospective lead and consultation records are retained only as long as active follow-up is relevant (typically up to 24 months unless you request earlier deletion). Executed client project and GST billing records are retained as required by Indian tax and corporate law.
+              </p>
+              <p>
+                <strong>Security:</strong> All website traffic and API submissions are protected in transit using HTTPS/TLS encryption with strict role-based internal access controls.
+              </p>
+              <p>
+                <strong>MediCore HMS Patient Data Boundary:</strong> When hospitals license VIMS MediCore HMS for clinical operations, the subscribing healthcare institution remains the legal <em>Data Fiduciary / Controller</em> responsible for patient consent under India&apos;s <strong>DPDPA 2023</strong> and <strong>ABDM</strong> guidelines; VIMS Enterprise acts strictly as a technical software processor according to institutional agreements.
+              </p>
+            </section>
+
+            <hr className="border-slate-200 dark:border-slate-800" />
+
+            {/* 09 */}
+            <section id="rights-deletion" className="scroll-mt-28 space-y-4">
+              <div className="text-xs font-mono font-semibold text-[#1D4ED8] dark:text-blue-400">SECTION 09</div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+                Your Privacy Rights (DPDPA 2023 / GDPR / CCPA) &amp; Data Deletion
+              </h2>
+              <p>
+                Regardless of whether you contacted us through Meta Ads, WhatsApp, email, or our website, you have the right to:
+              </p>
+              <ul className="space-y-2 pl-1 text-sm sm:text-base">
+                <li>&bull; <strong>Access &amp; Correction:</strong> Request a copy of your stored contact/enquiry record or correct inaccuracies.</li>
+                <li>&bull; <strong>Withdraw Consent:</strong> Opt out of marketing messages, Lead Ad follow-ups, or non-essential cookies.</li>
+                <li>&bull; <strong>Permanent Erasure / Deletion:</strong> Request deletion of your CRM profile, WhatsApp history, email enquiries, and AI voice logs.</li>
+              </ul>
+              <div className="pt-2">
+                {onNavigate ? (
+                  <button
+                    type="button"
+                    onClick={() => onNavigate(Page.DataDeletion)}
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] text-white text-sm font-semibold transition-colors"
                   >
-                    <Mail className="w-4 h-4" />
-                    Email vimal@vimsenterprise.com
+                    <Trash2 size={15} />
+                    <span>View Step-by-Step User Data Deletion Instructions</span>
+                  </button>
+                ) : (
+                  <a
+                    href="/data-deletion"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] text-white text-sm font-semibold transition-colors"
+                  >
+                    <Trash2 size={15} />
+                    <span>View Step-by-Step User Data Deletion Instructions</span>
+                  </a>
+                )}
+              </div>
+            </section>
+
+            <hr className="border-slate-200 dark:border-slate-800" />
+
+            {/* 10 */}
+            <section id="children-updates" className="scroll-mt-28 space-y-4">
+              <div className="text-xs font-mono font-semibold text-[#1D4ED8] dark:text-blue-400">SECTION 10</div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+                Children&apos;s Privacy &amp; Policy Updates
+              </h2>
+              <p>
+                Our B2B platforms, ads, and engineering programmes are intended for adults (18+) or college students participating under institutional coordination. We do not knowingly collect personal data from children under 13 (or minors without parental/guardian consent). Updates to this Privacy Policy will be published directly at{' '}
+                <code className="text-xs font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[#1D4ED8] dark:text-blue-400">
+                  https://www.vimsenterprise.com/privacy-policy
+                </code>{' '}
+                with an updated effective date.
+              </p>
+            </section>
+
+            <hr className="border-slate-200 dark:border-slate-800" />
+
+            {/* 11 */}
+            <section id="grievance-contact" className="scroll-mt-28 space-y-4">
+              <div className="text-xs font-mono font-semibold text-[#1D4ED8] dark:text-blue-400">SECTION 11</div>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 dark:text-white">
+                Official Privacy &amp; Grievance Officer Contact
+              </h2>
+              <p>
+                For any privacy enquiry, Meta Lead Ads opt-out, consent withdrawal, or personal data deletion request (acknowledged within 48 business hours):
+              </p>
+
+              <div className="pt-2 space-y-2.5 text-sm border-l-2 border-[#1D4ED8] pl-5">
+                <p className="font-bold text-slate-900 dark:text-white text-base">
+                  VIMS Enterprise &mdash; Attention: Vimal Raj (Founder, CTO &amp; Privacy Officer)
+                </p>
+                <p className="text-slate-600 dark:text-slate-400">
+                  MSME: {COMPANY_CONTACT.udyam} &middot; GSTIN: {COMPANY_CONTACT.gstin} &middot; Tamil Nadu, India
+                </p>
+                <div className="flex flex-wrap gap-6 pt-1">
+                  <a
+                    href={`mailto:${COMPANY_CONTACT.email}?subject=Privacy%20%2F%20Data%20Request`}
+                    className="inline-flex items-center gap-2 text-[#1D4ED8] dark:text-blue-400 font-semibold hover:underline"
+                  >
+                    <Mail size={15} />
+                    <span>{COMPANY_CONTACT.email}</span>
+                  </a>
+                  <a
+                    href={`tel:+91${COMPANY_CONTACT.phone}`}
+                    className="inline-flex items-center gap-2 text-slate-700 dark:text-slate-200 font-semibold hover:text-[#1D4ED8]"
+                  >
+                    <Phone size={15} />
+                    <span>{COMPANY_CONTACT.phoneFormatted}</span>
                   </a>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </article>
         </div>
       </div>
     </div>

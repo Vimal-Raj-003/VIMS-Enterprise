@@ -13,56 +13,23 @@
   }
 
   h1, h2, h3, h4, .font-display {
-    font-family: "Space Grotesk", system-ui, sans-serif;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   }
 }
 
 @layer utilities {
-  .executive-grid {
-    background-size: 56px 56px;
-    background-image:
-      linear-gradient(to right, rgba(24, 24, 27, 0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(24, 24, 27, 0.045) 1px, transparent 1px);
+  .hairline-divider {
+    @apply border-slate-200/80 dark:border-slate-800;
   }
 
-  .dark .executive-grid {
-    background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  }
-
-  .glass-panel {
-    @apply bg-white/85 dark:bg-[#111114]/85 backdrop-blur-xl border border-zinc-200/80 dark:border-white/10;
-  }
-
-  .executive-card {
-    @apply bg-white dark:bg-[#111114] border border-zinc-200/80 dark:border-white/10 rounded-2xl shadow-sm hover:border-[#E8451E]/40 dark:hover:border-[#E8451E]/40 transition-all duration-300;
-  }
-
-  /* 3D Perspective & Card Flip Helpers */
-  .perspective-1200 {
-    perspective: 1200px;
-    -webkit-perspective: 1200px;
-  }
-
-  .preserve-3d {
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-  }
-
-  .backface-hidden {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-
-  .rotate-y-180 {
-    transform: rotateY(180deg);
+  .editorial-section-alt {
+    @apply bg-[#F8F7F4] dark:bg-[#0F1420] border-y border-slate-200/80 dark:border-slate-800/80;
   }
 
   /* Edge-faded Marquee */
   .marquee-mask {
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   }
 }
 
@@ -71,9 +38,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-orbit-spin,
-  .animate-float-slow {
+  .animate-marquee {
     animation: none !important;
   }
 }
@@ -87,10 +52,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(113, 113, 122, 0.35);
+  background: rgba(100, 116, 139, 0.3);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(232, 69, 30, 0.65);
+  background: rgba(29, 78, 216, 0.55);
 }
